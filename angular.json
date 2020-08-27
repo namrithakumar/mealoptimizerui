@@ -24,6 +24,7 @@
               "src/assets"
             ],
             "styles": [
+              "node_modules/bootstrap/dist/css/bootstrap.min.css",
               "src/styles.css"
             ],
             "scripts": []
@@ -119,6 +120,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "mealoptimizerui"
+    }
+  },
+  "defaultProject": "mealoptimizerui",
+  "cli": {
+    "analytics": "290852dc-e0ce-49ef-af0c-59a29fa96df0"
+  }
 }
