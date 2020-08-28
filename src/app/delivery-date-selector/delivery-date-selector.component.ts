@@ -20,11 +20,14 @@ import {
     CalendarView = CalendarView;
   
     viewDate: Date = new Date();
-  
+    
+    dateOfDelivery: Date = this.viewDate;
+
     constructor() {}
   
     dayClicked({ date, events }: { date: Date; events: CalendarEvent[] }):void {
       console.log('date clicked: ' + date.getDate() + date.getMonth() + date.getFullYear());
+      this.dateOfDelivery = date;
     }
   
       closeOpenMonthViewDay() {
