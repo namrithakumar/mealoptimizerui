@@ -12,7 +12,7 @@ import { DeliveryDateSelectorComponent } from './meal-optimizer/delivery-date-se
 import { MealOptimizerComponent } from './meal-optimizer/meal-optimizer.component';
 import { MealSelectorComponent } from './meal-optimizer/meal-selector/meal-selector.component';
 import { OptimizedMealPlanComponent } from './meal-optimizer/optimized-meal-plan/optimized-meal-plan.component';
-import { OrderSummaryComponent } from './meal-optimizer/optimizer/optimized-meal-plan/order-summary/order-summary.component';
+import { OrderSummaryComponent } from './meal-optimizer/optimized-meal-plan/order-summary/order-summary.component';
 import { ShoppingListComponent } from './shopping-list/shopping-list.component';
 import { ShoppingEditComponent } from './shopping-list/shopping-edit/shopping-edit.component';
 import { RecipesComponent } from './recipes/recipes.component';
