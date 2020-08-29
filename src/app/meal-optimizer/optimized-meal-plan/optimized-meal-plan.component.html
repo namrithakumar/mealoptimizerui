@@ -9,27 +9,11 @@
             <th>Optimized by quality</th>
           </tr>
         </thead>
-        <tbody>
-          <tr>
-            <td>Green salad</td>
-            <td>portion: 1</td>
-            <td>portion: 1.5</td>
-          </tr>
-          <tr>
-            <td>Icecream</td>
-            <td>portion: 1.2</td>
-            <td>portion: 1</td>
-          </tr>
-          <tr>
-            <td>Strawberry milkshake</td>
-            <td>portion: 2</td>
-            <td>portion: 1</td>
-          </tr>
-          <tr>
-            <td>Garlic bread</td>
-            <td>portion: 1</td>
-            <td>portion: 1</td>
-          </tr>
+        <tbody *ngFor="let meal of order.mealList">
+            <tr>
+              <td>{{meal.itemName}}</td>
+              <td>portion: {{meal.portion}}, cost: ${{meal.mealCost}}</td>
+              </tr>
         </tbody>
       </table>
 </div>

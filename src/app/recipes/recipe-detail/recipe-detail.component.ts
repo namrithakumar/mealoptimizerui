@@ -12,4 +12,7 @@ export class RecipeDetailComponent implements OnInit {
   ngOnInit(): void {
   }
 
+onAddToShoppingList(event : Event): void {
+  console.log("Add to shopping list clicked " + event);
+}
 }
