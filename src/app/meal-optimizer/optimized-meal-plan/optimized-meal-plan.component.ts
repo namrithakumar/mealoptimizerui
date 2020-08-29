@@ -12,4 +12,12 @@ export class OptimizedMealPlanComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  onPlaceOrder(event : Event) : void {
+      console.log("plave order clicked - " + event);
+  }
+
+  onGetRecipe(event : Event) : void {
+    console.log("get recipe clicked - " + event);
+}
+
 }
