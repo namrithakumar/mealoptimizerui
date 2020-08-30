@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, EventEmitter } from '@angular/core';
 import { MealOptionsComponent } from './meal-options/meal-options.component';
 import { DeliveryDateSelectorComponent } from '../delivery-date-selector/delivery-date-selector.component';
 
@@ -10,11 +10,12 @@ import { DeliveryDateSelectorComponent } from '../delivery-date-selector/deliver
 
 export class MealSelectorComponent implements OnInit {
 
+  itemSelected : String;
+
   mealList : MealOptionsComponent[] = [new MealOptionsComponent(), new MealOptionsComponent(), new MealOptionsComponent(), new MealOptionsComponent()];
   
   constructor() { }
 
   ngOnInit(): void {
   }
-
 }

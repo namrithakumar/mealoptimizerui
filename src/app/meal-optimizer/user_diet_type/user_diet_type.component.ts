@@ -5,5 +5,5 @@ import { Component } from '@angular/core'
     templateUrl: './user_diet_type.component.html' 
 })
 export class UserDietTypeComponent {
-
+    userDietType : String = 'ALL';
 }
