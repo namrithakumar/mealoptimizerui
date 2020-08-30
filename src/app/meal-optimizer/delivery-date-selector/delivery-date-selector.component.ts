@@ -33,4 +33,8 @@ import {
       closeOpenMonthViewDay() {
       this.activeDayIsOpen = false;
     }
+
+    getDateOfDelivery() : Date {
+      return this.dateOfDelivery;
+    }
   }

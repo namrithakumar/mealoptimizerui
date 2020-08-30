@@ -1,23 +1,7 @@
 <h4><b><i>Result</i></b></h4>
-<table class="table"></table>
-<div>
-    <table class="table">
-        <thead>
-          <tr>
-            <th>User's choice</th>
-            <th>Optimized by cost</th>
-            <th>Optimized by quality</th>
-          </tr>
-        </thead>
-        <tbody *ngFor="let meal of order.mealList">
-            <tr>
-              <td>{{meal.itemName}}</td>
-              <td>portion: {{meal.portion}}, cost: ${{meal.mealCost}}</td>
-              </tr>
-        </tbody>
-      </table>
-</div>
-<div class="row" width=0>
+<app-optimized-results-table></app-optimized-results-table>
+<br/>
+<div class="row">
 <button type="button" class="btn btn-dark" (click)="onPlaceOrder($event)">Place order</button>
 <button type="button" class="btn btn-dark" (click)="onGetRecipe($event)">Get recipe</button>
 </div>

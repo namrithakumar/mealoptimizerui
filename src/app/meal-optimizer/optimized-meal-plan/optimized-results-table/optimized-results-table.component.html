@@ -1,0 +1,50 @@
+<div class="container mt-3">
+    <!-- Nav tabs -->
+    <ul class="nav nav-tabs">
+      <li class="nav-item">
+        <a class="nav-link active" data-toggle="tab" href="#orderInfo">User's Choice</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" data-toggle="tab" href="#optimizedByCost">Optimized by Cost</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" data-toggle="tab" href="#optimizedByQuality">Optimized by Quality</a>
+      </li>
+    </ul>
+  
+    <!-- Tab panes -->
+    <div class="tab-content">
+      <div id="orderInfo" class="container tab-pane active"><br>
+        <h3>You chose</h3>
+        <app-order-info></app-order-info>
+      </div>
+      <div id="optimizedByCost" class="container tab-pane fade"><br>
+        <h3>Meal Plan - Optimized by Cost</h3>
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Item Name</th>
+              <th>Optimized by cost</th>
+            </tr>
+          </thead>
+          <tbody>
+        <app-optimized-result-cost  *ngFor="let meal of mealListByCost" [meal]="meal"></app-optimized-result-cost>
+      </tbody>
+      </table>
+      </div>
+      <div id="optimizedByQuality" class="container tab-pane fade"><br>
+        <h3>Meal Plan - Optimized by Quality</h3>
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Item Name</th>
+              <th>Optimized by quality</th>
+            </tr>
+          </thead>
+          <tbody>
+        <app-optimized-result-quality *ngFor="let meal of mealListByQuality" [meal]="meal"></app-optimized-result-quality>
+      </tbody>
+      </table>
+      </div>
+    </div>
+  </div>

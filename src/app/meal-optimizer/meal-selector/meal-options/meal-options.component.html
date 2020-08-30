@@ -1,0 +1,8 @@
+<div class="dropdown">
+    <button class="btn btn-secondary dropdown-toggle" type="button" id="items" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        Select meal
+    </button>
+    <div class="dropdown-menu" aria-labelledby="items">
+      <a *ngFor="let item of itemList" class="dropdown-item" href="#">{{item}}</a>
+    </div>
+  </div>
