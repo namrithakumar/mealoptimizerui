@@ -10,8 +10,8 @@
     <tbody>
         <tr>
             <td>Date</td>
-            <td *ngFor="let meal of mealList">
-                <app-meal-options></app-meal-options>
+            <td *ngFor="let i of [0,1,2,3]; index as indexOfMeal">
+                <app-meal-options (mealSelected)="getSelectedMeal($event)" [indexOfMeal] = "indexOfMeal"></app-meal-options>
         </td>
         </tr>
     </tbody>

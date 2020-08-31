@@ -1,5 +1,5 @@
 <div>
-<select [(ngModel)]="itemSelected">
+<select [(ngModel)]="itemSelected" (change)="onMealSelected()">
     <option *ngFor="let item of itemList" [value]="item">{{item}}</option>
-</select></div>
-<div>You chose {{itemSelected}}</div>
+</select>
+</div>

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-meal-options',
@@ -6,6 +6,10 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./meal-options.component.css']
 })
 export class MealOptionsComponent implements OnInit {
+
+  @Input() indexOfMeal : number;
+
+  @Output() mealSelected = new EventEmitter< { itemPosition : number, itemName : String } >();
 
   itemList : String[] = ['Green Salad','Ice cream','Strawberry Milkshake','Garlic Bread'];
 
@@ -16,8 +20,8 @@ export class MealOptionsComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  onMealSelected($event) : void {
-    console.log('Event emmitted' + this.itemSelected);
+  onMealSelected() : void {
+    this.mealSelected.emit({ itemPosition : this.indexOfMeal, itemName : this.itemSelected });
   }
 
 }
