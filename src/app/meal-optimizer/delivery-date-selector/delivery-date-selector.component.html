@@ -43,7 +43,7 @@
   <mwl-calendar-month-view
     *ngSwitchCase="CalendarView.Month"
     [viewDate]="viewDate"
-    (dayClicked)="dayClicked($event.day)"
+    (dayClicked)="dateOfDeliveryChosen($event.day)"
   >
   </mwl-calendar-month-view>
   <div class="row text-center">

@@ -7,9 +7,25 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MealOptimizerComponent implements OnInit {
 
+  dateOfDelivery : Date;
+  mealList = new Array<String>(4);
+  dietTypeSelected : String;
+  
   constructor() { }
 
   ngOnInit(): void {
   }
 
+  getSelectedDietType(userDietTypeSelected : { dietType : String }) : void {
+    this.dietTypeSelected = userDietTypeSelected.dietType;
+    console.log('Inside meal-optimizer-component.ts ' + this.dietTypeSelected);
+  }
+
+  getSelectedDateOfDelivery(dateOfDeliverySelected : { dateOfDelivery : Date }) : void {
+    this.dateOfDelivery = dateOfDeliverySelected.dateOfDelivery;
+  }
+
+  getMealPlan(mealsSelected: { mealList : Array<String> }) : void {
+    this.mealList = mealsSelected.mealList;
+  }
 }

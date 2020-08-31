@@ -1,5 +1,5 @@
-<app-user-diet-type></app-user-diet-type>
-<app-delivery-date-selector></app-delivery-date-selector>
-<app-meal-selector></app-meal-selector>
+<app-user-diet-type (userDietTypeSelected) = "getSelectedDietType($event)"></app-user-diet-type>
+<app-delivery-date-selector (dateOfDeliverySelected) = "getSelectedDateOfDelivery($event)"></app-delivery-date-selector>
+<app-meal-selector (getMealPlan) = "getMealPlan($event)"></app-meal-selector>
 <hr/>
 <app-optimized-meal-plan></app-optimized-meal-plan>
