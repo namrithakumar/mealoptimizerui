@@ -18,7 +18,6 @@ export class MealOptimizerComponent implements OnInit {
 
   getSelectedDietType(userDietTypeSelected : { dietType : String }) : void {
     this.dietTypeSelected = userDietTypeSelected.dietType;
-    console.log('Inside meal-optimizer-component.ts ' + this.dietTypeSelected);
   }
 
   getSelectedDateOfDelivery(dateOfDeliverySelected : { dateOfDelivery : Date }) : void {
