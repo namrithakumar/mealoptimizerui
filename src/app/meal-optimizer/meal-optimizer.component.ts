@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-meal-optimizer',
@@ -10,7 +10,9 @@ export class MealOptimizerComponent implements OnInit {
   dateOfDelivery : Date;
   mealList = new Array<String>(4);
   dietTypeSelected : String;
-  
+
+  @Output() onFeatureSelected = new EventEmitter< String >();
+
   constructor() { }
 
   ngOnInit(): void {
@@ -26,5 +28,9 @@ export class MealOptimizerComponent implements OnInit {
 
   getMealPlan(mealsSelected: { mealList : Array<String> }) : void {
     this.mealList = mealsSelected.mealList;
+  }
+
+  featureSelected( feature :String ) : void {
+    this.onFeatureSelected.emit(feature);
   }
 }

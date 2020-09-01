@@ -25,6 +25,7 @@ import { OptimizedResultsTableComponent } from './meal-optimizer/optimized-meal-
 import { OptimizedResultCostComponent } from './meal-optimizer/optimized-meal-plan/optimized-results-table/optimized-result-cost/optimized-result-cost.component';
 import { OptimizedResultQualityComponent } from './meal-optimizer/optimized-meal-plan/optimized-results-table/optimized-result-quality/optimized-result-quality.component';
 import { OrderInfoComponent } from './meal-optimizer/optimized-meal-plan/optimized-results-table/order-info/order-info.component';
+import { OnlineOrderComponent } from './online-order/online-order.component';
 
 @NgModule({
   declarations: [
@@ -46,7 +47,8 @@ import { OrderInfoComponent } from './meal-optimizer/optimized-meal-plan/optimiz
     OptimizedResultsTableComponent,
     OptimizedResultCostComponent,
     OptimizedResultQualityComponent,
-    OrderInfoComponent
+    OrderInfoComponent,
+    OnlineOrderComponent
   ],
   imports: [
     BrowserModule,
