@@ -18,7 +18,6 @@ import { ShoppingListComponent } from './shopping-list/shopping-list.component';
 import { ShoppingEditComponent } from './shopping-list/shopping-edit/shopping-edit.component';
 import { RecipesComponent } from './recipes/recipes.component';
 import { RecipeListComponent } from './recipes/recipe-list/recipe-list.component';
-import { RecipeItemComponent } from './recipes/recipe-item/recipe-item/recipe-item.component';
 import { RecipeDetailComponent } from './recipes/recipe-detail/recipe-detail.component';
 import { MealOptionsComponent } from './meal-optimizer/meal-selector/meal-options/meal-options.component';
 import { OptimizedResultsTableComponent } from './meal-optimizer/optimized-meal-plan/optimized-results-table/optimized-results-table.component';
@@ -26,6 +25,7 @@ import { OptimizedResultCostComponent } from './meal-optimizer/optimized-meal-pl
 import { OptimizedResultQualityComponent } from './meal-optimizer/optimized-meal-plan/optimized-results-table/optimized-result-quality/optimized-result-quality.component';
 import { OrderInfoComponent } from './meal-optimizer/optimized-meal-plan/optimized-results-table/order-info/order-info.component';
 import { OnlineOrderComponent } from './online-order/online-order.component';
+import { RecipeItemComponent } from './recipes/recipe-list/recipe-item/recipe-item.component';
 
 @NgModule({
   declarations: [
@@ -41,14 +41,14 @@ import { OnlineOrderComponent } from './online-order/online-order.component';
     ShoppingEditComponent,
     RecipesComponent,
     RecipeListComponent,
-    RecipeItemComponent,
     RecipeDetailComponent,
     MealOptionsComponent,
     OptimizedResultsTableComponent,
     OptimizedResultCostComponent,
     OptimizedResultQualityComponent,
     OrderInfoComponent,
-    OnlineOrderComponent
+    OnlineOrderComponent,
+    RecipeItemComponent
   ],
   imports: [
     BrowserModule,
