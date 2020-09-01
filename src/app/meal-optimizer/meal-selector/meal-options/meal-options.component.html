@@ -1,0 +1,5 @@
+<div>
+<select [(ngModel)]="itemSelected" (change)="onMealSelected()">
+    <option *ngFor="let item of itemList" [value]="item">{{item}}</option>
+</select>
+</div>

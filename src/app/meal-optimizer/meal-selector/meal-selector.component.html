@@ -1,5 +1,4 @@
 <h4><b><i>Step 3: Select meals</i></b></h4>
-
 <table>
     <thead>
         <th>Date of Delivery</th>
@@ -11,58 +10,13 @@
     <tbody>
         <tr>
             <td>Date</td>
-            <td>
-              <div class="dropdown">
-                <button class="btn btn-secondary dropdown-toggle" type="button" id="items" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Select meal
-                </button>
-                <div class="dropdown-menu" aria-labelledby="items">
-                  <a class="dropdown-item" href="#">Pizza</a>
-                  <a class="dropdown-item" href="#">Sandwich</a>
-                  <a class="dropdown-item" href="#">Parfait</a>
-                  <a class="dropdown-item" href="#">Cake</a>
-                </div>
-              </div>
+            <td *ngFor="let i of [0,1,2,3]; index as indexOfMeal">
+                <app-meal-options (mealSelected)="getSelectedMeal($event)" [indexOfMeal] = "indexOfMeal"></app-meal-options>
         </td>
-        <td>
-          <div class="dropdown">
-            <button class="btn btn-secondary dropdown-toggle" type="button" id="items" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Select meal
-            </button>
-            <div class="dropdown-menu" aria-labelledby="items">
-              <a class="dropdown-item" href="#">Pizza</a>
-              <a class="dropdown-item" href="#">Sandwich</a>
-              <a class="dropdown-item" href="#">Parfait</a>
-              <a class="dropdown-item" href="#">Cake</a>
-            </div>
-          </div> 
-    </td>
-    <td>
-      <div class="dropdown">
-        <button class="btn btn-secondary dropdown-toggle" type="button" id="items" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            Select meal
-        </button>
-        <div class="dropdown-menu" aria-labelledby="items">
-          <a class="dropdown-item" href="#">Pizza</a>
-          <a class="dropdown-item" href="#">Sandwich</a>
-          <a class="dropdown-item" href="#">Parfait</a>
-          <a class="dropdown-item" href="#">Cake</a>
-        </div>
-      </div>
-</td>
-<td>
-  <div class="dropdown">
-    <button class="btn btn-secondary dropdown-toggle" type="button" id="items" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-        Select meal
-    </button>
-    <div class="dropdown-menu" aria-labelledby="items">
-      <a class="dropdown-item" href="#">Pizza</a>
-      <a class="dropdown-item" href="#">Sandwich</a>
-      <a class="dropdown-item" href="#">Parfait</a>
-      <a class="dropdown-item" href="#">Cake</a>
-    </div>
-  </div>
-</td>
         </tr>
+        <br/>
+<tr class="row">
+    <button type="button" class="btn btn-dark" (click)="onGetMealPlan()">Get Meal Plan</button>
+</tr>
     </tbody>
 </table>
