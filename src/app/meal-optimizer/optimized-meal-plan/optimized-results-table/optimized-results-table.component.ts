@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, ViewChild, ElementRef } from '@angular/core';
 import { Meal } from '../../../meal-optimizer/meal.model';
 
 @Component({
@@ -15,6 +15,10 @@ export class OptimizedResultsTableComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+  }
+
+  onTabSelected(tabSelected : String) {
+    console.log('Inside optimized-results-table ' + tabSelected);
   }
 
 }

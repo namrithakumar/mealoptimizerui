@@ -1,15 +1,22 @@
 <div class="row">
     <div class="col-xs-12">
-        <img src="" alt="" class="img-responsive">
+        <img 
+        [src]="recipeSelected.imagePath" 
+        alt="{{ recipeSelected.name }}" 
+        class="img-responsive"
+        style="max-height : 300px">
     </div>
 </div>
 <div class="row">
     <div class="col-xs-12">
-        <h1>Recipe Name</h1>
+        <h4>{{recipeSelected.name}}</h4>
+        <a href="{{recipeSelected.tutorialPath}}"> Watch the tutorial here </a>
+        <p>Ingredients</p>
+        <p *ngFor="let ingredient of recipeSelected.ingredients">{{ ingredient.name }} ({{ ingredient.amount}})</p>
     </div>
 </div>
 <div class="row">
     <div class="col-xs-12">
-        <button type="button" class="btn btn-primary" (click)="onAddToShoppingList($event)">Add to shopping list</button>
+        <button type="button" class="btn btn-primary" (click)="onAddToShoppingList($event)">Add ingredients to shopping list</button>
     </div>
 </div>
