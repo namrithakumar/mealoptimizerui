@@ -2,8 +2,8 @@
 <hr/>
 <app-meal-optimizer (onFeatureSelected)="onFeatureSelected($event)"></app-meal-optimizer>
 <hr/>
-<app-recipes *ngIf="featureSelected === 'getRecipeSelected'"></app-recipes>
-<hr/>
-<app-shopping-list *ngIf="featureSelected === 'getRecipeSelected'"></app-shopping-list>
-<hr/>
-<app-online-order *ngIf="featureSelected === 'placeOrderSelected'"></app-online-order>
+<div [ngSwitch]="featureSelected"> 
+    <app-recipes *ngSwitchCase="'getRecipeSelected'"></app-recipes>
+    <app-shopping-list *ngSwitchCase="'getRecipeSelected'"></app-shopping-list>
+    <app-online-order *ngSwitchCase="'placeOrderSelected'"></app-online-order>
+</div>
