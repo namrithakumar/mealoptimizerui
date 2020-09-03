@@ -22,6 +22,7 @@ export class ShoppingEditComponent implements OnInit {
   }
 
   onAddIngredient() : void {
+    this.ingredientAmount.nativeElement.value = (this.ingredientAmount.nativeElement.value === '')?1:this.ingredientAmount.nativeElement.value;
     this.addIngredient.emit({ ingredientName:this.ingredientName.nativeElement.value, ingredientAmount:this.ingredientAmount.nativeElement.value, ingredientLabel:this.ingredientLabel });
   }
 
