@@ -20,7 +20,7 @@ export class OrderService {
         this.deliveryDate = deliveryDate;
     }
 
-    addMeal(mealInfo : {'itemPosition' : number, itemName: String}) {
+    addMeal(mealInfo : {itemPosition : number, itemName: String}) {
         this.mealList[mealInfo.itemPosition] = mealInfo.itemName;
     }
     

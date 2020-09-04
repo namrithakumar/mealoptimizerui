@@ -21,7 +21,7 @@ export class MealOptionsComponent implements OnInit {
   }
 
   onMealSelected() : void {
-    this.orderService.addMeal({'itemPosition': this.indexOfMeal, 'itemName': this.itemSelected});
+    this.orderService.addMeal({itemPosition: this.indexOfMeal, itemName: this.itemSelected});
     this.orderService.onMealSelect.emit(this.orderService.mealList);
   }
 
