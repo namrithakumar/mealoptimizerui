@@ -1,4 +1,5 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { UserDietService } from '../shared/services/user-diet.service';
 
 @Component({
   selector: 'app-meal-optimizer',

@@ -1,9 +1,4 @@
         <h4><b><i>Step 1: Select diet type</i></b></h4>
-        <div>
-                <input type="radio" [(ngModel)]="userDietType" name="user_diet_type" value="ALL" (click)="onDietTypeSelect($event.target.value)">General<br/>
-                <input type="radio" name="user_diet_type" value="VEGAN" (click)="onDietTypeSelect($event.target.value)">VEGAN<br/>
-                <input type="radio" name="user_diet_type" value="GLUTENFREE" (click)="onDietTypeSelect($event.target.value)">GLUTEN FREE<br/>
-                <input type="radio" name="user_diet_type" value="FATFREE" (click)="onDietTypeSelect($event.target.value)">FAT FREE<br/>
-                <input type="radio" name="user_diet_type" value="DAIRYFREE" (click)="onDietTypeSelect($event.target.value)">DAIRY FREE<br/>
-                <input type="radio" name="user_diet_type" value="VEGETARIAN" (click)="onDietTypeSelect($event.target.value)">VEGETARIAN
+        <div *ngFor="let dietType of dietTypes | keyvalue">
+                <input type="radio" [id]='dietType.key' [(ngModel)]="userDietType" name="user_diet_type" [value]="dietType.key" (click)="onDietTypeSelect(dietType.key)">{{dietType.value}}<br/>
         </div>
