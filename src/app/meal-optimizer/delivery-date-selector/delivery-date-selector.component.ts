@@ -7,15 +7,15 @@ import {
   import {
     CalendarView, CalendarEvent,
   } from 'angular-calendar';
-  
+
+  import { OrderService } from '../../shared/services/order.service';
+
   @Component({
     selector: 'app-delivery-date-selector',
     styleUrls: ['delivery-date-selector.component.css'],
     templateUrl: './delivery-date-selector.component.html',
   })
   export class DeliveryDateSelectorComponent {
-  
-    @Output() dateOfDeliverySelected = new EventEmitter< { dateOfDelivery : Date } >();
 
     activeDayIsOpen: boolean = true;
   
@@ -27,18 +27,15 @@ import {
     
     dateOfDelivery: Date = this.viewDate;
 
-    constructor() {}
+    constructor(private orderService : OrderService) {}
   
     dateOfDeliveryChosen({ date, events }: { date: Date; events: CalendarEvent[] }):void {
       this.dateOfDelivery = date;
-      this.dateOfDeliverySelected.emit({ dateOfDelivery : this.dateOfDelivery});
+      this.orderService.setDeliveryDate(this.dateOfDelivery);
     }
   
-      closeOpenMonthViewDay() {
+    closeOpenMonthViewDay() {
       this.activeDayIsOpen = false;
     }
 
-    getDateOfDelivery() : Date {
-      return this.dateOfDelivery;
-    }
   }

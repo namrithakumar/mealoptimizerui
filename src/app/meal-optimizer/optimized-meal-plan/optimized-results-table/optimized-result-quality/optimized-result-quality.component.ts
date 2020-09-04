@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Meal } from '../../../../meal-optimizer/meal.model';
+import { Meal } from '../../../../shared/meal.model';
 
 @Component({
   selector: 'app-optimized-result-quality',

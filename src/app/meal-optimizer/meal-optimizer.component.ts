@@ -8,7 +8,6 @@ import { UserDietService } from '../shared/services/user-diet.service';
 })
 export class MealOptimizerComponent implements OnInit {
 
-  dateOfDelivery : Date;
   mealList = new Array<String>(4);
   dietTypeSelected : String;
 
@@ -17,14 +16,6 @@ export class MealOptimizerComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-  }
-
-  getSelectedDietType(userDietTypeSelected : { dietType : String }) : void {
-    this.dietTypeSelected = userDietTypeSelected.dietType;
-  }
-
-  getSelectedDateOfDelivery(dateOfDeliverySelected : { dateOfDelivery : Date }) : void {
-    this.dateOfDelivery = dateOfDeliverySelected.dateOfDelivery;
   }
 
   getMealPlan(mealsSelected: { mealList : Array<String> }) : void {

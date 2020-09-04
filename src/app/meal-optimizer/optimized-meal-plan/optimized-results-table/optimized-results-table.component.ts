@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, ViewChild, ElementRef } from '@angular/core';
-import { Meal } from '../../../meal-optimizer/meal.model';
+import { Meal } from '../../../shared/meal.model';
 
 @Component({
   selector: 'app-optimized-results-table',
