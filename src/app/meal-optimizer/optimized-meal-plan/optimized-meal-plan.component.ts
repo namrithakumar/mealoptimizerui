@@ -1,4 +1,5 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { OrderService } from '../../shared/services/order.service';
 
 @Component({
   selector: 'app-optimized-meal-plan',
@@ -7,14 +8,13 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 })
 export class OptimizedMealPlanComponent implements OnInit {
 
-  @Output() onFeatureSelected = new EventEmitter< String >();
-
-  constructor() { }
+  constructor(private orderService : OrderService) { }
 
   ngOnInit(): void {
   }
 
-  onSelect( feature : String) {
-      this.onFeatureSelected.emit(feature);
+  //  Action rfers to place Order/getRecipe
+  onSelect( action : String ) {
+      this.orderService.onActionSelected.emit(action);
   }
 }

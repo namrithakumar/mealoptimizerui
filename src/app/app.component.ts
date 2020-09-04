@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { OrderService } from './shared/services/order.service';
 
 @Component({
   selector: 'app-root',
@@ -7,9 +8,9 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
 
-  featureSelected : String;
+  actionSelected : String;
 
-  onFeatureSelected(feature : String) {
-    this.featureSelected = feature;
+  constructor(private orderService : OrderService) {
+    this.orderService.onActionSelected.subscribe((action : String) => this.actionSelected=this.actionSelected);
   }
 }

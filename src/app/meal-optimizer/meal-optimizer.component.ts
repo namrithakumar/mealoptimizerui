@@ -1,16 +1,13 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { OrderService } from '../shared/services/order.service';
 
-//This component handles routing
+//This component handles routing, link to optimizationService via controller
 @Component({
   selector: 'app-meal-optimizer',
   templateUrl: './meal-optimizer.component.html',
   styleUrls: ['./meal-optimizer.component.css']
 })
 export class MealOptimizerComponent implements OnInit {
-
-  mealList = new Array<String>(4);
-  dietTypeSelected : String;
 
   @Output() onFeatureSelected = new EventEmitter< String >();
 
@@ -26,7 +23,4 @@ export class MealOptimizerComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  featureSelected( feature :String ) : void {
-    this.onFeatureSelected.emit(feature);
-  }
 }

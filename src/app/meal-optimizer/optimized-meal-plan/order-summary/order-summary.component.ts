@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-
+import { OptimizationService } from '../../../shared/services/optimization.service';
 @Component({
   selector: 'app-order-summary',
   templateUrl: './order-summary.component.html',
@@ -7,7 +7,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class OrderSummaryComponent implements OnInit {
 
-  constructor() { }
+  optimizationResultsSummary = this.optimizationService.getOptimizationResultSummary();
+  constructor(private optimizationService : OptimizationService) { }
 
   ngOnInit(): void {
   }
