@@ -1,6 +1,7 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import { UserDietService } from '../shared/services/user-diet.service';
+import { OrderService } from '../shared/services/order.service';
 
+//This component handles routing
 @Component({
   selector: 'app-meal-optimizer',
   templateUrl: './meal-optimizer.component.html',
@@ -13,13 +14,16 @@ export class MealOptimizerComponent implements OnInit {
 
   @Output() onFeatureSelected = new EventEmitter< String >();
 
-  constructor() { }
-
-  ngOnInit(): void {
+  constructor(private orderService : OrderService) { 
+    this.orderService.getMealPlan.subscribe(
+      (mealList : Array<String>) => {
+        console.log('List of meals received as input for optimization' + mealList[0] + mealList[1] + mealList[2] + mealList[3]);
+        mealList.forEach(meal => console.log(meal));
+      }
+    );
   }
 
-  getMealPlan(mealsSelected: { mealList : Array<String> }) : void {
-    this.mealList = mealsSelected.mealList;
+  ngOnInit(): void {
   }
 
   featureSelected( feature :String ) : void {

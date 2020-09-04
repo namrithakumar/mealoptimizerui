@@ -1,7 +1,5 @@
 import { Component, OnInit, EventEmitter, Output } from '@angular/core';
-import { MealOptionsComponent } from './meal-options/meal-options.component';
-import { DeliveryDateSelectorComponent } from '../delivery-date-selector/delivery-date-selector.component';
-import { connectableObservableDescriptor } from 'rxjs/internal/observable/ConnectableObservable';
+import { OrderService } from '../../shared/services/order.service';
 
 @Component({
   selector: 'app-meal-selector',
@@ -11,19 +9,18 @@ import { connectableObservableDescriptor } from 'rxjs/internal/observable/Connec
 
 export class MealSelectorComponent implements OnInit {
 
-  mealList = new Array<String>(4);
+  disableGetMealPlan : boolean = true;
   
-  @Output() getMealPlan = new EventEmitter< { mealList : Array<String> } >();
-
-  getSelectedMeal(mealSelected : { itemPosition :number, itemName : String }) {
-    this.mealList[mealSelected.itemPosition] = mealSelected.itemName;
+  constructor(private orderService : OrderService) { 
+    this.orderService.onMealSelect.subscribe((mealList : String[]) => {
+      this.disableGetMealPlan = (mealList.length === 4)?false:true;
+    });
   }
-  constructor() { }
 
   ngOnInit(): void {
   }
 
   onGetMealPlan() {
-    this.getMealPlan.emit({ mealList : this.mealList });
+    this.orderService.getMealPlan.emit(this.orderService.mealList);
   }
 }

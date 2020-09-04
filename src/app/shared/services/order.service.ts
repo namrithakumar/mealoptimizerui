@@ -6,7 +6,7 @@ import { Meal } from '../meal.model';
 @Injectable({providedIn:'root'})
 export class OrderService {
 
-    selectedMealList = new Array<String>();
+    mealList = new Array<String>();
     dietType : String;
     deliveryDate : Date;
 
@@ -20,9 +20,11 @@ export class OrderService {
         this.deliveryDate = deliveryDate;
     }
 
-    addMeal(meal : Meal) {
-        this.selectedMealList.push(meal.itemName);
+    addMeal(mealInfo : {'itemPosition' : number, itemName: String}) {
+        this.mealList[mealInfo.itemPosition] = mealInfo.itemName;
     }
     
-    onMealSelect = new EventEmitter<Meal>();
+    onMealSelect = new EventEmitter<String[]>();
+
+    getMealPlan = new EventEmitter< Array<String> >();
 }
