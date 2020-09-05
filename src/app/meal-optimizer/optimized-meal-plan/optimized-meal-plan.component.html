@@ -6,3 +6,6 @@
 <button type="button" class="btn btn-dark" (click)="onSelect('getRecipeSelected')">Get recipe</button>
 </div>
 <app-order-summary></app-order-summary>
+<app-recipes [hidden]="actionSelected!=='getRecipeSelected'"></app-recipes>
+<app-shopping-list [hidden]="actionSelected!=='getRecipeSelected'"></app-shopping-list>
+<app-online-order [hidden]="actionSelected!=='placeOrderSelected'"></app-online-order>

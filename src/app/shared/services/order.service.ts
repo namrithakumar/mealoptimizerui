@@ -1,5 +1,4 @@
 import { Injectable, EventEmitter } from '@angular/core';
-import { ItemService } from './item.service';
 import { UserInputService } from './user-input.service';
 
 @Injectable({providedIn:'root'})

@@ -6,11 +6,4 @@ import { UserInputService } from './shared/services/user-input.service';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent {
-
-  actionSelected : String;
-
-  constructor(private userInputService : UserInputService) {
-    this.userInputService.onActionSelected.subscribe((action : String) => this.actionSelected=this.actionSelected);
-  }
-}
+export class AppComponent { }

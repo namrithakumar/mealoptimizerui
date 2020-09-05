@@ -26,8 +26,5 @@ export class UserInputService {
 
     onMealSelect = new EventEmitter<String[]>();
 
-    //Action refers to place Order/get Recipe
-    onActionSelected = new EventEmitter< String >();
-
     getMealPlan = new EventEmitter< Array<String> >();
 }

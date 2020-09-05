@@ -8,13 +8,15 @@ import { UserInputService } from '../../shared/services/user-input.service';
 })
 export class OptimizedMealPlanComponent implements OnInit {
 
-  constructor(private userInputService : UserInputService) { }
+  actionSelected : String;
+
+  constructor() { }
 
   ngOnInit(): void {
   }
 
   //  Action rfers to place Order/getRecipe
   onSelect( action : String ) {
-      this.userInputService.onActionSelected.emit(action);
+    this.actionSelected = action;
   }
 }
