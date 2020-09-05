@@ -1,22 +1,25 @@
-<h4><b><i>Step 3: Select meals</i></b></h4>
-<table>
-    <thead>
-        <th>Date of Delivery</th>
-        <th>Meal 1</th>
-        <th>Meal 2</th>
-        <th>Meal 3</th>
-        <th>Meal 4</th>
-    </thead>
-    <tbody>
-        <tr>
-            <td>Date</td>
-            <td *ngFor="let i of [0,1,2,3]; index as indexOfMeal">
-                <app-meal-options [indexOfMeal] = "indexOfMeal"></app-meal-options>
-        </td>
-        </tr>
-        <br/>
-<tr class="row">
-    <button type="button" class="btn btn-dark" (click)="onGetMealPlan()" [disabled]='disableGetMealPlan'>Get Meal Plan</button>
-</tr>
-    </tbody>
-</table>
+<div *ngIf="setCollapseInd"><h4><b><i>Step 3: Meals selected: <span *ngFor="let meal of getMealList()">{{meal}};</span></i></b></h4></div>
+<div *ngIf="!setCollapseInd"><h4><b><i>Step 3: Select meals</i></b></h4></div>
+<div [ngClass]="(setCollapseInd)?'collapse':'show'">
+    <table>
+        <thead>
+            <th>Date of Delivery</th>
+            <th>Meal 1</th>
+            <th>Meal 2</th>
+            <th>Meal 3</th>
+            <th>Meal 4</th>
+        </thead>
+        <tbody>
+            <tr>
+                <td>{{dateOfDelivery | date}}</td>
+                <td *ngFor="let i of [0,1,2,3]; index as indexOfMeal">
+                    <app-meal-options [indexOfMeal] = "indexOfMeal"></app-meal-options>
+            </td>
+            </tr>
+            <br/>
+    <tr class="row">
+        <button type="button" class="btn btn-dark" (click)="onGetMealPlan()" [disabled]='disableGetMealPlan'>Get Meal Plan</button>
+    </tr>
+        </tbody>
+    </table>
+    </div>

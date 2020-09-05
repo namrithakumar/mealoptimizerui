@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, HostListener } from '@angular/core';
 import { OrderService } from '../shared/services/order.service';
 
 //This component handles routing, link to optimizationService via controller
@@ -22,5 +22,4 @@ export class MealOptimizerComponent implements OnInit {
 
   ngOnInit(): void {
   }
-
 }
