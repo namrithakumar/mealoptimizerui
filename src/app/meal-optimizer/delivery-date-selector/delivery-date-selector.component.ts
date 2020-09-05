@@ -7,7 +7,7 @@ import {
     CalendarView, CalendarEvent,
   } from 'angular-calendar';
 
-import { OrderService } from '../../shared/services/order.service';
+import { UserInputService } from '../../shared/services/user-input.service';
 import { DisplayService } from 'src/app/shared/services/display.service';
 
   @Component({
@@ -29,11 +29,11 @@ import { DisplayService } from 'src/app/shared/services/display.service';
 
     setCollapseInd : boolean = false;
 
-    constructor(private orderService : OrderService, private displayService : DisplayService) {}
+    constructor(private userInputService : UserInputService, private displayService : DisplayService) {}
   
     dateOfDeliveryChosen({ date, events }: { date: Date; events: CalendarEvent[] }):void {
       this.dateOfDelivery = date;
-      this.orderService.setDeliveryDate(this.dateOfDelivery);
+      this.userInputService.setDeliveryDate(this.dateOfDelivery);
     }
   
     closeOpenMonthViewDay() {

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { OrderService } from './shared/services/order.service';
+import { UserInputService } from './shared/services/user-input.service';
 
 @Component({
   selector: 'app-root',
@@ -10,7 +10,7 @@ export class AppComponent {
 
   actionSelected : String;
 
-  constructor(private orderService : OrderService) {
-    this.orderService.onActionSelected.subscribe((action : String) => this.actionSelected=this.actionSelected);
+  constructor(private userInputService : UserInputService) {
+    this.userInputService.onActionSelected.subscribe((action : String) => this.actionSelected=this.actionSelected);
   }
 }

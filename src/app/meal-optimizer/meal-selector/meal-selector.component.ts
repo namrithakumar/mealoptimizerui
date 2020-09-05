@@ -1,5 +1,5 @@
 import { Component, OnInit, HostListener } from '@angular/core';
-import { OrderService } from '../../shared/services/order.service';
+import { UserInputService } from '../../shared/services/user-input.service';
 import { DisplayService } from 'src/app/shared/services/display.service';
 
 @Component({
@@ -12,14 +12,14 @@ export class MealSelectorComponent implements OnInit {
 
   disableGetMealPlan : boolean = true;
   
-  dateOfDelivery : Date = (this.orderService.deliveryDate === undefined)?new Date():this.orderService.deliveryDate;
+  dateOfDelivery : Date = (this.userInputService.deliveryDate === undefined)?new Date():this.userInputService.deliveryDate;
 
   setCollapseInd : boolean = false;
 
   getMealPlanInd : boolean = false;
 
-  constructor(private orderService : OrderService, private displayService : DisplayService) { 
-    this.orderService.onMealSelect.subscribe((mealList : String[]) => {
+  constructor(private userInputService : UserInputService, private displayService : DisplayService) { 
+    this.userInputService.onMealSelect.subscribe((mealList : String[]) => {
       this.disableGetMealPlan = (mealList.length === 4)?false:true;
     });
   }
@@ -30,18 +30,18 @@ export class MealSelectorComponent implements OnInit {
   onGetMealPlan() {
     this.setCollapseInd = true;
     this.getMealPlanInd = true;
-    this.orderService.getMealPlan.emit(this.orderService.mealList);
+    this.userInputService.getMealPlan.emit(this.userInputService.mealList);
   }
 
   @HostListener('mouseover') onMouseOver() {
-    this.setCollapseInd = this.displayService.getCollapsibleIndMealSelector('mouseover' , this.orderService.mealList, this.getMealPlanInd);
+    this.setCollapseInd = this.displayService.getCollapsibleIndMealSelector('mouseover' , this.userInputService.mealList, this.getMealPlanInd);
 }
 
   @HostListener('mouseout') onMouseOut() {
-    this.setCollapseInd = this.displayService.getCollapsibleIndMealSelector('mouseout' , this.orderService.mealList, this.getMealPlanInd);
+    this.setCollapseInd = this.displayService.getCollapsibleIndMealSelector('mouseout' , this.userInputService.mealList, this.getMealPlanInd);
   }
 
   getMealList() : String[] {
-    return this.orderService.mealList;
+    return this.userInputService.mealList;
   }
 }

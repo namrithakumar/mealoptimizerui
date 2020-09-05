@@ -1,6 +1,6 @@
 import { Component, Output, EventEmitter, HostListener, HostBinding, ViewChild, ElementRef } from '@angular/core'
 import { UserDietService } from '../../shared/services/user-diet.service';
-import { OrderService } from '../../shared/services/order.service';
+import { UserInputService } from '../../shared/services/user-input.service';
 import { DisplayService } from '../../shared/services/display.service';
 
 @Component({
@@ -9,7 +9,7 @@ import { DisplayService } from '../../shared/services/display.service';
 })
 export class UserDietTypeComponent {
     
-    constructor(private userDietService : UserDietService, private orderService : OrderService, private displayService : DisplayService) { }
+    constructor(private userDietService : UserDietService, private userInputService : UserInputService, private displayService : DisplayService) { }
 
     userDietType : String;
 
@@ -19,7 +19,7 @@ export class UserDietTypeComponent {
 
     onDietTypeSelect(dietType : String) {
         this.userDietType = dietType;
-        this.orderService.setDietType(dietType);
+        this.userInputService.setDietType(dietType);
     }
 
     @HostListener('mouseover') onMouseOver() {
