@@ -14,5 +14,8 @@ export class RecipeService {
         new Recipe("Garlic Bread","Feed your senses with some spice","https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQfuqq0ADG7H1LaGVBsIXkPEZsW_ECSzRHrow&usqp=CAU","https://www.youtube.com/watch?v=TAt2Nn0F2mc", [new Ingredient('Bread',2,'Garlic bread'), new Ingredient('Cheese',4,'Garlic bread'), new Ingredient('Garlic seasoning - ready to use',1,'Garlic bread')])
       ];
 
-    recipeSelected = new EventEmitter<Recipe>();
+    public getRecipes() : Recipe[] {
+      console.log('Get Recipes invoked');
+      return this.recipes;
+    }
 }

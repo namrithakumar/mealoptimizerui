@@ -10,7 +10,7 @@ import { RecipeService } from 'src/app/shared/services/recipe.service';
 })
 export class RecipeListComponent implements OnInit {
 
-  recipes: Recipe[] = this.recipeService.recipes;
+  recipes: Recipe[] = this.recipeService.getRecipes();
 
   constructor(private recipeService:RecipeService) { }
 

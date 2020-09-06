@@ -1,4 +1,6 @@
 import { Injectable, EventEmitter } from '@angular/core';
+import { Recipe } from '../recipe.model';
+import { Ingredient } from '../ingredient.model';
 
 @Injectable({providedIn:'root'})
 export class UserInputService {
@@ -27,4 +29,8 @@ export class UserInputService {
     onMealSelect = new EventEmitter<String[]>();
 
     getMealPlan = new EventEmitter< Array<String> >();
+
+    onRecipeSelect = new EventEmitter<Recipe>();
+
+    onAddIngredientsToShoppingList = new EventEmitter<{ ingredientName:String, ingredientAmount:number, ingredientLabel:String }[]>();
 }
