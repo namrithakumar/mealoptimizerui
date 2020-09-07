@@ -32,5 +32,5 @@ export class UserInputService {
 
     onRecipeSelect = new EventEmitter<Recipe>();
 
-    onAddIngredientsToShoppingList = new EventEmitter<{ ingredientName:String, ingredientAmount:number, ingredientLabel:String }[]>();
+    onAddIngredientsToShoppingList = new EventEmitter<{ ingredientName:String, ingredientAmount:number, ingredientLabels:String[] }[]>();
 }

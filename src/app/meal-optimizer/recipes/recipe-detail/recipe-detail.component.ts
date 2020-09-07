@@ -10,7 +10,7 @@ import { UserInputService } from 'src/app/shared/services/user-input.service';
 export class RecipeDetailComponent implements OnInit {
 
   @Input() recipeSelected : Recipe;
-  ingredientInfo : { ingredientName:String, ingredientAmount:number, ingredientLabel:String }[];
+  ingredientInfo : { ingredientName:String, ingredientAmount:number, ingredientLabels:String[] }[];
 
   ngOnInit(): void {
   }
@@ -18,12 +18,12 @@ export class RecipeDetailComponent implements OnInit {
   constructor(private userInputService : UserInputService) {}
 
   onAddToShoppingList(): void {
-    this.ingredientInfo = new Array<{ ingredientName:String, ingredientAmount:number, ingredientLabel:String }>();
+    this.ingredientInfo = new Array<{ ingredientName:String, ingredientAmount:number, ingredientLabels:String[] }>();
     this.recipeSelected.ingredients.forEach((ingredient) => {
       this.ingredientInfo.push({
         ingredientName : ingredient.name, 
         ingredientAmount : ingredient.amount, 
-        ingredientLabel : ingredient.label
+        ingredientLabels : ingredient.labels
       });
     });
     this.userInputService.onAddIngredientsToShoppingList.emit(this.ingredientInfo);

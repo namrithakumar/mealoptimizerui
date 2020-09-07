@@ -12,7 +12,7 @@ export class RecipesComponent implements OnInit {
 
   recipe : Recipe;
 
-  ingredientInfo : {ingredients: Ingredient[], label: String};
+  ingredientInfo : {ingredients: Ingredient[], labels: String[]};
 
   ngOnInit(): void { }
 

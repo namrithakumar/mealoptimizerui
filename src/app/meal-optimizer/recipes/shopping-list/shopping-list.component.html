@@ -4,7 +4,12 @@
         <hr>
         <ul class="list-group">
             <div class="list-group-item" style="cursor : pointer" *ngFor="let ingredient of ingredients">
-            {{ingredient.name}} ({{ingredient.amount}}) <span class="badge badge-secondary">{{ingredient.label}}</span></div>
+            {{ingredient.name}} ({{ingredient.amount}}) 
+            <span class="list-group">
+                <div class="list-group-item">
+                <span class="badge badge-secondary" *ngFor="let label of ingredient.labels">{{label}}</span></div>
+                </span>
+        </div>
         </ul>
     </div>
 </div>
