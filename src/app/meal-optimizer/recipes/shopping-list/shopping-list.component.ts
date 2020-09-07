@@ -33,6 +33,8 @@ export class ShoppingListComponent implements OnInit {
         if(!ingredientAdded && (ingredient.name.toLowerCase() === ingredientInfo.ingredientName.toLowerCase())) {
           var concatenatedLabels = ingredient.labels;
           ingredientInfo.ingredientLabels.forEach((label) => {
+
+            //Add new label only if the list of labels does not already contain it.
             if(!(concatenatedLabels.includes(label))) {
               concatenatedLabels.push(label);
             }
