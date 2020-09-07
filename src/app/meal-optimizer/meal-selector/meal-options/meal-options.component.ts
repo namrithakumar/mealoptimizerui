@@ -1,4 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { ItemService } from '../../../shared/services/item.service';
+import { UserInputService } from '../../../shared/services/user-input.service';
 
 @Component({
   selector: 'app-meal-options',
@@ -7,21 +9,20 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 })
 export class MealOptionsComponent implements OnInit {
 
-  @Input() indexOfMeal : number;
+  @Input() indexOfMeal : number; // Set inside meal-selector.html
 
-  @Output() mealSelected = new EventEmitter< { itemPosition : number, itemName : String } >();
-
-  itemList : String[] = ['Green Salad','Ice cream','Strawberry Milkshake','Garlic Bread'];
+  itemList : String[] = this.itemService.getItemsByCategory(this.userInputService.dietType);
 
   itemSelected : String;
   
-  constructor() { }
+  constructor(private itemService:ItemService, private userInputService:UserInputService) { }
 
   ngOnInit(): void {
   }
 
   onMealSelected() : void {
-    this.mealSelected.emit({ itemPosition : this.indexOfMeal, itemName : this.itemSelected });
+    this.userInputService.addMeal({itemPosition: this.indexOfMeal, itemName: this.itemSelected});
+    this.userInputService.onMealSelect.emit(this.userInputService.mealList);
   }
 
 }

@@ -1,5 +1,7 @@
-import { Component, OnInit, Input, ViewChild, ElementRef } from '@angular/core';
-import { Meal } from '../../../meal-optimizer/meal.model';
+import { Component, OnInit } from '@angular/core';
+import { Meal } from '../../../shared/meal.model';
+import { OptimizationService } from 'src/app/shared/services/optimization.service';
+import { UserInputService } from 'src/app/shared/services/user-input.service';
 
 @Component({
   selector: 'app-optimized-results-table',
@@ -8,17 +10,16 @@ import { Meal } from '../../../meal-optimizer/meal.model';
 })
 export class OptimizedResultsTableComponent implements OnInit {
 
-  mealListByCost : Meal[] = [new Meal("Green Salad", 1.0, 10.0) , new Meal('Icecream',1.0,3.2), new Meal('Strawberry Milkshake', 2.0, 8.38), new Meal('Garlic bread', 1.0,4.75)];
+  mealListByCost : Array<Meal> = this.optimizationService.mealListByCost;
+  mealListByQuality : Array<Meal> = this.optimizationService.mealListByQuality;
 
-  mealListByQuality : Meal[] = [new Meal("Green Salad", 1.0, 10.0) , new Meal('Icecream',1.0,3.2), new Meal('Strawberry Milkshake', 2.0, 8.38), new Meal('Garlic bread', 1.0,4.75)];
-
-  constructor() { }
+  constructor(private optimizationService : OptimizationService, private userInputService : UserInputService) { }
 
   ngOnInit(): void {
   }
 
   onTabSelected(tabSelected : String) {
-    console.log('Inside optimized-results-table ' + tabSelected);
+    this.userInputService.setTabSelected(tabSelected);
   }
 
 }

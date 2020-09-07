@@ -1,21 +1,21 @@
 import {
     Component,
-    Output,
-    EventEmitter
+    HostListener
   } from '@angular/core';
   
   import {
     CalendarView, CalendarEvent,
   } from 'angular-calendar';
-  
+
+import { UserInputService } from '../../shared/services/user-input.service';
+import { DisplayService } from 'src/app/shared/services/display.service';
+
   @Component({
     selector: 'app-delivery-date-selector',
     styleUrls: ['delivery-date-selector.component.css'],
     templateUrl: './delivery-date-selector.component.html',
   })
   export class DeliveryDateSelectorComponent {
-  
-    @Output() dateOfDeliverySelected = new EventEmitter< { dateOfDelivery : Date } >();
 
     activeDayIsOpen: boolean = true;
   
@@ -25,20 +25,26 @@ import {
   
     viewDate: Date = new Date();
     
-    dateOfDelivery: Date = this.viewDate;
+    dateOfDelivery: Date;
 
-    constructor() {}
+    setCollapseInd : boolean = false;
+
+    constructor(private userInputService : UserInputService, private displayService : DisplayService) {}
   
     dateOfDeliveryChosen({ date, events }: { date: Date; events: CalendarEvent[] }):void {
       this.dateOfDelivery = date;
-      this.dateOfDeliverySelected.emit({ dateOfDelivery : this.dateOfDelivery});
+      this.userInputService.setDeliveryDate(this.dateOfDelivery);
     }
   
-      closeOpenMonthViewDay() {
+    closeOpenMonthViewDay() {
       this.activeDayIsOpen = false;
     }
 
-    getDateOfDelivery() : Date {
-      return this.dateOfDelivery;
+    @HostListener('mouseover') onMouseOver() {
+      this.setCollapseInd = this.displayService.getCollapsibleInd('mouseover' , this.dateOfDelivery);
+}
+
+    @HostListener('mouseout') onMouseOut() {
+      this.setCollapseInd = this.displayService.getCollapsibleInd('mouseout' , this.dateOfDelivery);
     }
   }

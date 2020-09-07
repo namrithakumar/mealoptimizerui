@@ -1,9 +1,4 @@
 <app-header></app-header>
 <hr/>
-<app-meal-optimizer (onFeatureSelected)="onFeatureSelected($event)"></app-meal-optimizer>
+<app-meal-optimizer></app-meal-optimizer>
 <hr/>
-<div [ngSwitch]="featureSelected"> 
-    <app-recipes *ngSwitchCase="'getRecipeSelected'"></app-recipes>
-    <app-shopping-list *ngSwitchCase="'getRecipeSelected'"></app-shopping-list>
-    <app-online-order *ngSwitchCase="'placeOrderSelected'"></app-online-order>
-</div>

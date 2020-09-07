@@ -1,1 +1,3 @@
-<p>Order Information goes here</p>
+<ul>{{orderInfo.userDietType}}</ul>
+<ul>{{orderInfo.deliveryDate}}</ul>
+<ul *ngFor = 'let meal of orderInfo.mealSelected'>{{meal}}</ul>

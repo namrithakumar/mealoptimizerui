@@ -14,18 +14,18 @@ import { MealOptimizerComponent } from './meal-optimizer/meal-optimizer.componen
 import { MealSelectorComponent } from './meal-optimizer/meal-selector/meal-selector.component';
 import { OptimizedMealPlanComponent } from './meal-optimizer/optimized-meal-plan/optimized-meal-plan.component';
 import { OrderSummaryComponent } from './meal-optimizer/optimized-meal-plan/order-summary/order-summary.component';
-import { ShoppingListComponent } from './shopping-list/shopping-list.component';
-import { ShoppingEditComponent } from './shopping-list/shopping-edit/shopping-edit.component';
-import { RecipesComponent } from './recipes/recipes.component';
-import { RecipeListComponent } from './recipes/recipe-list/recipe-list.component';
-import { RecipeDetailComponent } from './recipes/recipe-detail/recipe-detail.component';
+import { ShoppingListComponent } from './meal-optimizer/recipes/shopping-list/shopping-list.component';
+import { ShoppingEditComponent } from './meal-optimizer/recipes/shopping-list/shopping-edit/shopping-edit.component';
+import { RecipesComponent } from './meal-optimizer/recipes/recipes.component';
+import { RecipeListComponent } from './meal-optimizer/recipes/recipe-list/recipe-list.component';
+import { RecipeDetailComponent } from './meal-optimizer/recipes/recipe-detail/recipe-detail.component';
 import { MealOptionsComponent } from './meal-optimizer/meal-selector/meal-options/meal-options.component';
 import { OptimizedResultsTableComponent } from './meal-optimizer/optimized-meal-plan/optimized-results-table/optimized-results-table.component';
 import { OptimizedResultCostComponent } from './meal-optimizer/optimized-meal-plan/optimized-results-table/optimized-result-cost/optimized-result-cost.component';
 import { OptimizedResultQualityComponent } from './meal-optimizer/optimized-meal-plan/optimized-results-table/optimized-result-quality/optimized-result-quality.component';
 import { OrderInfoComponent } from './meal-optimizer/optimized-meal-plan/optimized-results-table/order-info/order-info.component';
-import { OnlineOrderComponent } from './online-order/online-order.component';
-import { RecipeItemComponent } from './recipes/recipe-list/recipe-item/recipe-item.component';
+import { OnlineOrderComponent } from './meal-optimizer/online-order/online-order.component';
+import { RecipeItemComponent } from './meal-optimizer/recipes/recipe-list/recipe-item/recipe-item.component';
 
 @NgModule({
   declarations: [

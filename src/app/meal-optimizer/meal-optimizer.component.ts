@@ -1,5 +1,7 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, HostListener } from '@angular/core';
+import { UserInputService } from '../shared/services/user-input.service';
 
+//This component handles routing, link to optimizationService via controller
 @Component({
   selector: 'app-meal-optimizer',
   templateUrl: './meal-optimizer.component.html',
@@ -7,30 +9,16 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 })
 export class MealOptimizerComponent implements OnInit {
 
-  dateOfDelivery : Date;
-  mealList = new Array<String>(4);
-  dietTypeSelected : String;
-
   @Output() onFeatureSelected = new EventEmitter< String >();
 
-  constructor() { }
+  constructor(private userInputService : UserInputService) { 
+    this.userInputService.getMealPlan.subscribe(
+      (mealList : Array<String>) => {
+        mealList.forEach(meal => console.log(meal));
+      }
+    );
+  }
 
   ngOnInit(): void {
-  }
-
-  getSelectedDietType(userDietTypeSelected : { dietType : String }) : void {
-    this.dietTypeSelected = userDietTypeSelected.dietType;
-  }
-
-  getSelectedDateOfDelivery(dateOfDeliverySelected : { dateOfDelivery : Date }) : void {
-    this.dateOfDelivery = dateOfDeliverySelected.dateOfDelivery;
-  }
-
-  getMealPlan(mealsSelected: { mealList : Array<String> }) : void {
-    this.mealList = mealsSelected.mealList;
-  }
-
-  featureSelected( feature :String ) : void {
-    this.onFeatureSelected.emit(feature);
   }
 }

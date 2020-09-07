@@ -10,9 +10,9 @@ export class ShoppingEditComponent implements OnInit {
   @ViewChild('ingredientName') ingredientName : ElementRef;
   @ViewChild('ingredientAmount') ingredientAmount : ElementRef;
 
-  ingredientLabel : String = 'Added by user';
+  defaultLabel : String = 'Added by user';
 
-  @Output() addIngredient = new EventEmitter<{ ingredientName:String, ingredientAmount:number, ingredientLabel:String }>();
+  @Output() addIngredient = new EventEmitter<{ ingredientName:String, ingredientAmount:number, ingredientLabels:String[] }>();
 
   @Output() deleteIngredient = new EventEmitter<{ ingredientName:String }>();
 
@@ -23,7 +23,9 @@ export class ShoppingEditComponent implements OnInit {
 
   onAddIngredient() : void {
     this.ingredientAmount.nativeElement.value = (this.ingredientAmount.nativeElement.value === '')?1:this.ingredientAmount.nativeElement.value;
-    this.addIngredient.emit({ ingredientName:this.ingredientName.nativeElement.value, ingredientAmount:this.ingredientAmount.nativeElement.value, ingredientLabel:this.ingredientLabel });
+    var label = new Array<String>();
+    label.push(this.defaultLabel);
+    this.addIngredient.emit({ ingredientName:this.ingredientName.nativeElement.value, ingredientAmount:this.ingredientAmount.nativeElement.value, ingredientLabels: label });
   }
 
   onDeleteIngredient() : void {
