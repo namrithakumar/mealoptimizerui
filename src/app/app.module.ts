@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-
+import { AppRoutingModule } from './app-routing.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CalendarModule, DateAdapter } from 'angular-calendar';
 import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
@@ -26,6 +26,13 @@ import { OptimizedResultQualityComponent } from './meal-optimizer/optimized-meal
 import { OrderInfoComponent } from './meal-optimizer/optimized-meal-plan/optimized-results-table/order-info/order-info.component';
 import { OnlineOrderComponent } from './meal-optimizer/online-order/online-order.component';
 import { RecipeItemComponent } from './meal-optimizer/recipes/recipe-list/recipe-item/recipe-item.component';
+import { AppInfoComponent } from './app-info/app-info.component';
+import { HomeComponent } from './app-info/home/home.component';
+import { ContactUsComponent } from './app-info/contact-us/contact-us.component';
+import { UserMgmtComponent } from './user-mgmt/user-mgmt.component';
+import { UserRegisterLoginLogoutComponent } from './user-mgmt/user-register-login-logout/user-register-login-logout.component';
+import { UserProfileComponent } from './user-mgmt/user-profile/user-profile.component';
+import { UserSettingsComponent } from './user-mgmt/user-settings/user-settings.component';
 
 @NgModule({
   declarations: [
@@ -48,12 +55,20 @@ import { RecipeItemComponent } from './meal-optimizer/recipes/recipe-list/recipe
     OptimizedResultQualityComponent,
     OrderInfoComponent,
     OnlineOrderComponent,
-    RecipeItemComponent
+    RecipeItemComponent,
+    AppInfoComponent,
+    HomeComponent,
+    ContactUsComponent,
+    UserMgmtComponent,
+    UserRegisterLoginLogoutComponent,
+    UserProfileComponent,
+    UserSettingsComponent
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
     FormsModule,
+    AppRoutingModule,
     CalendarModule.forRoot({
       provide: DateAdapter,
       useFactory: adapterFactory,
