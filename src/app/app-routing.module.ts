@@ -7,6 +7,7 @@ import { UserRegisterLoginLogoutComponent } from './user-mgmt/user-register-logi
 import { UserProfileComponent } from './user-mgmt/user-profile/user-profile.component';
 import { UserSettingsComponent } from './user-mgmt/user-settings/user-settings.component';
 import { NgModule } from '@angular/core';
+import { ErrorPageComponent } from './shared/error-page/error-page.component';
 
 const appRoutes : Routes = [
     {path:'app-info', children: [
@@ -20,7 +21,10 @@ const appRoutes : Routes = [
                         { path:'user-settings', component: UserSettingsComponent }
                 ] }
             ]},
-    {path:'meal-optimizer', component: MealOptimizerComponent}
+    {path:'meal-optimizer', component: MealOptimizerComponent},
+    {path: '', redirectTo:'/app-info/home', pathMatch: 'full'},
+    {path: 'error', component: ErrorPageComponent, data: {errorMessage: 'oops, something went wrong! Let us try again ...'}},
+    {path: '**', redirectTo: '/error'}
 ];
 
 @NgModule({
