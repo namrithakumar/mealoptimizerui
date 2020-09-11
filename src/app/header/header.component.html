@@ -4,26 +4,25 @@
 <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
     <ul class="navbar-nav">
       <li class="nav-item">
-        <a class="nav-link" href="#">Home</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">About us</a>
+        <a class="nav-link" routerLink="/app-info/home">Home</a>
       </li>
         <li class="nav-item">
-        <a class="nav-link" href="#">Contact us</a>
+        <a class="nav-link" routerLink="/app-info/contact-us">Contact us</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#">Register/Login</a>
+        <a class="nav-link" routerLink="/user-mgmt/register-login">Register/Login</a>
       </li>
-   
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/meal-optimizer">Meal Planner</a>
+      </li>   
       <!-- Dropdown -->
       <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
+        <a class="nav-link dropdown-toggle" id="navbardrop" data-toggle="dropdown">
           User
         </a>
         <div class="dropdown-menu">
-          <a class="dropdown-item" href="#">Profile</a>
-          <a class="dropdown-item" href="#">Settings</a>
+          <a class="dropdown-item" routerLink="/user-mgmt/user/user-profile">Profile</a>
+          <a class="dropdown-item" routerLink="/user-mgmt/user/user-settings">Settings</a>
           <a class="dropdown-item" href="#">Logout</a>
         </div>
       </li>
