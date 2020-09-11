@@ -1,5 +1,5 @@
 <div *ngIf="setCollapseInd"><h4><b><i>Step 3: Meals selected: <span *ngFor="let meal of getMealList()">{{meal}};</span></i></b></h4></div>
-<div *ngIf="!setCollapseInd"><h4><b><i>Step 3: Select meals</i></b></h4></div>
+<div *ngIf="!setCollapseInd"><h4><b><i>Step 3: Select meals - Choose wisely</i></b></h4></div>
 <div [ngClass]="(setCollapseInd)?'collapse':'show'">
     <table>
         <thead>

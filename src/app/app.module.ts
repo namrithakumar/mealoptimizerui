@@ -33,6 +33,7 @@ import { UserMgmtComponent } from './user-mgmt/user-mgmt.component';
 import { UserRegisterLoginLogoutComponent } from './user-mgmt/user-register-login-logout/user-register-login-logout.component';
 import { UserProfileComponent } from './user-mgmt/user-profile/user-profile.component';
 import { UserSettingsComponent } from './user-mgmt/user-settings/user-settings.component';
+import { ErrorPageComponent } from './shared/error-page/error-page.component';
 
 @NgModule({
   declarations: [
@@ -62,7 +63,8 @@ import { UserSettingsComponent } from './user-mgmt/user-settings/user-settings.c
     UserMgmtComponent,
     UserRegisterLoginLogoutComponent,
     UserProfileComponent,
-    UserSettingsComponent
+    UserSettingsComponent,
+    ErrorPageComponent
   ],
   imports: [
     BrowserModule,
