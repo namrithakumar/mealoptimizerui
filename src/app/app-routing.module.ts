@@ -8,6 +8,8 @@ import { UserProfileComponent } from './user-mgmt/user-profile/user-profile.comp
 import { UserSettingsComponent } from './user-mgmt/user-settings/user-settings.component';
 import { NgModule } from '@angular/core';
 import { ErrorPageComponent } from './shared/error-page/error-page.component';
+import { AuthGuardService } from './shared/services/auth-guard.service';
+import { RegisterLoginGuardService } from './shared/services/register-login-guard.service';
 
 const appRoutes : Routes = [
     {path:'app-info', children: [
@@ -15,8 +17,8 @@ const appRoutes : Routes = [
                 { path:'contact-us', component: ContactUsComponent }
             ]},
     {path:'user-mgmt', children: [
-                { path: 'register-login', component: UserRegisterLoginLogoutComponent },
-                { path:'user', children: [
+                { path: 'register-login', canActivate: [RegisterLoginGuardService], component: UserRegisterLoginLogoutComponent },
+                { path:'user',  canActivate: [AuthGuardService], children: [
                         { path:'user-profile', component: UserProfileComponent },
                         { path:'user-settings', component: UserSettingsComponent }
                 ] }
