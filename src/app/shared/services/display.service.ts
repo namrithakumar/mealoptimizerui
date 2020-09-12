@@ -1,8 +1,11 @@
 import { Injectable } from '@angular/core';
+import { AuthService } from './auth.service';
 
 @Injectable({providedIn:'root'})
 export class DisplayService {
     
+    constructor(private authService : AuthService) {}
+
     getCollapsibleInd(mouseevent : String, value : any) : boolean {
         switch(mouseevent) {
             case 'mouseover':
@@ -24,6 +27,10 @@ export class DisplayService {
                 return true;
         }
         return false;
+       }
     }
+
+    getHideUserOptions() : boolean {
+        return !(this.authService.loggedIn);
     }
 }
