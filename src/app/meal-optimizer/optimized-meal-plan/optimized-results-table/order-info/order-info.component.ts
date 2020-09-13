@@ -13,5 +13,4 @@ export class OrderInfoComponent implements OnInit {
 
   ngOnInit(): void {
   }
-
 }

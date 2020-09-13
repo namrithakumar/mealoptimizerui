@@ -25,16 +25,13 @@ import { DisplayService } from 'src/app/shared/services/display.service';
     CalendarView = CalendarView;
   
     viewDate: Date = new Date();
-    
-    dateOfDelivery: Date;
 
     setCollapseInd : boolean = false;
 
     constructor(private userInputService : UserInputService, private displayService : DisplayService) {}
   
     dateOfDeliveryChosen({ date, events }: { date: Date; events: CalendarEvent[] }):void {
-      this.dateOfDelivery = date;
-      this.userInputService.setDeliveryDate(this.dateOfDelivery);
+      this.userInputService.setDeliveryDate(date);
     }
   
     closeOpenMonthViewDay() {
@@ -42,14 +39,13 @@ import { DisplayService } from 'src/app/shared/services/display.service';
     }
 
     @HostListener('mouseover') onMouseOver() {
-      this.setCollapseInd = this.displayService.getCollapsibleInd('mouseover' , this.dateOfDelivery);
+      this.setCollapseInd = this.displayService.getCollapsibleInd('mouseover' , this.userInputService.deliveryDate);
 }
 
     @HostListener('mouseout') onMouseOut() {
-      this.setCollapseInd = this.displayService.getCollapsibleInd('mouseout' , this.dateOfDelivery);
+      this.setCollapseInd = this.displayService.getCollapsibleInd('mouseout' , this.userInputService.deliveryDate);
     }
 
     ngOnInit() {
-      this.dateOfDelivery = undefined;
     }
   }

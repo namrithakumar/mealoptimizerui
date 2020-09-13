@@ -39,7 +39,14 @@ export class UserInputService {
     verifyOneOrMoreInputsReceived() : boolean {
         return (this.dietType !== undefined || this.deliveryDate !== undefined || this.mealList.length === 4)? true : false;
     }
-    
+ 
+    resetAllUserInputs() : void {
+        this.mealList = new Array<String>();
+        this.dietType = undefined;
+        this.deliveryDate = undefined;
+        this.getMealPlanClicked = false;   
+    }
+
     onMealSelect = new EventEmitter<String[]>();
 
     getMealPlan = new EventEmitter< Array<String> >();

@@ -17,6 +17,7 @@ export class MealOptimizerComponent implements OnInit, CanComponentDeactivate {
   }
 
   ngOnInit(): void {
+    this.userInputService.resetAllUserInputs();
   }
 
   canDeactivate() : Observable<boolean> | Promise<boolean> | boolean {
