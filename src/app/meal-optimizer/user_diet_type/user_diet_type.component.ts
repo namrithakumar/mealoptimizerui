@@ -11,23 +11,20 @@ export class UserDietTypeComponent {
     
     constructor(private userDietService : UserDietService, private userInputService : UserInputService, private displayService : DisplayService) { }
 
-    userDietType : String;
-
     dietTypes : Map<String, String> = this.userDietService.getDietTypes();
 
     setCollapseInd : boolean = false;
 
     onDietTypeSelect(dietType : String) {
-        this.userDietType = dietType;
         this.userInputService.setDietType(dietType);
     }
 
     @HostListener('mouseover') onMouseOver() {
-            this.setCollapseInd = this.displayService.getCollapsibleInd('mouseover' , this.userDietType);
+            this.setCollapseInd = this.displayService.getCollapsibleInd('mouseover' , this.userInputService.dietType);
     }
 
     @HostListener('mouseout') onMouseOut() {
-        if(this.userDietType !== undefined)
-        this.setCollapseInd = this.displayService.getCollapsibleInd('mouseout' , this.userDietType);
+        if(this.userInputService.dietType !== undefined)
+        this.setCollapseInd = this.displayService.getCollapsibleInd('mouseout' , this.userInputService.dietType);
     }
 }

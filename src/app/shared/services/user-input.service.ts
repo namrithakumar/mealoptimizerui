@@ -31,8 +31,20 @@ export class UserInputService {
     }
 
     //verify if all inputs are recieved
-    verifyInputsReceived() : boolean {
-        return (this.dietType === undefined || this.deliveryDate === undefined || this.mealList.length < 4)? false : true;
+    verifyAllInputsReceived() : boolean {
+        return (this.dietType !== undefined && this.deliveryDate !== undefined && this.mealList.length === 4)? true : false;
+    }
+
+    //verify if one or more inputs are recieved
+    verifyOneOrMoreInputsReceived() : boolean {
+        return (this.dietType !== undefined || this.deliveryDate !== undefined || this.mealList.length === 4)? true : false;
+    }
+ 
+    resetAllUserInputs() : void {
+        this.mealList = new Array<String>();
+        this.dietType = undefined;
+        this.deliveryDate = undefined;
+        this.getMealPlanClicked = false;   
     }
 
     onMealSelect = new EventEmitter<String[]>();
