@@ -1,6 +1,7 @@
 import {
     Component,
-    HostListener
+    HostListener,
+    OnInit
   } from '@angular/core';
   
   import {
@@ -15,7 +16,7 @@ import { DisplayService } from 'src/app/shared/services/display.service';
     styleUrls: ['delivery-date-selector.component.css'],
     templateUrl: './delivery-date-selector.component.html',
   })
-  export class DeliveryDateSelectorComponent {
+  export class DeliveryDateSelectorComponent implements OnInit {
 
     activeDayIsOpen: boolean = true;
   
@@ -46,5 +47,9 @@ import { DisplayService } from 'src/app/shared/services/display.service';
 
     @HostListener('mouseout') onMouseOut() {
       this.setCollapseInd = this.displayService.getCollapsibleInd('mouseout' , this.dateOfDelivery);
+    }
+
+    ngOnInit() {
+      this.dateOfDelivery = undefined;
     }
   }

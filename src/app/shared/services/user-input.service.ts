@@ -31,10 +31,15 @@ export class UserInputService {
     }
 
     //verify if all inputs are recieved
-    verifyInputsReceived() : boolean {
-        return (this.dietType === undefined || this.deliveryDate === undefined || this.mealList.length < 4)? false : true;
+    verifyAllInputsReceived() : boolean {
+        return (this.dietType !== undefined && this.deliveryDate !== undefined && this.mealList.length === 4)? true : false;
     }
 
+    //verify if one or more inputs are recieved
+    verifyOneOrMoreInputsReceived() : boolean {
+        return (this.dietType !== undefined || this.deliveryDate !== undefined || this.mealList.length === 4)? true : false;
+    }
+    
     onMealSelect = new EventEmitter<String[]>();
 
     getMealPlan = new EventEmitter< Array<String> >();

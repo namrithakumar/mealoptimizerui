@@ -23,12 +23,16 @@ export class MealSelectorComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.userInputService.setDietType(undefined);
+    this.userInputService.setDeliveryDate(undefined);
+    this.userInputService.mealList = new Array<String>();
+    this.userInputService.setGetMealPlanClicked(false);
   }
 
   onGetMealPlan() {
     this.setCollapseInd = true;
     this.userInputService.setGetMealPlanClicked(true);
-    (!this.userInputService.verifyInputsReceived())?alert('One of the required inputs is missing'):this.userInputService.getMealPlan.emit(this.userInputService.mealList);
+    (!this.userInputService.verifyAllInputsReceived())?alert('One of the required inputs is missing'):this.userInputService.getMealPlan.emit(this.userInputService.mealList);
   }
 
   @HostListener('mouseover') onMouseOver() {
