@@ -1,6 +1,5 @@
 import { Injectable, EventEmitter } from '@angular/core';
 import { Recipe } from '../recipe.model';
-import { Ingredient } from '../ingredient.model';
 
 @Injectable({providedIn:'root'})
 export class UserInputService {
@@ -9,6 +8,7 @@ export class UserInputService {
     dietType : String;
     deliveryDate : Date;
     tabSelected : String;
+    getMealPlanClicked: boolean;
 
     setDietType(dietType : String) {        
         this.dietType = dietType;
@@ -24,6 +24,15 @@ export class UserInputService {
 
     setTabSelected(tabSelected : String) {
         this.tabSelected = tabSelected;
+    }
+
+    setGetMealPlanClicked(getMealPlanClicked : boolean) {
+        this.getMealPlanClicked = getMealPlanClicked;
+    }
+
+    //verify if all inputs are recieved
+    verifyInputsReceived() : boolean {
+        return (this.dietType === undefined || this.deliveryDate === undefined || this.mealList.length < 4)? false : true;
     }
 
     onMealSelect = new EventEmitter<String[]>();
