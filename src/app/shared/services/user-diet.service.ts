@@ -1,17 +1,18 @@
-import { Injectable, EventEmitter } from '@angular/core';
+import { Injectable } from '@angular/core';
+import { IUserDietType } from './user-diet-type-resolver.service';
 
 @Injectable({providedIn:'root'})
 export class UserDietService {
-    getDietTypes() : Map<String, String>{
+    getDietTypes() : Array<IUserDietType> {
         //Structure of map: DietType, displayValue
-        let map = new Map<String, String>();
-        map.set('ALL','GENERAL');
-        map.set('VEGAN','VEGAN');
-        map.set('GLUTENFREE','GLUTEN FREE');
-        map.set('FATFREE','FAT FREE');
-        map.set('DAIRYFREE','DAIRY FREE');
-        map.set('VEGETARIAN','VEGETARIAN');
-        return map;
+        let userDietTypes = new Array<IUserDietType>();
+        userDietTypes.push({dietType: 'ALL', displayValue: 'GENERAL'});
+        userDietTypes.push({dietType: 'VEGAN',displayValue: 'VEGAN'});
+        userDietTypes.push({dietType: 'GLUTENFREE', displayValue: 'GLUTEN FREE'});
+        userDietTypes.push({dietType: 'FATFREE',displayValue: 'FAT FREE'});
+        userDietTypes.push({dietType: 'DAIRYFREE',displayValue: 'DAIRY FREE'});
+        userDietTypes.push({dietType: 'VEGETARIAN',displayValue: 'VEGETARIAN'});
+        return userDietTypes;
     }
 
     //userDietTypeSelected = new EventEmitter<String>();

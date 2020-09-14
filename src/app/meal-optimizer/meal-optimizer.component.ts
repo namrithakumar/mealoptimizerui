@@ -2,6 +2,8 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { UserInputService } from '../shared/services/user-input.service';
 import { CanComponentDeactivate } from '../shared/services/can-exit-page.service';
 import { Observable } from 'rxjs';
+import { IUserDietType } from '../shared/services/user-diet-type-resolver.service';
+import { ActivatedRoute, Data } from '@angular/router';
 
 //This component handles routing, link to optimizationService via controller
 @Component({
@@ -13,11 +15,16 @@ export class MealOptimizerComponent implements OnInit, CanComponentDeactivate {
 
   @Output() onFeatureSelected = new EventEmitter< String >();
 
-  constructor(private userInputService: UserInputService) {
+  constructor(private userInputService: UserInputService, private route: ActivatedRoute) {
   }
+
+  dietTypes : Array<IUserDietType>;
 
   ngOnInit(): void {
     this.userInputService.resetAllUserInputs();
+    this.route.data.subscribe(data => {
+      this.dietTypes = data['userDietTypes'];
+    });
   }
 
   canDeactivate() : Observable<boolean> | Promise<boolean> | boolean {
