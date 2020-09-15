@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { AuthService } from '../shared/services/auth.service';
 import { DisplayService } from '../shared/services/display.service';
 import { Router } from '@angular/router';
+import { UserService } from '../shared/services/user.service';
 
 @Component({
     selector: 'app-header',
@@ -9,7 +10,7 @@ import { Router } from '@angular/router';
     
 })
 export class HeaderComponent {
-    constructor(private authService : AuthService, private displayService : DisplayService, private router: Router) {}
+    constructor(private authService : AuthService, private displayService : DisplayService, private router: Router, private userService: UserService) {}
 
     getHideUserOptions() : boolean {
         return this.displayService.getHideUserOptions();
@@ -17,6 +18,14 @@ export class HeaderComponent {
 
     getDisplayName() : String {
         return this.authService.getDisplayName();
+    }
+
+    viewProfile() : void {
+        this.router.navigate(['/user-mgmt','user','user-profile', this.userService.user.username], { queryParams: {mode: 'view'} });
+    }
+
+    modifySettings() : void {
+        this.router.navigate(['/user-mgmt','user','user-settings', this.userService.user.username], { queryParams: {mode: 'edit'} });
     }
 
     logout() : void {

@@ -1,1 +1,18 @@
-<p>user-profile works!</p>
+<h4>User: {{user.username}}</h4>
+<div class="row">
+    <div class="col-md-12">
+        <label for="fname">First name:</label>
+        <input type="text" id="fname" name="fname"><br><br>
+    </div>
+    <div class="col-md-12">
+        <label for="lname">Last name:</label>
+        <input type="text" id="lname" name="lname"><br><br>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">    
+        <label for="address">Address:</label>
+        <input type="text" id="address" name="address"><br><br>
+    </div>
+</div>
+<button (click)="onEditUserProfile()">Edit</button>

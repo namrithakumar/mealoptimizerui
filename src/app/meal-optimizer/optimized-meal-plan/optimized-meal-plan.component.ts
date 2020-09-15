@@ -1,5 +1,6 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import { UserInputService } from '../../shared/services/user-input.service';
+import { Router } from '@angular/router';
+import { UserInputService } from 'src/app/shared/services/user-input.service';
 
 @Component({
   selector: 'app-optimized-meal-plan',
@@ -8,15 +9,16 @@ import { UserInputService } from '../../shared/services/user-input.service';
 })
 export class OptimizedMealPlanComponent implements OnInit {
 
-  actionSelected : String;
-
-  constructor() { }
+  constructor(private router:Router, private userInputService: UserInputService) { }
 
   ngOnInit(): void {
   }
 
-  //  Action rfers to place Order/getRecipe
-  onSelect( action : String ) {
-    this.actionSelected = action;
+  placeOrderSelected() {
+    this.router.navigate(['meal-optimizer','online-order']);
+  }
+
+  getRecipeSelected() {
+    this.router.navigate(['meal-optimizer','recipes']);
   }
 }

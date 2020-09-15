@@ -2,9 +2,8 @@
 <app-optimized-results-table></app-optimized-results-table>
 <br/>
 <div class="row">
-<button type="button" class="btn btn-dark" (click)="onSelect('placeOrderSelected')">Place order</button>
-<button type="button" class="btn btn-dark" (click)="onSelect('getRecipeSelected')">Get recipe</button>
+<button type="button" class="btn btn-dark" (click)="placeOrderSelected()">Place order</button>
+<button type="button" class="btn btn-dark" (click)="getRecipeSelected()">Get recipe</button>
 </div>
 <app-order-summary></app-order-summary>
-<app-recipes [hidden]="actionSelected!=='getRecipeSelected'"></app-recipes>
-<app-online-order [hidden]="actionSelected!=='placeOrderSelected'"></app-online-order>
+<router-outlet></router-outlet>
