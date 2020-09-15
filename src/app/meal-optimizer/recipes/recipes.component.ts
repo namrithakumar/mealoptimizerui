@@ -10,16 +10,9 @@ import { UserInputService } from '../../shared/services/user-input.service';
 })
 export class RecipesComponent implements OnInit {
 
-  recipe : Recipe;
-
-  ingredientInfo : {ingredients: Ingredient[], labels: String[]};
-
   ngOnInit(): void { }
 
-  constructor(private userInputService : UserInputService) {
-    
-    this.userInputService.onRecipeSelect.subscribe((recipe : Recipe) => {
-      this.recipe = recipe;
-    });
+  constructor() {
+
   }
 }

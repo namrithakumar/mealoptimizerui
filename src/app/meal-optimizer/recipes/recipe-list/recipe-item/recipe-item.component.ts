@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Recipe } from '../../../../shared/recipe.model';
-import { UserInputService } from '../../../../shared/services/user-input.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-recipe-item',
@@ -11,12 +11,14 @@ export class RecipeItemComponent implements OnInit {
 
   @Input() recipe : Recipe;
 
-  constructor(private userInputService : UserInputService) { }
+  @Input() indexOfRecipe: number;
+
+  constructor(private router : Router) { }
 
   ngOnInit(): void {
   }
 
   onItemSelect() : void {
-    this.userInputService.onRecipeSelect.emit(this.recipe);
+    this.router.navigate(['meal-optimizer','recipes',this.indexOfRecipe]);
   }
 }

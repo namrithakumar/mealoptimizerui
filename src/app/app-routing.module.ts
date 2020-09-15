@@ -12,6 +12,10 @@ import { AuthGuardService } from './shared/services/auth-guard.service';
 import { RegisterLoginGuardService } from './shared/services/register-login-guard.service';
 import { CanExitPageService } from './shared/services/can-exit-page.service';
 import { UseDietTypeResolver } from './shared/services/user-diet-type-resolver.service';
+import { OnlineOrderComponent } from './meal-optimizer/online-order/online-order.component';
+import { RecipesComponent } from './meal-optimizer/recipes/recipes.component';
+import { RecipeDetailComponent } from './meal-optimizer/recipes/recipe-detail/recipe-detail.component';
+import { UserComponent } from './user-mgmt/user/user.component';
 
 const appRoutes : Routes = [
     {path:'app-info', children: [
@@ -20,11 +24,15 @@ const appRoutes : Routes = [
             ]},
     {path:'user-mgmt', children: [
                 { path: 'register-login', canActivate: [RegisterLoginGuardService], component: UserRegisterLoginLogoutComponent },
-                { path:'user',  canActivate: [AuthGuardService], canActivateChild: [AuthGuardService], children: [
-                    { path:'user-profile', component: UserProfileComponent },
-                    { path:'user-settings', component: UserSettingsComponent }]}
+                { path:'user', canActivate: [AuthGuardService], component: UserComponent, children: [
+                    { path:'user-profile/:username', component: UserProfileComponent },
+                    { path:'user-settings/:username', component: UserSettingsComponent }]}
             ]},
-    {path:'meal-optimizer', canDeactivate: [CanExitPageService], component: MealOptimizerComponent, resolve:{userDietTypes: UseDietTypeResolver}},
+    {path:'meal-optimizer', canDeactivate: [CanExitPageService], component: MealOptimizerComponent, resolve:{userDietTypes: UseDietTypeResolver}, children: [
+        {path:'online-order', component: OnlineOrderComponent },
+        {path:'recipes', component: RecipesComponent, children: [
+        {path:':id', component: RecipeDetailComponent}]}
+    ]},
     {path: '', redirectTo:'/app-info/home', pathMatch: 'full'},
     {path: 'error', component: ErrorPageComponent, data: {errorMessage: 'oops, something went wrong! Let us try again ...'}},
     {path: '**', redirectTo: '/error'}

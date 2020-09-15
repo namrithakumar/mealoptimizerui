@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { UserInputService } from './shared/services/user-input.service';
 
 @Component({
   selector: 'app-root',

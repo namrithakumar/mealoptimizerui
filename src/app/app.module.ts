@@ -34,6 +34,8 @@ import { UserRegisterLoginLogoutComponent } from './user-mgmt/user-register-logi
 import { UserProfileComponent } from './user-mgmt/user-profile/user-profile.component';
 import { UserSettingsComponent } from './user-mgmt/user-settings/user-settings.component';
 import { ErrorPageComponent } from './shared/error-page/error-page.component';
+import { RecipeStartComponent } from './meal-optimizer/recipes/recipe-start/recipe-start.component';
+import { UserComponent } from './user-mgmt/user/user.component';
 
 @NgModule({
   declarations: [
@@ -64,7 +66,9 @@ import { ErrorPageComponent } from './shared/error-page/error-page.component';
     UserRegisterLoginLogoutComponent,
     UserProfileComponent,
     UserSettingsComponent,
-    ErrorPageComponent
+    ErrorPageComponent,
+    RecipeStartComponent,
+    UserComponent
   ],
   imports: [
     BrowserModule,

@@ -9,18 +9,7 @@ export class RegisterLoginGuardService implements CanActivate{
     constructor(private authService : AuthService, private router : Router) {}
 
     canActivate(route : ActivatedRouteSnapshot, state: RouterStateSnapshot) : Observable<boolean> | Promise<boolean>  | boolean {
-        this.authService.isAuthenticated()
-            .then(
-                (authenticated : boolean) => {
-                    if(!authenticated) {
-                    return true;
-                }
-                    else {
-                        this.authService.logout();
-                        this.router.navigateByUrl('/error');   
-                    }
-                }
-            );                                     
-            return true;
+        if(!this.authService.isAuthenticated()) return true;
+        else this.router.navigateByUrl('/error');
+        }
     }
-}

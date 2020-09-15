@@ -21,8 +21,8 @@
           {{getDisplayName()}}
         </a>
         <div class="dropdown-menu" [hidden] = "getHideUserOptions()">
-          <a class="dropdown-item" routerLink="/user-mgmt/user/user-profile">Profile</a>
-          <a class="dropdown-item" routerLink="/user-mgmt/user/user-settings">Settings</a>
+          <a class="dropdown-item" (click)="viewProfile()">Profile</a>
+          <a class="dropdown-item" (click)="modifySettings()">Modify Settings</a>
           <a class="dropdown-item" (click)="logout()">Logout</a>
         </div>
       </li>
