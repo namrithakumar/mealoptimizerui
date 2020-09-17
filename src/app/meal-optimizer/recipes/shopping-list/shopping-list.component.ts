@@ -25,29 +25,41 @@ export class ShoppingListComponent implements OnInit, OnDestroy {
       });
   }
 
+  //this method pushes ingredients (bread, milk etc.) to an array. This array elemnts will be displayed in the section 'shopping list'.
+  //The values passes are ingredientName, ingredientAmount, ingredient labels (the name of the item or 'added by user')
   addIngredient(ingredientInfo : { ingredientName:String, ingredientAmount:number, ingredientLabels:String[] }) {
     
     var ingredientAdded : boolean = false;    
 
+    //If ingredients array is empty, push to the array - there is no need for any check
     (this.ingredients.length ==0)?(this.ingredients.push(new Ingredient(ingredientInfo.ingredientName.toLowerCase(), ingredientInfo.ingredientAmount, ingredientInfo.ingredientLabels))):
-    (this.ingredients.forEach((ingredient, index) => {
-        if(!ingredientAdded && (ingredient.name.toLowerCase() === ingredientInfo.ingredientName.toLowerCase())) {
-          var concatenatedLabels = ingredient.labels;
-          ingredientInfo.ingredientLabels.forEach((label) => {
+    //If ingredients array is not empty, follow the below logic for the new ingredient to be added
+    /* If the ingredients array already has the new ingredient, do the below
+     * Add the new ingredient.label to exiting labels
+     * Calculate the correct ingredient amount - new ingredient.amount + existing ingredient.amount
+     * If the ingredients array does not have the new ingredient, make sure you loop through the entire array before adding a new ingredient.
+     */
 
-            //Add new label only if the list of labels does not already contain it.
-            if(!(concatenatedLabels.includes(label))) {
-              concatenatedLabels.push(label);
-            }
-          });
-          this.ingredients.splice(index, 1, new Ingredient(ingredientInfo.ingredientName.toLowerCase(), (Number(ingredientInfo.ingredientAmount) + Number(ingredient.amount)), concatenatedLabels));
-          ingredientAdded=true;
-        }
-        // Before adding a new ingredient, check the whole ingredients array to make sure it does not already have the ingredient
-        else if(!ingredientAdded && (index === (this.ingredients.length - 1))) { 
-          this.ingredients.push(new Ingredient(ingredientInfo.ingredientName.toLowerCase(), ingredientInfo.ingredientAmount, ingredientInfo.ingredientLabels));
-          ingredientAdded=true;
-        }
+    (this.ingredients.forEach((ingredient, index) => {
+      if(!ingredientAdded) {  
+        if(ingredient.name.toLowerCase() === ingredientInfo.ingredientName.toLowerCase()) {
+            var concatenatedLabels = ingredient.labels;
+            ingredientInfo.ingredientLabels.forEach((label) => {
+
+              //Add new label only if the list of labels does not already contain it.
+              if(!(concatenatedLabels.includes(label))) {
+                concatenatedLabels.push(label);
+              }
+            });
+            this.ingredients.splice(index, 1, new Ingredient(ingredientInfo.ingredientName.toLowerCase(), (Number(ingredientInfo.ingredientAmount) + Number(ingredient.amount)), concatenatedLabels));
+            ingredientAdded=true;
+          }
+          // Before adding a new ingredient, check the whole ingredients array to make sure it does not already have the ingredient
+          else if(index === (this.ingredients.length - 1)) { 
+            this.ingredients.push(new Ingredient(ingredientInfo.ingredientName.toLowerCase(), ingredientInfo.ingredientAmount, ingredientInfo.ingredientLabels));
+            ingredientAdded=true;
+          }
+      }
     }));
   }
 
