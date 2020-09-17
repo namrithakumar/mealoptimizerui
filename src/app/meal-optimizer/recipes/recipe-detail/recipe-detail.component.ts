@@ -34,6 +34,6 @@ export class RecipeDetailComponent implements OnInit {
         ingredientLabels : ingredient.labels
       });
     });
-    this.userInputService.onAddIngredientsToShoppingList.emit(this.ingredientInfo);
+    this.userInputService.onAddIngredientsToShoppingList.next(this.ingredientInfo);
   }
 }

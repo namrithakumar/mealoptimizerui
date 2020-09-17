@@ -13,8 +13,6 @@ import { ActivatedRoute, Data } from '@angular/router';
 })
 export class MealOptimizerComponent implements OnInit, CanComponentDeactivate {
 
-  @Output() onFeatureSelected = new EventEmitter< String >();
-
   constructor(private userInputService: UserInputService, private route: ActivatedRoute) {
   }
 
@@ -29,7 +27,7 @@ export class MealOptimizerComponent implements OnInit, CanComponentDeactivate {
 
   canDeactivate() : Observable<boolean> | Promise<boolean> | boolean {
     if(this.userInputService.verifyOneOrMoreInputsReceived()) {
-      if(this.userInputService.getMealPlanClicked) return true;
+      if(this.userInputService.createMealPlanClicked || this.userInputService.updateMealPlanClicked) return true;
       else return confirm('Changes are not saved. Are you sure you want to exit this page?');
     }
     else return true;

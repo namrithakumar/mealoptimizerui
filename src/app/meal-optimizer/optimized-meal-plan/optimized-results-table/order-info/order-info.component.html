@@ -1,3 +1,5 @@
-<ul>{{orderInfo.userDietType}}</ul>
-<ul>{{orderInfo.deliveryDate}}</ul>
-<ul *ngFor = 'let meal of orderInfo.mealSelected'>{{meal}}</ul>
+<div *ngIf="orderInfo !== undefined">
+    <ul>{{orderInfo.userDietType}}</ul>
+    <ul>{{orderInfo.deliveryDate}}</ul>
+    <ul *ngFor = 'let meal of orderInfo.mealSelected'>{{meal}}</ul>
+</div>

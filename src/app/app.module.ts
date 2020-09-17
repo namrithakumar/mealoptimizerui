@@ -36,6 +36,7 @@ import { UserSettingsComponent } from './user-mgmt/user-settings/user-settings.c
 import { ErrorPageComponent } from './shared/error-page/error-page.component';
 import { RecipeStartComponent } from './meal-optimizer/recipes/recipe-start/recipe-start.component';
 import { UserComponent } from './user-mgmt/user/user.component';
+import { ManageMealPlanComponent } from './meal-optimizer/meal-selector/manage-meal-plan/manage-meal-plan.component';
 
 @NgModule({
   declarations: [
@@ -68,7 +69,8 @@ import { UserComponent } from './user-mgmt/user/user.component';
     UserSettingsComponent,
     ErrorPageComponent,
     RecipeStartComponent,
-    UserComponent
+    UserComponent,
+    ManageMealPlanComponent
   ],
   imports: [
     BrowserModule,
