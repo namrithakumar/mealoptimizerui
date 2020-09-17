@@ -1,38 +1,52 @@
-import { Injectable, EventEmitter } from '@angular/core';
-import { Recipe } from '../recipe.model';
+import { Injectable } from '@angular/core';
+import { Subject } from 'rxjs';
+import { OrderService } from './order.service';
 
 @Injectable({providedIn:'root'})
 export class UserInputService {
-    
+
+    constructor(private orderService: OrderService) {}
+
     mealList : Array<String> = new Array<String>();
     dietType : String;
     deliveryDate : Date;
     tabSelected : String;
-    getMealPlanClicked: boolean;
+    createMealPlanClicked : boolean = false;
+    updateMealPlanClicked : boolean = false;
 
-    setDietType(dietType : String) {        
+    setDietType(dietType : String) {   
         this.dietType = dietType;
+        this.orderService.updateUserDietType(this.dietType);
     }
 
     setDeliveryDate(deliveryDate : Date) {
         this.deliveryDate = deliveryDate;
+        this.orderService.updateDeliveryDate(this.deliveryDate);
     }
 
     addMeal(mealInfo : {itemPosition : number, itemName: String}) {
         this.mealList[mealInfo.itemPosition] = mealInfo.itemName;
+        this.orderService.updateMealSelected(this.mealList);
     }
 
     setTabSelected(tabSelected : String) {
         this.tabSelected = tabSelected;
     }
 
-    setGetMealPlanClicked(getMealPlanClicked : boolean) {
-        this.getMealPlanClicked = getMealPlanClicked;
+    setCreateMealPlanClicked(createMealPlanClicked: boolean) : void {
+        this.createMealPlanClicked = createMealPlanClicked;
+    }
+
+    setUpdateMealPlanClicked(updateMealPlanClicked: boolean) : void {
+        this.updateMealPlanClicked = updateMealPlanClicked;
     }
 
     //verify if all inputs are recieved
     verifyAllInputsReceived() : boolean {
-        return (this.dietType !== undefined && this.deliveryDate !== undefined && this.mealList.length === 4)? true : false;
+        if(this.dietType !== undefined && this.deliveryDate !== undefined && this.mealList.length === 4) {
+            return true;
+        }
+        else return false;
     }
 
     //verify if one or more inputs are recieved
@@ -43,15 +57,16 @@ export class UserInputService {
     resetAllUserInputs() : void {
         this.mealList = new Array<String>();
         this.dietType = undefined;
-        this.deliveryDate = undefined;
-        this.getMealPlanClicked = false;   
+        this.deliveryDate = undefined; 
+        this.createMealPlanClicked = false;
+        this.updateMealPlanClicked = false;
     }
 
-    onMealSelect = new EventEmitter<String[]>();
+    onMealSelect = new Subject<String[]>();
 
-    getMealPlan = new EventEmitter< Array<String> >();
+    //This is a common event for both create meal plan and update
+    getMealPlan = new Subject< String[] >();
 
-    onRecipeSelect = new EventEmitter<Recipe>();
+    onAddIngredientsToShoppingList = new Subject<{ ingredientName:String, ingredientAmount:number, ingredientLabels:String[] }[]>();
 
-    onAddIngredientsToShoppingList = new EventEmitter<{ ingredientName:String, ingredientAmount:number, ingredientLabels:String[] }[]>();
 }

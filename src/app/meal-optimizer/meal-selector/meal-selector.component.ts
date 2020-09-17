@@ -1,6 +1,8 @@
-import { Component, OnInit, HostListener } from '@angular/core';
+import { Component, OnInit, HostListener, ViewChild } from '@angular/core';
 import { UserInputService } from '../../shared/services/user-input.service';
 import { DisplayService } from 'src/app/shared/services/display.service';
+import { ActivatedRoute, Router } from '@angular/router';
+import { ManageMealPlanComponent } from './manage-meal-plan/manage-meal-plan.component';
 
 @Component({
   selector: 'app-meal-selector',
@@ -10,37 +12,29 @@ import { DisplayService } from 'src/app/shared/services/display.service';
 
 export class MealSelectorComponent implements OnInit {
 
-  disableGetMealPlan : boolean = true;
-  
+  @ViewChild(ManageMealPlanComponent) manageMealPlan : ManageMealPlanComponent;
+
+  collapseInd : boolean;
+
   dateOfDelivery : Date = (this.userInputService.deliveryDate === undefined)?new Date():this.userInputService.deliveryDate;
 
-  setCollapseInd : boolean = false;
-
-  constructor(private userInputService : UserInputService, private displayService : DisplayService) { 
-    this.userInputService.onMealSelect.subscribe((mealList : String[]) => {
-      this.disableGetMealPlan = (mealList.length === 4)?false:true;
-    });
+  constructor(private userInputService : UserInputService, private displayService : DisplayService, private router: Router, private route: ActivatedRoute) { 
   }
 
   ngOnInit(): void {
-    this.userInputService.setDietType(undefined);
-    this.userInputService.setDeliveryDate(undefined);
-    this.userInputService.mealList = new Array<String>();
-    this.userInputService.setGetMealPlanClicked(false);
+    this.userInputService.resetAllUserInputs();
   }
 
-  onGetMealPlan() {
-    this.setCollapseInd = true;
-    this.userInputService.setGetMealPlanClicked(true);
-    (!this.userInputService.verifyAllInputsReceived())?alert('One of the required inputs is missing'):this.userInputService.getMealPlan.emit(this.userInputService.mealList);
+  afterViewInit() {
+    this.collapseInd = this.manageMealPlan.collapseMealListInd;
   }
 
   @HostListener('mouseover') onMouseOver() {
-    this.setCollapseInd = this.displayService.getCollapsibleIndMealSelector('mouseover' , this.userInputService.mealList, this.userInputService.getMealPlanClicked);
+    this.collapseInd = this.displayService.getCollapsibleIndMealSelector('mouseover' , this.userInputService.mealList, this.userInputService.createMealPlanClicked || this.userInputService.updateMealPlanClicked);
 }
 
   @HostListener('mouseout') onMouseOut() {
-    this.setCollapseInd = this.displayService.getCollapsibleIndMealSelector('mouseout' , this.userInputService.mealList, this.userInputService.getMealPlanClicked);
+    this.collapseInd = this.displayService.getCollapsibleIndMealSelector('mouseout' , this.userInputService.mealList, this.userInputService.createMealPlanClicked || this.userInputService.updateMealPlanClicked);
   }
 
   getMealList() : String[] {

@@ -22,7 +22,7 @@ export class MealOptionsComponent implements OnInit {
 
   onMealSelected() : void {
     this.userInputService.addMeal({itemPosition: this.indexOfMeal, itemName: this.itemSelected});
-    this.userInputService.onMealSelect.emit(this.userInputService.mealList);
+    this.userInputService.onMealSelect.next(this.userInputService.mealList);
   }
 
 }

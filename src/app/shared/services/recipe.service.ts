@@ -1,4 +1,4 @@
-import { Injectable, EventEmitter } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { UserInputService } from '../services/user-input.service';
 import { OptimizationService } from '../services/optimization.service';
 import { Recipe } from '../recipe.model';

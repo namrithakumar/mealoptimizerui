@@ -12,6 +12,10 @@ import { UserService } from '../shared/services/user.service';
 export class HeaderComponent {
     constructor(private authService : AuthService, private displayService : DisplayService, private router: Router, private userService: UserService) {}
 
+    viewMealPlanner() : void {
+        this.router.navigate(['/meal-optimizer'], { queryParams: {mode: 'create'} });
+    }
+
     getHideUserOptions() : boolean {
         return this.displayService.getHideUserOptions();
     }
