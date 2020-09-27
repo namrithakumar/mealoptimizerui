@@ -34,10 +34,10 @@ export class ShoppingListComponent implements OnInit, OnDestroy {
     //If ingredients array is empty, push to the array - there is no need for any check
     (this.ingredients.length ==0)?(this.ingredients.push(new Ingredient(ingredientInfo.ingredientName.toLowerCase(), ingredientInfo.ingredientAmount, ingredientInfo.ingredientLabels))):
     //If ingredients array is not empty, follow the below logic for the new ingredient to be added
-    /* If the ingredients array already has the new ingredient, do the below
-     * Add the new ingredient.label to exiting labels
+    /* If the ingredients array already contains the new ingredient,
+     * Add the new ingredient.label to existing labels
      * Calculate the correct ingredient amount - new ingredient.amount + existing ingredient.amount
-     * If the ingredients array does not have the new ingredient, make sure you loop through the entire array before adding a new ingredient.
+     * If the ingredients array does not contain the new ingredient, make sure you loop through the entire array before adding a new ingredient.
      */
 
     (this.ingredients.forEach((ingredient, index) => {
@@ -50,8 +50,7 @@ export class ShoppingListComponent implements OnInit, OnDestroy {
               if(!(concatenatedLabels.includes(label))) {
                 concatenatedLabels.push(label);
               }
-            });
-            this.ingredients.splice(index, 1, new Ingredient(ingredientInfo.ingredientName.toLowerCase(), (Number(ingredientInfo.ingredientAmount) + Number(ingredient.amount)), concatenatedLabels));
+            });         this.ingredients.splice(index, 1, new Ingredient(ingredientInfo.ingredientName.toLowerCase(), (Number(ingredientInfo.ingredientAmount) + Number(ingredient.amount)), concatenatedLabels));
             ingredientAdded=true;
           }
           // Before adding a new ingredient, check the whole ingredients array to make sure it does not already have the ingredient
@@ -62,7 +61,6 @@ export class ShoppingListComponent implements OnInit, OnDestroy {
       }
     }));
   }
-
   deleteIngredient(ingredientInfo : { ingredientName:String }) {
     if(this.ingredients.length > 0) {
       (this.ingredients.forEach((ingredient, index) => {
