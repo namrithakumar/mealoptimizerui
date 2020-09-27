@@ -17,7 +17,7 @@
             </div>
             <div class="row">
                 <div class="col-xs-12">
-                    <button class="btn btn-success" type="submit">Add</button>
+                    <button class="btn btn-success" type="submit" [disabled]="!shoppingEdit.valid">Add</button>
                     <button class="btn btn-danger" type="button" (click)="onDeleteIngredient()">Delete</button>
                     <button class="btn btn-primary" type="button" (click)="onClearIngredient()">Clear</button>
                 </div>

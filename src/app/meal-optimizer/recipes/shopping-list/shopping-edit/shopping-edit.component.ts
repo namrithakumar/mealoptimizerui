@@ -1,5 +1,5 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { IngredientValidatorService } from '../../../../shared/services/ingredientValidator.service';
 
 @Component({
@@ -23,8 +23,8 @@ export class ShoppingEditComponent implements OnInit {
 
   ngOnInit(): void {
     this.shoppingEdit = new FormGroup({
-      'ingredientName' : new FormControl('Enter ingredient name here'),
-      'ingredientAmount': new FormControl(null)
+      'ingredientName' : new FormControl('Enter ingredient name here', Validators.required),
+      'ingredientAmount': new FormControl(null, [Validators.required, Validators.pattern("^[1-9]+[0-9]*$")])
     });
 
     /* 
