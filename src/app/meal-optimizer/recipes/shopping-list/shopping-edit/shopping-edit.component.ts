@@ -1,4 +1,6 @@
-import { Component, OnInit, ViewChild, Output, EventEmitter, ElementRef } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { FormControl, FormGroup } from '@angular/forms';
+import { IngredientValidatorService } from '../../../../shared/services/ingredientValidator.service';
 
 @Component({
   selector: 'app-shopping-edit',
@@ -7,8 +9,7 @@ import { Component, OnInit, ViewChild, Output, EventEmitter, ElementRef } from '
 })
 export class ShoppingEditComponent implements OnInit {
 
-  @ViewChild('ingredientName') ingredientName : ElementRef;
-  @ViewChild('ingredientAmount') ingredientAmount : ElementRef;
+  shoppingEdit : FormGroup;
 
   defaultLabel : String = 'Added by user';
 
@@ -16,24 +17,50 @@ export class ShoppingEditComponent implements OnInit {
 
   @Output() deleteIngredient = new EventEmitter<{ ingredientName:String }>();
 
-  constructor() { }
+  constructor(private ingredientValidatorService : IngredientValidatorService) { }
 
   ngOnInit(): void {
+    this.shoppingEdit = new FormGroup({
+      'ingredientName' : new FormControl('Enter ingredient name here'),
+      'ingredientAmount': new FormControl(null)
+    });
+    /* 
+    When the field ingredientName is updated (touched), set ingredientAmount=1 
+    by listening to the angular event 'valueChanges'. This event is emitted only
+    when reactive forms is used.
+    */
+    this.shoppingEdit.get('ingredientName').valueChanges.subscribe((value) => {
+      this.shoppingEdit.get('ingredientAmount').setValue(1);
+    });
   }
 
   onAddIngredient() : void {
-    this.ingredientAmount.nativeElement.value = (this.ingredientAmount.nativeElement.value === '')?1:this.ingredientAmount.nativeElement.value;
-    var label = new Array<String>();
-    label.push(this.defaultLabel);
-    this.addIngredient.emit({ ingredientName:this.ingredientName.nativeElement.value, ingredientAmount:this.ingredientAmount.nativeElement.value, ingredientLabels: label });
+    var ingredientName : String = this.shoppingEdit.get('ingredientName').value;
+    //Validate ingredient entered
+    if(this.ingredientValidatorService.isValidIngredient(ingredientName) || 
+      confirm(ingredientName + " does not look like a valid ingredient. Are you sure you want to add it to your shopping list?")) {
+        var label = new Array<String>();
+        label.push(this.defaultLabel);
+        this.addIngredient.emit({ ingredientName:this.shoppingEdit.get('ingredientName').value, ingredientAmount:this.shoppingEdit.get('ingredientAmount').value, ingredientLabels: label }); 
+    }
   }
 
   onDeleteIngredient() : void {
-    this.deleteIngredient.emit({ ingredientName:this.ingredientName.nativeElement.value });
+  //  this.deleteIngredient.emit({ ingredientName:this.ingredientName.nativeElement.value });
   }
 
   onClearIngredient() : void {
-    this.ingredientName.nativeElement.value = '';
-    this.ingredientAmount.nativeElement.value = '';
+  //  this.ingredientName.nativeElement.value = '';
+  //  this.ingredientAmount.nativeElement.value = '';
   }
+
+  validateIngredient(control : FormControl) : { [key:string]: boolean } {
+    if((control.value)) {
+      return { 'isValidIngredient' : true }
+    }
+    else if(confirm(control.value + " does not look like a valid ingredient. Are you sure you want to add it to your shopping list?")) {
+      return { 'isValidIngredient' : true }
+    }
+    else return null;
+}
 }
