@@ -31,6 +31,7 @@ export class MealSelectorComponent implements OnInit {
 
   @HostListener('mouseover', ['$event'])  
   @HostListener('mouseout', ['$event']) handleMouseEvent() {
+    //Update collapse indicator only if 4 meals are selected
       if(this.userInputService.mealList.length === 4)
           this.collapseInd = this.displayService.canCollapseMealList && this.displayService.getCollapsibleInd(event.type);
   }

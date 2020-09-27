@@ -24,6 +24,7 @@ export class UserDietTypeComponent implements OnInit {
 
     @HostListener('mouseover', ['$event'])  
     @HostListener('mouseout', ['$event']) handleMouseEvent() {
+        //Update collapse indicator only if diet type is not empty
         if(this.userInputService.dietType !== undefined)
             this.setCollapseInd = this.displayService.getCollapsibleInd(event.type);
     }

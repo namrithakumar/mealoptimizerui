@@ -40,6 +40,7 @@ import { DisplayService } from 'src/app/shared/services/display.service';
 
     @HostListener('mouseover', ['$event'])  
     @HostListener('mouseout', ['$event']) handleMouseEvent() {
+      //Update collapse indicator only if delivery date is not empty
         if(this.userInputService.deliveryDate !== undefined)
             this.setCollapseInd = this.displayService.getCollapsibleInd(event.type);
     }
