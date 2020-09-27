@@ -13,6 +13,8 @@ export class ShoppingEditComponent implements OnInit {
 
   defaultLabel : String = 'Added by user';
 
+  //This can be changed to new Subject<>() in the user-input.service and we can subscribe to the event here.
+  //We leave it as such for reference
   @Output() addIngredient = new EventEmitter<{ ingredientName:String, ingredientAmount:number, ingredientLabels:String[] }>();
 
   @Output() deleteIngredient = new EventEmitter<{ ingredientName:String }>();
@@ -24,6 +26,7 @@ export class ShoppingEditComponent implements OnInit {
       'ingredientName' : new FormControl('Enter ingredient name here'),
       'ingredientAmount': new FormControl(null)
     });
+
     /* 
     When the field ingredientName is updated (touched), set ingredientAmount=1 
     by listening to the angular event 'valueChanges'. This event is emitted only
@@ -41,26 +44,15 @@ export class ShoppingEditComponent implements OnInit {
       confirm(ingredientName + " does not look like a valid ingredient. Are you sure you want to add it to your shopping list?")) {
         var label = new Array<String>();
         label.push(this.defaultLabel);
-        this.addIngredient.emit({ ingredientName:this.shoppingEdit.get('ingredientName').value, ingredientAmount:this.shoppingEdit.get('ingredientAmount').value, ingredientLabels: label }); 
+        this.addIngredient.emit({ ingredientName : ingredientName, ingredientAmount:this.shoppingEdit.get('ingredientAmount').value, ingredientLabels: label }); 
     }
   }
 
   onDeleteIngredient() : void {
-  //  this.deleteIngredient.emit({ ingredientName:this.ingredientName.nativeElement.value });
+    this.deleteIngredient.emit({ ingredientName:this.shoppingEdit.get('ingredientName').value });
   }
 
   onClearIngredient() : void {
-  //  this.ingredientName.nativeElement.value = '';
-  //  this.ingredientAmount.nativeElement.value = '';
+    this.shoppingEdit.reset();
   }
-
-  validateIngredient(control : FormControl) : { [key:string]: boolean } {
-    if((control.value)) {
-      return { 'isValidIngredient' : true }
-    }
-    else if(confirm(control.value + " does not look like a valid ingredient. Are you sure you want to add it to your shopping list?")) {
-      return { 'isValidIngredient' : true }
-    }
-    else return null;
-}
 }
