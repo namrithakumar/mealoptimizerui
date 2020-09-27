@@ -36,7 +36,7 @@ export class ShoppingEditComponent implements OnInit {
 
   onAddIngredient() : void {
     var ingredientName : String = this.shoppingEdit.get('ingredientName').value;
-    //Validate ingredient entered
+    //Validate ingredient entered - the ingredient must either belong to a list of valid ingredients, or the user must confirm that he wants to add the ingredient to the list.
     if(this.ingredientValidatorService.isValidIngredient(ingredientName) || 
       confirm(ingredientName + " does not look like a valid ingredient. Are you sure you want to add it to your shopping list?")) {
         var label = new Array<String>();
