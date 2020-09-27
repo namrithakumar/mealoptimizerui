@@ -50,8 +50,7 @@ export class ShoppingListComponent implements OnInit, OnDestroy {
               if(!(concatenatedLabels.includes(label))) {
                 concatenatedLabels.push(label);
               }
-            });
-            this.ingredients.splice(index, 1, new Ingredient(ingredientInfo.ingredientName.toLowerCase(), (Number(ingredientInfo.ingredientAmount) + Number(ingredient.amount)), concatenatedLabels));
+            });         this.ingredients.splice(index, 1, new Ingredient(ingredientInfo.ingredientName.toLowerCase(), (Number(ingredientInfo.ingredientAmount) + Number(ingredient.amount)), concatenatedLabels));
             ingredientAdded=true;
           }
           // Before adding a new ingredient, check the whole ingredients array to make sure it does not already have the ingredient
@@ -62,7 +61,6 @@ export class ShoppingListComponent implements OnInit, OnDestroy {
       }
     }));
   }
-
   deleteIngredient(ingredientInfo : { ingredientName:String }) {
     if(this.ingredients.length > 0) {
       (this.ingredients.forEach((ingredient, index) => {
