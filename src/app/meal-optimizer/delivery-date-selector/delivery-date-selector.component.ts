@@ -38,12 +38,10 @@ import { DisplayService } from 'src/app/shared/services/display.service';
       this.activeDayIsOpen = false;
     }
 
-    @HostListener('mouseover') onMouseOver() {
-      this.setCollapseInd = this.displayService.getCollapsibleInd('mouseover' , this.userInputService.deliveryDate);
-}
-
-    @HostListener('mouseout') onMouseOut() {
-      this.setCollapseInd = this.displayService.getCollapsibleInd('mouseout' , this.userInputService.deliveryDate);
+    @HostListener('mouseover', ['$event'])  
+    @HostListener('mouseout', ['$event']) handleMouseEvent() {
+        if(this.userInputService.deliveryDate !== undefined)
+            this.setCollapseInd = this.displayService.getCollapsibleInd(event.type);
     }
 
     ngOnInit() {

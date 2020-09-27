@@ -27,7 +27,7 @@ export class MealOptimizerComponent implements OnInit, CanComponentDeactivate {
 
   canDeactivate() : Observable<boolean> | Promise<boolean> | boolean {
     if(this.userInputService.verifyOneOrMoreInputsReceived()) {
-      if(this.userInputService.createMealPlanClicked || this.userInputService.updateMealPlanClicked) return true;
+      if(this.userInputService.userInputSaved) return true;
       else return confirm('Changes are not saved. Are you sure you want to exit this page?');
     }
     else return true;

@@ -26,15 +26,13 @@ export class MealSelectorComponent implements OnInit {
   }
 
   afterViewInit() {
-    this.collapseInd = this.manageMealPlan.collapseMealListInd;
+    this.collapseInd = this.displayService.canCollapseMealList;
   }
 
-  @HostListener('mouseover') onMouseOver() {
-    this.collapseInd = this.displayService.getCollapsibleIndMealSelector('mouseover' , this.userInputService.mealList, this.userInputService.createMealPlanClicked || this.userInputService.updateMealPlanClicked);
-}
-
-  @HostListener('mouseout') onMouseOut() {
-    this.collapseInd = this.displayService.getCollapsibleIndMealSelector('mouseout' , this.userInputService.mealList, this.userInputService.createMealPlanClicked || this.userInputService.updateMealPlanClicked);
+  @HostListener('mouseover', ['$event'])  
+  @HostListener('mouseout', ['$event']) handleMouseEvent() {
+      if(this.userInputService.mealList.length === 4)
+          this.collapseInd = this.displayService.canCollapseMealList && this.displayService.getCollapsibleInd(event.type);
   }
 
   getMealList() : String[] {

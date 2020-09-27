@@ -22,12 +22,9 @@ export class UserDietTypeComponent implements OnInit {
 
     ngOnInit(): void { }
 
-    @HostListener('mouseover') onMouseOver() {
-            this.setCollapseInd = this.displayService.getCollapsibleInd('mouseover' , this.userInputService.dietType);
-    }
-
-    @HostListener('mouseout') onMouseOut() {
+    @HostListener('mouseover', ['$event'])  
+    @HostListener('mouseout', ['$event']) handleMouseEvent() {
         if(this.userInputService.dietType !== undefined)
-        this.setCollapseInd = this.displayService.getCollapsibleInd('mouseout' , this.userInputService.dietType);
+            this.setCollapseInd = this.displayService.getCollapsibleInd(event.type);
     }
 }

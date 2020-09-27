@@ -11,8 +11,7 @@ export class UserInputService {
     dietType : String;
     deliveryDate : Date;
     tabSelected : String;
-    createMealPlanClicked : boolean = false;
-    updateMealPlanClicked : boolean = false;
+    userInputSaved : boolean;
 
     setDietType(dietType : String) {   
         this.dietType = dietType;
@@ -33,14 +32,6 @@ export class UserInputService {
         this.tabSelected = tabSelected;
     }
 
-    setCreateMealPlanClicked(createMealPlanClicked: boolean) : void {
-        this.createMealPlanClicked = createMealPlanClicked;
-    }
-
-    setUpdateMealPlanClicked(updateMealPlanClicked: boolean) : void {
-        this.updateMealPlanClicked = updateMealPlanClicked;
-    }
-
     //verify if all inputs are recieved
     verifyAllInputsReceived() : boolean {
         if(this.dietType !== undefined && this.deliveryDate !== undefined && this.mealList.length === 4) {
@@ -57,9 +48,12 @@ export class UserInputService {
     resetAllUserInputs() : void {
         this.mealList = new Array<String>();
         this.dietType = undefined;
-        this.deliveryDate = undefined; 
-        this.createMealPlanClicked = false;
-        this.updateMealPlanClicked = false;
+        this.deliveryDate = undefined;
+    }
+
+    //userInputSaved is set to true when either get meal plan or update meal plan is clicked.
+    setUserInputSaved(saved : boolean) {
+        this.userInputSaved = saved;
     }
 
     onMealSelect = new Subject<String[]>();

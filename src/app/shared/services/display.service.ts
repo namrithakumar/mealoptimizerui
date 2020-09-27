@@ -3,31 +3,21 @@ import { AuthService } from './auth.service';
 
 @Injectable({providedIn:'root'})
 export class DisplayService {
+
+    canCollapseMealList : boolean;
     
     constructor(private authService : AuthService) {}
 
-    getCollapsibleInd(mouseevent : String, value : any) : boolean {
+    getCollapsibleInd(mouseevent : String) : boolean {
         switch(mouseevent) {
             case 'mouseover':
-                if(value !== undefined) return false; 
+                return false; 
                 break;
             case 'mouseout':
-                if(value !== undefined) return true;
+                return true;
                 break;
             default: return false;
         }
-    }
-
-    getCollapsibleIndMealSelector(mouseevent : String, mealList : String[], getMealPlanInd : boolean) {
-        if(mealList.length === 4 && getMealPlanInd === true) {
-        switch(mouseevent) {
-            case 'mouseover':
-                 return false;
-            case 'mouseout':
-                return true;
-        }
-        return false;
-       }
     }
 
     getHideUserOptions() : boolean {
