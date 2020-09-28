@@ -11,7 +11,7 @@ export class MealOptionsComponent implements OnInit {
 
   @Input() indexOfMeal : number; // Set inside meal-selector.html
 
-  itemList : String[] = this.itemService.getItemsByCategory(this.userInputService.dietType);
+  itemList : String[] = this.itemService.getItemsByCategory(this.userInputService.userInput.dietType);
 
   itemSelected : String;
   
@@ -22,7 +22,7 @@ export class MealOptionsComponent implements OnInit {
 
   onMealSelected() : void {
     this.userInputService.addMeal({itemPosition: this.indexOfMeal, itemName: this.itemSelected});
-    this.userInputService.onMealSelect.next(this.userInputService.mealList);
+    this.userInputService.onMealSelect.next(this.userInputService.userInput.mealSelected);
   }
 
 }

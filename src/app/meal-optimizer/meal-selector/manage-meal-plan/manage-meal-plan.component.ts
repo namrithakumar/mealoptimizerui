@@ -4,6 +4,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { UserInputService } from '../../../shared/services/user-input.service';
 import { Subscription } from 'rxjs';
 import { OrderService } from 'src/app/shared/services/order.service';
+import { DisplayService } from 'src/app/shared/services/display.service';
 
 @Component({
   selector: 'app-manage-meal-plan',
@@ -11,8 +12,6 @@ import { OrderService } from 'src/app/shared/services/order.service';
   styleUrls: ['./manage-meal-plan.component.css']
 })
 export class ManageMealPlanComponent implements OnInit, OnDestroy {
-
-  collapseMealListInd : boolean = true;
 
   disableGetMealPlan : boolean = true;
 
@@ -26,7 +25,7 @@ export class ManageMealPlanComponent implements OnInit, OnDestroy {
 
   mode : String;
 
-  constructor(private userInputService : UserInputService, private router : Router, private route:ActivatedRoute, private orderService : OrderService) { }
+  constructor(private userInputService : UserInputService, private router : Router, private route:ActivatedRoute, private orderService : OrderService, private displayService : DisplayService) { }
 
   ngOnInit(): void {
         // Get value of mode (create or edit)
@@ -35,7 +34,7 @@ export class ManageMealPlanComponent implements OnInit, OnDestroy {
         });
 
         this.mealSelectorSubscription = this.userInputService.onMealSelect.subscribe((mealList : String[]) => {
-          this.disableGetMealPlan = (this.mode === 'create' && this.userInputService.mealList.length === 4)?false:true;
+          this.disableGetMealPlan = (this.mode === 'create' && this.userInputService.userInput.mealSelected.length === 4)?false:true;
         });
 
         this.orderInfoSubscription = this.orderService.orderObservable.subscribe( (orderInfo) => {
@@ -45,15 +44,17 @@ export class ManageMealPlanComponent implements OnInit, OnDestroy {
   }
 
   onGetMealPlan() {
-    this.collapseMealListInd = true;
-    this.userInputService.setCreateMealPlanClicked(true);
+    //mealList section can be collapsed
+    this.displayService.canCollapseMealList = true;
     if(this.userInputService.verifyAllInputsReceived()) {
       //If all inputs are received, create the order
-      this.orderService.createOrder(this.userInputService.dietType, this.userInputService.deliveryDate, this.userInputService.mealList);    
+      this.orderService.createOrder(this.userInputService.userInput.dietType, this.userInputService.userInput.deliveryDate, this.userInputService.userInput.mealSelected);    
       //Setup an observable to track any changes in the order
       this.orderService.orderObservableSubject.next(this.orderService.order);
       //Call backend to get a meal plan
-      this.userInputService.getMealPlan.next(this.userInputService.mealList);
+      this.userInputService.getMealPlan.next(this.userInputService.userInput.mealSelected);
+      //User inputs are saved/sent for processing to the backend.
+      this.userInputService.setUserInputSaved(true);
       //Change to update mode to allow user to update the inputs if they want
       this.router.navigate(['/meal-optimizer'], { queryParams: {mode: 'update'} });
       this.disableGetMealPlan = true;
@@ -62,10 +63,13 @@ export class ManageMealPlanComponent implements OnInit, OnDestroy {
   }
 
   onUpdateMealPlan() {
-    this.collapseMealListInd = true;
-    this.userInputService.setUpdateMealPlanClicked(true);
-    (!this.userInputService.verifyAllInputsReceived())?alert('One of the required inputs is missing'):this.userInputService.getMealPlan.next(this.userInputService.mealList);
-    this.disableUpdateMealPlan = true;
+    //mealList section can be collapsed
+    this.displayService.canCollapseMealList = true;
+    //If all inputs are received, notify call backend to get a meal plan . If all inputs are not received, display an alert.
+    (this.userInputService.verifyAllInputsReceived())?this.userInputService.getMealPlan.next(this.userInputService.userInput.mealSelected):alert('One of the required inputs is missing');
+    //user inputs are saved/sent for processing to the backend.
+    this.userInputService.setUserInputSaved(true);
+    this.disableUpdateMealPlan = true; 
   }
 
   ngOnDestroy() : void {
