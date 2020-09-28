@@ -28,7 +28,7 @@ export class ShoppingListComponent implements OnInit, OnDestroy {
   //this method pushes ingredients (bread, milk etc.) to an array. This array elemnts will be displayed in the section 'shopping list'.
   //The values passes are ingredientName, ingredientAmount, ingredient labels (the name of the item or 'added by user')
   addIngredient(ingredientInfo : { ingredientName:String, ingredientAmount:number, ingredientLabels:String[] }) {
-    
+
     var ingredientAdded : boolean = false;    
 
     //If ingredients array is empty, push to the array - there is no need for any check
@@ -50,7 +50,8 @@ export class ShoppingListComponent implements OnInit, OnDestroy {
               if(!(concatenatedLabels.includes(label))) {
                 concatenatedLabels.push(label);
               }
-            });         this.ingredients.splice(index, 1, new Ingredient(ingredientInfo.ingredientName.toLowerCase(), (Number(ingredientInfo.ingredientAmount) + Number(ingredient.amount)), concatenatedLabels));
+            });         
+            this.ingredients.splice(index, 1, new Ingredient(ingredientInfo.ingredientName.toLowerCase(), (Number(ingredientInfo.ingredientAmount) + Number(ingredient.amount)), concatenatedLabels));
             ingredientAdded=true;
           }
           // Before adding a new ingredient, check the whole ingredients array to make sure it does not already have the ingredient
@@ -61,6 +62,7 @@ export class ShoppingListComponent implements OnInit, OnDestroy {
       }
     }));
   }
+
   deleteIngredient(ingredientInfo : { ingredientName:String }) {
     if(this.ingredients.length > 0) {
       (this.ingredients.forEach((ingredient, index) => {
@@ -69,6 +71,15 @@ export class ShoppingListComponent implements OnInit, OnDestroy {
         }
       }));
     }   
+  }
+
+  updateIngredient(ingredientInfo : { indexOfIngredient : number, ingredientName : String, ingredientAmount : number }) {
+    var existingIngredient = this.ingredients[ingredientInfo.indexOfIngredient];
+    this.ingredients[ingredientInfo.indexOfIngredient] = new Ingredient(ingredientInfo.ingredientName, ingredientInfo.ingredientAmount, existingIngredient.labels);
+  }
+
+  onLoadIngredient(indexOfIngredient : number) {
+    this.userInputService.onEditIngredientsInShoppingList.next( { indexOfIngredient : indexOfIngredient, ingredient : this.ingredients[indexOfIngredient]});
   }
 
   ngOnDestroy() : void {

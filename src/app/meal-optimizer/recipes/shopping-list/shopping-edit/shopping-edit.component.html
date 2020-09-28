@@ -1,6 +1,6 @@
 <div class="row">
     <div class="col-xs-12">
-        <form [formGroup]="shoppingEdit" (ngSubmit)="onAddIngredient()">
+        <form [formGroup]="shoppingEdit" (ngSubmit)="onAddOrUpdateIngredient()">
             <div class="row">
                 <div class="col-sm-5 form-group">
                     <label for="ingredientName">Name</label>
@@ -17,7 +17,7 @@
             </div>
             <div class="row">
                 <div class="col-xs-12">
-                    <button class="btn btn-success" type="submit" [disabled]="!shoppingEdit.valid">Add</button>
+                    <button class="btn btn-success" type="submit" [disabled]="!shoppingEdit.valid">{{ mode }}</button>
                     <button class="btn btn-danger" type="button" (click)="onDeleteIngredient()">Delete</button>
                     <button class="btn btn-primary" type="button" (click)="onClearIngredient()">Clear</button>
                 </div>
