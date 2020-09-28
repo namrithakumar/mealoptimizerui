@@ -30,7 +30,7 @@ export class ShoppingEditComponent implements OnInit, OnDestroy {
 
   @Output() deleteIngredient = new EventEmitter<{ ingredientName:String }>();
 
-  @Output() updateIngredient = new EventEmitter< { indexOfIngredient : number, ingredientName : String, ingredientAmount : number} >();
+  @Output() updateIngredient = new EventEmitter< { indexOfIngredient : number, ingredientName : String, ingredientAmount : number, ingredientNameUpdated: boolean} >();
 
   constructor(private ingredientValidatorService : IngredientValidatorService, private userInputService : UserInputService) { }
 
@@ -74,7 +74,7 @@ export class ShoppingEditComponent implements OnInit, OnDestroy {
 
         //To update ingredient, send the updated ingredient info to shoppinglist. Label need not be updated. 
         if(this.mode.toLowerCase() === 'update') {
-          this.updateIngredient.emit({ indexOfIngredient : this.indexOfIngredient, ingredientName : ingredientName, ingredientAmount:this.shoppingEdit.get('ingredientAmount').value }); 
+          this.updateIngredient.emit({ indexOfIngredient : this.indexOfIngredient, ingredientName : ingredientName, ingredientAmount:this.shoppingEdit.get('ingredientAmount').value, ingredientNameUpdated:this.shoppingEdit.get('ingredientName').touched }); 
           this.mode = 'Add';
           this.onClearIngredient();
         }
