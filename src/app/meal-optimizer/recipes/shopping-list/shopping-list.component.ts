@@ -27,7 +27,7 @@ export class ShoppingListComponent implements OnInit, OnDestroy {
 
   //this method pushes ingredients (bread, milk etc.) to an array. This array elemnts will be displayed in the section 'shopping list'.
   //The values passes are ingredientName, ingredientAmount, ingredient labels (the name of the item or 'added by user')
-  addIngredient(ingredientInfo : { ingredientName:String, ingredientAmount:number, ingredientLabels:String[] }) {
+  addIngredient(ingredientInfo : { ingredientName:String, ingredientAmount:number, ingredientLabels:String[] }) : void {
 
     var ingredientAdded : boolean = false;    
 
@@ -73,10 +73,31 @@ export class ShoppingListComponent implements OnInit, OnDestroy {
     }   
   }
 
-  updateIngredient(ingredientInfo : { indexOfIngredient : number, ingredientName : String, ingredientAmount : number }) {
+  updateIngredient(ingredientInfo : { indexOfIngredient : number, ingredientName : String, ingredientAmount : number }) : void {
     var existingIngredient = this.ingredients[ingredientInfo.indexOfIngredient];
-    this.ingredients[ingredientInfo.indexOfIngredient] = new Ingredient(ingredientInfo.ingredientName, ingredientInfo.ingredientAmount, existingIngredient.labels);
-  }
+    var ingredientUpdated = false;
+    (this.ingredients.forEach((ingredient, index) => {
+      if(!ingredientUpdated) {  
+        if(ingredient.name.toLowerCase() === ingredientInfo.ingredientName.toLowerCase()) {
+            var concatenatedLabels = ingredient.labels;
+            existingIngredient.labels.forEach((label) => {
+
+              //Add new label only if the list of labels does not already contain it.
+              if(!(concatenatedLabels.includes(label))) {
+                concatenatedLabels.push(label);
+              }
+            });         
+            this.ingredients.splice(index, 1, new Ingredient(ingredientInfo.ingredientName.toLowerCase(), (Number(ingredientInfo.ingredientAmount) + Number(ingredient.amount)), concatenatedLabels));
+            ingredientUpdated=true;
+          }
+          // Before adding a new ingredient, check the whole ingredients array to make sure it does not already have the ingredient
+          else if(index === (this.ingredients.length - 1)) { 
+			      this.ingredients.splice(ingredientInfo.indexOfIngredient, 1, new Ingredient(ingredientInfo.ingredientName, ingredientInfo.ingredientAmount, existingIngredient.labels));
+            ingredientUpdated=true;
+          }
+      }
+    })); 
+	}
 
   onLoadIngredient(indexOfIngredient : number) {
     this.userInputService.onEditIngredientsInShoppingList.next( { indexOfIngredient : indexOfIngredient, ingredient : this.ingredients[indexOfIngredient]});
