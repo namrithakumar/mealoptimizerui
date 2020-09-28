@@ -10,6 +10,8 @@ import { IUserDietType } from '../../shared/services/user-diet-type-resolver.ser
 })
 export class UserDietTypeComponent implements OnInit {
     
+    propertyName: String = 'dietType';
+
     constructor(private userDietService : UserDietService, private userInputService : UserInputService, private displayService : DisplayService) { }
 
     @Input() dietTypes : Array<IUserDietType>;
@@ -17,7 +19,7 @@ export class UserDietTypeComponent implements OnInit {
     setCollapseInd : boolean = false;
 
     onDietTypeSelect(dietType : String) {
-        this.userInputService.setDietType(dietType);
+        this.userInputService.updateUserInput(this.propertyName, dietType);
     }
 
     ngOnInit(): void { }
@@ -25,7 +27,7 @@ export class UserDietTypeComponent implements OnInit {
     @HostListener('mouseover', ['$event'])  
     @HostListener('mouseout', ['$event']) handleMouseEvent() {
         //Update collapse indicator only if diet type is not empty
-        if(this.userInputService.dietType !== undefined)
+        if(this.userInputService.userInput.dietType !== undefined)
             this.setCollapseInd = this.displayService.getCollapsibleInd(event.type);
     }
 }

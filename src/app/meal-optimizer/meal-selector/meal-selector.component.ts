@@ -16,7 +16,7 @@ export class MealSelectorComponent implements OnInit {
 
   collapseInd : boolean;
 
-  dateOfDelivery : Date = (this.userInputService.deliveryDate === undefined)?new Date():this.userInputService.deliveryDate;
+  dateOfDelivery : Date = (this.userInputService.userInput.deliveryDate === undefined)?new Date():this.userInputService.userInput.deliveryDate;
 
   constructor(private userInputService : UserInputService, private displayService : DisplayService, private router: Router, private route: ActivatedRoute) { 
   }
@@ -32,11 +32,11 @@ export class MealSelectorComponent implements OnInit {
   @HostListener('mouseover', ['$event'])  
   @HostListener('mouseout', ['$event']) handleMouseEvent() {
     //Update collapse indicator only if 4 meals are selected
-      if(this.userInputService.mealList.length === 4)
+      if(this.userInputService.userInput.mealSelected!==undefined && this.userInputService.userInput.mealSelected.length === 4)
           this.collapseInd = this.displayService.canCollapseMealList && this.displayService.getCollapsibleInd(event.type);
   }
 
   getMealList() : String[] {
-    return this.userInputService.mealList;
+    return this.userInputService.userInput.mealSelected;
   }
 }

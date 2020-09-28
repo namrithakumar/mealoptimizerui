@@ -7,25 +7,30 @@ export class UserInputService {
 
     constructor(private orderService: OrderService) {}
 
-    mealList : Array<String> = new Array<String>();
-    dietType : String;
-    deliveryDate : Date;
+    userInput : {
+        dietType : String,
+        deliveryDate : Date,
+        mealSelected : Array<String>
+    } = 
+    {
+        dietType : new String(),
+        deliveryDate : new Date(),
+        mealSelected : new Array<String>()
+    };
+
     tabSelected : String;
     userInputSaved : boolean;
 
-    setDietType(dietType : String) {   
-        this.dietType = dietType;
-        this.orderService.updateUserDietType(this.dietType);
-    }
-
-    setDeliveryDate(deliveryDate : Date) {
-        this.deliveryDate = deliveryDate;
-        this.orderService.updateDeliveryDate(this.deliveryDate);
+    updateUserInput(property:String, value:any) {
+        this.userInput[property.toString()] = value;
+        this.userInputSaved = false;
+        this.orderService.updateOrderInfo(property, value);
     }
 
     addMeal(mealInfo : {itemPosition : number, itemName: String}) {
-        this.mealList[mealInfo.itemPosition] = mealInfo.itemName;
-        this.orderService.updateMealSelected(this.mealList);
+        this.userInput.mealSelected[mealInfo.itemPosition] = mealInfo.itemName;
+        this.orderService.updateOrderInfo('mealSelected',this.userInput.mealSelected);
+        this.userInputSaved = false;
     }
 
     setTabSelected(tabSelected : String) {
@@ -34,7 +39,7 @@ export class UserInputService {
 
     //verify if all inputs are recieved
     verifyAllInputsReceived() : boolean {
-        if(this.dietType !== undefined && this.deliveryDate !== undefined && this.mealList.length === 4) {
+        if(this.userInput.dietType !== undefined && this.userInput.deliveryDate !== undefined && this.userInput.mealSelected.length === 4) {
             return true;
         }
         else return false;
@@ -42,13 +47,13 @@ export class UserInputService {
 
     //verify if one or more inputs are recieved
     verifyOneOrMoreInputsReceived() : boolean {
-        return (this.dietType !== undefined || this.deliveryDate !== undefined || this.mealList.length === 4)? true : false;
+        return (this.userInput.dietType !== undefined || this.userInput.deliveryDate !== undefined || this.userInput.mealSelected.length === 4)? true : false;
     }
  
     resetAllUserInputs() : void {
-        this.mealList = new Array<String>();
-        this.dietType = undefined;
-        this.deliveryDate = undefined;
+        this.userInput.mealSelected = new Array<String>();
+        this.userInput.dietType = undefined;
+        this.userInput.deliveryDate = undefined;
     }
 
     //userInputSaved is set to true when either get meal plan or update meal plan is clicked.

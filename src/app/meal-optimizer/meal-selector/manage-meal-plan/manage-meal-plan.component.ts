@@ -34,7 +34,7 @@ export class ManageMealPlanComponent implements OnInit, OnDestroy {
         });
 
         this.mealSelectorSubscription = this.userInputService.onMealSelect.subscribe((mealList : String[]) => {
-          this.disableGetMealPlan = (this.mode === 'create' && this.userInputService.mealList.length === 4)?false:true;
+          this.disableGetMealPlan = (this.mode === 'create' && this.userInputService.userInput.mealSelected.length === 4)?false:true;
         });
 
         this.orderInfoSubscription = this.orderService.orderObservable.subscribe( (orderInfo) => {
@@ -48,11 +48,11 @@ export class ManageMealPlanComponent implements OnInit, OnDestroy {
     this.displayService.canCollapseMealList = true;
     if(this.userInputService.verifyAllInputsReceived()) {
       //If all inputs are received, create the order
-      this.orderService.createOrder(this.userInputService.dietType, this.userInputService.deliveryDate, this.userInputService.mealList);    
+      this.orderService.createOrder(this.userInputService.userInput.dietType, this.userInputService.userInput.deliveryDate, this.userInputService.userInput.mealSelected);    
       //Setup an observable to track any changes in the order
       this.orderService.orderObservableSubject.next(this.orderService.order);
       //Call backend to get a meal plan
-      this.userInputService.getMealPlan.next(this.userInputService.mealList);
+      this.userInputService.getMealPlan.next(this.userInputService.userInput.mealSelected);
       //User inputs are saved/sent for processing to the backend.
       this.userInputService.setUserInputSaved(true);
       //Change to update mode to allow user to update the inputs if they want
@@ -66,7 +66,7 @@ export class ManageMealPlanComponent implements OnInit, OnDestroy {
     //mealList section can be collapsed
     this.displayService.canCollapseMealList = true;
     //If all inputs are received, notify call backend to get a meal plan . If all inputs are not received, display an alert.
-    (this.userInputService.verifyAllInputsReceived())?this.userInputService.getMealPlan.next(this.userInputService.mealList):alert('One of the required inputs is missing');
+    (this.userInputService.verifyAllInputsReceived())?this.userInputService.getMealPlan.next(this.userInputService.userInput.mealSelected):alert('One of the required inputs is missing');
     //user inputs are saved/sent for processing to the backend.
     this.userInputService.setUserInputSaved(true);
     this.disableUpdateMealPlan = true; 
