@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
+import { Ingredient } from '../ingredient.model';
 import { OrderService } from './order.service';
 
 @Injectable({providedIn:'root'})
@@ -68,4 +69,5 @@ export class UserInputService {
 
     onAddIngredientsToShoppingList = new Subject<{ ingredientName:String, ingredientAmount:number, ingredientLabels:String[] }[]>();
 
+    onEditIngredientsInShoppingList = new Subject< { indexOfIngredient : number, ingredient : Ingredient } >();
 }

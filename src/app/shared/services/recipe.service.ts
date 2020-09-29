@@ -17,10 +17,11 @@ export class RecipeService {
       ];
 
     public getRecipes() : Recipe[] {
-      return this.recipes;
+      return this.recipes.slice();
     }
 
     public getRecipeById(id : number) : Recipe {
-      return this.recipes[id];
+      var recipeList = this.recipes.slice();
+      return recipeList[id];
     }
 }
