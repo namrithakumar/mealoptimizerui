@@ -19,7 +19,7 @@ export class OptimizedResultsTableComponent implements OnInit {
   }
 
   onTabSelected(tabSelected : String) {
-    this.userInputService.setTabSelected(tabSelected);
+    this.userInputService.setOptimizationTypeSelected(tabSelected);
   }
 
 }
