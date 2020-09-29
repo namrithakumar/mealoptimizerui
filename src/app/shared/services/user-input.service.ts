@@ -19,7 +19,7 @@ export class UserInputService {
         mealSelected : new Array<String>()
     };
 
-    tabSelected : String;
+    optimizationTypeSelected : String;
     userInputSaved : boolean;
 
     updateUserInput(property:String, value:any) {
@@ -34,8 +34,9 @@ export class UserInputService {
         this.userInputSaved = false;
     }
 
-    setTabSelected(tabSelected : String) {
-        this.tabSelected = tabSelected;
+    setOptimizationTypeSelected(tabSelected : String) {
+        this.optimizationTypeSelected = tabSelected;
+        this.onOptimizationTypeSelected.next(this.optimizationTypeSelected);
     }
 
     //verify if all inputs are recieved
@@ -66,6 +67,8 @@ export class UserInputService {
 
     //This is a common event for both create meal plan and update
     getMealPlan = new Subject< String[] >();
+
+    onOptimizationTypeSelected = new Subject< String >();
 
     onAddIngredientsToShoppingList = new Subject<{ ingredientName:String, ingredientAmount:number, ingredientLabels:String[] }[]>();
 
