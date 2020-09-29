@@ -10,9 +10,16 @@
 <div class="row">
     <div class="col-xs-12">
         <h4>{{recipeSelected.name}}</h4>
-        <a href="{{recipeSelected.tutorialPath}}"> Watch the tutorial here </a>
+        <a href="{{recipeSelected.tutorialPath}}"> Watch the tutorial here </a><br/>
+        <label for="noOfPortions">No. of portions</label>
+        <input class="col-sm-3" type="number" id="noOfPortions" [(ngModel)]="noOfPortions" min="1"><br/>
         <p>Ingredients</p>
-        <p *ngFor="let ingredient of recipeSelected.ingredients">{{ ingredient.name }} ({{ ingredient.amount}})</p>
+        <table>
+        <tr *ngFor="let ingredient of recipeSelected.ingredients">
+                <td class="col-xs-12">{{ ingredient.name }}</td>
+                <td class="col-xs-12" style="align=right">({{ ingredient.amount * noOfPortions }})</td>
+        </tr>        
+    </table>
     </div>
 </div>
 <div class="row">
