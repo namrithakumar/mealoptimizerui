@@ -64,7 +64,6 @@ export class ShoppingListComponent implements OnInit, OnDestroy {
   }
 
   updateIngredient(updatedIngredientInfo : { indexOfIngredient : number, ingredientName : String, ingredientAmount : number, ingredientNameUpdated : boolean }) : void {
-    var existingIngredient = this.ingredients[updatedIngredientInfo.indexOfIngredient];
     var ingredientUpdated = false;
     (this.ingredients.forEach((ingredient, index) => {
       if(!ingredientUpdated) {
@@ -107,8 +106,7 @@ export class ShoppingListComponent implements OnInit, OnDestroy {
       if(!(concatenatedLabels.includes(label))) {
         concatenatedLabels.push(label);
       }
-    });
-    console.log('splice at ' + indexOfExistingingredient);         
+    });        
     this.ingredients.splice(indexOfExistingingredient, 1, new Ingredient(newIngredient.ingredientName.toLowerCase(), (Number(existingIngredient.amount) + Number(newIngredient.ingredientAmount)), concatenatedLabels));
     return true;
 }

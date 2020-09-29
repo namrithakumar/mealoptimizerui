@@ -13,6 +13,7 @@ export class RecipeDetailComponent implements OnInit {
 
   recipeSelected : Recipe;
   id: number;
+  noOfPortions : number = 1;
 
   ingredientInfo : { ingredientName:String, ingredientAmount:number, ingredientLabels:String[] }[];
 
@@ -30,7 +31,7 @@ export class RecipeDetailComponent implements OnInit {
     this.recipeSelected.ingredients.forEach((ingredient) => {
       this.ingredientInfo.push({
         ingredientName : ingredient.name, 
-        ingredientAmount : ingredient.amount, 
+        ingredientAmount : ingredient.amount * this.noOfPortions, 
         ingredientLabels : ingredient.labels
       });
     });
