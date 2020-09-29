@@ -21,6 +21,7 @@ export class RecipeService {
     }
 
     public getRecipeById(id : number) : Recipe {
-      return this.recipes.slice[id];
+      var recipeList = this.recipes.slice();
+      return recipeList[id];
     }
 }
