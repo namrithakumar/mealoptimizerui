@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { UserDietService } from './user-diet.service';
+import { UserDietService } from './http/user-diet.service';
 import { ActivatedRouteSnapshot, RouterStateSnapshot, Resolve } from '@angular/router';
 import { Observable } from 'rxjs';
 
