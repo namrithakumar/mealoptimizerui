@@ -37,6 +37,7 @@ export class MealOptionsComponent implements OnInit, OnDestroy {
         .getItemsByCategory(this.userInputService.userInput.dietType)
         .subscribe(items => {
           this.itemList = items;
+          this.itemList.unshift(this.defaultText);
         });
   }
 
