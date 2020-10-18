@@ -1,5 +1,5 @@
 import { Component, OnInit, HostListener, Input } from '@angular/core'
-import { UserDietService } from '../../shared/services/user-diet.service';
+import { UserDietService } from '../../shared/services/http/user-diet.service';
 import { UserInputService } from '../../shared/services/user-input.service';
 import { DisplayService } from '../../shared/services/display.service';
 import { IUserDietType } from '../../shared/services/user-diet-type-resolver.service';
