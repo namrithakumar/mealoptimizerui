@@ -24,6 +24,7 @@ export class UserInputService {
 
     updateUserInput(property:String, value:any) {
         this.userInput[property.toString()] = value;
+        if(property === 'dietType') this.onDietTypeSelect.next(value);
         this.userInputSaved = false;
         this.orderService.updateOrderInfo(property, value);
     }
@@ -62,6 +63,8 @@ export class UserInputService {
     setUserInputSaved(saved : boolean) {
         this.userInputSaved = saved;
     }
+
+    onDietTypeSelect = new Subject<String>();
 
     onMealSelect = new Subject<String[]>();
 
