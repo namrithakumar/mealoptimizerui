@@ -56,7 +56,7 @@ export class ManageMealPlanComponent implements OnInit, OnDestroy {
       //If all inputs are received, create the order
       this.orderRequest = this.orderService.createOrderRequest(this.userInputService.userInput.deliveryDate, this.userInputService.userInput.mealSelected);    
       //Setup an observable to track any changes in the order
-       this.orderService.orderObservableSubject.next(this.orderService.order);
+       this.orderService.orderObservableSubject.next(this.orderService.orderRequest);
       //Call backend to get a meal plan
       this.mealPlanService.getMealPlan(this.orderRequest).subscribe(
         (responseData:OrderResponse) => {

@@ -7,9 +7,9 @@ import { UserInputService } from './user-input.service';
 @Injectable({providedIn:'root'})
 export class OptimizationService {
 
-    mealPlanCost : { mealListByCost : Meal[], planCost: number } = { mealListByCost : new Array<Meal>(), planCost: 0.0 };
+    mealPlanCost : { mealListByCost : Meal[], planCost: number } = { mealListByCost : null, planCost: null };
 
-    mealPlanQuality : { mealListByQuality : Meal[], planCost: number } = { mealListByQuality : new Array<Meal>(), planCost: 0.0 };
+    mealPlanQuality : { mealListByQuality : Meal[], planCost: number } = { mealListByQuality : null, planCost: null };
 
     onCostOptimizationComplete = new Subject< { mealListByCost : Meal[], planCost: number } >();
     onQualityOptimizationComplete = new Subject< { mealListByQuality : Meal[], planCost: number } >();
@@ -41,14 +41,12 @@ export class OptimizationService {
     }
 
     setOptimizedMealPlans(orderResponse : OrderResponse) {
-        console.log(orderResponse);
         orderResponse.mealPlan.forEach((mealPlan) => {
             if(mealPlan.optimizationType === "COST") {
                 this.mealPlanCost.mealListByCost = mealPlan.meals;
                 this.mealPlanCost.planCost = mealPlan.mealPlanCost;
             }
             if(mealPlan.optimizationType === "REWARD") {
-                mealPlan.meals.forEach(meal => { console.log(meal.itemName + ' - ' + meal.mealCost + ' - ' + meal.portion); });
                 this.mealPlanQuality.mealListByQuality = mealPlan.meals;
                 this.mealPlanQuality.planCost = mealPlan.mealPlanCost;
             }

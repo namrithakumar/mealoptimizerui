@@ -11,22 +11,26 @@ import { UserInputService } from 'src/app/shared/services/user-input.service';
 })
 export class OptimizedResultsTableComponent implements OnInit, OnDestroy {
 
-  mealListByCost : Array<Meal>;
-  mealListByQuality : Array<Meal>;
+  costOptimizedPlan : { mealListByCost : Meal[], planCost: number } = { mealListByCost : new Array<Meal>(), planCost: 0 };
+  qualityOptimizedPlan : { mealListByQuality : Meal[], planCost: number } = { mealListByQuality : new Array<Meal>(), planCost: 0 };
   
   costOptimizationSub : Subscription;
   qualityOptimizationSub : Subscription;
+
+  resultsPending : boolean = true;
 
   constructor(private optimizationService : OptimizationService, private userInputService : UserInputService) { }
 
   ngOnInit(): void {
     
     this.costOptimizationSub = this.optimizationService.onCostOptimizationComplete.subscribe((costOptimizedPlan) => {
-      this.mealListByCost = costOptimizedPlan.mealListByCost;
+      this.costOptimizedPlan = costOptimizedPlan;
+      this.resultsPending = false;
     });
 
     this.qualityOptimizationSub = this.optimizationService.onQualityOptimizationComplete.subscribe((qualityOptimizedPlan) => {
-      this.mealListByQuality = qualityOptimizedPlan.mealListByQuality;
+      this.qualityOptimizedPlan = qualityOptimizedPlan;
+      this.resultsPending = false;
     });
   }
 
