@@ -1,3 +1,4 @@
+import { DatePipe } from '@angular/common';
 import { Injectable } from '@angular/core';
 import { Subject, Observable } from 'rxjs';
 
@@ -6,13 +7,13 @@ export class OrderService {
 
     order : { dietType: String, deliveryDate: Date, mealSelected: Array<String> }; // This is different from order.model.ts since it will have the order response, this on the other hand is the order info entered by the user
 
-    constructor() { }
+    constructor(private datePipe: DatePipe) { }
 
-    createOrder(dietType: String, deliveryDate: Date, mealList: Array<String>) {
-        this.order = {
-            dietType : dietType,
-            deliveryDate : deliveryDate,
-            mealSelected : mealList
+    createOrderRequest(deliveryDate: Date, mealList: Array<String>) {
+      return {
+            deliveryDate : this.datePipe.transform(deliveryDate, 'MM/dd/yyyy'),
+            mealSelected : mealList,
+            optimizationTypes:['COST','REWARD']
         };
         
     }

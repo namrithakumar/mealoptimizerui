@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Meal } from '../../../../shared/meal.model';
+import { Meal } from '../../../../shared/model/order/order-response.model';
 
 @Component({
   selector: 'app-optimized-result-cost',

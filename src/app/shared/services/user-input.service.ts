@@ -68,9 +68,6 @@ export class UserInputService {
 
     onMealSelect = new Subject<String[]>();
 
-    //This is a common event for both create meal plan and update
-    getMealPlan = new Subject< String[] >();
-
     onOptimizationTypeSelected = new Subject< String >();
 
     onAddIngredientsToShoppingList = new Subject<{ ingredientName:String, ingredientAmount:number, ingredientLabels:String[] }[]>();
