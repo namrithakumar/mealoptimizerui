@@ -39,6 +39,7 @@ import { ErrorPageComponent } from './shared/error-page/error-page.component';
 import { RecipeStartComponent } from './meal-optimizer/recipes/recipe-start/recipe-start.component';
 import { UserComponent } from './user-mgmt/user/user.component';
 import { ManageMealPlanComponent } from './meal-optimizer/meal-selector/manage-meal-plan/manage-meal-plan.component';
+import { DatePipe } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -86,7 +87,7 @@ import { ManageMealPlanComponent } from './meal-optimizer/meal-selector/manage-m
       useFactory: adapterFactory,
     })    
   ],
-  providers: [],
+  providers: [DatePipe],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

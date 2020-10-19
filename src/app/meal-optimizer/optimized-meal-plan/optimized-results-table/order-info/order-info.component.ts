@@ -10,14 +10,16 @@ import { OrderService } from 'src/app/shared/services/order.service';
 })
 export class OrderInfoComponent implements OnInit, OnDestroy {
 
-  orderInfo : { dietType: String, deliveryDate: Date, mealSelected: Array<String> };
+  orderInfo : { deliveryDate: Date, mealSelected: Array<String> } = { deliveryDate: null, mealSelected: null };
   orderSubscription : Subscription;
 
   constructor(private orderService : OrderService) { }
 
   ngOnInit(): void {
     this.orderSubscription = this.orderService.orderObservable.subscribe(
-      (orderInfo : { dietType: String, deliveryDate: Date, mealSelected: Array<String> }) => {this.orderInfo = orderInfo;
+      (orderInfo : { deliveryDate: String, mealSelected: Array<String>, optimizationTypes : Array<String> }) => {
+        this.orderInfo.deliveryDate = new Date(orderInfo.deliveryDate.toString());
+        this.orderInfo.mealSelected = orderInfo.mealSelected;
       }
     );
   }
