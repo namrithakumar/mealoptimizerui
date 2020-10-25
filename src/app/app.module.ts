@@ -6,7 +6,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CalendarModule, DateAdapter } from 'angular-calendar';
 import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
@@ -39,6 +39,7 @@ import { ErrorPageComponent } from './shared/error-page/error-page.component';
 import { RecipeStartComponent } from './meal-optimizer/recipes/recipe-start/recipe-start.component';
 import { UserComponent } from './user-mgmt/user/user.component';
 import { ManageMealPlanComponent } from './meal-optimizer/meal-selector/manage-meal-plan/manage-meal-plan.component';
+import { AuthInterceptor } from './shared/services/interceptor/auth-interceptor.service';
 import { DatePipe } from '@angular/common';
 
 @NgModule({
@@ -87,7 +88,8 @@ import { DatePipe } from '@angular/common';
       useFactory: adapterFactory,
     })    
   ],
-  providers: [DatePipe],
+  providers: [DatePipe, 
+              { provide : HTTP_INTERCEPTORS, useClass : AuthInterceptor, multi : true}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

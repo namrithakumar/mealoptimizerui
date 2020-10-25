@@ -28,6 +28,7 @@ export class DisplayService {
     }
 
     getHideUserOptions() : boolean {
-        return !(this.authService.loggedIn);
+        //return !(this.authService.loggedIn);
+        return false;
     }
 }

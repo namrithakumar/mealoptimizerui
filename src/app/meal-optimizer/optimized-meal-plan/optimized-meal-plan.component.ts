@@ -2,6 +2,7 @@ import { Component, OnInit, Output, EventEmitter, OnDestroy } from '@angular/cor
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { DisplayService } from 'src/app/shared/services/display.service';
+import { RecipeService } from 'src/app/shared/services/recipe.service';
 import { UserInputService } from 'src/app/shared/services/user-input.service';
 
 @Component({
@@ -15,7 +16,7 @@ export class OptimizedMealPlanComponent implements OnInit, OnDestroy {
 
   onOptimizationTypeSelectedSubscription : Subscription;
 
-  constructor(private router : Router, private userInputService : UserInputService, private displayService : DisplayService) { }
+  constructor(private router : Router, private userInputService : UserInputService, private displayService : DisplayService, private recipeService : RecipeService) { }
 
   ngOnInit(): void {
     this.onOptimizationTypeSelectedSubscription = this.userInputService.onOptimizationTypeSelected.subscribe(

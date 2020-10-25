@@ -52,10 +52,10 @@ export class ShoppingEditComponent implements OnInit, OnDestroy {
     //This observable is triggered when the user wants to edit an existing ingredient.
     this.onEditIngredient = this.userInputService.onEditIngredientsInShoppingList.subscribe((ingredientInfo) => {
       this.mode = 'Update';
-      this.indexOfIngredient = ingredientInfo.indexOfIngredient;
+      this.indexOfIngredient = ingredientInfo.indexOfShoppingListItem;
       this.shoppingEdit.setValue(
-        { 'ingredientName' : ingredientInfo.ingredient.name,
-          'ingredientAmount' : ingredientInfo.ingredient.amount
+        { 'ingredientName' : ingredientInfo.shoppingItem.name,
+          'ingredientAmount' : ingredientInfo.shoppingItem.amount
         });
     });
   }

@@ -1,11 +1,11 @@
 <div class="row float-right">
     <div class="col-xs-10">
-        <app-shopping-edit (addIngredient)="addIngredient($event)" (deleteIngredient)="deleteIngredient($event)" (updateIngredient)="updateIngredient($event)"></app-shopping-edit>
+        <app-shopping-edit (addIngredient)="addItemToShoppingList($event)" (deleteIngredient)="deleteItemInShoppingList($event)" (updateIngredient)="updateItemInShoppingList($event)"></app-shopping-edit>
         <hr>
         <ul class="list-group">
-            <button class="list-group-item" type="button" *ngFor="let ingredient of ingredients; index as indexOfIngredient" (click)="onLoadIngredient(indexOfIngredient)">
-            <span class="float-left">{{ingredient.name}} ({{ingredient.amount}})</span>
-                        <span class="badge badge-secondary float-right" *ngFor="let label of ingredient.labels">{{label}}</span>
+            <button class="list-group-item" type="button" *ngFor="let shoppingItem of shoppingList; index as indexOfShoppingItem" (click)="onLoadShoppingItem(indexOfShoppingItem)">
+            <span class="float-left">{{shoppingItem.name}} ({{shoppingItem.amount}} {{shoppingItem.measure}})</span>
+                        <span class="badge badge-secondary float-right" *ngFor="let label of shoppingItemlabels">{{label}}</span>
             </button>
         </ul>
     </div>
