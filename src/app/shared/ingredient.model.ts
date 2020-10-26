@@ -8,6 +8,10 @@ export class Ingredient {
     constructor(name : String, quantity : Quantity) {
         this.name = name;
         this.quantity = quantity;
+        this.setLabels();
+    }
+
+    private setLabels() {
         this.labels.push(this.name);
     }
 }
