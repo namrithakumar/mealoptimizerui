@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { AuthService } from '../shared/services/auth.service';
 import { DisplayService } from '../shared/services/display.service';
 import { Router } from '@angular/router';
-import { UserService } from '../shared/services/user.service';
 
 @Component({
     selector: 'app-header',
@@ -10,7 +9,7 @@ import { UserService } from '../shared/services/user.service';
     
 })
 export class HeaderComponent {
-    constructor(private authService : AuthService, private displayService : DisplayService, private router: Router, private userService: UserService) {}
+    constructor(private authService : AuthService, private displayService : DisplayService, private router: Router) {}
 
     viewMealPlanner() : void {
         this.router.navigate(['/meal-optimizer'], { queryParams: {mode: 'create'} });
@@ -25,11 +24,11 @@ export class HeaderComponent {
     }
 
     viewProfile() : void {
-        this.router.navigate(['/user-mgmt','user','user-profile', this.userService.user.username], { queryParams: {mode: 'view'} });
+        //this.router.navigate(['/user-mgmt','user','user-profile', this.userService.user.username], { queryParams: {mode: 'view'} });
     }
 
     modifySettings() : void {
-        this.router.navigate(['/user-mgmt','user','user-settings', this.userService.user.username], { queryParams: {mode: 'edit'} });
+        //this.router.navigate(['/user-mgmt','user','user-settings', this.userService.user.username], { queryParams: {mode: 'edit'} });
     }
 
     logout() : void {

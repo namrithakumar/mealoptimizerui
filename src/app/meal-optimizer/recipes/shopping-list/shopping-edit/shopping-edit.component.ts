@@ -1,6 +1,7 @@
 import { Component, OnInit, Output, EventEmitter, OnDestroy } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs';
+import { ShoppingItem } from 'src/app/shared/model/shopping-item-model';
 import { UserInputService } from 'src/app/shared/services/user-input.service';
 import { IngredientValidatorService } from '../../../../shared/services/ingredientValidator.service';
 
@@ -26,18 +27,19 @@ export class ShoppingEditComponent implements OnInit, OnDestroy {
   //This can be changed to new Subject<>() in the user-input.service and we can subscribe to the event here.
   //We can even use existing observables onAddIngredientsToShoppingList and onEditIngredientsInShoppingList
   //We leave it as such for reference
-  @Output() addIngredient = new EventEmitter<{ ingredientName:String, ingredientAmount:number, ingredientLabels:String[] }>();
+  @Output() addIngredient = new EventEmitter<ShoppingItem>();
 
-  @Output() deleteIngredient = new EventEmitter<{ ingredientName:String }>();
+  @Output() deleteIngredient = new EventEmitter<{ name : String }>();
 
-  @Output() updateIngredient = new EventEmitter< { indexOfIngredient : number, ingredientName : String, ingredientAmount : number, ingredientNameUpdated: boolean} >();
+  @Output() updateIngredient = new EventEmitter< { indexOfItem : number, name : String, amount : number, shoppingItemNameUpdated: boolean} >();
 
   constructor(private ingredientValidatorService : IngredientValidatorService, private userInputService : UserInputService) { }
 
   ngOnInit(): void {
     this.shoppingEdit = new FormGroup({
       'ingredientName' : new FormControl('Enter ingredient name here', Validators.required),
-      'ingredientAmount': new FormControl(null, [Validators.required, Validators.pattern("^[1-9]+[0-9]*$")])
+      'ingredientAmount': new FormControl(null, [Validators.required, Validators.pattern("^[1-9]+[0-9]*$")]),
+      'ingredientMeasure' : new FormControl(null, Validators.required),
     });
 
     /* 
@@ -50,14 +52,16 @@ export class ShoppingEditComponent implements OnInit, OnDestroy {
     });
 
     //This observable is triggered when the user wants to edit an existing ingredient.
-    this.onEditIngredient = this.userInputService.onEditIngredientsInShoppingList.subscribe((ingredientInfo) => {
-      this.mode = 'Update';
-      this.indexOfIngredient = ingredientInfo.indexOfIngredient;
-      this.shoppingEdit.setValue(
-        { 'ingredientName' : ingredientInfo.ingredient.name,
-          'ingredientAmount' : ingredientInfo.ingredient.amount
-        });
-    });
+    this.onEditIngredient = this.userInputService.onEditIngredientsInShoppingList.subscribe(
+      (shoppingItemToBeUpdated : { indexOfShoppingItem : number, shoppingItem : ShoppingItem }) => {
+        this.mode = 'Update';
+        this.indexOfIngredient = shoppingItemToBeUpdated.indexOfShoppingItem;
+        this.shoppingEdit.setValue(
+          { 'ingredientName' : shoppingItemToBeUpdated.shoppingItem.name,
+            'ingredientAmount' : shoppingItemToBeUpdated.shoppingItem.amount,
+            'ingredientMeasure' : shoppingItemToBeUpdated.shoppingItem.measure
+          });
+      });
   }
 
   onAddOrUpdateIngredient() : void {
@@ -69,12 +73,12 @@ export class ShoppingEditComponent implements OnInit, OnDestroy {
         if(this.mode.toLowerCase() === 'add') {
           var label = new Array<String>();
           label.push(this.defaultLabel);
-          this.addIngredient.emit({ ingredientName : ingredientName, ingredientAmount:this.shoppingEdit.get('ingredientAmount').value, ingredientLabels: label }); 
+          this.addIngredient.emit(new ShoppingItem(ingredientName, this.shoppingEdit.get('ingredientAmount').value, this.shoppingEdit.get('ingredientMeasure').value, label));
         }
 
         //To update ingredient, send the updated ingredient info to shoppinglist. Label need not be updated. 
         if(this.mode.toLowerCase() === 'update') {
-          this.updateIngredient.emit({ indexOfIngredient : this.indexOfIngredient, ingredientName : ingredientName, ingredientAmount:this.shoppingEdit.get('ingredientAmount').value, ingredientNameUpdated:this.shoppingEdit.get('ingredientName').touched }); 
+          this.updateIngredient.emit({ indexOfItem : this.indexOfIngredient, name : ingredientName, amount:this.shoppingEdit.get('ingredientAmount').value, shoppingItemNameUpdated:this.shoppingEdit.get('ingredientName').touched }); 
           this.mode = 'Add';
           this.onClearIngredient();
         }
@@ -82,7 +86,8 @@ export class ShoppingEditComponent implements OnInit, OnDestroy {
   }
 
   onDeleteIngredient() : void {
-    this.deleteIngredient.emit({ ingredientName:this.shoppingEdit.get('ingredientName').value });
+    if(this.shoppingEdit.get('ingredientName').value !== null)
+      this.deleteIngredient.emit({ name:this.shoppingEdit.get('ingredientName').value });
     this.mode = 'Add';
     this.onClearIngredient();
   }

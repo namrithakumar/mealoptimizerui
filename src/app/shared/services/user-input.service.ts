@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
 import { Ingredient } from '../ingredient.model';
 import { OrderService } from './order.service';
+import { ShoppingItem } from '../model/shopping-item-model';
 
 @Injectable({providedIn:'root'})
 export class UserInputService {
@@ -70,7 +71,7 @@ export class UserInputService {
 
     onOptimizationTypeSelected = new Subject< String >();
 
-    onAddIngredientsToShoppingList = new Subject<{ ingredientName:String, ingredientAmount:number, ingredientLabels:String[] }[]>();
+    onAddIngredientsToShoppingList = new Subject<ShoppingItem[]>();
 
-    onEditIngredientsInShoppingList = new Subject< { indexOfIngredient : number, ingredient : Ingredient } >();
+    onEditIngredientsInShoppingList = new Subject< { indexOfShoppingItem : number, shoppingItem : ShoppingItem } >();
 }

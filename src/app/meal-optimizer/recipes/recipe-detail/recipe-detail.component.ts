@@ -5,6 +5,8 @@ import { ActivatedRoute, Params, Router } from '@angular/router';
 import { RecipeService } from 'src/app/shared/services/recipe.service';
 import { OptimizationService } from 'src/app/shared/services/optimization.service';
 import { Subscription } from 'rxjs';
+import { Ingredient } from 'src/app/shared/ingredient.model';
+import { ShoppingItem } from '../../../shared/model/shopping-item-model';
 
 @Component({
   selector: 'app-recipe-detail',
@@ -17,7 +19,7 @@ export class RecipeDetailComponent implements OnInit, OnDestroy {
   id: number;
   noOfPortions : number;
 
-  ingredientInfo : { ingredientName:String, ingredientAmount:number, ingredientLabels:String[] }[];
+  ingredientInfo : ShoppingItem[];
 
   //Delete
   onOptimizationTypeSelectedSubscription : Subscription;
@@ -42,13 +44,14 @@ export class RecipeDetailComponent implements OnInit, OnDestroy {
   constructor(private userInputService : UserInputService, private route: ActivatedRoute, private recipeService: RecipeService, private optimizationService : OptimizationService, private router : Router) {}
 
   onAddToShoppingList(): void {
-    this.ingredientInfo = new Array<{ ingredientName:String, ingredientAmount:number, ingredientLabels:String[] }>();
-    this.recipeSelected.ingredients.forEach((ingredient) => {
-      this.ingredientInfo.push({
-        ingredientName : ingredient.name, 
-        ingredientAmount : ingredient.amount * this.noOfPortions, 
-        ingredientLabels : ingredient.labels
-      });
+    this.ingredientInfo = new Array<ShoppingItem>();
+    this.recipeSelected.ingredients.forEach((ingredient : Ingredient) => {
+      this.ingredientInfo.push(
+        new ShoppingItem(ingredient.name, 
+              ingredient.quantity.count * this.noOfPortions, 
+              ingredient.quantity.measure,
+              (ingredient.labels === undefined)?[this.recipeSelected.name]:ingredient.labels
+      ));
     });
     this.userInputService.onAddIngredientsToShoppingList.next(this.ingredientInfo);
   }

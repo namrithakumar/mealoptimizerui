@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router, Params } from '@angular/router';
 import { User } from '../../shared/user.model';
-import { UserService } from '../../shared/services/user.service';
 
 @Component({
   selector: 'app-user-settings',
@@ -13,12 +12,12 @@ export class UserSettingsComponent implements OnInit {
 
   mode: String;
 
-  constructor(private router : Router, private route: ActivatedRoute, private userService: UserService) { }
+  constructor(private router : Router, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
 
     this.route.params.subscribe((params : Params) => {
-      this.user = this.userService.getUserDetails(params['username']);
+      //this.user = this.userService.getUserDetails(params['username']);
     });
 
       this.route.queryParams.subscribe(
