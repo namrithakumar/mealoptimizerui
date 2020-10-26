@@ -86,7 +86,8 @@ export class ShoppingEditComponent implements OnInit, OnDestroy {
   }
 
   onDeleteIngredient() : void {
-    this.deleteIngredient.emit({ name:this.shoppingEdit.get('ingredientName').value });
+    if(this.shoppingEdit.get('ingredientName').value !== null)
+      this.deleteIngredient.emit({ name:this.shoppingEdit.get('ingredientName').value });
     this.mode = 'Add';
     this.onClearIngredient();
   }
