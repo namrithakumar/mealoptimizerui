@@ -7,7 +7,7 @@ export class MealPlanService {
 
     constructor(private http : HttpClient) {} 
 
-    getMealPlan(orderRequest :{ deliveryDate : Date ,mealSelected : Array<String> }) {
+    getMealPlan(orderRequest :{ deliveryDate : Date ,mealSelected : Array<String>, optimizationTypes: Array<String> }) {
         const url = 'http://localhost:9090/mealoptimizer/orders/save';
         return this.http.post<OrderResponse>(url,
                         orderRequest);
