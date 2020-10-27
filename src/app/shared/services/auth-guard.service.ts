@@ -14,7 +14,7 @@ export class AuthGuardService implements CanActivate {
 
     constructor(private userService : UserService, private router : Router) {}
 
-    //If user is authenticated, allow access. Otherwise redirect to register-login page.
+    //If user is authenticated, allow access. Otherwise redirect to login page.
     canActivate(route : ActivatedRouteSnapshot, state: RouterStateSnapshot) : Observable<boolean> | Promise<boolean>  | boolean {
         
         this.userService.user
@@ -22,6 +22,6 @@ export class AuthGuardService implements CanActivate {
                 (user : User) => this.loggedInUser = user);
         
         if(this.loggedInUser) return true;        
-        else this.router.navigateByUrl('/user-mgmt/register-login');
+        else this.router.navigateByUrl('/user-mgmt/login');
         }
 }

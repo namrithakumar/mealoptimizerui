@@ -3,7 +3,7 @@ import { RouterModule } from '@angular/router';
 import { MealOptimizerComponent } from './meal-optimizer/meal-optimizer.component';
 import { HomeComponent } from './app-info/home/home.component';
 import { ContactUsComponent } from './app-info/contact-us/contact-us.component';
-import { UserRegisterLoginLogoutComponent } from './user-mgmt/user-register-login-logout/user-register-login-logout.component';
+import { UserLoginComponent } from './user-mgmt/user-register-login/user-login/user-login.component';
 import { UserProfileComponent } from './user-mgmt/user-profile/user-profile.component';
 import { UserSettingsComponent } from './user-mgmt/user-settings/user-settings.component';
 import { NgModule } from '@angular/core';
@@ -23,7 +23,7 @@ const appRoutes : Routes = [
                 { path:'contact-us', component: ContactUsComponent }
             ]},
     {path:'user-mgmt', children: [
-                { path: 'register-login', canActivate: [RegisterLoginGuardService], component: UserRegisterLoginLogoutComponent },
+                { path: 'login', canActivate: [RegisterLoginGuardService], component: UserLoginComponent },
                 { path:'user', canActivate: [AuthGuardService], component: UserComponent, children: [
                     { path:'user-profile/:username', component: UserProfileComponent },
                     { path:'user-settings/:username', component: UserSettingsComponent }]}

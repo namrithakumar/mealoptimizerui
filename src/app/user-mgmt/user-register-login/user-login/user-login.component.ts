@@ -4,11 +4,11 @@ import { Router } from '@angular/router';
 import { UserService } from 'src/app/shared/services/user.service';
 
 @Component({
-  selector: 'app-user-register-login-logout',
-  templateUrl: './user-register-login-logout.component.html',
-  styleUrls: ['./user-register-login-logout.component.css']
+  selector: 'app-user-login',
+  templateUrl: './user-login.component.html',
+  styleUrls: ['./user-login.component.css']
 })
-export class UserRegisterLoginLogoutComponent implements OnInit {
+export class UserLoginComponent implements OnInit {
 
   @ViewChild('loginForm') loginForm: NgForm;
 
