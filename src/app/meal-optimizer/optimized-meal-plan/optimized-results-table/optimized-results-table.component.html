@@ -20,8 +20,8 @@
       </div>
       <div id="optimizedByCost" class="container tab-pane fade"><br>
         <h3>Meal Plan - Optimized by Cost</h3>
-        <div *ngIf="resultsPending; else resultsReceived"><p>Meal plan will be displayed here</p></div>
-        <ng-template #resultsReceived>
+        <div *ngIf="resultsPending; else resultsReceivedForCost"><p>Meal plan will be displayed here</p></div>
+        <ng-template #resultsReceivedForCost>
           <table class="table">
             <thead>
               <tr class="d-flex">
@@ -40,8 +40,8 @@
       </div>
       <div id="optimizedByQuality" class="container tab-pane fade"><br>
         <h3>Meal Plan - Optimized by Quality</h3>
-        <div *ngIf="resultsPending; else resultsReceived"><p>Meal plan will be displayed here</p></div>
-        <ng-template #resultsReceived>
+        <div *ngIf="resultsPending; else resultsReceivedForQuality"><p>Meal plan will be displayed here</p></div>
+        <ng-template #resultsReceivedForQuality>
           <table class="table">
             <thead>
               <tr class="d-flex">
