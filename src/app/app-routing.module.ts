@@ -4,6 +4,7 @@ import { MealOptimizerComponent } from './meal-optimizer/meal-optimizer.componen
 import { HomeComponent } from './app-info/home/home.component';
 import { ContactUsComponent } from './app-info/contact-us/contact-us.component';
 import { UserLoginComponent } from './user-mgmt/user-register-login/user-login/user-login.component';
+import { UserRegisterComponent } from './user-mgmt/user-register-login/user-register/user-register.component';
 import { UserProfileComponent } from './user-mgmt/user-profile/user-profile.component';
 import { UserSettingsComponent } from './user-mgmt/user-settings/user-settings.component';
 import { NgModule } from '@angular/core';
@@ -24,6 +25,7 @@ const appRoutes : Routes = [
             ]},
     {path:'user-mgmt', children: [
                 { path: 'login', canActivate: [RegisterLoginGuardService], component: UserLoginComponent },
+                { path: 'register', canActivate: [RegisterLoginGuardService], component: UserRegisterComponent },
                 { path:'user', canActivate: [AuthGuardService], component: UserComponent, children: [
                     { path:'user-profile/:username', component: UserProfileComponent },
                     { path:'user-settings/:username', component: UserSettingsComponent }]}

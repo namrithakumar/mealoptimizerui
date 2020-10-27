@@ -46,4 +46,8 @@ export class UserLoginComponent implements OnInit {
     this.userService.logout();
     this.router.navigate(['/app-info','home']);
   }
+
+  switchToRegister() {
+    this.router.navigate(['/user-mgmt','register']);
+  }
 }

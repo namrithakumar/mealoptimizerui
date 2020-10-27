@@ -42,6 +42,7 @@ import { ManageMealPlanComponent } from './meal-optimizer/meal-selector/manage-m
 import { AuthInterceptor } from './shared/services/interceptor/auth-interceptor.service';
 import { DatePipe } from '@angular/common';
 import { from } from 'rxjs';
+import { UserRegisterComponent } from './user-mgmt/user-register-login/user-register/user-register.component';
 
 @NgModule({
   declarations: [
@@ -75,7 +76,8 @@ import { from } from 'rxjs';
     ErrorPageComponent,
     RecipeStartComponent,
     UserComponent,
-    ManageMealPlanComponent
+    ManageMealPlanComponent,
+    UserRegisterComponent
   ],
   imports: [
     BrowserModule,
