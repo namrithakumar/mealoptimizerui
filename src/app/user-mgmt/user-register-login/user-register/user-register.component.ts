@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { Nutrient } from 'src/app/shared/model/nutrient.model';
+import { UserService } from 'src/app/shared/services/user.service';
 
 @Component({
   selector: 'app-user-register',
@@ -10,13 +12,16 @@ export class UserRegisterComponent implements OnInit {
 
   signupForm : FormGroup;
 
-  nutrientNames = ['carbs', 'protein', 'fat', 'calories', 'sodium', 'calcium'];
+  defaultNutrientLimits : Nutrient[];
 
   get nutrients() { return this.signupForm.get('nutrients') as FormArray; }
 
-  constructor(private formBuilder : FormBuilder) { }
+  constructor(private formBuilder : FormBuilder, private userService : UserService) { }
 
   ngOnInit(): void {
+
+    this.defaultNutrientLimits = this.userService.getDefaultNutrientLimits();
+    
     this.signupForm = this.formBuilder.group({
       personalInfo : this.formBuilder.group({
         fname : this.formBuilder.control('First name'),
@@ -31,14 +36,15 @@ export class UserRegisterComponent implements OnInit {
       nutrients : this.formBuilder.array([])
     });
     
-    this.nutrientNames.forEach((nutrientName) => this.addNutrient(nutrientName));
+    this.defaultNutrientLimits.forEach((nutrient) => this.addNutrient(nutrient.name, nutrient.min, nutrient.max, nutrient.unitOfMeasure));
   }
 
-  private addNutrient(nutrientName : String) {
+  private addNutrient(nutrientName : String, min : number, max : number, unitOfMeasure : String) {
     this.nutrients.push(this.formBuilder.group({
       name : nutrientName,
-      min : 5,
-      max : 2000
+      min : min,
+      max : max,
+      unitOfMeasure : unitOfMeasure
     }));
   }
 
