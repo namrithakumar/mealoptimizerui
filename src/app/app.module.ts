@@ -42,7 +42,6 @@ import { ManageMealPlanComponent } from './meal-optimizer/meal-selector/manage-m
 import { AuthInterceptor } from './shared/services/interceptor/auth-interceptor.service';
 import { DatePipe } from '@angular/common';
 import { UserRegisterComponent } from './user-mgmt/user-register-login/user-register/user-register.component';
-import { LabelControl } from './shared/directive/label-control.directive';
 
 @NgModule({
   declarations: [
@@ -77,8 +76,7 @@ import { LabelControl } from './shared/directive/label-control.directive';
     RecipeStartComponent,
     UserComponent,
     ManageMealPlanComponent,
-    UserRegisterComponent,
-    LabelControl
+    UserRegisterComponent
   ],
   imports: [
     BrowserModule,
