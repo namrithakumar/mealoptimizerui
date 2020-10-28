@@ -41,8 +41,8 @@ import { UserComponent } from './user-mgmt/user/user.component';
 import { ManageMealPlanComponent } from './meal-optimizer/meal-selector/manage-meal-plan/manage-meal-plan.component';
 import { AuthInterceptor } from './shared/services/interceptor/auth-interceptor.service';
 import { DatePipe } from '@angular/common';
-import { from } from 'rxjs';
 import { UserRegisterComponent } from './user-mgmt/user-register-login/user-register/user-register.component';
+import { LabelControl } from './shared/directive/label-control.directive';
 
 @NgModule({
   declarations: [
@@ -77,7 +77,8 @@ import { UserRegisterComponent } from './user-mgmt/user-register-login/user-regi
     RecipeStartComponent,
     UserComponent,
     ManageMealPlanComponent,
-    UserRegisterComponent
+    UserRegisterComponent,
+    LabelControl
   ],
   imports: [
     BrowserModule,
