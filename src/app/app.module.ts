@@ -42,6 +42,7 @@ import { ManageMealPlanComponent } from './meal-optimizer/meal-selector/manage-m
 import { AuthInterceptor } from './shared/services/interceptor/auth-interceptor.service';
 import { DatePipe } from '@angular/common';
 import { UserRegisterComponent } from './user-mgmt/user-register-login/user-register/user-register.component';
+import { AppLoadingSpinnerComponent } from './shared/app-loading-spinner/app-loading-spinner.component';
 
 @NgModule({
   declarations: [
@@ -76,7 +77,8 @@ import { UserRegisterComponent } from './user-mgmt/user-register-login/user-regi
     RecipeStartComponent,
     UserComponent,
     ManageMealPlanComponent,
-    UserRegisterComponent
+    UserRegisterComponent,
+    AppLoadingSpinnerComponent
   ],
   imports: [
     BrowserModule,

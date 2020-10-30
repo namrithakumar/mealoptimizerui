@@ -1,8 +1,10 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { Meal } from 'src/app/shared/model/order/order-response.model';
+import { MealPlanService } from 'src/app/shared/services/http/meal-plan.service';
 import { OptimizationService } from 'src/app/shared/services/optimization.service';
 import { UserInputService } from 'src/app/shared/services/user-input.service';
+import { OptimizationStatus } from '../../../shared/services/optimization-status.enum';
 
 @Component({
   selector: 'app-optimized-results-table',
@@ -17,20 +19,33 @@ export class OptimizedResultsTableComponent implements OnInit, OnDestroy {
   costOptimizationSub : Subscription;
   qualityOptimizationSub : Subscription;
 
-  resultsPending : boolean = true;
+  optimizationStatus : OptimizationStatus;
+
+  optimizationStatusValues = OptimizationStatus;
+
+  optimizationStatusChangeSubscription : Subscription;
+  
+  resultsPending = true;
 
   constructor(private optimizationService : OptimizationService, private userInputService : UserInputService) { }
 
   ngOnInit(): void {
     
+    this.optimizationStatus = OptimizationStatus.NO_ACTION;
+
+    this.optimizationStatusChangeSubscription = this.optimizationService.optimizationStatusChange.subscribe((optimizationStatus : OptimizationStatus) => {
+      this.optimizationStatus = optimizationStatus;
+    });
+
     this.costOptimizationSub = this.optimizationService.onCostOptimizationComplete.subscribe((costOptimizedPlan) => {
-      this.costOptimizedPlan = costOptimizedPlan;
+      this.optimizationStatus = OptimizationStatus.RESPONSE_RECEIVED;
       this.resultsPending = false;
+      this.costOptimizedPlan = costOptimizedPlan;
     });
 
     this.qualityOptimizationSub = this.optimizationService.onQualityOptimizationComplete.subscribe((qualityOptimizedPlan) => {
+      this.optimizationStatus = OptimizationStatus.RESPONSE_RECEIVED;
       this.qualityOptimizedPlan = qualityOptimizedPlan;
-      this.resultsPending = false;
     });
   }
 
