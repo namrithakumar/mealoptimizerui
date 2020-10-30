@@ -1,31 +1,31 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
-import { AuthService } from 'src/app/shared/services/auth.service';
+import { UserService } from 'src/app/shared/services/user.service';
 
 @Component({
-  selector: 'app-user-register-login-logout',
-  templateUrl: './user-register-login-logout.component.html',
-  styleUrls: ['./user-register-login-logout.component.css']
+  selector: 'app-user-login',
+  templateUrl: './user-login.component.html',
+  styleUrls: ['./user-login.component.css']
 })
-export class UserRegisterLoginLogoutComponent implements OnInit {
+export class UserLoginComponent implements OnInit {
 
   @ViewChild('loginForm') loginForm: NgForm;
 
   error : String;
   isLoading : boolean;
 
-  constructor(private authService : AuthService, private router : Router) { }
+  constructor(private userService : UserService, private router : Router) { }
 
   ngOnInit(): void {
   }
 
   onLogin() : void {
-    this.authService
-    .login(this.loginForm.value.username, this.loginForm.value.password)
-    .subscribe(userData => {
-      this.isLoading = true;
-      this.router.navigate(['/meal-optimizer'], { queryParams: {mode: 'create'} });
+    this.userService
+      .login(this.loginForm.value.username, this.loginForm.value.password)
+      .subscribe(userData => {
+        this.isLoading = true;
+        this.router.navigate(['/meal-optimizer'], { queryParams: {mode: 'create'} });
     },
     error => {
       this.isLoading = false;
@@ -43,7 +43,11 @@ export class UserRegisterLoginLogoutComponent implements OnInit {
   }
 
   logout() : void {
-    this.authService.logout();
+    this.userService.logout();
     this.router.navigate(['/app-info','home']);
+  }
+
+  switchToRegister() {
+    this.router.navigate(['/user-mgmt','register']);
   }
 }

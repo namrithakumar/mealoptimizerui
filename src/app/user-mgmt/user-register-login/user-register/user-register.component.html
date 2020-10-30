@@ -1,0 +1,37 @@
+<div class="container">
+    <div class="row">
+        <div class="col-xs-12 col-sm-10 col-md-8 col-sm-offset-1 col-md-offset-2">
+            <form [formGroup]="signupForm">
+                <div class="form-group" formGroupName="personalInfo">
+                    <label for="fname">First name:</label>
+                    <input type="text" id="fname" class="form-control" formControlName="fname">
+                    <label for="lname">Last name:</label>
+                    <input type="text" id="lname" class="form-control" formControlName="lname">
+                    <label for="dob">Date of birth:</label>
+                    <input type="text" id="dob" class="form-control" formControlName="dob">
+                </div>
+                <div class="form-group" formGroupName="signupInfo">
+                    <label for="email">Email:</label>
+                    <input type="text" id="email" class="form-control" formControlName="email">
+                    <label for="username">Username:</label>
+                    <input type="text" id="username" class="form-control" formControlName="username"/>
+                    <label for="password">Password:</label>
+                    <input type="password" id="password" class="form-control" formControlName="password"/>
+                </div>
+                <div formArrayName="nutrients">
+                    <div class="form-group" *ngFor="let nutrient of nutrients.controls; let i = index">
+                        <div [formGroupName]="i">
+                            <div>
+                                <input [ngStyle]="{'background-color':'rgba(0,0,0,0)', 'border': 'none'}" formControlName="name" readonly/>
+                                <input type="number" formControlName="min"/>
+                                <input type="number" formControlName="max"/>
+                                <input [ngStyle]="{'background-color':'rgba(0,0,0,0)', 'border': 'none'}" formControlName="unitOfMeasure"/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <button type="button" (click) = "viewFormInfo()">View form Info</button>
+            </form>
+        </div>
+    </div>
+</div>

@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
-import { AuthService } from '../shared/services/auth.service';
+import { UserService } from '../shared/services/user.service';
 import { DisplayService } from '../shared/services/display.service';
 import { Router } from '@angular/router';
+import { User } from '../shared/user.model';
 
 @Component({
     selector: 'app-header',
@@ -9,7 +10,7 @@ import { Router } from '@angular/router';
     
 })
 export class HeaderComponent {
-    constructor(private authService : AuthService, private displayService : DisplayService, private router: Router) {}
+    constructor(private userService : UserService, private displayService : DisplayService, private router: Router) {}
 
     viewMealPlanner() : void {
         this.router.navigate(['/meal-optimizer'], { queryParams: {mode: 'create'} });
@@ -20,7 +21,10 @@ export class HeaderComponent {
     }
 
     getDisplayName() : String {
-        return this.authService.getDisplayName();
+        this.userService.user.subscribe((user : User) => {
+            return (user) ? user.username : 'Guest';
+        });
+        return 'Guest';
     }
 
     viewProfile() : void {
@@ -32,7 +36,7 @@ export class HeaderComponent {
     }
 
     logout() : void {
-        this.authService.logout();
+        this.userService.logout();
         this.router.navigate(['/app-info','home']);
     }
 }

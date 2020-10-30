@@ -31,8 +31,8 @@ import { RecipeItemComponent } from './meal-optimizer/recipes/recipe-list/recipe
 import { AppInfoComponent } from './app-info/app-info.component';
 import { HomeComponent } from './app-info/home/home.component';
 import { ContactUsComponent } from './app-info/contact-us/contact-us.component';
+import { UserLoginComponent } from './user-mgmt/user-register-login/user-login/user-login.component';
 import { UserMgmtComponent } from './user-mgmt/user-mgmt.component';
-import { UserRegisterLoginLogoutComponent } from './user-mgmt/user-register-login-logout/user-register-login-logout.component';
 import { UserProfileComponent } from './user-mgmt/user-profile/user-profile.component';
 import { UserSettingsComponent } from './user-mgmt/user-settings/user-settings.component';
 import { ErrorPageComponent } from './shared/error-page/error-page.component';
@@ -41,6 +41,7 @@ import { UserComponent } from './user-mgmt/user/user.component';
 import { ManageMealPlanComponent } from './meal-optimizer/meal-selector/manage-meal-plan/manage-meal-plan.component';
 import { AuthInterceptor } from './shared/services/interceptor/auth-interceptor.service';
 import { DatePipe } from '@angular/common';
+import { UserRegisterComponent } from './user-mgmt/user-register-login/user-register/user-register.component';
 
 @NgModule({
   declarations: [
@@ -68,13 +69,14 @@ import { DatePipe } from '@angular/common';
     HomeComponent,
     ContactUsComponent,
     UserMgmtComponent,
-    UserRegisterLoginLogoutComponent,
+    UserLoginComponent,
     UserProfileComponent,
     UserSettingsComponent,
     ErrorPageComponent,
     RecipeStartComponent,
     UserComponent,
-    ManageMealPlanComponent
+    ManageMealPlanComponent,
+    UserRegisterComponent
   ],
   imports: [
     BrowserModule,

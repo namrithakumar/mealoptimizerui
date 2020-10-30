@@ -10,7 +10,7 @@
         <a class="nav-link" routerLink="/app-info/contact-us">Contact us</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" routerLink="/user-mgmt/register-login" [hidden] = "!getHideUserOptions()">Register/Login</a>
+        <a class="nav-link" routerLink="/user-mgmt/login" [hidden] = "!getHideUserOptions()">Register/Login</a>
       </li>
       <li class="nav-item">
         <a class="nav-link" [routerLink]="['/meal-optimizer']" [queryParams] = "{mode : 'create' }">Meal Planner</a>

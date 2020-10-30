@@ -14,6 +14,6 @@ export class HomeComponent implements OnInit {
   }
 
   goToLogin() : void {
-    this.router.navigate(['/user-mgmt','register-login']);
+    this.router.navigate(['/user-mgmt','login']);
   }
 }
