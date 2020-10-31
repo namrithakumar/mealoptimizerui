@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
 import { Meal } from '../model/order/order-response.model';
 import { OrderResponse } from '../model/order/order-response.model';
+import { MealPlanService } from './http/meal-plan.service';
+import { OptimizationStatus } from './optimization-status.enum';
 import { UserInputService } from './user-input.service';
 
 @Injectable({providedIn:'root'})
@@ -14,7 +16,9 @@ export class OptimizationService {
     onCostOptimizationComplete = new Subject< { mealListByCost : Meal[], planCost: number } >();
     onQualityOptimizationComplete = new Subject< { mealListByQuality : Meal[], planCost: number } >();
 
-    constructor(private userInputService:UserInputService) {}
+    optimizationStatusChange = new Subject<OptimizationStatus>();
+
+    constructor(private userInputService:UserInputService, private mealPlanService:  MealPlanService) {}
 
     getOptimizationResultSummary() : {totalCost: number, totalCalories: number} {
         return { totalCost: 39.9, totalCalories: 1938};
@@ -39,6 +43,11 @@ export class OptimizationService {
         }
         return portionCount;
     }
+
+    getMealPlan(orderRequest :{ deliveryDate : Date ,mealSelected : Array<String>, optimizationTypes: Array<String> }) {
+        this.optimizationStatusChange.next(OptimizationStatus.REQUEST_SENT);
+        return this.mealPlanService.getMealPlan(orderRequest);
+      }
 
     setOptimizedMealPlans(orderResponse : OrderResponse) {
         orderResponse.mealPlan.forEach((mealPlan) => {

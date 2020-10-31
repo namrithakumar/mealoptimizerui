@@ -8,6 +8,10 @@ import { DisplayService } from 'src/app/shared/services/display.service';
 import { MealPlanService } from '../../../shared/services/http/meal-plan.service';
 import { OrderResponse } from 'src/app/shared/model/order/order-response.model';
 import { OptimizationService } from 'src/app/shared/services/optimization.service';
+import { HttpEvent, HttpEventType } from '@angular/common/http';
+import { take, tap } from 'rxjs/operators';
+import { UserService } from 'src/app/shared/services/user.service';
+import { User } from 'src/app/shared/user.model';
 
 @Component({
   selector: 'app-manage-meal-plan',
@@ -31,7 +35,7 @@ export class ManageMealPlanComponent implements OnInit, OnDestroy {
   orderRequest : any;
 
   constructor(private userInputService : UserInputService, private router : Router, private route:ActivatedRoute, private orderService : OrderService, private displayService : DisplayService,
-    private mealPlanService : MealPlanService, private optimizationService : OptimizationService) { }
+    private userService : UserService, private optimizationService : OptimizationService) { }
 
   ngOnInit(): void {
         // Get value of mode (create or edit)
@@ -54,12 +58,13 @@ export class ManageMealPlanComponent implements OnInit, OnDestroy {
     this.displayService.canCollapseMealList = true;
     if(this.userInputService.verifyAllInputsReceived()) {
       //If all inputs are received, create the order
-      this.orderRequest = this.orderService.createOrderRequest(this.userInputService.userInput.deliveryDate, this.userInputService.userInput.mealSelected);    
+      this.orderRequest = this.orderService.createOrderRequest(this.userInputService.userInput.deliveryDate, this.userInputService.userInput.mealSelected, this.userService.user.getValue());    
       //Setup an observable to track any changes in the order
        this.orderService.orderObservableSubject.next(this.orderService.orderRequest);
       //Call backend to get a meal plan
-      this.mealPlanService.getMealPlan(this.orderRequest).subscribe(
-        (responseData:OrderResponse) => {
+      this.optimizationService.getMealPlan(this.orderRequest)
+      .subscribe(
+        (responseData : OrderResponse) => {
           this.optimizationService.setOptimizedMealPlans(responseData);
         }
       );

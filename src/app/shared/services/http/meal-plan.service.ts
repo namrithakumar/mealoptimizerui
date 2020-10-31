@@ -1,5 +1,6 @@
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { tap } from 'rxjs/operators';
 import { OrderResponse } from '../../model/order/order-response.model';
 
 @Injectable({ providedIn : 'root'})
