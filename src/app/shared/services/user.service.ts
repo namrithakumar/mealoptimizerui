@@ -1,9 +1,10 @@
 import { Injectable } from "@angular/core";
-import { BehaviorSubject } from "rxjs";
+import { BehaviorSubject, Observable, throwError } from "rxjs";
 import { AuthService } from "../services/http/auth.service";
 import { User } from "../user.model";
-import { tap } from "rxjs/operators";
+import { catchError, tap } from "rxjs/operators";
 import { Nutrient } from "../model/nutrient.model";
+import { HttpClient } from '@angular/common/http';
 
 @Injectable({ providedIn : 'root' })
 export class UserService {
@@ -12,7 +13,7 @@ export class UserService {
 
     user = new BehaviorSubject<User>(null);
 
-    constructor(private authService : AuthService) {}
+    constructor(private authService : AuthService, private http : HttpClient) {}
 
     login(username:String, password: String) {
         return this.authService.login(username, password).pipe( 
@@ -23,6 +24,16 @@ export class UserService {
 
     logout() : void {
         this.userDisplayName = 'Guest';
+    }
+
+    fetchAllUsernames() : Observable<Array<String>> {
+        console.log('Sent request to get all usernames');
+        const url = 'http://localhost:9090/mealoptimizer/user/fetchAllUsernames';
+        return this.http.get<String[]>(url).pipe(
+            catchError((errorRes : any) => {
+                return throwError(errorRes.error.error + errorRes.error.message);
+            })
+        );
     }
 
     getDefaultNutrientLimits() : Nutrient[] {

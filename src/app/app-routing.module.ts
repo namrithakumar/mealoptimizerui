@@ -16,7 +16,7 @@ import { UseDietTypeResolver } from './shared/services/user-diet-type-resolver.s
 import { OnlineOrderComponent } from './meal-optimizer/online-order/online-order.component';
 import { RecipesComponent } from './meal-optimizer/recipes/recipes.component';
 import { RecipeDetailComponent } from './meal-optimizer/recipes/recipe-detail/recipe-detail.component';
-import { UserComponent } from './user-mgmt/user/user.component';
+import { UsernameResolver } from './shared/services/username-resolver.service';
 
 const appRoutes : Routes = [
     {path:'app-info', children: [
@@ -25,7 +25,7 @@ const appRoutes : Routes = [
             ]},
     {path:'user-mgmt', children: [
                 { path: 'login', canActivate: [RegisterLoginGuardService], component: UserLoginComponent },
-                { path: 'register', canActivate: [RegisterLoginGuardService], component: UserRegisterComponent },
+                { path: 'register', canActivate: [RegisterLoginGuardService], resolve:{usernames: UsernameResolver},component: UserRegisterComponent },
                 { path:'user', canActivate: [AuthGuardService], children: [
                     { path:'user-profile', component: UserProfileComponent }]}
             ]},
