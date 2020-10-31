@@ -27,12 +27,8 @@ export class HeaderComponent {
         return 'Guest';
     }
 
-    viewProfile() : void {
-        //this.router.navigate(['/user-mgmt','user','user-profile', this.userService.user.username], { queryParams: {mode: 'view'} });
-    }
-
-    modifySettings() : void {
-        //this.router.navigate(['/user-mgmt','user','user-settings', this.userService.user.username], { queryParams: {mode: 'edit'} });
+    viewOrModifyProfile() : void {
+        this.router.navigate(['/user-mgmt','user','user-profile'], { queryParams: {mode: 'view'} });
     }
 
     logout() : void {

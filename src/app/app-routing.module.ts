@@ -26,9 +26,8 @@ const appRoutes : Routes = [
     {path:'user-mgmt', children: [
                 { path: 'login', canActivate: [RegisterLoginGuardService], component: UserLoginComponent },
                 { path: 'register', canActivate: [RegisterLoginGuardService], component: UserRegisterComponent },
-                { path:'user', canActivate: [AuthGuardService], component: UserComponent, children: [
-                    { path:'user-profile/:username', component: UserProfileComponent },
-                    { path:'user-settings/:username', component: UserSettingsComponent }]}
+                { path:'user', canActivate: [AuthGuardService], children: [
+                    { path:'user-profile', component: UserProfileComponent }]}
             ]},
     {path:'meal-optimizer', canDeactivate: [CanExitPageService], component: MealOptimizerComponent, resolve:{userDietTypes: UseDietTypeResolver}, children: [
         {path:'online-order', component: OnlineOrderComponent },
