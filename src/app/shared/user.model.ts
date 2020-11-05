@@ -1,18 +1,23 @@
 export class User {
-    constructor(
-        public id: number,
-        public username: String,
-        public email : String, 
-        public preferredDietType : String,
-        public nutrientMinLimits : Array<{String, number}>,
-        public nutrientMaxLimits : Array<{String, number}>,
-        private _token : String,
-        private _tokenValidTime : number) {}
+    public id: number;
+    public username: String;
+    public email : String; 
+    public preferredDietType : String;
+    public nutrientMinLimits : Array<{String, number}>;
+    public nutrientMaxLimits : Array<{String, number}>;
+    public token : String;
+    public tokenValidTime : number;
+    public tokenExpiryDate? : Date;
 
-        //Getter for token. Can be accesses as user.token. _token cannot be accessed directly since it is private.
-        get token() : String | null {
-            let tokenExpirationDate = new Date(new Date().getTime() + this._tokenValidTime);
-            if(tokenExpirationDate > new Date()) return this._token;
-            else return null;
-        }
+    constructor(id:number, username:String, email:String, preferredDietType:String, nutrientMinLimits : Array<{String, number}>, nutrientMaxLimits : Array<{String, number}>, token : String, tokenValidTime : number, tokenExpiryDate? : Date) {
+        this.id = id;
+        this.username = username;
+        this.email = email;
+        this.preferredDietType = preferredDietType;
+        this.nutrientMaxLimits = nutrientMaxLimits;
+        this.nutrientMinLimits = nutrientMinLimits;
+        this.token = token;
+        this.tokenValidTime = tokenValidTime;
+        this.tokenExpiryDate = tokenExpiryDate;
+    }
 }
