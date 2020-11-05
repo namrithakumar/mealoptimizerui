@@ -25,7 +25,7 @@ const appRoutes : Routes = [
             ]},
     {path:'user-mgmt', children: [
                 { path: 'login', canActivate: [RegisterLoginGuardService], component: UserLoginComponent },
-                { path: 'register', canActivate: [RegisterLoginGuardService], resolve:{usernames: UsernameResolver},component: UserRegisterComponent },
+                { path: 'register', canActivate: [RegisterLoginGuardService], resolve:{ usernames : UsernameResolver, dietTypes : UseDietTypeResolver },component: UserRegisterComponent },
                 { path:'user', canActivate: [AuthGuardService], children: [
                     { path:'user-profile', component: UserProfileComponent }]}
             ]},

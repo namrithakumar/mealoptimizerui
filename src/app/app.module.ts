@@ -43,6 +43,7 @@ import { AuthInterceptor } from './shared/services/interceptor/auth-interceptor.
 import { DatePipe } from '@angular/common';
 import { UserRegisterComponent } from './user-mgmt/user-register-login/user-register/user-register.component';
 import { AppLoadingSpinnerComponent } from './shared/app-loading-spinner/app-loading-spinner.component';
+import { JwtHelperService, JWT_OPTIONS  } from '@auth0/angular-jwt';
 
 @NgModule({
   declarations: [
@@ -93,7 +94,9 @@ import { AppLoadingSpinnerComponent } from './shared/app-loading-spinner/app-loa
     })    
   ],
   providers: [DatePipe, 
-              { provide : HTTP_INTERCEPTORS, useClass : AuthInterceptor, multi : true}],
+              { provide : HTTP_INTERCEPTORS, useClass : AuthInterceptor, multi : true},
+              { provide: JWT_OPTIONS, useValue: JWT_OPTIONS },
+              JwtHelperService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

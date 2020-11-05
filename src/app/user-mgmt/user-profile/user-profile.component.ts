@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router, Params } from '@angular/router';
 import { UserService } from 'src/app/shared/services/user.service';
-import { User } from '../../shared/user.model';
+import { User } from 'src/app/shared/user.model';
 
 @Component({
   selector: 'app-user-profile',
@@ -40,12 +40,11 @@ export class UserProfileComponent implements OnInit {
       });
 
       this.signupForm.valueChanges.subscribe((value) => {
-        console.log(this.signupForm);
         this.onEditUserProfile();
       });
   }
 
-  mergeNutrientMinMaxLimits(nutrientMaxLimits : Array<{ String, number }>, nutrientMinLimits : Array<{ String, number }>) {
+  mergeNutrientMinMaxLimits(nutrientMaxLimits : Array<{String, number}>, nutrientMinLimits : Array<{String, number}>) {
     let mergedArrayNoKeys : Array<{String, number}> = 
     Object.values(nutrientMinLimits).map( (nutrientMin,i) => Object.assign( {}, nutrientMin, nutrientMaxLimits[i]));
     let mergedArray = new Array<{ name : String, min:Number, max:number }>();

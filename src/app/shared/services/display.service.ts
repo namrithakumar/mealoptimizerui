@@ -27,8 +27,4 @@ export class DisplayService {
                 this.userInputService.optimizationTypeSelected === 'optimizedByQuality');
     }
 
-    getHideUserOptions() : boolean {
-        //return !(this.authService.loggedIn);
-        return false;
-    }
 }

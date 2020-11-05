@@ -1,15 +1,8 @@
 <div class="container">
     <div class="row">
         <div class="col-xs-12 col-sm-10 col-md-8 col-sm-offset-1 col-md-offset-2">
-            <form [formGroup]="signupForm">
-                <div class="form-group" formGroupName="personalInfo">
-                    <label for="fname">First name:</label>
-                    <input type="text" id="fname" class="form-control" formControlName="fname">
-                    <label for="lname">Last name:</label>
-                    <input type="text" id="lname" class="form-control" formControlName="lname">
-                    <label for="dob">Date of birth:</label>
-                    <input type="text" id="dob" class="form-control" formControlName="dob">
-                </div>
+            <form [formGroup]="signupForm" (ngSubmit)="signup()">
+                <div *ngIf="error">Sorry an error occurred : {{ error }}</div>
                 <div class="form-group" formGroupName="signupInfo">
                     <label for="email">Email:</label>
                     <input type="text" id="email" class="form-control" formControlName="email">
@@ -27,6 +20,10 @@
                         <span class="help-block" *ngIf="signupForm.get('signupInfo.password').errors && signupForm.get('signupInfo.password').errors[validation.type] && (signupForm.get('signupInfo.password').dirty || signupForm.get('signupInfo.password').touched)">{{ validation.message }}</span>
                     </div>  
                 </div>
+                <label for="dietType">Preferred diet type:</label>
+                <select id="dietType" class="form-control" formControlName="preferredDietType">
+                    <option *ngFor="let diet of dietTypes" [value]="diet.dietType" [id]="diet.dietType">{{ diet.displayValue }}</option>
+                </select>
                 <div formArrayName="nutrients">
                     <div class="form-group" *ngFor="let nutrient of nutrients.controls; let i = index">
                         <div [formGroupName]="i">
@@ -39,7 +36,7 @@
                         </div>
                     </div>
                 </div>
-                <button type="button" (click) = "viewFormInfo()">View form Info</button>
+                <button type="submit" [disabled] = "!signupForm.valid">Sign up</button>
             </form>
         </div>
     </div>

@@ -10,7 +10,7 @@
         <a class="nav-link" routerLink="/app-info/contact-us">Contact us</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" routerLink="/user-mgmt/login" [hidden] = "!getHideUserOptions()">Register/Login</a>
+        <a class="nav-link" routerLink="/user-mgmt/login" [hidden] = "authenticatedUser">Register/Login</a>
       </li>
       <li class="nav-item">
         <a class="nav-link" [routerLink]="['/meal-optimizer']" [queryParams] = "{mode : 'create' }">Meal Planner</a>
@@ -18,9 +18,9 @@
       <!-- Dropdown -->
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" id="navbardrop" data-toggle="dropdown" routerLink="/user-mgmt/user">
-          {{getDisplayName()}}
+          {{ authenticatedUser? authenticatedUser.username : 'Guest' }}
         </a>
-        <div class="dropdown-menu" [hidden] = "getHideUserOptions()">
+        <div class="dropdown-menu" [hidden] = "!authenticatedUser">
           <a class="dropdown-item" (click)="viewOrModifyProfile()">Profile</a>
           <a class="dropdown-item" (click)="logout()">Logout</a>
         </div>

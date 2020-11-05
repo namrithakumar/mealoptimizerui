@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { UserService } from '../shared/services/user.service';
 import { DisplayService } from '../shared/services/display.service';
 import { Router } from '@angular/router';
@@ -9,22 +9,20 @@ import { User } from '../shared/user.model';
     templateUrl: './header.component.html'
     
 })
-export class HeaderComponent {
+export class HeaderComponent implements OnInit {
+    
+    authenticatedUser : User;
+
     constructor(private userService : UserService, private displayService : DisplayService, private router: Router) {}
+
+    ngOnInit(){
+        this.userService.user.subscribe((user : User) => {
+            this.authenticatedUser = user;
+        });
+    }
 
     viewMealPlanner() : void {
         this.router.navigate(['/meal-optimizer'], { queryParams: {mode: 'create'} });
-    }
-
-    getHideUserOptions() : boolean {
-        return this.displayService.getHideUserOptions();
-    }
-
-    getDisplayName() : String {
-        this.userService.user.subscribe((user : User) => {
-            return (user) ? user.username : 'Guest';
-        });
-        return 'Guest';
     }
 
     viewOrModifyProfile() : void {

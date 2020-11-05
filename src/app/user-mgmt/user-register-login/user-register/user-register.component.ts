@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Nutrient } from 'src/app/shared/model/nutrient.model';
+import { IUserDietType } from 'src/app/shared/services/user-diet-type-resolver.service';
 import { UserService } from 'src/app/shared/services/user.service';
 
 @Component({
@@ -17,8 +18,15 @@ export class UserRegisterComponent implements OnInit {
 
   unavailableUsernames : String[];
 
-  passwordPattern : any = '^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])[A-Za-z\d$@$!%?&]{6,10}$';
+  passwordPattern : string = "^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])[A-Za-z0-9$@$!%*?&]+$";
+//^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])[A-Za-z0-9$@$!%*?&].{3,7}$
 
+  dietTypes : Array<IUserDietType>;
+
+  nutrientInitialLimits = new Array<FormGroup>();
+
+  error : String;
+  
   account_validation_messages = {
     'username': [
       { type: 'required', message: 'Username is required' },
@@ -33,8 +41,11 @@ export class UserRegisterComponent implements OnInit {
     'password': [
       { type: 'required', message: 'Password is required' },
       { type: 'minlength', message: 'Password must be at least 6 characters long' },
-      { type: 'maxlength', message: 'Password must be utmost 10 characters long' },
+      { type: 'maxlength', message: 'Password must be utmost 8 characters long' },
       { type: 'pattern', message: 'Your password must contain at least one uppercase, one lowercase, and one number' }
+    ],
+    'preferredDietType' : [
+      { type: 'required', message: 'Value is required' }
     ],
     'nutrients': [
       { type: 'required', message: 'Value is required' },
@@ -45,41 +56,43 @@ export class UserRegisterComponent implements OnInit {
   
   get nutrients() { return this.signupForm.get('nutrients') as FormArray; }
 
-  constructor(private formBuilder : FormBuilder, private userService : UserService, private route: ActivatedRoute) { }
+  constructor(private formBuilder : FormBuilder, private userService : UserService, private route: ActivatedRoute, private router : Router) { }
 
   ngOnInit(): void {
 
     this.route.data.subscribe(data => {
       this.unavailableUsernames = data['usernames'];
-      console.log('Username received');
+    });
+
+    this.route.data.subscribe(data => {
+      this.dietTypes = data['dietTypes'];
     });
 
     this.defaultNutrientLimits = this.userService.getDefaultNutrientLimits();
     
+    this.defaultNutrientLimits.forEach((nutrient) => {
+      this.nutrientInitialLimits.push(this.addNutrient(nutrient.name, nutrient.min, nutrient.max, nutrient.unitOfMeasure));
+      
+    });
+
     this.signupForm = this.formBuilder.group({
-      personalInfo : this.formBuilder.group({
-        fname : this.formBuilder.control('First name'),
-        lname : this.formBuilder.control('Last name'),
-        dob : this.formBuilder.control('DOB')
-      }),
       signupInfo : this.formBuilder.group({
         email  : this.formBuilder.control('email', [Validators.required, Validators.email]),
         username : this.formBuilder.control('username', [Validators.required, Validators.minLength(2), Validators.maxLength(20), this.checkUsernameAvailability.bind(this)]),
-        password : this.formBuilder.control(null, [Validators.required, Validators.minLength(6), Validators.maxLength(10), Validators.pattern(this.passwordPattern)])
+        password : this.formBuilder.control(null, [Validators.required, Validators.minLength(6), Validators.maxLength(8), Validators.pattern(this.passwordPattern)])
       }),
-      nutrients : this.formBuilder.array([], [Validators.required, Validators.min(1), Validators.max(3000)])
+      preferredDietType : this.formBuilder.control(null, Validators.required),
+      nutrients : this.formBuilder.array(this.nutrientInitialLimits, [Validators.required, Validators.min(1), Validators.max(3000)])
     });
-    
-    this.defaultNutrientLimits.forEach((nutrient) => this.addNutrient(nutrient.name, nutrient.min, nutrient.max, nutrient.unitOfMeasure));
   }
 
-  private addNutrient(nutrientName : String, min : number, max : number, unitOfMeasure : String) {
-    this.nutrients.push(this.formBuilder.group({
+  private addNutrient(nutrientName : String, min : number, max : number, unitOfMeasure : String) : FormGroup {
+    return this.formBuilder.group({
       name : nutrientName,
       min : min,
       max : max,
       unitOfMeasure : unitOfMeasure
-    }));
+    });
   }
 
   private checkUsernameAvailability(control:FormControl) : { usernameIsUnavailable : boolean } {
@@ -88,11 +101,13 @@ export class UserRegisterComponent implements OnInit {
     else return null;
   }
 
-  viewFormInfo() {
-    this.nutrients.value.forEach((nutrient) => {
-      console.log(nutrient.name);
-      console.log(nutrient.min);
-      console.log(nutrient.max);
-    });
+  signup() {
+    let signupRequest = this.userService.createUserRequest(this.signupForm.value);
+    this.userService.signup(signupRequest).subscribe(userData => {
+      this.router.navigate(['/meal-optimizer'], { queryParams: {mode: 'create'} });
+    },
+    error => {
+      this.error = error;
+    }    );
   }
 }
