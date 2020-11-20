@@ -8,8 +8,11 @@ import {
     CalendarView, CalendarEvent,
   } from 'angular-calendar';
 
-import { UserInputService } from '../../shared/services/user-input.service';
 import { DisplayService } from 'src/app/shared/services/display.service';
+
+import { AppState } from 'src/app/store/reducers/app.reducer';
+import { Store } from '@ngrx/store';
+import * as UserPreferencesActions from '../store/actions/user-preferences.actions';
 
   @Component({
     selector: 'app-delivery-date-selector',
@@ -30,10 +33,11 @@ import { DisplayService } from 'src/app/shared/services/display.service';
 
     setCollapseInd : boolean = false;
 
-    constructor(private userInputService : UserInputService, private displayService : DisplayService) {}
+    constructor(private store : Store<AppState>, private displayService : DisplayService) {}
   
     dateOfDeliveryChosen({ date, events }: { date: Date; events: CalendarEvent[] }):void {
-      this.userInputService.updateUserInput(this.propertyName,date);
+      //this.userInputService.updateUserInput(this.propertyName,date);
+      this.store.dispatch(new UserPreferencesActions.EditDeliveryDate(date));
     }
   
     closeOpenMonthViewDay() {
@@ -43,8 +47,8 @@ import { DisplayService } from 'src/app/shared/services/display.service';
     @HostListener('mouseover', ['$event'])  
     @HostListener('mouseout', ['$event']) handleMouseEvent() {
       //Update collapse indicator only if delivery date is not empty
-        if(this.userInputService.userInput.deliveryDate !== undefined)
-            this.setCollapseInd = this.displayService.getCollapsibleInd(event.type);
+        //if(this.userInputService.userInput.deliveryDate !== undefined)
+        //    this.setCollapseInd = this.displayService.getCollapsibleInd(event.type);
     }
 
     ngOnInit() {
