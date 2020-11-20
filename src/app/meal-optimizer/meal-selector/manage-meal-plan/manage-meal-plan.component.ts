@@ -12,6 +12,9 @@ import { HttpEvent, HttpEventType } from '@angular/common/http';
 import { take, tap } from 'rxjs/operators';
 import { UserService } from 'src/app/shared/services/user.service';
 import { User } from 'src/app/shared/user.model';
+import { AppState } from 'src/app/store/reducers/app.reducer';
+import { Store } from '@ngrx/store';
+import { UserPreferences } from '../../store/reducers/user-preferences.reducer';
 
 @Component({
   selector: 'app-manage-meal-plan',
@@ -35,7 +38,7 @@ export class ManageMealPlanComponent implements OnInit, OnDestroy {
   orderRequest : any;
 
   constructor(private userInputService : UserInputService, private router : Router, private route:ActivatedRoute, private orderService : OrderService, private displayService : DisplayService,
-    private userService : UserService, private optimizationService : OptimizationService) { }
+    private userService : UserService, private optimizationService : OptimizationService, private store : Store<AppState>) { }
 
   ngOnInit(): void {
         // Get value of mode (create or edit)
