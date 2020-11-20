@@ -45,6 +45,12 @@ import { UserRegisterComponent } from './user-mgmt/user-register-login/user-regi
 import { AppLoadingSpinnerComponent } from './shared/app-loading-spinner/app-loading-spinner.component';
 import { JwtHelperService, JWT_OPTIONS  } from '@auth0/angular-jwt';
 
+import * as fromApp from '../app/store/reducers/app.reducer';
+import { StoreModule } from '@ngrx/store';
+import { EffectsModule } from '@ngrx/effects';
+import { UserEffects } from './meal-optimizer/store/effects/user.effects';
+import { MenuEffects } from './meal-optimizer/store/effects/menu.effects';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -91,7 +97,9 @@ import { JwtHelperService, JWT_OPTIONS  } from '@auth0/angular-jwt';
     CalendarModule.forRoot({
       provide: DateAdapter,
       useFactory: adapterFactory,
-    })    
+    }),
+    StoreModule.forRoot(fromApp.appReducer),
+    EffectsModule.forRoot([UserEffects, MenuEffects])    
   ],
   providers: [DatePipe, 
               { provide : HTTP_INTERCEPTORS, useClass : AuthInterceptor, multi : true},

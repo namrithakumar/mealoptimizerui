@@ -1,6 +1,9 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
+import { UserPreferences } from 'src/app/meal-optimizer/store/reducers/user-preferences.reducer';
+import { AppState } from 'src/app/store/reducers/app.reducer';
 
 @Injectable({providedIn:'root'})
 export class ItemService {
