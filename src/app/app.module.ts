@@ -23,22 +23,18 @@ import { MenuEffects } from '../app/meal-optimizer/store/effects/menu.effects';
 import { OrderEffects } from '../app/meal-optimizer/store/effects/order.effects';
 import { RecipesEffects } from '../app/recipes/store/effects/recipes.effects';
 import { UserMgmtEffects } from '../app/user-mgmt/store/effects/user-mgmt.effects';
-import { AppInfoComponent } from './app-info/app-info.component';
-import { HomeComponent } from './app-info/home/home.component';
-import { ContactUsComponent } from './app-info/contact-us/contact-us.component';
 import { HeaderComponent } from './header/header.component';
+import { AppInfoModule } from '../app/app-info/app-info.module';
 
 @NgModule({
   declarations: [
     AppComponent,
     ErrorPageComponent,
     AppLoadingSpinnerComponent,
-    AppInfoComponent,
-    HomeComponent,
-    ContactUsComponent,
     HeaderComponent
   ],
   imports: [
+    AppInfoModule,
     BrowserModule,
     BrowserAnimationsModule,
     FormsModule,
