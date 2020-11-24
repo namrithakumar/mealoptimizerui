@@ -1,6 +1,5 @@
 import { Injectable } from "@angular/core";
-import { BehaviorSubject, Observable, throwError } from "rxjs";
-import { AuthService } from "../services/http/auth.service";
+import { Observable, throwError } from "rxjs";
 import { UserSignUpRequest } from "../model/user-signup-request.model";
 import { catchError, tap } from "rxjs/operators";
 import { Nutrient } from "../model/nutrient.model";
@@ -12,35 +11,12 @@ import { JwtHelperService } from '@auth0/angular-jwt';
 @Injectable({ providedIn : 'root' })
 export class UserService {
     
-    user = new BehaviorSubject<User>(null);
-
     tokenExpirationTimer : number;
 
-    constructor(private authService : AuthService, private http : HttpClient, private router : Router, private jwtHelper:JwtHelperService) {}
-
-    login(username:String, password: String) {
-        return this.authService.login(username, password).pipe( 
-            tap((userData : User) => {
-                userData.tokenExpiryDate = new Date(new Date().getTime() + userData.tokenValidTime);
-                localStorage.setItem('userData' , JSON.stringify(userData));
-                this.user.next(userData);
-                this.autoLogout(userData.tokenValidTime);
-            }));
-    }
-
-    signup(userSignUpRequest : UserSignUpRequest) {
-        return this.authService.signup(userSignUpRequest).pipe(
-            tap((userData : User) => {
-                userData.tokenExpiryDate = new Date(new Date().getTime() + userData.tokenValidTime);
-                localStorage.setItem('userData' , JSON.stringify(userData));
-                this.user.next(userData);
-                this.autoLogout(userData.tokenValidTime); 
-            })
-        );
-    }
+    constructor(private http : HttpClient, private router : Router, private jwtHelper:JwtHelperService) {}
 
     logout() {
-        this.user.next(null);
+        //this.user.next(null);
         localStorage.removeItem('userData');
         if(this.tokenExpirationTimer) {
             clearTimeout(this.tokenExpirationTimer);
@@ -103,7 +79,6 @@ export class UserService {
     }
       else { 
         loadedUser = new User(userData.id, userData.username, userData.email, userData.preferredDietType, userData.nutrientMinLimits, userData.nutrientMaxLimits, userData.token, userData._tokenValidTime, userData.tokenExpiryDate);  
-        this.user.next(loadedUser);
         this.autoLogout(new Date(loadedUser.tokenExpiryDate).getTime() - new Date().getTime());
       }
     }

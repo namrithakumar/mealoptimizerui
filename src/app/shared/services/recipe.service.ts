@@ -1,29 +1,27 @@
-import { Injectable } from '@angular/core';
+import { Injectable, OnDestroy, OnInit } from '@angular/core';
 import { Recipe } from '../recipe.model';
-import { AuthService } from './http/auth.service';
-import { HttpClient, HttpParams } from '@angular/common/http';
-import { tap } from 'rxjs/operators';
-import { Observable } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
+import { AppState } from 'src/app/store/reducers/app.reducer';
+import { Store } from '@ngrx/store';
+import { Recipes } from 'src/app/recipes/store/reducers/recipes.reducer';
 
 @Injectable({providedIn:'root'})
-export class RecipeService {
+export class RecipeService implements OnInit, OnDestroy {
     
-  constructor(private authService : AuthService, private http : HttpClient) {}
+  constructor(private store : Store<AppState>, private http : HttpClient) {}
 
+  ngOnInit() {
+    this.store.select('recipes').subscribe((recipes : Recipes) => {
+      this.recipes = recipes.recipes.slice();
+    });
+  }
+  
   recipes: Recipe[] = [];
-
-    public getRecipes(itemNames : Array<String>) : Observable<Recipe[]> {
-      let url = 'http://localhost:9090/mealoptimizer/recipe/find';
-      let params = new HttpParams()
-                  .set('names', itemNames.toString());
-
-      return this.http.get<Recipe[]>(url, {params}).pipe(
-        tap(recipes => {
-            this.recipes = recipes;}));            
-    }
 
     public getRecipeById(id : number) : Recipe {
       var recipeList = this.recipes.slice();
       return recipeList[id];
     }
+
+  ngOnDestroy() {}
 }

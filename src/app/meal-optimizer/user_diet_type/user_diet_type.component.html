@@ -1,8 +1,0 @@
-<div *ngIf="!setCollapseInd"><h4><b><i>Step 1: Select diet type</i></b></h4></div>
-<div *ngIf="setCollapseInd"><h4><b><i>Step 1: Diet Type: {{userDietType}}</i></b></h4></div>
-    <div #collapsible [ngClass]="(setCollapseInd)?'collapse':'show'">
-        <div *ngFor="let dietType of dietTypes">
-                <input type="radio" [id]='dietType.dietType' [(ngModel)]="userDietType" name="user_diet_type" [value]="dietType.dietType" (click)="onDietTypeSelect(dietType.dietType)">{{dietType.displayValue}}<br/>
-        </div>
-</div>
-<hr/>

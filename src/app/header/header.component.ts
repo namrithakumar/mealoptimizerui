@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { UserService } from '../shared/services/user.service';
-import { DisplayService } from '../shared/services/display.service';
 import { Router } from '@angular/router';
-import { User } from '../shared/user.model';
+import { User } from '../shared/model/user.model';
+import { AppState } from '../store/reducers/app.reducer';
+import { Store } from '@ngrx/store';
+import { AuthenticatedUser } from '../user-mgmt/store/reducers/user-mgmt.reducer';
+import * as UserMgmtActions from '../user-mgmt/store/actions/user-mgmt.actions';
 
 @Component({
     selector: 'app-header',
@@ -13,11 +15,11 @@ export class HeaderComponent implements OnInit {
     
     authenticatedUser : User;
 
-    constructor(private userService : UserService, private displayService : DisplayService, private router: Router) {}
+    constructor(private store : Store<AppState>, private router: Router) {}
 
     ngOnInit(){
-        this.userService.user.subscribe((user : User) => {
-            this.authenticatedUser = user;
+        this.store.select('authenticatedUser').subscribe((authenticatedUser : AuthenticatedUser) => {
+            if(!authenticatedUser.error) this.authenticatedUser = authenticatedUser.user;
         });
     }
 
@@ -30,7 +32,7 @@ export class HeaderComponent implements OnInit {
     }
 
     logout() : void {
-        this.userService.logout();
+        this.store.dispatch(new UserMgmtActions.Logout());
         this.router.navigate(['/app-info','home']);
     }
 }
