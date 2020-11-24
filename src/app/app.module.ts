@@ -9,83 +9,34 @@ import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
-import { HeaderComponent } from './header/header.component';
-import { UserDietTypeComponent } from './meal-optimizer/user_diet_type/user_diet_type.component';
-import { DeliveryDateSelectorComponent } from './meal-optimizer/delivery-date-selector/delivery-date-selector.component';
-import { MealOptimizerComponent } from './meal-optimizer/meal-optimizer.component';
-import { MealSelectorComponent } from './meal-optimizer/meal-selector/meal-selector.component';
-import { OptimizedMealPlanComponent } from './meal-optimizer/optimized-meal-plan/optimized-meal-plan.component';
-import { OrderSummaryComponent } from './meal-optimizer/optimized-meal-plan/order-summary/order-summary.component';
-import { ShoppingListComponent } from './meal-optimizer/recipes/shopping-list/shopping-list.component';
-import { ShoppingEditComponent } from './meal-optimizer/recipes/shopping-list/shopping-edit/shopping-edit.component';
-import { RecipesComponent } from './meal-optimizer/recipes/recipes.component';
-import { RecipeListComponent } from './meal-optimizer/recipes/recipe-list/recipe-list.component';
-import { RecipeDetailComponent } from './meal-optimizer/recipes/recipe-detail/recipe-detail.component';
-import { MealOptionsComponent } from './meal-optimizer/meal-selector/meal-options/meal-options.component';
-import { OptimizedResultsTableComponent } from './meal-optimizer/optimized-meal-plan/optimized-results-table/optimized-results-table.component';
-import { OptimizedResultCostComponent } from './meal-optimizer/optimized-meal-plan/optimized-results-table/optimized-result-cost/optimized-result-cost.component';
-import { OptimizedResultQualityComponent } from './meal-optimizer/optimized-meal-plan/optimized-results-table/optimized-result-quality/optimized-result-quality.component';
-import { OrderInfoComponent } from './meal-optimizer/optimized-meal-plan/optimized-results-table/order-info/order-info.component';
-import { OnlineOrderComponent } from './meal-optimizer/online-order/online-order.component';
-import { RecipeItemComponent } from './meal-optimizer/recipes/recipe-list/recipe-item/recipe-item.component';
-import { AppInfoComponent } from './app-info/app-info.component';
-import { HomeComponent } from './app-info/home/home.component';
-import { ContactUsComponent } from './app-info/contact-us/contact-us.component';
-import { UserLoginComponent } from './user-mgmt/user-register-login/user-login/user-login.component';
-import { UserMgmtComponent } from './user-mgmt/user-mgmt.component';
-import { UserProfileComponent } from './user-mgmt/user-profile/user-profile.component';
-import { UserSettingsComponent } from './user-mgmt/user-settings/user-settings.component';
 import { ErrorPageComponent } from './shared/error-page/error-page.component';
-import { RecipeStartComponent } from './meal-optimizer/recipes/recipe-start/recipe-start.component';
-import { UserComponent } from './user-mgmt/user/user.component';
-import { ManageMealPlanComponent } from './meal-optimizer/meal-selector/manage-meal-plan/manage-meal-plan.component';
 import { AuthInterceptor } from './shared/services/interceptor/auth-interceptor.service';
 import { DatePipe } from '@angular/common';
-import { UserRegisterComponent } from './user-mgmt/user-register-login/user-register/user-register.component';
 import { AppLoadingSpinnerComponent } from './shared/app-loading-spinner/app-loading-spinner.component';
 import { JwtHelperService, JWT_OPTIONS  } from '@auth0/angular-jwt';
 
 import * as fromApp from '../app/store/reducers/app.reducer';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
-import { UserEffects } from './meal-optimizer/store/effects/user.effects';
-import { MenuEffects } from './meal-optimizer/store/effects/menu.effects';
+import { UserEffects } from '../app/meal-optimizer/store/effects/user.effects';
+import { MenuEffects } from '../app/meal-optimizer/store/effects/menu.effects';
+import { OrderEffects } from '../app/meal-optimizer/store/effects/order.effects';
+import { RecipesEffects } from '../app/recipes/store/effects/recipes.effects';
+import { UserMgmtEffects } from '../app/user-mgmt/store/effects/user-mgmt.effects';
+import { AppInfoComponent } from './app-info/app-info.component';
+import { HomeComponent } from './app-info/home/home.component';
+import { ContactUsComponent } from './app-info/contact-us/contact-us.component';
+import { HeaderComponent } from './header/header.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    HeaderComponent,
-    UserDietTypeComponent,
-    DeliveryDateSelectorComponent,
-    MealOptimizerComponent,
-    MealSelectorComponent,
-    OptimizedMealPlanComponent,
-    OrderSummaryComponent,
-    ShoppingListComponent,
-    ShoppingEditComponent,
-    RecipesComponent,
-    RecipeListComponent,
-    RecipeDetailComponent,
-    MealOptionsComponent,
-    OptimizedResultsTableComponent,
-    OptimizedResultCostComponent,
-    OptimizedResultQualityComponent,
-    OrderInfoComponent,
-    OnlineOrderComponent,
-    RecipeItemComponent,
+    ErrorPageComponent,
+    AppLoadingSpinnerComponent,
     AppInfoComponent,
     HomeComponent,
     ContactUsComponent,
-    UserMgmtComponent,
-    UserLoginComponent,
-    UserProfileComponent,
-    UserSettingsComponent,
-    ErrorPageComponent,
-    RecipeStartComponent,
-    UserComponent,
-    ManageMealPlanComponent,
-    UserRegisterComponent,
-    AppLoadingSpinnerComponent
+    HeaderComponent
   ],
   imports: [
     BrowserModule,
@@ -99,7 +50,7 @@ import { MenuEffects } from './meal-optimizer/store/effects/menu.effects';
       useFactory: adapterFactory,
     }),
     StoreModule.forRoot(fromApp.appReducer),
-    EffectsModule.forRoot([UserEffects, MenuEffects])    
+    EffectsModule.forRoot([UserEffects, MenuEffects, OrderEffects, RecipesEffects, UserMgmtEffects])    
   ],
   providers: [DatePipe, 
               { provide : HTTP_INTERCEPTORS, useClass : AuthInterceptor, multi : true},
@@ -107,4 +58,4 @@ import { MenuEffects } from './meal-optimizer/store/effects/menu.effects';
               JwtHelperService],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {}

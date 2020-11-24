@@ -1,6 +1,5 @@
 import { DatePipe } from '@angular/common';
 import { Injectable } from '@angular/core';
-import { Subject } from 'rxjs';
 import { User } from '../user.model';
 
 @Injectable({providedIn:'root'})
@@ -20,15 +19,4 @@ export class OrderService {
         
         return this.orderRequest;
     }
-
-    updateOrderInfo(property:String, value:any) {
-        if(this.orderRequest !== undefined) {
-            this.orderRequest[property.toString()] = value;
-            this.orderObservableSubject.next(this.orderRequest);
-        }
-    }
-
-    //Setup Observable to track changes in Order object
-        orderObservableSubject = new Subject<{ deliveryDate: String, mealSelected: Array<String>, optimizationTypes : Array<String> }>();
-        orderObservable = this.orderObservableSubject.asObservable();
 }

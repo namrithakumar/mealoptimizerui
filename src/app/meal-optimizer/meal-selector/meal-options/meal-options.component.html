@@ -1,5 +1,0 @@
-<div>
-<select [(ngModel)]="itemSelected" (change)="onMealSelected()">
-    <option *ngFor="let item of itemList" [value]="item" [ngStyle]="{'visibility':( item === defaultText ) ? 'hidden' : 'visible'}">{{ (item === undefined) ? defaultText:item }}</option>
-</select>
-</div>
