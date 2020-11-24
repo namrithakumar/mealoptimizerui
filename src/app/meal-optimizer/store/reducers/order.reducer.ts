@@ -1,4 +1,4 @@
-import { OrderResponse } from '../../../shared/model/order/order-response.model';
+import { OrderResponse } from '../../../shared/model/order-response.model';
 import { OptimizationStatus } from '../../../shared/services/optimization-status.enum';
 import * as OrderActions from '../actions/order.actions';
 

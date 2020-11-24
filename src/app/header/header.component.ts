@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { User } from '../shared/user.model';
+import { User } from '../shared/model/user.model';
 import { AppState } from '../store/reducers/app.reducer';
 import { Store } from '@ngrx/store';
 import { AuthenticatedUser } from '../user-mgmt/store/reducers/user-mgmt.reducer';
@@ -18,10 +18,9 @@ export class HeaderComponent implements OnInit {
     constructor(private store : Store<AppState>, private router: Router) {}
 
     ngOnInit(){
-        /*
         this.store.select('authenticatedUser').subscribe((authenticatedUser : AuthenticatedUser) => {
             if(!authenticatedUser.error) this.authenticatedUser = authenticatedUser.user;
-        });*/
+        });
     }
 
     viewMealPlanner() : void {

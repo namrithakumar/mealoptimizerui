@@ -1,4 +1,4 @@
-import { Recipe } from '../../../shared/recipe.model';
+import { Recipe } from '../../../shared/model/recipe.model';
 import * as RecipesActions from '../actions/recipes.actions';
 
 export interface Recipes {

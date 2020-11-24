@@ -1,4 +1,4 @@
-import { Quantity } from '../shared/model/quantity.model';
+import { Quantity } from '../model/quantity.model';
 
 export class Ingredient {
     public name : String;

@@ -1,4 +1,4 @@
-import { User } from "../../../shared/user.model";
+import { User } from "../../../shared/model/user.model";
 import * as UserMgmtActions from '../actions/user-mgmt.actions';
 
 export interface AuthenticatedUser {

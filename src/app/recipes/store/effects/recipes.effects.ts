@@ -4,7 +4,7 @@ import { Actions, Effect, ofType } from "@ngrx/effects";
 import { Store } from "@ngrx/store";
 import { of } from "rxjs";
 import { catchError, map, switchMap } from "rxjs/operators";
-import { Recipe } from "../../../shared/recipe.model";
+import { Recipe } from "../../../shared/model/recipe.model";
 import { AppState } from "../../../store/reducers/app.reducer";
 import * as RecipesActions from '../actions/recipes.actions';
 

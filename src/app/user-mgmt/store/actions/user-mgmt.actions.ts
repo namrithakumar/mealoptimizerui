@@ -1,7 +1,7 @@
 import { Action } from '@ngrx/store';
 
 import { UserSignUpRequest } from '../../../shared/model/user-signup-request.model';
-import { User } from '../../../shared/user.model';
+import { User } from '../../../shared/model/user.model';
 
 export const SIGNUP_START = '[User mgmt] SIGNUP_START';
 export const AUTH_SUCCESS = '[User mgmt] AUTH_SUCCESS';

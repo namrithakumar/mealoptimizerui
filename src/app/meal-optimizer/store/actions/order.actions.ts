@@ -1,5 +1,5 @@
 import { Action } from '@ngrx/store';
-import { OrderResponse } from '../../../shared/model/order/order-response.model';
+import { OrderResponse } from '../../../shared/model/order-response.model';
 import { OptimizationStatus } from '../../../shared/services/optimization-status.enum';
 
 export const CREATE_ORDER_START = '[Get meal plan] CREATE_ORDER_START';

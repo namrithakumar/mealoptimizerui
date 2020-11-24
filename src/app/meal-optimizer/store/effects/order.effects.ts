@@ -6,7 +6,7 @@ import { Store } from '@ngrx/store';
 import { AppState } from '../../../store/reducers/app.reducer';
 import * as OrderActions from '../actions/order.actions';
 import { of } from 'rxjs';
-import { OrderResponse } from '../../../shared/model/order/order-response.model';
+import { OrderResponse } from '../../../shared/model/order-response.model';
 
 @Injectable()
 export class OrderEffects {

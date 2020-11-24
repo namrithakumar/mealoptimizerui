@@ -6,7 +6,7 @@ import { Store } from '@ngrx/store';
 import { AppState } from '../../../store/reducers/app.reducer';
 import * as UserMgmtActions from '../actions/user-mgmt.actions';
 import { switchMap, catchError, tap } from 'rxjs/operators';
-import { User } from '../../../shared/user.model';
+import { User } from '../../../shared/model/user.model';
 import { of } from "rxjs";
 
 @Injectable()
