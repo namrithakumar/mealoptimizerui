@@ -4,7 +4,7 @@ import { UserSignUpRequest } from "../model/user-signup-request.model";
 import { catchError, tap } from "rxjs/operators";
 import { Nutrient } from "../model/nutrient.model";
 import { HttpClient } from '@angular/common/http';
-import { User } from '../user.model';
+import { User } from '../model/user.model';
 import { Router } from '@angular/router';
 import { JwtHelperService } from '@auth0/angular-jwt';
 
@@ -50,6 +50,7 @@ export class UserService {
         //userSignupInputs.nutrients is an array of objects
         let minMaxNutrientLimits = this.parseNutrientLimits(userSignupInputs.nutrients);
         let usersignupReq = new UserSignUpRequest(userSignupInputs.signupInfo.username, userSignupInputs.signupInfo.password, userSignupInputs.signupInfo.email, userSignupInputs.preferredDietType, minMaxNutrientLimits.nutrientMinLimits, minMaxNutrientLimits.nutrientMinLimits);
+        console.log('usersignupReq created ' + usersignupReq);
         return usersignupReq;
     }
 

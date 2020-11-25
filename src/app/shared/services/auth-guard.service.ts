@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { CanActivate, Router, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
 import { Observable } from 'rxjs';
 import { take } from 'rxjs/operators';
-import { User } from '../user.model';
+import { User } from '../model/user.model';
 import { AppState } from 'src/app/store/reducers/app.reducer';
 import { Store } from '@ngrx/store';
 import { AuthenticatedUser } from 'src/app/user-mgmt/store/reducers/user-mgmt.reducer';
