@@ -25,6 +25,7 @@ import { RecipesEffects } from '../app/recipes/store/effects/recipes.effects';
 import { UserMgmtEffects } from '../app/user-mgmt/store/effects/user-mgmt.effects';
 import { HeaderComponent } from './header/header.component';
 import { AppInfoModule } from '../app/app-info/app-info.module';
+import { UserMgmtModule } from '../app/user-mgmt/user-mgmt.module';
 
 @NgModule({
   declarations: [
@@ -35,6 +36,7 @@ import { AppInfoModule } from '../app/app-info/app-info.module';
   ],
   imports: [
     AppInfoModule,
+    UserMgmtModule,
     BrowserModule,
     BrowserAnimationsModule,
     FormsModule,
