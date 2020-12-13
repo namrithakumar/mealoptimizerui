@@ -26,10 +26,13 @@ export function userPreferencesReducer(state : UserPreferences = defaultPreferen
 			
 		case UserPreferenceActions.UPDATE_MEAL:
             //Copy meals upto indexOfMeal to be updated, copy updated meal at index, copy rest of the array
-			return {...state, mealSelected: [...state.mealSelected.slice(0,action.payload.itemPosition), 
-															Object.assign({}, state[action.payload.itemPosition], action.payload.itemName),
-															...state.mealSelected.slice(0,action.payload.itemPosition + 1)]};
-        
+            let modifiedMealList : Array<String> = [...state.mealSelected];
+            modifiedMealList[action.payload.itemPosition] = action.payload.itemName;
+            return {...state, mealSelected: modifiedMealList };
+ 
+        case UserPreferenceActions.OPTIMIZATION_TYPE_SELECTED:
+            return {...state, optimizationTypeSelected : action.payload};
+
         default : return state;
     }
 }

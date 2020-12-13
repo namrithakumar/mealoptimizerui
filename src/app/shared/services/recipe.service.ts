@@ -1,5 +1,5 @@
 import { Injectable, OnDestroy, OnInit } from '@angular/core';
-import { Recipe } from '../recipe.model';
+import { Recipe } from '../model/recipe.model';
 import { HttpClient } from '@angular/common/http';
 import { AppState } from 'src/app/store/reducers/app.reducer';
 import { Store } from '@ngrx/store';

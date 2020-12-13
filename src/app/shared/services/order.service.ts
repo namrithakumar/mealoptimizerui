@@ -1,6 +1,6 @@
 import { DatePipe } from '@angular/common';
 import { Injectable } from '@angular/core';
-import { User } from '../user.model';
+import { User } from '../model/user.model';
 
 @Injectable({providedIn:'root'})
 export class OrderService {

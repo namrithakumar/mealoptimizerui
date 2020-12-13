@@ -26,6 +26,7 @@ import { UserMgmtEffects } from '../app/user-mgmt/store/effects/user-mgmt.effect
 import { HeaderComponent } from './header/header.component';
 import { AppInfoModule } from '../app/app-info/app-info.module';
 import { UserMgmtModule } from '../app/user-mgmt/user-mgmt.module';
+import { MealOptimizerModule } from './meal-optimizer/meal-optimizer.module';
 
 @NgModule({
   declarations: [
@@ -37,21 +38,17 @@ import { UserMgmtModule } from '../app/user-mgmt/user-mgmt.module';
   imports: [
     AppInfoModule,
     UserMgmtModule,
+    MealOptimizerModule,
     BrowserModule,
     BrowserAnimationsModule,
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
     AppRoutingModule,
-    CalendarModule.forRoot({
-      provide: DateAdapter,
-      useFactory: adapterFactory,
-    }),
     StoreModule.forRoot(fromApp.appReducer),
     EffectsModule.forRoot([UserEffects, MenuEffects, OrderEffects, RecipesEffects, UserMgmtEffects])    
   ],
-  providers: [DatePipe, 
-              { provide : HTTP_INTERCEPTORS, useClass : AuthInterceptor, multi : true},
+  providers: [{ provide : HTTP_INTERCEPTORS, useClass : AuthInterceptor, multi : true},
               { provide: JWT_OPTIONS, useValue: JWT_OPTIONS },
               JwtHelperService],
   bootstrap: [AppComponent]

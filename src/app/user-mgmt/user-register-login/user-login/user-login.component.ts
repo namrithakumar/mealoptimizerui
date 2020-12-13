@@ -27,8 +27,7 @@ export class UserLoginComponent implements OnInit {
     this.store.select('authenticatedUser').subscribe((authenticatedUser : AuthenticatedUser) => {
       if(authenticatedUser.user && !authenticatedUser.error) {
         this.isLoading = true;
-        console.log('Route to meal-optimizer homepage after login');
-        //this.router.navigate(['/meal-optimizer'], { queryParams: {mode: 'create'} });
+        this.router.navigate(['/meal-optimizer'], { queryParams: {mode: 'create'} });
       }
       else if (!authenticatedUser.user && authenticatedUser.error) {
         this.isLoading = false;
