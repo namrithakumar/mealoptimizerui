@@ -4,6 +4,7 @@ import { Store } from '@ngrx/store';
 import { RecipeService } from 'src/app/shared/services/recipe.service';
 import { AppState } from 'src/app/store/reducers/app.reducer';
 import { UserPreferences } from '../store/reducers/user-preferences.reducer';
+import * as RecipesActions from '../../recipes/store/actions/recipes.actions';
 
 @Component({
   selector: 'app-optimized-meal-plan',
@@ -14,12 +15,15 @@ export class OptimizedMealPlanComponent implements OnInit, OnDestroy {
 
   allowUserToPlaceOrderOrGetRecipe : boolean = true;
 
+  userPreferences : UserPreferences;
+
   constructor(private router : Router, private store : Store<AppState>, private recipeService : RecipeService) { }
 
   ngOnInit(): void {
 
     this.store.select('userPreferences').subscribe((userPrefs : UserPreferences) => {
-      this.allowUserToPlaceOrderOrGetRecipe = (userPrefs.optimizationTypeSelected && userPrefs.optimizationTypeSelected !== 'orderInfo')?true:false;
+      this.userPreferences = userPrefs;
+      this.allowUserToPlaceOrderOrGetRecipe = (this.userPreferences.optimizationTypeSelected && this.userPreferences.optimizationTypeSelected !== 'orderInfo')?true:false;
     });
   }
 
@@ -28,6 +32,7 @@ export class OptimizedMealPlanComponent implements OnInit, OnDestroy {
   }
 
   getRecipeSelected() {
+    this.store.dispatch(new RecipesActions.FetchRecipesStart(this.userPreferences.mealSelected));
     this.router.navigate(['recipes']);
   }
 

@@ -19,7 +19,7 @@ export class RecipesEffects {
         switchMap((fetchRecipesAction : RecipesActions.FetchRecipesStart) => {
             const url = 'http://localhost:9090/mealoptimizer/recipe/find';
             const params = new HttpParams()
-                        .set('names', fetchRecipesAction.toString());
+                        .set('names', fetchRecipesAction.payload.join());
             return this.http.get<Recipe[]>(url, {params}).pipe(
                 map((recipes : Recipe[]) => {
                     return new RecipesActions.FetchRecipesSuccess(recipes);
