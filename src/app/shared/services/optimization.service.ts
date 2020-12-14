@@ -37,13 +37,13 @@ export class OptimizationService {
         var portionCount = 0;
         this.optimizedMealPlans.mealPlan.forEach((mealPlan : MealPlan) => {
             
-            if(optimizationType === 'COST' && mealPlan.optimizationType === 'COST') {
+            if(optimizationType === 'optimizedByCost' && mealPlan.optimizationType === 'COST') {
                 mealPlan.meals.forEach((meal : Meal) => {
                     if(mealName.toLowerCase() === meal.itemName.toLowerCase()) portionCount = meal.portion;
                 });
             }
 
-            if(optimizationType === 'QUALITY' && mealPlan.optimizationType === 'REWARD') {
+            if(optimizationType === 'optimizedByQuality' && mealPlan.optimizationType === 'REWARD') {
                 mealPlan.meals.forEach((meal : Meal) => {
                     if(mealName.toLowerCase() === meal.itemName.toLowerCase()) portionCount = meal.portion;
                 });

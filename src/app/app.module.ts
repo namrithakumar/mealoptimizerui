@@ -27,6 +27,7 @@ import { HeaderComponent } from './header/header.component';
 import { AppInfoModule } from '../app/app-info/app-info.module';
 import { UserMgmtModule } from '../app/user-mgmt/user-mgmt.module';
 import { MealOptimizerModule } from './meal-optimizer/meal-optimizer.module';
+import { RecipesModule } from './recipes/recipes.module';
 
 @NgModule({
   declarations: [
@@ -39,6 +40,7 @@ import { MealOptimizerModule } from './meal-optimizer/meal-optimizer.module';
     AppInfoModule,
     UserMgmtModule,
     MealOptimizerModule,
+    RecipesModule,
     BrowserModule,
     BrowserAnimationsModule,
     FormsModule,
