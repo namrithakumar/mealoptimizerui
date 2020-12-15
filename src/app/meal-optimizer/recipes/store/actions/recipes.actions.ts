@@ -1,5 +1,5 @@
 import { Action } from '@ngrx/store';
-import { Recipe } from '../../../shared/model/recipe.model';
+import { Recipe } from '../../../../shared/model/recipe.model';
 
 export const FETCH_RECIPES_START = '[Recipes] FETCH_RECIPES_START';
 export const FETCH_RECIPES_SUCCESS = '[Recipes] FETCH_RECIPES_SUCCESS';

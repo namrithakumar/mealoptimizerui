@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AppState } from 'src/app/store/reducers/app.reducer';
 import { Store } from '@ngrx/store';
-import { Recipes } from '../store/reducers/recipes.reducer';
+import { Recipes } from '../../recipes/store/reducers/recipes.reducer';
 import { Recipe } from 'src/app/shared/model/recipe.model';
 
 @Component({

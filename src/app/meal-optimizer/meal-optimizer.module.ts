@@ -20,6 +20,11 @@ import { OptimizedResultQualityComponent } from '../meal-optimizer/optimized-mea
 import { OrderInfoComponent } from '../meal-optimizer/optimized-meal-plan/optimized-results-table/order-info/order-info.component';
 import { OrderSummaryComponent } from '../meal-optimizer/optimized-meal-plan/order-summary/order-summary.component';
 import { UserDietTypeComponent } from '../meal-optimizer/user_diet_type/user_diet_type.component';
+import { RecipeDetailComponent } from './recipes/recipe-detail/recipe-detail.component';
+import { RecipesComponent } from './recipes/recipes.component';
+import { RecipeListComponent } from './recipes/recipe-list/recipe-list.component';
+import { RecipeItemComponent } from './recipes/recipe-list/recipe-item/recipe-item.component';
+import { RecipeStartComponent } from './recipes/recipe-start/recipe-start.component';
 
 @NgModule({
     declarations : [
@@ -34,7 +39,12 @@ import { UserDietTypeComponent } from '../meal-optimizer/user_diet_type/user_die
         OrderInfoComponent,
         OrderSummaryComponent,
         UserDietTypeComponent,
-        MealOptimizerComponent
+        MealOptimizerComponent,
+        RecipesComponent,
+        RecipeDetailComponent,
+        RecipeListComponent,
+        RecipeItemComponent,
+        RecipeStartComponent
     ],
     imports : [
         CommonModule,

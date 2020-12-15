@@ -19,6 +19,6 @@ export class RecipeItemComponent implements OnInit {
   }
 
   onItemSelect() : void {
-    this.router.navigate(['recipes',this.indexOfRecipe]);
+    this.router.navigate(['meal-optimizer','recipes',this.indexOfRecipe]);
   }
 }

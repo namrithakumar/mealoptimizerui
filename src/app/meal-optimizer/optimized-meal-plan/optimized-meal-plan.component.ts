@@ -1,10 +1,10 @@
-import { Component, OnInit, Output, EventEmitter, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { RecipeService } from 'src/app/shared/services/recipe.service';
 import { AppState } from 'src/app/store/reducers/app.reducer';
 import { UserPreferences } from '../store/reducers/user-preferences.reducer';
-import * as RecipesActions from '../../recipes/store/actions/recipes.actions';
+import * as RecipesActions from '../recipes/store/actions/recipes.actions';
 
 @Component({
   selector: 'app-optimized-meal-plan',
@@ -33,7 +33,7 @@ export class OptimizedMealPlanComponent implements OnInit, OnDestroy {
 
   getRecipeSelected() {
     this.store.dispatch(new RecipesActions.FetchRecipesStart(this.userPreferences.mealSelected));
-    this.router.navigate(['recipes']);
+    this.router.navigate(['meal-optimizer','recipes']);
   }
 
   ngOnDestroy() {

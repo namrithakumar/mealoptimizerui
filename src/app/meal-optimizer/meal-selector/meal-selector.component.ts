@@ -1,10 +1,8 @@
 import { Component, OnInit, HostListener, ViewChild } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { tap } from 'rxjs/operators';
 import { AppState } from 'src/app/store/reducers/app.reducer';
 import { ManageMealPlanComponent } from './manage-meal-plan/manage-meal-plan.component';
 import { UserPreferences } from '../store/reducers/user-preferences.reducer';
-import { Meal } from 'src/app/shared/model/order-response.model';
 
 @Component({
   selector: 'app-meal-selector',
