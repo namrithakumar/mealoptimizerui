@@ -1,0 +1,9 @@
+<h4><b><i>Result</i></b></h4>
+<app-optimized-results-table></app-optimized-results-table>
+<br/>
+<div class="row">
+<button type="button" class="btn btn-dark" (click)="placeOrderSelected()" [disabled]="!allowUserToPlaceOrderOrGetRecipe">Place order</button>
+<button type="button" class="btn btn-dark" (click)="getRecipeSelected()" [disabled]="!allowUserToPlaceOrderOrGetRecipe">Get recipe</button>
+</div>
+<app-order-summary></app-order-summary>
+<router-outlet></router-outlet>

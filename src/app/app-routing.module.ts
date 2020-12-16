@@ -8,7 +8,7 @@ import { ErrorPageComponent } from '../app/shared/error-page/error-page.componen
 const appRoutes : Routes = [
     {path: '', redirectTo:'/app-info/home', pathMatch: 'full'},
     {path: 'error', component: ErrorPageComponent, data: {errorMessage: 'oops, something went wrong! Let us try again ...'}},
-    {path: '**', redirectTo: '/error'}
+    //{path: '**', redirectTo: '/error'}
 ];
 
 @NgModule({

@@ -1,20 +1,19 @@
 import { Injectable, OnDestroy, OnInit } from '@angular/core';
-import { Recipe } from '../recipe.model';
-import { HttpClient } from '@angular/common/http';
+import { Recipe } from '../model/recipe.model';
 import { AppState } from 'src/app/store/reducers/app.reducer';
 import { Store } from '@ngrx/store';
-import { Recipes } from 'src/app/recipes/store/reducers/recipes.reducer';
+import { Recipes } from 'src/app/meal-optimizer/recipes/store/reducers/recipes.reducer';
 
 @Injectable({providedIn:'root'})
 export class RecipeService implements OnInit, OnDestroy {
     
-  constructor(private store : Store<AppState>, private http : HttpClient) {}
-
-  ngOnInit() {
+  constructor(private store : Store<AppState>) {
     this.store.select('recipes').subscribe((recipes : Recipes) => {
-      this.recipes = recipes.recipes.slice();
+      this.recipes = recipes.recipes;
     });
   }
+
+  ngOnInit() { }
   
   recipes: Recipe[] = [];
 

@@ -3,7 +3,7 @@ import * as fromUserPreferences from '../../meal-optimizer/store/reducers/user-p
 import * as fromMenu from '../../meal-optimizer/store/reducers/menu.reducer';
 import * as fromUserMgmt from '../../user-mgmt/store/reducers/user-mgmt.reducer';
 import * as fromOptimizedPlans from '../../meal-optimizer/store/reducers/order.reducer';
-import * as fromRecipes from '../../recipes/store/reducers/recipes.reducer';
+import * as fromRecipes from '../../meal-optimizer/recipes/store/reducers/recipes.reducer';
 
 export interface AppState {
     userPreferences : fromUserPreferences.UserPreferences,

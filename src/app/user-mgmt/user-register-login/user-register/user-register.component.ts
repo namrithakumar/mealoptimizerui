@@ -112,8 +112,7 @@ export class UserRegisterComponent implements OnInit {
     this.store.select('authenticatedUser').subscribe(( authenticatedUser : AuthenticatedUser ) => {
       if(authenticatedUser.error) this.error = authenticatedUser.error;
       else {
-      console.log('Route to meal-optimizer homepage after registration');
-      //this.router.navigate(['/meal-optimizer'], { queryParams: {mode: 'create'} });
+      this.router.navigate(['/meal-optimizer'], { queryParams: {mode: 'create'} });
     }});
   }
 }

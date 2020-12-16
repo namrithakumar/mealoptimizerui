@@ -1,51 +1,49 @@
-import { Injectable, OnDestroy, OnInit } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { OptimizedMealPlans } from 'src/app/meal-optimizer/store/reducers/order.reducer';
 import { AppState } from 'src/app/store/reducers/app.reducer';
-import { Meal, MealPlan } from '../model/order/order-response.model';
-import { OrderResponse } from '../model/order/order-response.model';
+import { Meal, MealPlan } from '../model/order-response.model';
+import { OrderResponse } from '../model/order-response.model';
 
 @Injectable({providedIn:'root'})
-export class OptimizationService implements OnInit, OnDestroy {
+export class OptimizationService {
 
-    constructor(private store : Store<AppState>) {}
+    constructor(private store : Store<AppState>) { }
 
     optimizedMealPlans : OrderResponse;
-
-    ngOnInit() {
-        this.store.select('optimizedPlans').subscribe((optimizedMealPlans : OptimizedMealPlans) => {
-            this.optimizedMealPlans = optimizedMealPlans.optimizedMealPlans;
-            }
-        );
-    }
 
     getOptimizationResultSummary() : {totalCost: number, totalCalories: number} {
         return { totalCost: 39.9, totalCalories: 1938};
     }
 
-    getMealPlanByOptimizationType(optimizationType : String) : { mealList : Meal[], planCost: number, optimizationType : String } | null {
+    getMealPlanByOptimizationType(optimizationType : String, optimizedMealPlans : OptimizedMealPlans) : { mealList : Meal[], planCost: number, optimizationType : String } {
+        
+        this.optimizedMealPlans = optimizedMealPlans.optimizedMealPlans;
+
+        let mealPlanOptimizedByType : { mealList : Meal[], planCost: number, optimizationType : String };
+
         this.optimizedMealPlans.mealPlan.forEach((mealPlan : MealPlan) => {
             if(optimizationType === 'COST' && mealPlan.optimizationType === 'COST') {
-                return { mealList : mealPlan.meals, planCost: mealPlan.mealPlanCost, optimizationType : 'COST' };
+                mealPlanOptimizedByType = { mealList : mealPlan.meals, planCost: mealPlan.mealPlanCost, optimizationType : 'COST' };
             }
             if(optimizationType === 'QUALITY' && mealPlan.optimizationType === 'REWARD') {
-                return { mealList : mealPlan.meals, planCost: mealPlan.mealPlanCost, optimizationType : 'QUALITY' };
+                mealPlanOptimizedByType = { mealList : mealPlan.meals, planCost: mealPlan.mealPlanCost, optimizationType : 'QUALITY' };
             }
         });
-        return null;
+        return mealPlanOptimizedByType;
     }
 
     getPortionCountByOptimizationTypeMealName(optimizationType:String, mealName : String) : number {
         var portionCount = 0;
         this.optimizedMealPlans.mealPlan.forEach((mealPlan : MealPlan) => {
             
-            if(optimizationType === 'COST' && mealPlan.optimizationType === 'COST') {
+            if(optimizationType === 'optimizedByCost' && mealPlan.optimizationType === 'COST') {
                 mealPlan.meals.forEach((meal : Meal) => {
                     if(mealName.toLowerCase() === meal.itemName.toLowerCase()) portionCount = meal.portion;
                 });
             }
 
-            if(optimizationType === 'QUALITY' && mealPlan.optimizationType === 'REWARD') {
+            if(optimizationType === 'optimizedByQuality' && mealPlan.optimizationType === 'REWARD') {
                 mealPlan.meals.forEach((meal : Meal) => {
                     if(mealName.toLowerCase() === meal.itemName.toLowerCase()) portionCount = meal.portion;
                 });
@@ -53,6 +51,4 @@ export class OptimizationService implements OnInit, OnDestroy {
         });
         return portionCount;
     }
-
-    ngOnDestroy() {}
 }

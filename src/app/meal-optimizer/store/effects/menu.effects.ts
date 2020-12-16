@@ -24,7 +24,6 @@ export class MenuEffects {
                 }),
                 catchError(
                     (errorRes : any) => {
-                        console.log('Dispatching action UPDATE_MENU_FAIL in menu.effects.ts');
                         return of(new MenuActions.UpdateMenuFail('There was an error in retrieving the menu. Error was : ' + errorRes.error));
                     }
                 ))

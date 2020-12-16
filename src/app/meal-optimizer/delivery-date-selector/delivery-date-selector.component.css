@@ -1,0 +1,12 @@
+h3 {
+    margin: 0 0 10px;
+  }
+  
+  pre {
+    background-color: #8aaeaf;
+    padding: 15px;
+  }
+
+  .month-view {
+    background-color: #fff; 
+    width: 50%}
