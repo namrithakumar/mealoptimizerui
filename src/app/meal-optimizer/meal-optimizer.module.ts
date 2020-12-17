@@ -25,6 +25,8 @@ import { RecipesComponent } from './recipes/recipes.component';
 import { RecipeListComponent } from './recipes/recipe-list/recipe-list.component';
 import { RecipeItemComponent } from './recipes/recipe-list/recipe-item/recipe-item.component';
 import { RecipeStartComponent } from './recipes/recipe-start/recipe-start.component';
+import { ShoppingListComponent } from './recipes/shopping-list/shopping-list.component';
+import { ShoppingEditComponent } from './recipes/shopping-list/shopping-edit/shopping-edit.component';
 
 @NgModule({
     declarations : [
@@ -44,7 +46,9 @@ import { RecipeStartComponent } from './recipes/recipe-start/recipe-start.compon
         RecipeDetailComponent,
         RecipeListComponent,
         RecipeItemComponent,
-        RecipeStartComponent
+        RecipeStartComponent,
+        ShoppingListComponent,
+        ShoppingEditComponent
     ],
     imports : [
         CommonModule,

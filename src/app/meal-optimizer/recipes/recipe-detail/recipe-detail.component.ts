@@ -8,6 +8,7 @@ import { Store } from '@ngrx/store';
 import { UserPreferences } from 'src/app/meal-optimizer/store/reducers/user-preferences.reducer';
 import { Recipe } from 'src/app/shared/model/recipe.model';
 import { Ingredient } from 'src/app/shared/model/ingredient.model';
+import * as ShoppingListActions from '../shopping-list/store/shopping-list.actions';
 
 @Component({
   selector: 'app-recipe-detail',
@@ -59,6 +60,7 @@ export class RecipeDetailComponent implements OnInit, OnDestroy {
               (ingredient.labels === undefined)?[this.recipeSelected.name]:ingredient.labels
       ));
     });
+    this.store.dispatch(new ShoppingListActions.AddIngredients(this.shoppingItems));
   }
 
   ngOnDestroy() {}
