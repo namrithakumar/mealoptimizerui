@@ -15,9 +15,10 @@ const defaultShoppingList: ShoppingList = {
 
 export function shoppingListReducer(
   state: ShoppingList = defaultShoppingList,
-  action: ShoppingListActions.ShoppingListActions
-) {
+  action: ShoppingListActions.ShoppingListActions) {
+
   let updatedShoppingList : ShoppingItem[] = null;
+  
   switch (action.type) {
     
     case ShoppingListActions.ADD_INGREDIENT:
@@ -40,7 +41,14 @@ export function shoppingListReducer(
       };
     
     case ShoppingListActions.UPDATE_INGREDIENT:
-      updatedShoppingList = (verifyIfShoppingItemExists(action.payload.shoppingItem, state.shoppingItems))?mergeWithExistingShoppingItem(action.payload.shoppingItem, state.shoppingItems):updateCurrentShoppingList(action.payload.shoppingItem, state.shoppingItems); 
+
+      if(!action.payload.itemNameUpdated) {
+        updatedShoppingList = updateCurrentShoppingList(action.payload.shoppingItem, state.shoppingItems);
+      }
+      //If name is updated, check if we can merge it with an existing item in the list
+      else {
+        updatedShoppingList = (verifyIfShoppingItemExists(action.payload.shoppingItem, state.shoppingItems))?mergeWithExistingShoppingItem(action.payload.shoppingItem, state.shoppingItems):addNewShoppingItem(action.payload.shoppingItem, state.shoppingItems); 
+      }
 
       return {
         ...state,
@@ -48,6 +56,7 @@ export function shoppingListReducer(
         editedshoppingItemIndex: -1,
         editedshoppingItem: null
       };
+
     case ShoppingListActions.DELETE_INGREDIENT:
       return {
         ...state,
@@ -57,18 +66,22 @@ export function shoppingListReducer(
         editedshoppingItemIndex: -1,
         editedshoppingItem: null
       };
+    
     case ShoppingListActions.START_EDIT:
+      
       return {
         ...state,
         editedshoppingItemIndex: action.payload,
         editedshoppingItem: { ...state.shoppingItems[action.payload] }
       };
+    
     case ShoppingListActions.STOP_EDIT:
       return {
         ...state,
         editedshoppingItem: null,
         editedshoppingItemIndex: -1
       };
+    
     default:
       return state;
   }

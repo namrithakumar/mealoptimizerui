@@ -24,7 +24,7 @@ export class AddIngredients implements Action {
 export class UpdateIngredient implements Action {
   readonly type = UPDATE_INGREDIENT;
 
-  constructor(public payload: { shoppingItem : ShoppingItem } ) {}
+  constructor(public payload: { shoppingItem : ShoppingItem, itemNameUpdated : boolean} ) {}
 }
 
 export class DeleteIngredient implements Action {

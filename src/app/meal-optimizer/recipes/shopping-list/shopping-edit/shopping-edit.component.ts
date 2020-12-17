@@ -33,7 +33,8 @@ export class ShoppingEditComponent implements OnInit, OnDestroy {
           this.editedItem = stateData.editedshoppingItem;
           this.slForm.setValue({
             name: this.editedItem.name,
-            amount: this.editedItem.amount
+            amount: this.editedItem.amount,
+            measure: this.editedItem.measure
           });
         } else {
           this.editMode = false;
@@ -43,10 +44,11 @@ export class ShoppingEditComponent implements OnInit, OnDestroy {
 
   onSubmit(form: NgForm) {
     const value = form.value;
+    //console.log('pristine : ' + form.controls['name'].pristine + ' dirty : '+ form.controls['name'].dirty + ' touched : ' + form.controls['name'].touched); 
     const newIngredient = new ShoppingItem(value.name, value.amount, value.measure, (this.editedItem === null)?['Added by User']:this.editedItem.labels);
     if (this.editMode) {
       this.store.dispatch(
-        new ShoppingListActions.UpdateIngredient({ shoppingItem : newIngredient })
+        new ShoppingListActions.UpdateIngredient({ shoppingItem : newIngredient, itemNameUpdated : form.controls['name'].touched })
       );
     } else {
       this.store.dispatch(new ShoppingListActions.AddIngredient(newIngredient));
