@@ -28,7 +28,7 @@ export class OptimizedMealPlanComponent implements OnInit, OnDestroy {
   }
 
   placeOrderSelected() {
-    this.router.navigate(['online-order']);
+    this.router.navigate(['meal-optimizer','online-order']);
   }
 
   getRecipeSelected() {

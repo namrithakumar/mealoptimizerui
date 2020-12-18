@@ -26,6 +26,7 @@ import { RecipeItemComponent } from './recipes/recipe-list/recipe-item/recipe-it
 import { RecipeStartComponent } from './recipes/recipe-start/recipe-start.component';
 import { ShoppingListComponent } from './recipes/shopping-list/shopping-list.component';
 import { ShoppingEditComponent } from './recipes/shopping-list/shopping-edit/shopping-edit.component';
+import { OnlineOrderComponent } from './online-order/online-order.component';
 
 @NgModule({
     declarations : [
@@ -46,7 +47,8 @@ import { ShoppingEditComponent } from './recipes/shopping-list/shopping-edit/sho
         RecipeItemComponent,
         RecipeStartComponent,
         ShoppingListComponent,
-        ShoppingEditComponent
+        ShoppingEditComponent,
+        OnlineOrderComponent
     ],
     imports : [
         CommonModule,
