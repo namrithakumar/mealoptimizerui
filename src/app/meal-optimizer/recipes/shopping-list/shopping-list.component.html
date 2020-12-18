@@ -3,14 +3,15 @@
     <app-shopping-edit></app-shopping-edit>
     <hr>
     <ul class="list-group">
-      <a
+      <button
         class="list-group-item"
         style="cursor: pointer"
         *ngFor="let shoppingItem of shoppingItems; let i = index"
         (click)="onEditItem(i)"
       >
         {{ shoppingItem.name }} ({{ shoppingItem.amount }}) {{ shoppingItem.measure }}
-      </a>
+        <span class="badge badge-secondary float-right" *ngFor="let label of shoppingItem.labels">{{label}}</span>
+    </button>
     </ul>
   </div>
 </div>

@@ -22,6 +22,7 @@ export function shoppingListReducer(
   switch (action.type) {
     
     case ShoppingListActions.ADD_INGREDIENT:
+
       updatedShoppingList = (verifyIfShoppingItemExists(action.payload, state.shoppingItems))?mergeWithExistingShoppingItem(action.payload, state.shoppingItems):addNewShoppingItem(action.payload, state.shoppingItems); 
       
       return {
@@ -102,11 +103,21 @@ function mergeWithExistingShoppingItem(newShoppingItem : ShoppingItem, currentSh
   let mergedShoppingItem : ShoppingItem = null;
   currentShoppingList.forEach((existingShoppingItem : ShoppingItem, index : number) => {
     if(!shoppingItemMerged && (existingShoppingItem.name.toLowerCase() === newShoppingItem.name.toLowerCase())) {
-    mergedShoppingItem = new ShoppingItem(existingShoppingItem.name, newShoppingItem.amount + existingShoppingItem.amount, existingShoppingItem.measure, existingShoppingItem.labels);
+      mergedShoppingItem = new ShoppingItem(existingShoppingItem.name, newShoppingItem.amount + existingShoppingItem.amount, existingShoppingItem.measure, mergeLabels(existingShoppingItem.labels, newShoppingItem.labels));
       updatedShoppingList[index] = mergedShoppingItem;
       shoppingItemMerged = true;
   }});
   return updatedShoppingList;
+}
+
+function mergeLabels(existingLabels : Array<String>, newLabels : Array<String>) :Array <String> {
+  let mergedLabels : Array<String> = existingLabels.slice();
+  newLabels.forEach((newLabel : String) => {
+    if(!existingLabels.includes(newLabel)) { 
+      mergedLabels.push(newLabel); 
+    }
+  });
+  return mergedLabels;
 }
 
 function addNewShoppingItem(newShoppingItem : ShoppingItem, currentShoppingList : ShoppingItem[]) : ShoppingItem[] {

@@ -25,8 +25,7 @@ export class MealSelectorComponent implements OnInit {
   ngOnInit(): void {
     this.store.select('userPreferences').subscribe((userPrefs : UserPreferences) => {
         
-        if(userPrefs.deliveryDate) this.dateOfDelivery = userPrefs.deliveryDate;
-        else this.dateOfDelivery = new Date();
+        this.dateOfDelivery = userPrefs.deliveryDate;
 
         this.mealsSelected = userPrefs.mealSelected;
       });

@@ -20,6 +20,8 @@ export class ShoppingEditComponent implements OnInit, OnDestroy {
   editMode = false;
   editedItem: ShoppingItem = null;
 
+  defaultLabel : String = 'Added by user';
+
   constructor(
     private store: Store<fromApp.AppState>
   ) {}
@@ -42,17 +44,25 @@ export class ShoppingEditComponent implements OnInit, OnDestroy {
       });
   }
 
-  onSubmit(form: NgForm) {
+  onSubmit(form: NgForm) {    
     const value = form.value;
-    //console.log('pristine : ' + form.controls['name'].pristine + ' dirty : '+ form.controls['name'].dirty + ' touched : ' + form.controls['name'].touched); 
-    const newIngredient = new ShoppingItem(value.name, value.amount, value.measure, (this.editedItem === null)?['Added by User']:this.editedItem.labels);
+    //console.log('pristine : ' + form.controls['name'].pristine + ' dirty : '+ form.controls['name'].dirty + ' touched : ' + form.controls['name'].touched);
+    let updatedLabels = null;    
+    let newIngredient = null;    
     if (this.editMode) {
+      //Calculate updatedLabels. Add the label 'Added by User' if it is not already available 
+      updatedLabels = this.editedItem.labels.slice();
+      if(!updatedLabels.includes(this.defaultLabel)) updatedLabels.push(this.defaultLabel);
+      //Create the ingredient to be updated
+      newIngredient = new ShoppingItem(value.name, value.amount, value.measure, updatedLabels); 
       this.store.dispatch(
         new ShoppingListActions.UpdateIngredient({ shoppingItem : newIngredient, itemNameUpdated : form.controls['name'].touched })
       );
     } else {
+      //Create the ingredient to be added
+      newIngredient = new ShoppingItem(value.name, value.amount, value.measure, [this.defaultLabel]);
       this.store.dispatch(new ShoppingListActions.AddIngredient(newIngredient));
-    }
+    }    
     this.editMode = false;
     form.reset();
   }

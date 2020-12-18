@@ -34,7 +34,6 @@ import * as UserPreferencesActions from '../store/actions/user-preferences.actio
     constructor(private store : Store<AppState>) {}
   
     dateOfDeliveryChosen({ date, events }: { date: Date; events: CalendarEvent[] }):void {
-      //this.userInputService.updateUserInput(this.propertyName,date);
       this.store.dispatch(new UserPreferencesActions.EditDeliveryDate(date));
     }
   

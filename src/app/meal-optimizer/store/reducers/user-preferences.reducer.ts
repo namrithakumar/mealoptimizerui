@@ -9,7 +9,7 @@ export interface UserPreferences {
 
 const defaultPreferences : UserPreferences = {
         dietType : null,
-        deliveryDate : null,
+        deliveryDate : new Date(), //Current date is set as default date
         mealSelected : new Array<String>(4),
 	    optimizationTypeSelected : null
 };
@@ -25,7 +25,6 @@ export function userPreferencesReducer(state : UserPreferences = defaultPreferen
             return { ...state, deliveryDate : action.payload };
 			
 		case UserPreferenceActions.UPDATE_MEAL:
-            //Copy meals upto indexOfMeal to be updated, copy updated meal at index, copy rest of the array
             let modifiedMealList : Array<String> = [...state.mealSelected];
             modifiedMealList[action.payload.itemPosition] = action.payload.itemName;
             return {...state, mealSelected: modifiedMealList };
