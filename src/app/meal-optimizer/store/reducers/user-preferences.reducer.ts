@@ -18,7 +18,7 @@ const defaultPreferences : UserPreferences = {
 export function userPreferencesReducer(state : UserPreferences = defaultPreferences, action : UserPreferenceActions.UserPreferencesActions) : UserPreferences {
 	switch(action.type) {
 		
-		case UserPreferenceActions.EDIT_DIET_TYPE : 
+        case UserPreferenceActions.EDIT_DIET_TYPE : 
             return { ...state, dietType : action.payload };
         
         case UserPreferenceActions.EDIT_DELIVERY_DATE : 

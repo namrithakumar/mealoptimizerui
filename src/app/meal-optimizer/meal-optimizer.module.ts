@@ -18,7 +18,6 @@ import { OptimizedResultsTableComponent } from '../meal-optimizer/optimized-meal
 import { OptimizedResultCostComponent } from '../meal-optimizer/optimized-meal-plan/optimized-results-table/optimized-result-cost/optimized-result-cost.component';
 import { OptimizedResultQualityComponent } from '../meal-optimizer/optimized-meal-plan/optimized-results-table/optimized-result-quality/optimized-result-quality.component';
 import { OrderInfoComponent } from '../meal-optimizer/optimized-meal-plan/optimized-results-table/order-info/order-info.component';
-import { OrderSummaryComponent } from '../meal-optimizer/optimized-meal-plan/order-summary/order-summary.component';
 import { UserDietTypeComponent } from '../meal-optimizer/user_diet_type/user_diet_type.component';
 import { RecipeDetailComponent } from './recipes/recipe-detail/recipe-detail.component';
 import { RecipesComponent } from './recipes/recipes.component';
@@ -39,7 +38,6 @@ import { ShoppingEditComponent } from './recipes/shopping-list/shopping-edit/sho
         OptimizedResultCostComponent,
         OptimizedResultQualityComponent,
         OrderInfoComponent,
-        OrderSummaryComponent,
         UserDietTypeComponent,
         MealOptimizerComponent,
         RecipesComponent,

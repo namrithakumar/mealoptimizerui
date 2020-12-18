@@ -12,10 +12,6 @@ export class OptimizationService {
 
     optimizedMealPlans : OrderResponse;
 
-    getOptimizationResultSummary() : {totalCost: number, totalCalories: number} {
-        return { totalCost: 39.9, totalCalories: 1938};
-    }
-
     getMealPlanByOptimizationType(optimizationType : String, optimizedMealPlans : OptimizedMealPlans) : { mealList : Meal[], planCost: number, optimizationType : String } {
         
         this.optimizedMealPlans = optimizedMealPlans.optimizedMealPlans;

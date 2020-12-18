@@ -40,14 +40,6 @@ export class RecipeDetailComponent implements OnInit, OnDestroy {
   });
   }
 
-  ngAfterViewInit() {
-    //If there is a change in userPrefs, clear the recipe list
-    /*this.store.select('userPreferences').subscribe((userPreferences : UserPreferences) => {
-      console.log('Change in user prefs detected. Clearing recipes. Inside ngAfterViewInit');
-      this.router.navigate(['recipes']);
-    });*/
-  }
-
   constructor(private route: ActivatedRoute, private recipeService: RecipeService, private optimizationService : OptimizationService, private router : Router, private store : Store<AppState>) {}
 
   onAddToShoppingList(): void {
