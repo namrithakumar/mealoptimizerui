@@ -15,7 +15,7 @@ import { JwtHelperService, JWT_OPTIONS  } from '@auth0/angular-jwt';
 import * as fromApp from '../app/store/reducers/app.reducer';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
-import { UserEffects } from '../app/meal-optimizer/store/effects/user.effects';
+import { UserPreferencesEffects } from './meal-optimizer/store/effects/user-preferences.effects';
 import { MenuEffects } from '../app/meal-optimizer/store/effects/menu.effects';
 import { OrderEffects } from '../app/meal-optimizer/store/effects/order.effects';
 import { RecipesEffects } from '../app/meal-optimizer/recipes/store/effects/recipes.effects';
@@ -43,7 +43,7 @@ import { MealOptimizerModule } from './meal-optimizer/meal-optimizer.module';
     HttpClientModule,
     AppRoutingModule,
     StoreModule.forRoot(fromApp.appReducer),
-    EffectsModule.forRoot([UserEffects, MenuEffects, OrderEffects, RecipesEffects, UserMgmtEffects])    
+    EffectsModule.forRoot([UserPreferencesEffects, MenuEffects, OrderEffects, RecipesEffects, UserMgmtEffects])    
   ],
   providers: [{ provide : HTTP_INTERCEPTORS, useClass : AuthInterceptor, multi : true},
               { provide: JWT_OPTIONS, useValue: JWT_OPTIONS },

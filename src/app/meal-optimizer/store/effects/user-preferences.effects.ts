@@ -8,7 +8,7 @@ import * as MenuActions from '../actions/menu.actions';
 import { Store } from '@ngrx/store';
 
 @Injectable()
-export class UserEffects {
+export class UserPreferencesEffects {
 
   constructor(private actions$ : Actions, private store : Store<AppState>) { }
 
