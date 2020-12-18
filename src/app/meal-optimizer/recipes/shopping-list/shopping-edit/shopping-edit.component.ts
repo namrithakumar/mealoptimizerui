@@ -53,8 +53,8 @@ export class ShoppingEditComponent implements OnInit, OnDestroy {
       //Calculate updatedLabels. Add the label 'Added by User' if it is not already available 
       updatedLabels = this.editedItem.labels.slice();
       if(!updatedLabels.includes(this.defaultLabel)) updatedLabels.push(this.defaultLabel);
-      //Create the ingredient to be updated
-      newIngredient = new ShoppingItem(value.name, value.amount, value.measure, updatedLabels); 
+      //Create the ingredient to be updated. NOTE: We use the same measure as editedItem since the measure cannot be updated.
+      newIngredient = new ShoppingItem(value.name, value.amount, this.editedItem.measure, updatedLabels); 
       this.store.dispatch(
         new ShoppingListActions.UpdateIngredient({ shoppingItem : newIngredient, itemNameUpdated : form.controls['name'].touched })
       );
