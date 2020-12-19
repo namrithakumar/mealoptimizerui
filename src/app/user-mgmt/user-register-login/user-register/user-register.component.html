@@ -36,6 +36,23 @@
                         </div>
                     </div>
                 </div>
+                <div class="form-group" formGroupName="personalInfo">
+                    <label for="firstName">First name:</label>
+                    <input type="text" id="firstName" class="form-control" formControlName="firstName"/>
+                    <div *ngFor="let validation of account_validation_messages.firstName">
+                        <span class="help-block" *ngIf="signupForm.get('personalInfo.firstName').errors && signupForm.get('personalInfo.firstName').errors[validation.type] && (signupForm.get('personalInfo.firstName').dirty || signupForm.get('personalInfo.firstName').touched)">{{ validation.message }}</span>
+                    </div>
+                    <label for="lastName">Last name:</label>
+                    <input type="text" id="lastName" class="form-control" formControlName="lastName"/>
+                    <div *ngFor="let validation of account_validation_messages.lastName">
+                        <span class="help-block" *ngIf="signupForm.get('personalInfo.lastName').errors && signupForm.get('personalInfo.lastName').errors[validation.type] && (signupForm.get('personalInfo.lastName').dirty || signupForm.get('personalInfo.lastName').touched)">{{ validation.message }}</span>
+                    </div>
+                    <label for="address">Address:</label>
+                    <textarea id="address" rows="4" class="form-control" formControlName="address"></textarea>
+                    <div *ngFor="let validation of account_validation_messages.address">
+                        <span class="help-block" *ngIf="signupForm.get('personalInfo.address').errors && signupForm.get('personalInfo.address').errors[validation.type] && (signupForm.get('personalInfo.address').dirty || signupForm.get('personalInfo.address').touched)">{{ validation.message }}</span>
+                    </div>                    
+                </div>
                 <button type="submit" [disabled] = "!signupForm.valid">Sign up</button>
             </form>
         </div>

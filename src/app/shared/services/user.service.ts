@@ -78,7 +78,7 @@ export class UserService {
         return;
     }
       else { 
-        loadedUser = new User(userData.id, userData.username, userData.email, userData.preferredDietType, userData.nutrientMinLimits, userData.nutrientMaxLimits, userData.token, userData._tokenValidTime, userData.tokenExpiryDate);  
+        loadedUser = new User(userData.id, userData.username, userData.email, userData.preferredDietType, userData.firstName, userData.lastName, userData.address, userData.nutrientMinLimits, userData.nutrientMaxLimits, userData.token, userData._tokenValidTime, userData.tokenExpiryDate);  
         this.autoLogout(new Date(loadedUser.tokenExpiryDate).getTime() - new Date().getTime());
       }
     }
