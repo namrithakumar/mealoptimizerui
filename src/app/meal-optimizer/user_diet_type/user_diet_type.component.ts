@@ -3,7 +3,7 @@ import { UserDietService } from '../../shared/services/http/user-diet.service';
 import { IUserDietType } from '../../shared/services/user-diet-type-resolver.service';
 import { AppState } from 'src/app/store/reducers/app.reducer';
 import { Store } from '@ngrx/store';
-import * as UserPreferencesActions from '../store/actions/user-preferences.actions';
+import * as UserPreferenceActions from '../store/actions/user-preferences.actions';
 
 @Component({
     selector: 'app-user-diet-type',
@@ -20,8 +20,7 @@ export class UserDietTypeComponent implements OnInit {
     setCollapseInd : boolean = false;
 
     onDietTypeSelect(dietType : String) {
-        //this.userInputService.updateUserInput(this.propertyName, dietType);
-        this.store.dispatch(new UserPreferencesActions.EditDietType(dietType));
+        this.store.dispatch(new UserPreferenceActions.EditDietType(dietType));
     }
 
     ngOnInit(): void { }

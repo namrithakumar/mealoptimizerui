@@ -13,18 +13,22 @@ export class MealOptionsComponent implements OnInit {
 
   @Input() indexOfMeal : number; // Set inside meal-selector.html
 
+  defaultText = "Please select a meal";
+
   itemList : String[]; 
 
   itemSelected : String;
   
-  defaultText = "Please select meal";
-
   constructor(private store:Store<AppState>) { }
 
   ngOnInit(): void {
     this.resetItemList();
     this.store.select('menu').subscribe((menu : Menu) => {
-      if(menu.itemList) { this.itemList = menu.itemList; }
+      if(menu.itemList) { 
+        this.itemList = menu.itemList.slice();
+        //Insert default text 'Please select a meal' as the first entry of the list
+        this.itemList.unshift(this.defaultText);
+      }
       if(menu.error) { this.itemList = [menu.error]; }
     });
   }

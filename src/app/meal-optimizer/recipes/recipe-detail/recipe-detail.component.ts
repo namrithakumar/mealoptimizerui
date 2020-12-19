@@ -8,6 +8,7 @@ import { Store } from '@ngrx/store';
 import { UserPreferences } from 'src/app/meal-optimizer/store/reducers/user-preferences.reducer';
 import { Recipe } from 'src/app/shared/model/recipe.model';
 import { Ingredient } from 'src/app/shared/model/ingredient.model';
+import * as ShoppingListActions from '../shopping-list/store/shopping-list.actions';
 
 @Component({
   selector: 'app-recipe-detail',
@@ -39,14 +40,6 @@ export class RecipeDetailComponent implements OnInit, OnDestroy {
   });
   }
 
-  ngAfterViewInit() {
-    //If there is a change in userPrefs, clear the recipe list
-    /*this.store.select('userPreferences').subscribe((userPreferences : UserPreferences) => {
-      console.log('Change in user prefs detected. Clearing recipes. Inside ngAfterViewInit');
-      this.router.navigate(['recipes']);
-    });*/
-  }
-
   constructor(private route: ActivatedRoute, private recipeService: RecipeService, private optimizationService : OptimizationService, private router : Router, private store : Store<AppState>) {}
 
   onAddToShoppingList(): void {
@@ -59,6 +52,7 @@ export class RecipeDetailComponent implements OnInit, OnDestroy {
               (ingredient.labels === undefined)?[this.recipeSelected.name]:ingredient.labels
       ));
     });
+    this.store.dispatch(new ShoppingListActions.AddIngredients(this.shoppingItems));
   }
 
   ngOnDestroy() {}
