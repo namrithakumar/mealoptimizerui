@@ -8,11 +8,12 @@ import * as UserMgmtActions from '../actions/user-mgmt.actions';
 import { switchMap, catchError, map } from 'rxjs/operators';
 import { User } from '../../../shared/model/user.model';
 import { of } from "rxjs";
+import { JwtHelperService } from "@auth0/angular-jwt";
 
 @Injectable()
 export class UserMgmtEffects {
 
-    constructor(private http : HttpClient, private actions$ : Actions, private store : Store<AppState>) {}
+    constructor(private http : HttpClient, private actions$ : Actions, private store : Store<AppState>, private jwtHelper : JwtHelperService) {}
 
 @Effect()
 signup = this.actions$.pipe(
@@ -38,8 +39,25 @@ login = this.actions$.pipe(
     }
 ));
 
+@Effect()
+autoLogin = this.actions$.pipe(
+    ofType<UserMgmtActions.AutoLogin>(UserMgmtActions.AUTO_LOGIN),
+    map(() => {
+        const userData = JSON.parse(localStorage.getItem('userData'));
+        let loadedUser : User;
+        if( !userData || (this.jwtHelper.isTokenExpired(userData.token))) {
+            return { type : 'NO_ACTION' }
+        }
+        else {
+            loadedUser = new User(userData.id, userData.username, userData.email, userData.preferredDietType, userData.firstName, userData.lastName, userData.address, userData.nutrientMinLimits, userData.nutrientMaxLimits, userData.token, userData._tokenValidTime, userData.tokenExpiryDate);
+            return new UserMgmtActions.AuthSuccess(loadedUser);   
+        }
+    })
+);
+
 private handleSuccessfulAuthentication(user : User) {
     user.tokenExpiryDate = new Date(new Date().getTime() + user.tokenValidTime);
+    localStorage.setItem('userData', JSON.stringify(user));
     return new UserMgmtActions.AuthSuccess(user);
 }
 
