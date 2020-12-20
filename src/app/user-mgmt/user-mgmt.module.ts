@@ -10,7 +10,6 @@ import { UserComponent } from './user/user.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
 import { UserRegisterComponent } from './user-register-login/user-register/user-register.component';
 import { UserLoginComponent } from './user-register-login/user-login/user-login.component';
-import { UserSettingsComponent } from './user-settings/user-settings.component';
 import { UserMgmtRoutingModule } from '../user-mgmt/user-mgmt-routing.module';
 
 @NgModule({
@@ -19,8 +18,7 @@ import { UserMgmtRoutingModule } from '../user-mgmt/user-mgmt-routing.module';
         UserComponent,
         UserProfileComponent,
         UserRegisterComponent,
-        UserLoginComponent,
-        UserSettingsComponent
+        UserLoginComponent
     ],
     imports : [
         CommonModule,

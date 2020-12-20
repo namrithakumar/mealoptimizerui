@@ -56,6 +56,21 @@ export class UserRegisterComponent implements OnInit {
       { type: 'required', message: 'Value is required' },
       { type: 'min', message: 'Min value must be at least 1' },
       { type: 'max', message: 'Max must not exceed 3000' },
+    ],
+    'firstName': [
+      { type: 'required', message: 'First name is required' },
+      { type: 'minlength', message: 'First name must be at least 2 characters long' },
+      { type: 'maxlength', message: 'First name cannot be more than 20 characters long' }
+    ],
+    'lastName': [
+      { type: 'required', message: 'Last name is required' },
+      { type: 'minlength', message: 'Last name must be at least 2 characters long' },
+      { type: 'maxlength', message: 'Last name cannot be more than 20 characters long' }
+    ],
+    'address': [
+      { type: 'required', message: 'Address is required' },
+      { type: 'minlength', message: 'Address must be at least 5 characters long' },
+      { type: 'maxlength', message: 'Address cannot be more than 100 characters long' }
     ]
   }
   
@@ -87,7 +102,12 @@ export class UserRegisterComponent implements OnInit {
         password : this.formBuilder.control(null, [Validators.required, Validators.minLength(6), Validators.maxLength(8), Validators.pattern(this.passwordPattern)])
       }),
       preferredDietType : this.formBuilder.control(null, Validators.required),
-      nutrients : this.formBuilder.array(this.nutrientInitialLimits, [Validators.required, Validators.min(1), Validators.max(3000)])
+      nutrients : this.formBuilder.array(this.nutrientInitialLimits, [Validators.required, Validators.min(1), Validators.max(3000)]),
+      personalInfo : this.formBuilder.group({
+        firstName  : this.formBuilder.control('first name', [Validators.required, Validators.minLength(2), Validators.maxLength(20)]),
+        lastName  : this.formBuilder.control('last name', [Validators.required, Validators.minLength(2), Validators.maxLength(20)]),
+        address  : this.formBuilder.control('address', [Validators.required, Validators.minLength(5), Validators.maxLength(100)])
+      })
     });
   }
 

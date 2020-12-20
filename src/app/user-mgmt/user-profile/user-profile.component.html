@@ -1,4 +1,4 @@
-            <form [formGroup]="signupForm">
+            <form [formGroup]="userProfileForm">
                     <label for="email">Email:</label>
                     <input type="text" id="email" class="form-control" formControlName="email">
                     <label for="username">Username:</label>
@@ -6,6 +6,12 @@
                     <label for="password">Password:</label>
                     <input type="password" id="password" class="form-control" formControlName="password"/>
                     <ng-template class="help-block" #fieldRequired>This field is required!!</ng-template>
+                    <label for="firstName">First name:</label>
+                    <input type="text" id="firstName" class="form-control" formControlName="firstName">
+                    <label for="lastName">Last name:</label>
+                    <input type="text" id="lastName" class="form-control" formControlName="lastName">
+                    <label for="address">Address:</label>
+                    <textarea rows="4" id="address" class="form-control" formControlName="address"></textarea>
 <!--                <div formArrayName="nutrients">
                     <div class="form-control"  *ngFor="let nutrient of nutrients.controls; let i = index">
                             <div>

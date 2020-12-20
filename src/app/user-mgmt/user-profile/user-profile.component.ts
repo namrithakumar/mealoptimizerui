@@ -17,7 +17,7 @@ export class UserProfileComponent implements OnInit {
 
   mode: String;
 
-  signupForm : FormGroup;
+  userProfileForm : FormGroup;
 
   passwordPattern : any = '^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])[A-Za-z\d$@$!%?&]{6,10}$';
 
@@ -35,15 +35,18 @@ export class UserProfileComponent implements OnInit {
         }
       );
 
-      this.signupForm = this.formBuilder.group({
+      this.userProfileForm = this.formBuilder.group({
           email  : this.formBuilder.control(this.user.email, [Validators.required, Validators.email]),
           username : this.formBuilder.control(this.user.username, [Validators.required, Validators.minLength(2), Validators.maxLength(20)]),
           //error accessed as !signupForm.get('email').errors['required']
           password : this.formBuilder.control('password', [Validators.required, Validators.pattern(this.passwordPattern)]),
-          nutrients : this.formBuilder.array(this.mergeNutrientMinMaxLimits(this.user.nutrientMaxLimits, this.user.nutrientMinLimits))
+          nutrients : this.formBuilder.array(this.mergeNutrientMinMaxLimits(this.user.nutrientMaxLimits, this.user.nutrientMinLimits)),
+          firstName  : this.formBuilder.control(this.user.firstName, [Validators.required, Validators.minLength(2), Validators.maxLength(20)]),
+          lastName  : this.formBuilder.control(this.user.lastName, [Validators.required, Validators.minLength(2), Validators.maxLength(20)]),
+          address  : this.formBuilder.control(this.user.address, [Validators.required, Validators.minLength(5), Validators.maxLength(100)])
       });
 
-      this.signupForm.valueChanges.subscribe((value) => {
+      this.userProfileForm.valueChanges.subscribe((value) => {
         this.onEditUserProfile();
       });
   }
