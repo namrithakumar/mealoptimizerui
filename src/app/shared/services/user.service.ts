@@ -4,26 +4,13 @@ import { UserSignUpRequest } from "../model/user-signup-request.model";
 import { catchError, tap } from "rxjs/operators";
 import { Nutrient } from "../model/nutrient.model";
 import { HttpClient } from '@angular/common/http';
-import { User } from '../model/user.model';
 import { Router } from '@angular/router';
 import { JwtHelperService } from '@auth0/angular-jwt';
 
 @Injectable({ providedIn : 'root' })
 export class UserService {
-    
-    tokenExpirationTimer : number;
-
+ 
     constructor(private http : HttpClient, private router : Router, private jwtHelper:JwtHelperService) {}
-
-    logout() {
-        //this.user.next(null);
-        localStorage.removeItem('userData');
-        if(this.tokenExpirationTimer) {
-            clearTimeout(this.tokenExpirationTimer);
-        }
-        this.tokenExpirationTimer = null;
-        this.router.navigate(['/meal-optimizer'], { queryParams: {mode: 'create'} });
-    }
 
     fetchAllUsernames() : Observable<Array<String>> {
         const url = 'http://localhost:9090/mealoptimizer/user/fetchAllUsernames';
@@ -69,21 +56,5 @@ export class UserService {
             nutrientLimitObj[key.toString()] = value;
         });
         return nutrientLimitObj;
-    }
-
-    autoLogin() {
-      const userData = JSON.parse(localStorage.getItem('userData'));
-      let loadedUser : User;
-      if(!userData || (this.jwtHelper.isTokenExpired(userData.token))) {
-        return;
-    }
-      else { 
-        loadedUser = new User(userData.id, userData.username, userData.email, userData.preferredDietType, userData.firstName, userData.lastName, userData.address, userData.nutrientMinLimits, userData.nutrientMaxLimits, userData.token, userData._tokenValidTime, userData.tokenExpiryDate);  
-        this.autoLogout(new Date(loadedUser.tokenExpiryDate).getTime() - new Date().getTime());
-      }
-    }
-
-    autoLogout(expirationDuration : number) {
-        this.tokenExpirationTimer = setTimeout(this.logout, expirationDuration);       
     }
 }
