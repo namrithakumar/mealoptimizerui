@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Store } from '@ngrx/store';
+import { AppState } from './store/reducers/app.reducer';
+import * as UserMgmtActions from './user-mgmt/store/actions/user-mgmt.actions';
 
 @Component({
   selector: 'app-root',
@@ -7,9 +10,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AppComponent implements OnInit { 
   
-  constructor() {}
+  constructor(private store : Store<AppState>) {}
 
   ngOnInit() {
-//    this.userService.autoLogin();
+    this.store.dispatch(new UserMgmtActions.AutoLogin());
   }
 }

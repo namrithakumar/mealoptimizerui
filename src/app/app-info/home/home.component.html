@@ -7,4 +7,5 @@
 <p>We still care for you though, so if you select meals that will not meet your daily nutrition requirements, we will give you a tailored meal plan.</p>
 <br/>
 <br/>
-<button (click)='goToLoginOrRegister()'>Login/Register</button>
+<button *ngIf="!authenticatedUser" (click)='goToLoginOrRegister()'>Login/Register</button>
+<button *ngIf="authenticatedUser" (click)='goToMealPlanner()'>Take me to Meal Planner</button>

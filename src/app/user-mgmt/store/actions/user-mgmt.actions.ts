@@ -8,6 +8,7 @@ export const AUTH_SUCCESS = '[User mgmt] AUTH_SUCCESS';
 export const AUTH_ERROR = '[User mgmt] AUTH_ERROR';
 export const LOGIN_START = '[User mgmt] LOGIN_START';
 export const LOGOUT = '[User mgmt] LOGOUT';
+export const AUTO_LOGIN = '[User mgmt] AUTO_LOGIN';
 
 export class SignupStart implements Action {
     readonly type = SIGNUP_START;
@@ -33,4 +34,8 @@ export class Logout implements Action {
     readonly type = LOGOUT;
 }
 
-export type UserMgmtActions = SignupStart | AuthSuccess | AuthError | LoginStart | Logout;
+export class AutoLogin implements Action {
+    readonly type = AUTO_LOGIN;
+}
+
+export type UserMgmtActions = SignupStart | AuthSuccess | AuthError | LoginStart | Logout | AutoLogin;

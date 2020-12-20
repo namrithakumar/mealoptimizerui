@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Store } from '@ngrx/store';
+import { User } from 'src/app/shared/model/user.model';
+import { AppState } from 'src/app/store/reducers/app.reducer';
+import { AuthenticatedUser } from 'src/app/user-mgmt/store/reducers/user-mgmt.reducer';
 
 @Component({
   selector: 'app-home',
@@ -8,12 +12,21 @@ import { Router } from '@angular/router';
 })
 export class HomeComponent implements OnInit {
 
-  constructor(private router:Router) { }
+  authenticatedUser : User;
+
+  constructor(private router:Router, private store : Store<AppState>) { }
 
   ngOnInit(): void {
+    this.store.select('authenticatedUser').subscribe(( authenticatedUser : AuthenticatedUser ) => {
+      this.authenticatedUser = authenticatedUser.user;
+    });
   }
 
   goToLoginOrRegister() : void {
     this.router.navigate(['/user-mgmt','login']);
+  }
+
+  goToMealPlanner() : void {
+    this.router.navigate(['/meal-optimizer']);
   }
 }
