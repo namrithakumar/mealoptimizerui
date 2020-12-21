@@ -33,12 +33,11 @@ export class OptimizedMealPlanComponent implements OnInit, OnDestroy {
       if(optimizedMealPlans.optimizedMealPlans)
       this.optimizationState = optimizedMealPlans.optimizedMealPlans.optimizationState;
 
-      if(optimizedMealPlans.status !== OptimizationStatus.RESPONSE_RECEIVED)
+      if(optimizedMealPlans.status !== OptimizationStatus.RESPONSE_RECEIVED) {
       this.isValidOptimizationState = true;
-
-      else {
-        if(this.optimizationState !== 'INFEASIBLE' && this.optimizationState !== 'ERROR') this.isValidOptimizationState = true;
-        else this.isValidOptimizationState = false;
+      } else {
+          if(this.optimizationState === 'DISTINCT' || this.optimizationState === 'OPTIMAL' || this.optimizationState === 'FEASIBLE') this.isValidOptimizationState = true;
+          else this.isValidOptimizationState = false;
       }
     });
   }

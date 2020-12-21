@@ -51,7 +51,7 @@ export class ManageMealPlanComponent implements OnInit, OnDestroy {
 
         //Switch back to 'create' mode if optimization result state is FAILED OR INFEASIBLE
         this.store.select('optimizedPlans').subscribe((optimizedMealPlans : OptimizedMealPlans) => {
-          if(optimizedMealPlans.optimizedMealPlans && ( optimizedMealPlans.optimizedMealPlans.optimizationState === "INFEASIBLE" || optimizedMealPlans.optimizedMealPlans.optimizationState === "FAILED" )) {
+          if(optimizedMealPlans.optimizedMealPlans && optimizedMealPlans.optimizedMealPlans.optimizationState !== "DISTINCT" && optimizedMealPlans.optimizedMealPlans.optimizationState !== "OPTIMAL" && optimizedMealPlans.optimizedMealPlans.optimizationState !== "FEASIBLE") {
             this.router.navigate([],{
               relativeTo : this.route,
               queryParams : { mode: 'create' }
