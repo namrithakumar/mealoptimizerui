@@ -29,8 +29,6 @@ import * as UserPreferencesActions from '../store/actions/user-preferences.actio
   
     viewDate: Date = new Date();
 
-    setCollapseInd : boolean = false;
-
     constructor(private store : Store<AppState>) {}
   
     dateOfDeliveryChosen({ date, events }: { date: Date; events: CalendarEvent[] }):void {
@@ -39,13 +37,6 @@ import * as UserPreferencesActions from '../store/actions/user-preferences.actio
   
     closeOpenMonthViewDay() {
       this.activeDayIsOpen = false;
-    }
-
-    @HostListener('mouseover', ['$event'])  
-    @HostListener('mouseout', ['$event']) handleMouseEvent() {
-      //Update collapse indicator only if delivery date is not empty
-        //if(this.userInputService.userInput.deliveryDate !== undefined)
-        //    this.setCollapseInd = this.displayService.getCollapsibleInd(event.type);
     }
 
     ngOnInit() {

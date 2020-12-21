@@ -11,8 +11,6 @@ import { UserPreferences } from '../store/reducers/user-preferences.reducer';
 
 export class MealSelectorComponent implements OnInit {
 
-  collapseInd : boolean;
-
   constructor(private store : Store<AppState>) {}
   
   dateOfDelivery : Date;
@@ -30,16 +28,5 @@ export class MealSelectorComponent implements OnInit {
 
   afterViewInit() {
     //this.collapseInd = this.displayService.canCollapseMealList;
-  }
-
-  @HostListener('mouseover', ['$event'])  
-  @HostListener('mouseout', ['$event']) handleMouseEvent() {
-    //Update collapse indicator only if 4 meals are selected
-      //if(this.userInputService.userInput.mealSelected!==undefined && this.userInputService.userInput.mealSelected.length === 4)
-      //    this.collapseInd = this.displayService.canCollapseMealList && this.displayService.getCollapsibleInd(event.type);
-  }
-
-  getMealList() : String[] {
-    return this.mealsSelected;
   }
 }
