@@ -5,6 +5,8 @@ import { RecipeService } from 'src/app/shared/services/recipe.service';
 import { AppState } from 'src/app/store/reducers/app.reducer';
 import { UserPreferences } from '../store/reducers/user-preferences.reducer';
 import * as RecipesActions from '../recipes/store/actions/recipes.actions';
+import { OptimizedMealPlans } from '../store/reducers/order.reducer';
+import { OptimizationStatus } from 'src/app/shared/services/optimization-status.enum';
 
 @Component({
   selector: 'app-optimized-meal-plan',
@@ -13,9 +15,11 @@ import * as RecipesActions from '../recipes/store/actions/recipes.actions';
 })
 export class OptimizedMealPlanComponent implements OnInit, OnDestroy {
 
-  allowUserToPlaceOrderOrGetRecipe : boolean = true;
-
   userPreferences : UserPreferences;
+
+  optimizationState : String;
+  
+  isValidOptimizationState : boolean;
 
   constructor(private router : Router, private store : Store<AppState>, private recipeService : RecipeService) { }
 
@@ -23,8 +27,25 @@ export class OptimizedMealPlanComponent implements OnInit, OnDestroy {
 
     this.store.select('userPreferences').subscribe((userPrefs : UserPreferences) => {
       this.userPreferences = userPrefs;
-      this.allowUserToPlaceOrderOrGetRecipe = (this.userPreferences.optimizationTypeSelected && this.userPreferences.optimizationTypeSelected !== 'orderInfo')?true:false;
     });
+
+    this.store.select('optimizedPlans').subscribe((optimizedMealPlans : OptimizedMealPlans) => {
+      if(optimizedMealPlans.optimizedMealPlans)
+      this.optimizationState = optimizedMealPlans.optimizedMealPlans.optimizationState;
+
+      if(optimizedMealPlans.status !== OptimizationStatus.RESPONSE_RECEIVED)
+      this.isValidOptimizationState = true;
+
+      else {
+        if(this.optimizationState !== 'INFEASIBLE' && this.optimizationState !== 'ERROR') this.isValidOptimizationState = true;
+        else this.isValidOptimizationState = false;
+      }
+    });
+  }
+
+  get allowUserToPlaceOrderOrGetRecipe() : boolean {
+    if(this.userPreferences.optimizationTypeSelected && this.userPreferences.optimizationTypeSelected !== 'orderInfo' && this.isValidOptimizationState) return true;
+    else return false;
   }
 
   placeOrderSelected() {

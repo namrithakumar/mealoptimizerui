@@ -15,12 +15,15 @@ import * as UserPreferencesActions from '../../store/actions/user-preferences.ac
 export class OptimizedResultsTableComponent implements OnInit, OnDestroy {
 
   costOptimizedPlan : { mealList : Meal[], planCost: number, optimizationType : String } = { mealList : new Array<Meal>(), planCost: 0, optimizationType : 'COST' };
+  
   qualityOptimizedPlan : { mealList : Meal[], planCost: number, optimizationType : String } = { mealList : new Array<Meal>(), planCost: 0, optimizationType : 'QUALITY' };
 
   optimizationStatus : OptimizationStatus;
 
   optimizationStatusValues = OptimizationStatus;
   
+  optimizationState : String;
+
   resultsPending = false;
 
   constructor(private store : Store<AppState>, private optimizationService : OptimizationService) { }
@@ -34,7 +37,11 @@ export class OptimizedResultsTableComponent implements OnInit, OnDestroy {
       if(optimizedMealPlans.status === OptimizationStatus.RESPONSE_RECEIVED) {
         this.costOptimizedPlan = this.optimizationService.getMealPlanByOptimizationType('COST', optimizedMealPlans);
         this.qualityOptimizedPlan = this.optimizationService.getMealPlanByOptimizationType('QUALITY', optimizedMealPlans);
-      }});
+      }
+    
+      if(optimizedMealPlans.optimizedMealPlans)
+      this.optimizationState = optimizedMealPlans.optimizedMealPlans.optimizationState;
+    });
 
   }
 
