@@ -10,6 +10,7 @@ import { Store } from '@ngrx/store';
 import { UserPreferences } from '../../store/reducers/user-preferences.reducer';
 import { AuthenticatedUser } from 'src/app/user-mgmt/store/reducers/user-mgmt.reducer';
 import * as OrderActions from '../../store/actions/order.actions';
+import { OptimizedMealPlans } from '../../store/reducers/order.reducer';
 
 @Component({
   selector: 'app-manage-meal-plan',
@@ -46,6 +47,17 @@ export class ManageMealPlanComponent implements OnInit, OnDestroy {
 
         this.store.select('authenticatedUser').subscribe((authenticatedUser : AuthenticatedUser) => {
           this.authenticatedUser = authenticatedUser.user;
+        });
+
+        //Switch back to 'create' mode if optimization result state is FAILED OR INFEASIBLE
+        this.store.select('optimizedPlans').subscribe((optimizedMealPlans : OptimizedMealPlans) => {
+          if(optimizedMealPlans.optimizedMealPlans && optimizedMealPlans.optimizedMealPlans.optimizationState !== "DISTINCT" && optimizedMealPlans.optimizedMealPlans.optimizationState !== "OPTIMAL" && optimizedMealPlans.optimizedMealPlans.optimizationState !== "FEASIBLE") {
+            this.router.navigate([],{
+              relativeTo : this.route,
+              queryParams : { mode: 'create' }
+            });
+            this.disableGetMealPlan = false;
+          }
         });
   }
 

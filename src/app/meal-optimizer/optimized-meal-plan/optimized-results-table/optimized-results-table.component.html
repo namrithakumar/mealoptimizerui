@@ -5,10 +5,10 @@
         <a class="nav-link active" data-toggle="tab" href="#orderInfo" (click)="onTabSelected('orderInfo')">User's Choice</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" data-toggle="tab" href="#optimizedByCost" (click)="onTabSelected('optimizedByCost')">Optimized by Cost</a>
+        <a class="nav-link" data-toggle="tab" href="#optimizedByCost" (click)="onTabSelected('optimizedByCost')" [class.disabled]="optimizationState !== 'DISTINCT' && optimizationState !== 'FEASIBLE' && optimizationState !== 'OPTIMAL'">Optimized by Cost</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" data-toggle="tab" href="#optimizedByQuality" (click)="onTabSelected('optimizedByQuality')"> Optimized by Quality</a>
+        <a class="nav-link" data-toggle="tab" href="#optimizedByQuality" (click)="onTabSelected('optimizedByQuality')" [class.disabled]="optimizationState !== 'DISTINCT' && optimizationState !== 'FEASIBLE' && optimizationState !== 'OPTIMAL'"> Optimized by Quality</a>
       </li>
     </ul>
   

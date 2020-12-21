@@ -3,11 +3,13 @@ export class OrderResponse {
     public orderId : number;
     public mealPlan : MealPlan[];
     public dateOfDelivery : Date;
+    public optimizationState : String;
 
-    constructor(orderId : number, mealPlan : MealPlan[], dateOfDelivery : Date) {
+    constructor(orderId : number, mealPlan : MealPlan[], dateOfDelivery : Date, optimizationState : String) {
         this.orderId = orderId;
         this.mealPlan = mealPlan;
         this.dateOfDelivery = dateOfDelivery;
+        this.optimizationState = optimizationState;
     }
 }
 

@@ -17,7 +17,7 @@ const defaultMealPlans : OptimizedMealPlans = {
 export function orderReducer(state : OptimizedMealPlans = defaultMealPlans, action : OrderActions.OrderActions) {
     switch(action.type) {
 
-        case OrderActions.CREATE_ORDER_SUCCESS : 
+        case OrderActions.CREATE_ORDER_SUCCESS :
             return { ...state, optimizedMealPlans : action.payload, error : null, status : OptimizationStatus.RESPONSE_RECEIVED };
 
         case OrderActions.CREATE_ORDER_FAIL:
