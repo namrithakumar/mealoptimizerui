@@ -10,11 +10,12 @@ import { User } from '../../../shared/model/user.model';
 import { of } from "rxjs";
 import { JwtHelperService } from "@auth0/angular-jwt";
 import { UserMgmtService } from '../../../shared/services/user-mgmt.service';
+import { Router } from "@angular/router";
 
 @Injectable()
 export class UserMgmtEffects {
 
-    constructor(private http : HttpClient, private actions$ : Actions, private store : Store<AppState>, private jwtHelper : JwtHelperService, private userMgmtService : UserMgmtService) {}
+    constructor(private http : HttpClient, private actions$ : Actions, private store : Store<AppState>, private jwtHelper : JwtHelperService, private userMgmtService : UserMgmtService, private router : Router) {}
 
 @Effect()
 signup = this.actions$.pipe(
@@ -47,7 +48,8 @@ logout = this.actions$.pipe(
     ofType<UserMgmtActions.Logout>(UserMgmtActions.LOGOUT),
     tap(() => {
         this.userMgmtService.clearLogoutTimer();
-        localStorage.clear();
+        sessionStorage.clear();
+        this.router.navigate(['/user-mgmt','login']);
     })
 );
 
@@ -55,7 +57,7 @@ logout = this.actions$.pipe(
 autoLogin = this.actions$.pipe(
     ofType<UserMgmtActions.AutoLogin>(UserMgmtActions.AUTO_LOGIN),
     map(() => {
-        const userData = JSON.parse(localStorage.getItem('userData'));
+        const userData = JSON.parse(sessionStorage.getItem('userData'));
         let loadedUser : User;
         if( !userData || (this.jwtHelper.isTokenExpired(userData.token))) {
             return { type : 'NO_ACTION' }
@@ -70,13 +72,15 @@ autoLogin = this.actions$.pipe(
 
 private handleSuccessfulAuthentication(user : User) {
     user.tokenExpiryDate = new Date(new Date().getTime() + user.tokenValidTime);
-    localStorage.setItem('userData', JSON.stringify(user));
+    sessionStorage.setItem('userData', JSON.stringify(user));
     this.userMgmtService.setLogoutTimer(new Date(user.tokenExpiryDate).getTime() - new Date().getTime());
     return new UserMgmtActions.AuthSuccess(user);
 }
 
 private handleAuthenticationError(error : any) {
     var defaultErrorMessage = 'There was an error authenticating the user.';
+    sessionStorage.clear();
+    this.userMgmtService.clearLogoutTimer();
     if(!error || !error.error) return of(new UserMgmtActions.AuthError(defaultErrorMessage));
     else return of(new UserMgmtActions.AuthError(error.error.error + error.error.message));
     }

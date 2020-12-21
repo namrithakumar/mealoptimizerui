@@ -7,9 +7,10 @@ import { UseDietTypeResolver } from '../shared/services/user-diet-type-resolver.
 import { RecipesComponent } from './recipes/recipes.component';
 import { RecipeDetailComponent } from './recipes/recipe-detail/recipe-detail.component';
 import { OnlineOrderComponent } from './online-order/online-order.component';
+import { AuthGuardService } from '../shared/services/auth-guard.service';
 
 const mealOptimizerRoutes : Routes = [
-    {path:'meal-optimizer', canDeactivate: [CanExitPageService], component: MealOptimizerComponent, resolve:{userDietTypes: UseDietTypeResolver}, children : [
+    {path:'meal-optimizer', canActivate: [AuthGuardService], canDeactivate: [CanExitPageService], component: MealOptimizerComponent, resolve:{userDietTypes: UseDietTypeResolver}, children : [
         {path:'recipes', component: RecipesComponent, children: [
             {path:':id', component: RecipeDetailComponent} ]},
         {path:'online-order', component : OnlineOrderComponent}

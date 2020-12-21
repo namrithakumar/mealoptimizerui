@@ -17,17 +17,9 @@ export class UserDietTypeComponent implements OnInit {
 
     @Input() dietTypes : Array<IUserDietType>;
 
-    setCollapseInd : boolean = false;
-
     onDietTypeSelect(dietType : String) {
         this.store.dispatch(new UserPreferenceActions.EditDietType(dietType));
     }
 
     ngOnInit(): void { }
-
-    @HostListener('mouseover', ['$event'])  
-    @HostListener('mouseout', ['$event']) handleMouseEvent() {
-        //Update collapse indicator only if diet type is not empty
-            this.setCollapseInd = false;
-    }
 }
