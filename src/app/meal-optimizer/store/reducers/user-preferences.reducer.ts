@@ -32,6 +32,9 @@ export function userPreferencesReducer(state : UserPreferences = defaultPreferen
         case UserPreferenceActions.OPTIMIZATION_TYPE_SELECTED:
             return {...state, optimizationTypeSelected : action.payload};
 
+        case UserPreferenceActions.CLEAR_USER_PREFERENCES:
+            return defaultPreferences;
+
         default : return state;
     }
 }

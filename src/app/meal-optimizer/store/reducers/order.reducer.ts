@@ -26,6 +26,9 @@ export function orderReducer(state : OptimizedMealPlans = defaultMealPlans, acti
         case OrderActions.UPDATE_OPTIMIZATION_STATUS:
             return { ...state, status : action.payload };
 
+        case OrderActions.CLEAR_ORDER:
+            return defaultMealPlans;
+            
         default : return state;
     }
 }

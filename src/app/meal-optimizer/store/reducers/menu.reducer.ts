@@ -16,6 +16,9 @@ export function menuReducer(state : Menu = defaultMenu, action : MenuActions.Men
         case MenuActions.UPDATE_MENU_FAIL:
             return { ...state, itemList : null, error: action.payload }; 
             
+        case MenuActions.CLEAR_MENU:
+            return defaultMenu;
+
         default: return state;
     }
 }

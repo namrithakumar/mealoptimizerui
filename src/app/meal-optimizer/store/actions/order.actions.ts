@@ -6,6 +6,7 @@ export const CREATE_ORDER_START = '[Get meal plan] CREATE_ORDER_START';
 export const CREATE_ORDER_SUCCESS = '[Get meal plan] CREATE_ORDER_SUCCESS';
 export const CREATE_ORDER_FAIL = '[Get meal plan] CREATE_ORDER_FAIL';
 export const UPDATE_OPTIMIZATION_STATUS = '[Get meal plan] UPDATE_OPTIMIZATION_STATUS';
+export const CLEAR_ORDER = '[Get meal plan] CLEAR_ORDER';
 
 export class CreateOrderStart implements Action {
     readonly type = CREATE_ORDER_START;
@@ -27,4 +28,8 @@ export class UpdateOptimizationStatus implements Action {
     constructor(public payload : OptimizationStatus) {}
 }
 
-export type OrderActions = CreateOrderStart | CreateOrderSuccess | CreateOrderFail | UpdateOptimizationStatus;
+export class ClearOrder implements Action {
+    readonly type = CLEAR_ORDER;
+}
+
+export type OrderActions = CreateOrderStart | CreateOrderSuccess | CreateOrderFail | UpdateOptimizationStatus | ClearOrder;
