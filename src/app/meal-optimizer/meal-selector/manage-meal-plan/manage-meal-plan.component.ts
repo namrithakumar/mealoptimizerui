@@ -11,6 +11,7 @@ import { UserPreferences } from '../../store/reducers/user-preferences.reducer';
 import { AuthenticatedUser } from 'src/app/user-mgmt/store/reducers/user-mgmt.reducer';
 import * as OrderActions from '../../store/actions/order.actions';
 import { OptimizedMealPlans } from '../../store/reducers/order.reducer';
+import { OrderResponse } from 'src/app/shared/model/order-response.model';
 
 @Component({
   selector: 'app-manage-meal-plan',
@@ -21,10 +22,8 @@ export class ManageMealPlanComponent implements OnInit, OnDestroy {
 
   disableGetMealPlan : boolean = false;
 
-  disableUpdateMealPlan : boolean = false;
+  savedMealPlans : OrderResponse;
   
-  orderInfoUpdated : boolean = false;
-
   userPrefs : UserPreferences;
 
   authenticatedUser : User;
@@ -52,12 +51,14 @@ export class ManageMealPlanComponent implements OnInit, OnDestroy {
         //Switch back to 'create' mode if optimization result state is FAILED OR INFEASIBLE
         this.store.select('optimizedPlans').subscribe((optimizedMealPlans : OptimizedMealPlans) => {
           if(optimizedMealPlans.optimizedMealPlans && optimizedMealPlans.optimizedMealPlans.optimizationState !== "DISTINCT" && optimizedMealPlans.optimizedMealPlans.optimizationState !== "OPTIMAL" && optimizedMealPlans.optimizedMealPlans.optimizationState !== "FEASIBLE") {
+            this.savedMealPlans = null;
             this.router.navigate([],{
               relativeTo : this.route,
               queryParams : { mode: 'create' }
             });
             this.disableGetMealPlan = false;
           }
+          else this.savedMealPlans = optimizedMealPlans.optimizedMealPlans;
         });
   }
 
@@ -75,9 +76,13 @@ export class ManageMealPlanComponent implements OnInit, OnDestroy {
   }
 
   onUpdateMealPlan() {
-    //If all inputs are received, notify call backend to get a meal plan . If all inputs are not received, display an alert.
-    //(this.userPrefs.deliveryDate !== null && this.userPrefs.dietType !==null && this.userPrefs.mealSelected.length === 4)?console.log('Send update request to backend'):alert('One of the required inputs is missing');
-    this.disableUpdateMealPlan = true; 
+    /* We do not check if this.savedMealPlans !=null since this point is reached 
+     * only if the order has been saved atleast once, 
+     * if the order has never been saved, the app is create mode. 
+     */
+    
+    if(this.userPrefs.deliveryDate !== null && this.userPrefs.dietType !==null && this.userPrefs.mealSelected.length === 4)
+      console.log('Order ID to be updated ' + this.savedMealPlans.orderId);
   }
 
   ngOnDestroy() : void {}

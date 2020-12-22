@@ -1,8 +1,13 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CanComponentDeactivate } from '../shared/services/can-exit-page.service';
 import { Observable } from 'rxjs';
 import { IUserDietType } from '../shared/services/user-diet-type-resolver.service';
-import { ActivatedRoute, Data } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
+import { AppState } from 'src/app/store/reducers/app.reducer';
+import { Action, Store } from '@ngrx/store';
+import * as UserPreferencesActions from './store/actions/user-preferences.actions';
+import * as MenuActions from './store/actions/menu.actions';
+import * as OrderActions from './store/actions/order.actions';
 
 //This component handles routing, link to optimizationService via controller
 @Component({
@@ -12,7 +17,7 @@ import { ActivatedRoute, Data } from '@angular/router';
 })
 export class MealOptimizerComponent implements OnInit, CanComponentDeactivate {
 
-  constructor(private route: ActivatedRoute) {
+  constructor(private route: ActivatedRoute, private store : Store<AppState>) {
   }
 
   dietTypes : Array<IUserDietType>;
@@ -24,6 +29,14 @@ export class MealOptimizerComponent implements OnInit, CanComponentDeactivate {
   }
 
   canDeactivate() : Observable<boolean> | Promise<boolean> | boolean {
-    return true;
+    if(confirm('You are navigating away from the page. Your inputs will be reset.')) {
+      [new UserPreferencesActions.ClearUserPreferences(), 
+        new MenuActions.ClearMenu(),
+        new OrderActions.ClearOrder()].forEach((action : Action) => {
+          this.store.dispatch(action);
+        });
+        return true;
+    }
+    else return false;
   }
 }

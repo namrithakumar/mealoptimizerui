@@ -1,5 +1,5 @@
-import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
-import { NgForm } from '@angular/forms';
+import { Component, OnInit, OnDestroy, ViewChild, ElementRef } from '@angular/core';
+import { FormControl, NgForm } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { Store } from '@ngrx/store';
 
@@ -44,9 +44,8 @@ export class ShoppingEditComponent implements OnInit, OnDestroy {
       });
   }
 
-  onSubmit(form: NgForm) {    
+  onSubmit(form: NgForm) {
     const value = form.value;
-    //console.log('pristine : ' + form.controls['name'].pristine + ' dirty : '+ form.controls['name'].dirty + ' touched : ' + form.controls['name'].touched);
     let updatedLabels = null;    
     let newIngredient = null;    
     if (this.editMode) {
