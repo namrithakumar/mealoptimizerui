@@ -38,7 +38,6 @@ export class ManageMealPlanComponent implements OnInit, OnDestroy {
         // Get value of mode (create or edit)
         this.route.queryParams.subscribe((queryParams : String) => {
           this.mode = queryParams['optimizermode'];
-          console.log('optmizermode : ' + this.mode);
         });
 
         this.store.select('userPreferences').subscribe((userPrefs : UserPreferences) => {

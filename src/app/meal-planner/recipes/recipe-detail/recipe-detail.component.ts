@@ -41,7 +41,6 @@ export class RecipeDetailComponent implements OnInit, OnDestroy {
      */
     this.route.params.subscribe((params : Params) => {
       this.id = +params['id'];
-      console.log('Recipe ID ' + this.id);
       this.recipeSelected = this.recipeService.getRecipeById(this.id);
       this.noOfPortions = this.optimizationService.getPortionCountByOptimizationTypeMealName(this.optimizationTypeSelected, this.recipeSelected.name);
   });
@@ -63,7 +62,8 @@ export class RecipeDetailComponent implements OnInit, OnDestroy {
       ));
     });
     this.store.dispatch(new ShoppingListActions.AddIngredients(this.shoppingItems));
-    this.router.navigate([ 'meal-planner' , { outlets : { mealoptimizer : 'meal-optimizer', recipes : ['recipes'], shoppinglist : 'shopping-list' } }], { queryParams : { shoppinglistmode : 'add' }, queryParamsHandling : 'merge' });
+    //id can either be taken from the current route or from this.id in this component.
+    this.router.navigate([ 'meal-planner' , { outlets : { mealoptimizer : 'meal-optimizer', recipes : ['recipes', this.route.snapshot.params['id']], shoppinglist : 'shopping-list' } }], { queryParams : { shoppinglistmode : 'add' }, queryParamsHandling : 'merge' });
   }
 
   ngOnDestroy() {}

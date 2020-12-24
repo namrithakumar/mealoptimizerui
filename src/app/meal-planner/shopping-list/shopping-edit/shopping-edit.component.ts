@@ -1,5 +1,5 @@
-import { Component, OnInit, OnDestroy, ViewChild, ElementRef } from '@angular/core';
-import { FormControl, NgForm } from '@angular/forms';
+import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
+import { NgForm } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { Store } from '@ngrx/store';
 
@@ -18,7 +18,7 @@ export class ShoppingEditComponent implements OnInit, OnDestroy {
   @ViewChild('f', { static: false }) slForm: NgForm;
   
   subscription: Subscription;
-  editMode = false;
+  mode : String = 'Add';
   editedItem: ShoppingItem = null;
 
   defaultLabel : String = 'Added by user';
@@ -31,22 +31,30 @@ export class ShoppingEditComponent implements OnInit, OnDestroy {
 
     // Get value of mode (create or update)
     this.route.queryParams.subscribe((queryParams : String) => {
-      console.log('shoppinglistmode : ' + queryParams['shoppinglistmode']);
+      this.mode = queryParams['shoppinglistmode'];
     });
 
     this.subscription = this.store
       .select('shoppingList')
       .subscribe(stateData => {
         if (stateData.editedshoppingItemIndex > -1) {
-          this.editMode = true;
           this.editedItem = stateData.editedshoppingItem;
           this.slForm.setValue({
             name: this.editedItem.name,
             amount: this.editedItem.amount,
             measure: this.editedItem.measure
           });
+          this.router.navigate([],{
+            relativeTo : this.route,
+            queryParams : { shoppinglistmode: 'update' },
+            queryParamsHandling : 'merge'
+          });
         } else {
-          this.editMode = false;
+          this.router.navigate([],{
+            relativeTo : this.route,
+            queryParams : { shoppinglistmode: 'add' },
+            queryParamsHandling : 'merge'
+          });
         }
       });
   }
@@ -55,7 +63,7 @@ export class ShoppingEditComponent implements OnInit, OnDestroy {
     const value = form.value;
     let updatedLabels = null;    
     let newIngredient = null;    
-    if (this.editMode) {
+    if (this.mode === 'update') {
       //Calculate updatedLabels. Add the label 'Added by User' if it is not already available 
       updatedLabels = this.editedItem.labels.slice();
       if(!updatedLabels.includes(this.defaultLabel)) updatedLabels.push(this.defaultLabel);
@@ -74,13 +82,12 @@ export class ShoppingEditComponent implements OnInit, OnDestroy {
       queryParams : { shoppinglistmode: 'add' },
       queryParamsHandling : 'merge'
     });
-    this.editMode = false;
+    this.mode = 'add';
     form.reset();
   }
 
   onClear() {
     this.slForm.reset();
-    this.editMode = false;
     this.store.dispatch(new ShoppingListActions.StopEdit());
     this.router.navigate([],{
       relativeTo : this.route,
