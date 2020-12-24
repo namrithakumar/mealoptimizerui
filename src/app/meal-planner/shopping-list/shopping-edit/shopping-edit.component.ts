@@ -6,6 +6,7 @@ import { Store } from '@ngrx/store';
 import { ShoppingItem } from '../../../shared/model/shopping-item-model';
 import * as ShoppingListActions from '../store/shopping-list.actions';
 import * as fromApp from '../../../store/reducers/app.reducer';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-shopping-edit',
@@ -23,10 +24,16 @@ export class ShoppingEditComponent implements OnInit, OnDestroy {
   defaultLabel : String = 'Added by user';
 
   constructor(
-    private store: Store<fromApp.AppState>
+    private store: Store<fromApp.AppState>, private router : Router, private route : ActivatedRoute
   ) {}
 
   ngOnInit() {
+
+    // Get value of mode (create or update)
+    this.route.queryParams.subscribe((queryParams : String) => {
+      console.log('shoppinglistmode : ' + queryParams['shoppinglistmode']);
+    });
+
     this.subscription = this.store
       .select('shoppingList')
       .subscribe(stateData => {
@@ -62,6 +69,11 @@ export class ShoppingEditComponent implements OnInit, OnDestroy {
       newIngredient = new ShoppingItem(value.name, value.amount, value.measure, [this.defaultLabel]);
       this.store.dispatch(new ShoppingListActions.AddIngredient(newIngredient));
     }    
+    this.router.navigate([],{
+      relativeTo : this.route,
+      queryParams : { shoppinglistmode: 'add' },
+      queryParamsHandling : 'merge'
+    });
     this.editMode = false;
     form.reset();
   }
@@ -70,6 +82,11 @@ export class ShoppingEditComponent implements OnInit, OnDestroy {
     this.slForm.reset();
     this.editMode = false;
     this.store.dispatch(new ShoppingListActions.StopEdit());
+    this.router.navigate([],{
+      relativeTo : this.route,
+      queryParams : { shoppinglistmode: 'add' },
+      queryParamsHandling : 'merge'
+    });
   }
 
   onDelete() {

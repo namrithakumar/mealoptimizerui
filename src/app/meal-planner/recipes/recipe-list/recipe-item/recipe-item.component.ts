@@ -1,5 +1,5 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component, OnInit, Input } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Recipe } from 'src/app/shared/model/recipe.model';
 
 @Component({
@@ -9,16 +9,17 @@ import { Recipe } from 'src/app/shared/model/recipe.model';
 })
 export class RecipeItemComponent implements OnInit {
 
+  //Recipe and index are set from RecipeList.
   @Input() recipe : Recipe;
 
   @Input() indexOfRecipe: number;
 
-  constructor(private router : Router) { }
+  constructor(private router : Router, private route : ActivatedRoute) { }
 
   ngOnInit(): void {
   }
 
   onItemSelect() : void {
-    this.router.navigate(['meal-optimizer','recipes',this.indexOfRecipe]);
+    this.router.navigate([ 'meal-planner' , { outlets : { mealoptimizer : 'meal-optimizer', recipes : [ 'recipes' , this.indexOfRecipe ] } }] , { queryParams : this.route.snapshot.queryParams });
   }
 }

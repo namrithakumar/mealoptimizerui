@@ -8,6 +8,9 @@ import { AppState } from 'src/app/store/reducers/app.reducer';
   templateUrl: './order-info.component.html',
   styleUrls: ['./order-info.component.css']
 })
+/*
+ * This tab displays the user inputs (diet type / delivery date / meals selected)
+ */
 export class OrderInfoComponent implements OnInit, OnDestroy {
 
   orderInfo : { dietType: String, deliveryDate: Date, mealSelected: Array<String> } = { dietType : null, deliveryDate: null, mealSelected: null };

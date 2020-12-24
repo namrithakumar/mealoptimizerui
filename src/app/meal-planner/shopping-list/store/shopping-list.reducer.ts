@@ -42,7 +42,8 @@ export function shoppingListReducer(
       };
     
     case ShoppingListActions.UPDATE_INGREDIENT:
-
+      
+      //If name is not updated, only update the item.
       if(!action.payload.itemNameUpdated) {
         updatedShoppingList = updateCurrentShoppingList(action.payload.shoppingItem, state.shoppingItems);
       }

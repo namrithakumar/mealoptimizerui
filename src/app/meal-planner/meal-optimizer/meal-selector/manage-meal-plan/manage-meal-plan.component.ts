@@ -37,7 +37,8 @@ export class ManageMealPlanComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
         // Get value of mode (create or edit)
         this.route.queryParams.subscribe((queryParams : String) => {
-          this.mode = queryParams['mode'];
+          this.mode = queryParams['optimizermode'];
+          console.log('optmizermode : ' + this.mode);
         });
 
         this.store.select('userPreferences').subscribe((userPrefs : UserPreferences) => {
@@ -54,7 +55,7 @@ export class ManageMealPlanComponent implements OnInit, OnDestroy {
             this.savedMealPlans = null;
             this.router.navigate([],{
               relativeTo : this.route,
-              queryParams : { mode: 'create' }
+              queryParams : { optimizermode: 'create' }
             });
             this.disableGetMealPlan = false;
           }
@@ -69,7 +70,7 @@ export class ManageMealPlanComponent implements OnInit, OnDestroy {
       //Call backend to get a meal plan
       this.store.dispatch(new OrderActions.CreateOrderStart(this.orderRequest));
       //Change to update mode to allow user to update the inputs if they want
-      this.router.navigate(['/meal-optimizer'], { queryParams: {mode: 'update'} });
+      this.router.navigate([ 'meal-planner' , { outlets : { mealoptimizer : 'meal-optimizer' } }] , { queryParams : { optimizermode: 'update' } });
       this.disableGetMealPlan = true;
     }
     else alert('One of the required inputs is missing');
@@ -78,7 +79,7 @@ export class ManageMealPlanComponent implements OnInit, OnDestroy {
   onUpdateMealPlan() {
     /* We do not check if this.savedMealPlans !=null since this point is reached 
      * only if the order has been saved atleast once, 
-     * if the order has never been saved, the app is create mode. 
+     * if the order has never been saved, the optimizer is in create mode. 
      */
     
     if(this.userPrefs.deliveryDate !== null && this.userPrefs.dietType !==null && this.userPrefs.mealSelected.length === 4)

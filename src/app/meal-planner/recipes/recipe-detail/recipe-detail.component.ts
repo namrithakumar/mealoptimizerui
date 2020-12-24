@@ -29,12 +29,19 @@ export class RecipeDetailComponent implements OnInit, OnDestroy {
 
     this.optimizationTypeSelected = 'COST';
 
+    /*
+     * We need to know optimizationType selected by the user since the no of portions varies based on the optimization type.
+     */
     this.store.select('userPreferences').subscribe((userPreferences : UserPreferences) => {
       this.optimizationTypeSelected = userPreferences.optimizationTypeSelected;
     });
 
+    /*
+     * When /meal-planner/recipes/recipeID is loaded, select the recipe based on the ID. 
+     */
     this.route.params.subscribe((params : Params) => {
       this.id = +params['id'];
+      console.log('Recipe ID ' + this.id);
       this.recipeSelected = this.recipeService.getRecipeById(this.id);
       this.noOfPortions = this.optimizationService.getPortionCountByOptimizationTypeMealName(this.optimizationTypeSelected, this.recipeSelected.name);
   });
@@ -42,6 +49,9 @@ export class RecipeDetailComponent implements OnInit, OnDestroy {
 
   constructor(private route: ActivatedRoute, private recipeService: RecipeService, private optimizationService : OptimizationService, private router : Router, private store : Store<AppState>) {}
 
+  /*
+   * When 'Add to Shopping List' is clicked, add named router-outlet shoppinglist, and dispatch a ShoppingList action.
+   */
   onAddToShoppingList(): void {
     this.shoppingItems = new Array<ShoppingItem>();
     this.recipeSelected.ingredients.forEach((ingredient : Ingredient) => {
@@ -53,6 +63,7 @@ export class RecipeDetailComponent implements OnInit, OnDestroy {
       ));
     });
     this.store.dispatch(new ShoppingListActions.AddIngredients(this.shoppingItems));
+    this.router.navigate([ 'meal-planner' , { outlets : { mealoptimizer : 'meal-optimizer', recipes : ['recipes'], shoppinglist : 'shopping-list' } }], { queryParams : { shoppinglistmode : 'add' }, queryParamsHandling : 'merge' });
   }
 
   ngOnDestroy() {}
