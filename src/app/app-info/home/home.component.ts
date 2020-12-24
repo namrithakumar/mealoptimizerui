@@ -27,6 +27,6 @@ export class HomeComponent implements OnInit {
   }
 
   goToMealPlanner() : void {
-    this.router.navigate(['/meal-optimizer'], { queryParams: {mode: 'create'} });
+    this.router.navigate(['/meal-planner', { outlets: { mealoptimizer : ['meal-optimizer'] } }], { queryParams: {optimizermode: 'create'} });
   }
 }

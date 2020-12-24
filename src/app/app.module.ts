@@ -15,15 +15,15 @@ import { JwtHelperService, JWT_OPTIONS  } from '@auth0/angular-jwt';
 import * as fromApp from '../app/store/reducers/app.reducer';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
-import { UserPreferencesEffects } from './meal-optimizer/store/effects/user-preferences.effects';
-import { MenuEffects } from '../app/meal-optimizer/store/effects/menu.effects';
-import { OrderEffects } from '../app/meal-optimizer/store/effects/order.effects';
-import { RecipesEffects } from '../app/meal-optimizer/recipes/store/effects/recipes.effects';
+import { UserPreferencesEffects } from './meal-planner/meal-optimizer/store/effects/user-preferences.effects';
+import { MenuEffects } from '../app/meal-planner/meal-optimizer/store/effects/menu.effects';
+import { OrderEffects } from '../app/meal-planner/meal-optimizer/store/effects/order.effects';
+import { RecipesEffects } from '../app/meal-planner/recipes/store/effects/recipes.effects';
 import { UserMgmtEffects } from '../app/user-mgmt/store/effects/user-mgmt.effects';
 import { HeaderComponent } from './header/header.component';
 import { AppInfoModule } from '../app/app-info/app-info.module';
 import { UserMgmtModule } from '../app/user-mgmt/user-mgmt.module';
-import { MealOptimizerModule } from './meal-optimizer/meal-optimizer.module';
+import { MealPlannerModule } from '../app/meal-planner/meal-planner.module';
 
 @NgModule({
   declarations: [
@@ -35,7 +35,7 @@ import { MealOptimizerModule } from './meal-optimizer/meal-optimizer.module';
   imports: [
     AppInfoModule,
     UserMgmtModule,
-    MealOptimizerModule,
+    MealPlannerModule,
     BrowserModule,
     BrowserAnimationsModule,
     FormsModule,

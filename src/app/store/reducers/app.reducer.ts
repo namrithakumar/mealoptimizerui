@@ -1,10 +1,10 @@
 import { ActionReducerMap } from '@ngrx/store';
-import * as fromUserPreferences from '../../meal-optimizer/store/reducers/user-preferences.reducer';
-import * as fromMenu from '../../meal-optimizer/store/reducers/menu.reducer';
+import * as fromUserPreferences from '../../meal-planner/meal-optimizer/store/reducers/user-preferences.reducer';
+import * as fromMenu from '../../meal-planner/meal-optimizer/store/reducers/menu.reducer';
 import * as fromUserMgmt from '../../user-mgmt/store/reducers/user-mgmt.reducer';
-import * as fromOptimizedPlans from '../../meal-optimizer/store/reducers/order.reducer';
-import * as fromRecipes from '../../meal-optimizer/recipes/store/reducers/recipes.reducer';
-import * as fromShoppingList from '../../meal-optimizer/recipes/shopping-list/store/shopping-list.reducer';
+import * as fromOptimizedPlans from '../../meal-planner/meal-optimizer/store/reducers/order.reducer';
+import * as fromRecipes from '../../meal-planner/recipes/store/reducers/recipes.reducer';
+import * as fromShoppingList from '../../meal-planner/shopping-list/store/shopping-list.reducer';
 
 export interface AppState {
     userPreferences : fromUserPreferences.UserPreferences,

@@ -132,7 +132,7 @@ export class UserRegisterComponent implements OnInit {
     this.store.select('authenticatedUser').subscribe(( authenticatedUser : AuthenticatedUser ) => {
       if(authenticatedUser.error) this.error = authenticatedUser.error;
       else {
-      this.router.navigate(['/meal-optimizer'], { queryParams: {mode: 'create'} });
+        this.router.navigate(['/meal-planner', { outlets: { mealoptimizer : ['meal-optimizer'] } }], { queryParams: {optimizermode: 'create'} });
     }});
   }
 }

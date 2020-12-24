@@ -1,0 +1,6 @@
+<div *ngIf="orderInfo !== undefined">
+    <h3>You chose</h3>
+    <ul>{{ orderInfo.dietType }}</ul>
+    <ul>{{ orderInfo.deliveryDate | date: 'fullDate' }}</ul>
+    <ul *ngFor = 'let meal of orderInfo.mealSelected'>{{ meal }}</ul>
+</div>

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { OptimizedMealPlans } from 'src/app/meal-optimizer/store/reducers/order.reducer';
+import { OptimizedMealPlans } from 'src/app/meal-planner/meal-optimizer/store/reducers/order.reducer';
 import { AppState } from 'src/app/store/reducers/app.reducer';
 import { Meal, MealPlan } from '../model/order-response.model';
 import { OrderResponse } from '../model/order-response.model';
