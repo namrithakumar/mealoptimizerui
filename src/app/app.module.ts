@@ -24,6 +24,8 @@ import { HeaderComponent } from './header/header.component';
 import { AppInfoModule } from '../app/app-info/app-info.module';
 import { UserMgmtModule } from '../app/user-mgmt/user-mgmt.module';
 import { MealPlannerModule } from '../app/meal-planner/meal-planner.module';
+import { ServiceWorkerModule } from '@angular/service-worker';
+import { environment } from '../environments/environment';
 
 @NgModule({
   declarations: [
@@ -43,7 +45,8 @@ import { MealPlannerModule } from '../app/meal-planner/meal-planner.module';
     HttpClientModule,
     AppRoutingModule,
     StoreModule.forRoot(fromApp.appReducer),
-    EffectsModule.forRoot([UserPreferencesEffects, MenuEffects, OrderEffects, RecipesEffects, UserMgmtEffects])    
+    EffectsModule.forRoot([UserPreferencesEffects, MenuEffects, OrderEffects, RecipesEffects, UserMgmtEffects]),
+    ServiceWorkerModule.register('offline-service-worker.js', { scope : '/', enabled: environment.production })    
   ],
   providers: [{ provide : HTTP_INTERCEPTORS, useClass : AuthInterceptor, multi : true},
               { provide: JWT_OPTIONS, useValue: JWT_OPTIONS },
