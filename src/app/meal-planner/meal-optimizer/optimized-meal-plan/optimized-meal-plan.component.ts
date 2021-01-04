@@ -34,7 +34,9 @@ export class OptimizedMealPlanComponent implements OnInit, OnDestroy {
   // Display help text if optimization state != DISTINCT | OPTIMAL | FEASIBLE
   optimizationState : String;
   
-  isValidOptimizationState : boolean;
+  optimizationError : String;
+
+  isValidOptimizationState : boolean = true;
 
   constructor(private router : Router, private store : Store<AppState>, private route : ActivatedRoute) { }
 
@@ -45,15 +47,22 @@ export class OptimizedMealPlanComponent implements OnInit, OnDestroy {
     });
 
     this.store.select('optimizedPlans').subscribe((optimizedMealPlans : OptimizedMealPlans) => {
-      if(optimizedMealPlans.optimizedMealPlans)
-      this.optimizationState = optimizedMealPlans.optimizedMealPlans.optimizationState;
-
-      if(optimizedMealPlans.status !== OptimizationStatus.RESPONSE_RECEIVED) {
-      this.isValidOptimizationState = true;
-      } else {
-          if(this.optimizationState === 'DISTINCT' || this.optimizationState === 'OPTIMAL' || this.optimizationState === 'FEASIBLE') this.isValidOptimizationState = true;
-          else this.isValidOptimizationState = false;
+      
+      //If there is an error, display error message.
+      if(optimizedMealPlans.error) {
+        this.optimizationError = optimizedMealPlans.error;
       }
+      
+      //If there is no error, verify if response is received and optimizationState belongs to one of the 3 valid states - DISTINCT | OPTIMAL | FEASIBLE
+      if(optimizedMealPlans.optimizedMealPlans) {      
+        this.optimizationState = optimizedMealPlans.optimizedMealPlans.optimizationState;
+
+        if(optimizedMealPlans.status !== OptimizationStatus.RESPONSE_RECEIVED) {
+          this.isValidOptimizationState = true;
+        } else {
+            if(this.optimizationState === 'DISTINCT' || this.optimizationState === 'OPTIMAL' || this.optimizationState === 'FEASIBLE') this.isValidOptimizationState = true;
+            else this.isValidOptimizationState = false;
+        }}
     });
   }
 

@@ -1,7 +1,10 @@
+<div *ngIf="optimizationError">
+    There was an internal error. Please try again later.
+</div>
 <div *ngIf="!isValidOptimizationState">
     Sorry, the meals you have selected does not satisfy your daily nutrition requirements. Please choose a different meal plan.
-<hr/>
 </div>
+<hr/>
 <h4><b><i>Result</i></b></h4>
 <app-optimized-results-table></app-optimized-results-table>
 <br/>

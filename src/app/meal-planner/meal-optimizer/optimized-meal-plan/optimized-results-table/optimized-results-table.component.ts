@@ -49,13 +49,11 @@ export class OptimizedResultsTableComponent implements OnInit, OnDestroy {
        * Once meal plan is received from the backend, parse it into a suitable format 
        * and bind it to the individual tabs using attribute binding.
        */
-      if(optimizedMealPlans.status === OptimizationStatus.RESPONSE_RECEIVED) {
+      if(optimizedMealPlans.status === OptimizationStatus.RESPONSE_RECEIVED && !optimizedMealPlans.error) {
         this.costOptimizedPlan = this.optimizationService.getMealPlanByOptimizationType('COST', optimizedMealPlans);
         this.qualityOptimizedPlan = this.optimizationService.getMealPlanByOptimizationType('QUALITY', optimizedMealPlans);
-      }
-    
-      if(optimizedMealPlans.optimizedMealPlans)
-      this.optimizationState = optimizedMealPlans.optimizedMealPlans.optimizationState;
+        this.optimizationState = optimizedMealPlans.optimizedMealPlans.optimizationState;
+      }      
     });
 
   }

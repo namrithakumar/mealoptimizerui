@@ -48,17 +48,18 @@ export class ManageMealPlanComponent implements OnInit, OnDestroy {
           this.authenticatedUser = authenticatedUser.user;
         });
 
-        //Switch back to 'create' mode if optimization result state is FAILED OR INFEASIBLE
+        //Switch to 'update' mode if there is no error and optimization result state is DISTINCT OR OPTIMAL OR FEASIBLE
         this.store.select('optimizedPlans').subscribe((optimizedMealPlans : OptimizedMealPlans) => {
-          if(optimizedMealPlans.optimizedMealPlans && optimizedMealPlans.optimizedMealPlans.optimizationState !== "DISTINCT" && optimizedMealPlans.optimizedMealPlans.optimizationState !== "OPTIMAL" && optimizedMealPlans.optimizedMealPlans.optimizationState !== "FEASIBLE") {
-            this.savedMealPlans = null;
+          if(!optimizedMealPlans.error && (optimizedMealPlans.optimizedMealPlans && (optimizedMealPlans.optimizedMealPlans.optimizationState === "DISTINCT" || optimizedMealPlans.optimizedMealPlans.optimizationState === "OPTIMAL" || optimizedMealPlans.optimizedMealPlans.optimizationState === "FEASIBLE"))) {
+            this.savedMealPlans = optimizedMealPlans.optimizedMealPlans;
             this.router.navigate([],{
               relativeTo : this.route,
-              queryParams : { optimizermode: 'create' }
+              queryParams : { optimizermode: 'update' }
             });
             this.disableGetMealPlan = false;
           }
-          else this.savedMealPlans = optimizedMealPlans.optimizedMealPlans;
+          else { 
+            this.savedMealPlans = null;}
         });
   }
 
@@ -68,8 +69,6 @@ export class ManageMealPlanComponent implements OnInit, OnDestroy {
       this.orderRequest = this.orderService.createOrderRequest(this.userPrefs.deliveryDate, this.userPrefs.mealSelected, this.authenticatedUser);    
       //Call backend to get a meal plan
       this.store.dispatch(new OrderActions.CreateOrderStart(this.orderRequest));
-      //Change to update mode to allow user to update the inputs if they want
-      this.router.navigate([ 'meal-planner' , { outlets : { mealoptimizer : 'meal-optimizer' } }] , { queryParams : { optimizermode: 'update' } });
       this.disableGetMealPlan = true;
     }
     else alert('One of the required inputs is missing');
