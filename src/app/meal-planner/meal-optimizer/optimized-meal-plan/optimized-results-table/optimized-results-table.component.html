@@ -2,13 +2,24 @@
     <!-- Nav tabs -->
     <ul class="nav nav-tabs">
       <li class="nav-item">
-        <a class="nav-link active" data-toggle="tab" href="#orderInfo" (click)="onTabSelected('orderInfo')">User's Choice</a>
+        <a class="nav-link active" 
+           data-toggle="tab" 
+           href="#orderInfo" 
+           (click)="onTabSelected('orderInfo')"> User's Choice </a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" data-toggle="tab" href="#optimizedByCost" (click)="onTabSelected('optimizedByCost')" [class.disabled]="optimizationState !== 'DISTINCT' && optimizationState !== 'FEASIBLE' && optimizationState !== 'OPTIMAL'">Optimized by Cost</a>
+        <a class="nav-link" 
+           data-toggle="tab" 
+           href="#optimizedByCost" 
+           (click)="onTabSelected('optimizedByCost')" 
+           [class.disabled]="optimizationState !== 'DISTINCT' && optimizationState !== 'FEASIBLE' && optimizationState !== 'OPTIMAL'">Optimized by Cost</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" data-toggle="tab" href="#optimizedByQuality" (click)="onTabSelected('optimizedByQuality')" [class.disabled]="optimizationState !== 'DISTINCT' && optimizationState !== 'FEASIBLE' && optimizationState !== 'OPTIMAL'"> Optimized by Quality</a>
+        <a class="nav-link" 
+        data-toggle="tab" 
+        href="#optimizedByQuality" 
+        (click)="onTabSelected('optimizedByQuality')" 
+        [class.disabled]="optimizationState !== 'DISTINCT' && optimizationState !== 'FEASIBLE' && optimizationState !== 'OPTIMAL'"> Optimized by Quality</a>
       </li>
     </ul>
   
@@ -19,10 +30,7 @@
       </div>
       <div id="optimizedByCost" class="container tab-pane fade"><br>
         <h3>Meal Plan - Optimized by Cost</h3>
-        <div [ngSwitch] = "optimizationStatus">
-          <p *ngSwitchCase="optimizationStatusValues.NO_ACTION">Meal plan will be displayed here</p>
-          <div *ngSwitchCase="optimizationStatusValues.REQUEST_SENT"><app-loading-spinner></app-loading-spinner></div>
-          <div *ngSwitchCase="optimizationStatusValues.RESPONSE_RECEIVED">
+          <div *ngIf="optimizationStatusValues.RESPONSE_RECEIVED">
           <table class="table">
             <thead>
               <tr class="d-flex">
@@ -31,7 +39,10 @@
               </tr>
             </thead>
             <tbody>
-          <app-optimized-result-cost  *ngFor="let meal of costOptimizedPlan.mealList" [meal]="meal"></app-optimized-result-cost>
+          <app-optimized-result-cost  
+            *ngFor="let meal of costOptimizedPlan.mealList" 
+            [meal]="meal">
+          </app-optimized-result-cost>
           <tr>
             <td [attr.colspan]="2">Total cost: {{ costOptimizedPlan.planCost }}</td>
           </tr>
@@ -39,13 +50,9 @@
         </table>
         </div>
       </div>
-      </div>
       <div id="optimizedByQuality" class="container tab-pane fade"><br>
         <h3>Meal Plan - Optimized by Quality</h3>
-        <div [ngSwitch] = "optimizationStatus">
-          <p *ngSwitchCase="optimizationStatusValues.NO_ACTION">Meal plan will be displayed here</p>
-          <div *ngSwitchCase="optimizationStatusValues.REQUEST_SENT"><app-loading-spinner></app-loading-spinner></div>
-          <div *ngSwitchCase="optimizationStatusValues.RESPONSE_RECEIVED">
+          <div *ngIf="optimizationStatusValues.RESPONSE_RECEIVED">
           <table class="table">
             <thead>
               <tr class="d-flex">
@@ -54,14 +61,16 @@
               </tr>
             </thead>
             <tbody>
-          <app-optimized-result-quality *ngFor="let meal of qualityOptimizedPlan.mealList" [meal]="meal"></app-optimized-result-quality>
+          <app-optimized-result-quality 
+            *ngFor="let meal of qualityOptimizedPlan.mealList" 
+            [meal]="meal">
+          </app-optimized-result-quality>
             <tr>
               <td [attr.colspan]="2">Total cost: {{ qualityOptimizedPlan.planCost }}</td>
             </tr>
           </tbody>
           </table>
         </div>
-      </div>
       </div>
     </div>
   </div>

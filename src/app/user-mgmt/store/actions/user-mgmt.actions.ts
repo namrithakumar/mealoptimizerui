@@ -3,6 +3,10 @@ import { Action } from '@ngrx/store';
 import { UserSignUpRequest } from '../../../shared/model/user-signup-request.model';
 import { User } from '../../../shared/model/user.model';
 
+/* AUTH_SUCCESS and AUTH_ERROR are common for both SIGNUP and LOGIN.
+ * Other actions are self explanatory.
+ */
+
 export const SIGNUP_START = '[User mgmt] SIGNUP_START';
 export const AUTH_SUCCESS = '[User mgmt] AUTH_SUCCESS';
 export const AUTH_ERROR = '[User mgmt] AUTH_ERROR';

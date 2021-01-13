@@ -18,19 +18,29 @@ import { OrderResponse } from 'src/app/shared/model/order-response.model';
   templateUrl: './manage-meal-plan.component.html',
   styleUrls: ['./manage-meal-plan.component.css']
 })
+/* This component performs 3 actions
+ * Get mode from the url : This decide whether the backend call must be a CREATE (POST) or an UPDATE (PUT)
+ * Get values of user prefs and authenticated user from the store and create the meal plan request
+ * Call backend by dispatching the action CREATE_ORDER_START
+ */
 export class ManageMealPlanComponent implements OnInit, OnDestroy {
 
+  //Enable or disable the 'Get Meal Plan' button based on whether the user inputs are valid or not
   disableGetMealPlan : boolean = false;
 
+  //This value is truthy if a valid meal plan is generated atleast once. 
+  //We need the ID of the generated meal plan for further updates.
   savedMealPlans : OrderResponse;
   
+  //Read the user inputs from store to generate a meal plan request
   userPrefs : UserPreferences;
 
+  //Read the authenticatedUser info from store to include user ID in the meal plan request
   authenticatedUser : User;
 
+  //Mode toggles between get and update to either generate meal plan for the first time 
+  //or to update an existing meal plan.
   mode : String;
-
-  orderRequest : any;
 
   constructor(private store : Store<AppState>, private router : Router, private route:ActivatedRoute, private userService : UserService, private optimizationService : OptimizationService, private orderService : OrderService) { }
 
@@ -66,9 +76,9 @@ export class ManageMealPlanComponent implements OnInit, OnDestroy {
   onGetMealPlan() {
     if(this.userPrefs.deliveryDate !== null && this.userPrefs.dietType !==null && this.userPrefs.mealSelected.length === 4) {
       //If all inputs are received, create the order
-      this.orderRequest = this.orderService.createOrderRequest(this.userPrefs.deliveryDate, this.userPrefs.mealSelected, this.authenticatedUser);    
+      let orderRequest = this.orderService.createOrderRequest(this.userPrefs.deliveryDate, this.userPrefs.mealSelected, this.authenticatedUser);    
       //Call backend to get a meal plan
-      this.store.dispatch(new OrderActions.CreateOrderStart(this.orderRequest));
+      this.store.dispatch(new OrderActions.CreateOrderStart(orderRequest));
       this.disableGetMealPlan = true;
     }
     else alert('One of the required inputs is missing');

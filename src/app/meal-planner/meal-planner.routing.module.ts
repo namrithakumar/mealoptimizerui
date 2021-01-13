@@ -16,7 +16,7 @@ const mealPlannerRoutes : Routes = [
         {path:'meal-optimizer', outlet:'mealoptimizer', canActivate: [AuthGuardService], canDeactivate: [CanExitPageService], component: MealOptimizerComponent, resolve:{userDietTypes: UseDietTypeResolver}},
         {path:'recipes', outlet:'recipes', component: RecipesComponent, children: [
             {path:':id', component: RecipeDetailComponent} ]},
-        {path:'online-order', component : OnlineOrderComponent},
+        {path:'online-order', outlet:'onlineorder', component : OnlineOrderComponent},
         {path:'shopping-list', outlet:'shoppinglist', component : ShoppingListComponent}
     ]}];
 

@@ -8,6 +8,9 @@ import { AuthenticatedUser } from 'src/app/user-mgmt/store/reducers/user-mgmt.re
   templateUrl: './online-order.component.html',
   styleUrls: ['./online-order.component.css']
 })
+/* This component displays delivery information such as address, first name 
+ * and last name based on the authenticatedUser.
+ */
 export class OnlineOrderComponent implements OnInit {
 
   constructor(private store : Store<AppState>) { }
@@ -19,5 +22,4 @@ export class OnlineOrderComponent implements OnInit {
       this.authenticatedUser = authenticatedUser;
     });
   }
-
 }

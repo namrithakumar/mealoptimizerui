@@ -16,6 +16,7 @@ import * as UserPreferencesActions from '../store/actions/user-preferences.actio
     styleUrls: ['delivery-date-selector.component.css'],
     templateUrl: './delivery-date-selector.component.html',
   })
+  // This component performs only 1 action - save delivery date chosen to store.
   export class DeliveryDateSelectorComponent implements OnInit {
 
     propertyName = 'deliveryDate';
