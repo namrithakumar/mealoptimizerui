@@ -8,6 +8,7 @@ import * as UserPreferenceActions from '../store/actions/user-preferences.action
     selector: 'app-user-diet-type',
     templateUrl: './user_diet_type.component.html' 
 })
+// This class displays the list of diet types and allows the user to choose a diet type.
 export class UserDietTypeComponent implements OnInit {
     
     propertyName: String = 'dietType';
@@ -16,6 +17,7 @@ export class UserDietTypeComponent implements OnInit {
 
     @Input() dietTypes : Array<IUserDietType>;
 
+    // When the user selects a diet type, dispatch and action to fetch menu.
     onDietTypeSelect(dietType : String) {
         this.store.dispatch(new UserPreferenceActions.EditDietType(dietType));
     }
