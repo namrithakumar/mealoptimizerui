@@ -127,7 +127,7 @@ export class UserRegisterComponent implements OnInit {
   }
 
   signup() {
-    let signupRequest = this.userService.createUserRequest(this.signupForm.value);
+    let signupRequest = this.userService.createUserSignupRequest(this.signupForm.value);
     this.store.dispatch(new UserMgmtActions.SignupStart(signupRequest));
     this.store.select('authenticatedUser').subscribe(( authenticatedUser : AuthenticatedUser ) => {
       if(authenticatedUser.error) this.error = authenticatedUser.error;

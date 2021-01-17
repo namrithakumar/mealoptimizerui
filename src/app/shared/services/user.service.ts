@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 import { Observable, throwError } from "rxjs";
 import { UserSignUpRequest } from "../model/user-signup-request.model";
-import { catchError, tap } from "rxjs/operators";
+import { catchError } from "rxjs/operators";
 import { Nutrient } from "../model/nutrient.model";
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
@@ -33,13 +33,15 @@ export class UserService {
         return defaultNutrients;
     }
 
-    createUserRequest(userSignupInputs) : UserSignUpRequest {
+    createUserSignupRequest(userSignupInputs) : UserSignUpRequest {
         //userSignupInputs.nutrients is an array of objects
         let minMaxNutrientLimits = this.parseNutrientLimits(userSignupInputs.nutrients);
         let usersignupReq = new UserSignUpRequest(userSignupInputs.signupInfo.username, userSignupInputs.signupInfo.password, userSignupInputs.signupInfo.email, userSignupInputs.preferredDietType, minMaxNutrientLimits.nutrientMinLimits, minMaxNutrientLimits.nutrientMinLimits);
         return usersignupReq;
     }
 
+    // The nutrient min-max elements for each user is stored as { nutrientName, min, max }
+    // We split it into 2 separate objects - { nutrientName, min } and { nutrientName, max} to mae it easier to handle. 
     private parseNutrientLimits(limitInfo : { name: String, min:number, max:number}[]) :  { nutrientMinLimits : {}, nutrientMaxLimits: {}} {
         let nutrientMinLimitMap = new Map<String, number>();
         let nutrientMaxLimitMap = new Map<String, number>();
@@ -47,14 +49,7 @@ export class UserService {
             nutrientMinLimitMap.set(nutrient.name, nutrient.min);
             nutrientMaxLimitMap.set(nutrient.name, nutrient.max);
         });
-        return { nutrientMinLimits : this.convertMapToObj(nutrientMinLimitMap), nutrientMaxLimits: this.convertMapToObj(nutrientMaxLimitMap)};
-    }
-
-    private convertMapToObj(limitMap : Map<String, number>) {
-        let nutrientLimitObj = {};
-        limitMap.forEach((value : number, key : string) => {
-            nutrientLimitObj[key.toString()] = value;
-        });
-        return nutrientLimitObj;
+        //return { nutrientMinLimits : this.convertMapToObj(nutrientMinLimitMap), nutrientMaxLimits: this.convertMapToObj(nutrientMaxLimitMap)};
+        return { nutrientMinLimits : Object.fromEntries(nutrientMinLimitMap), nutrientMaxLimits: Object.fromEntries(nutrientMaxLimitMap)};
     }
 }
