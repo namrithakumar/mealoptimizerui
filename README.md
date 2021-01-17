@@ -1,2 +1,3 @@
 # mealoptimizerui
-UI for mealoptimizer application developer using Angular
+UI for mealoptimizer application
+Framework used: Angular
