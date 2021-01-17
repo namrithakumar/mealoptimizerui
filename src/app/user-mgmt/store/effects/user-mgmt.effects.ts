@@ -2,8 +2,6 @@ import { Injectable } from "@angular/core";
 
 import { HttpClient } from '@angular/common/http';
 import { Actions, Effect, ofType } from '@ngrx/effects';
-import { Store } from '@ngrx/store';
-import { AppState } from '../../../store/reducers/app.reducer';
 import * as UserMgmtActions from '../actions/user-mgmt.actions';
 import { switchMap, catchError, map, tap } from 'rxjs/operators';
 import { User } from '../../../shared/model/user.model';
@@ -15,8 +13,16 @@ import { Router } from "@angular/router";
 @Injectable()
 export class UserMgmtEffects {
 
-    constructor(private http : HttpClient, private actions$ : Actions, private store : Store<AppState>, private jwtHelper : JwtHelperService, private userMgmtService : UserMgmtService, private router : Router) {}
+    constructor(private http : HttpClient, 
+                private actions$ : Actions, 
+                private jwtHelper : JwtHelperService, 
+                private userMgmtService : UserMgmtService, 
+                private router : Router) {}
 
+/*
+ * All of the below methods send a request to the backend and handle a response.
+ * Names are self explanatory.
+ */
 @Effect()
 signup = this.actions$.pipe(
     ofType<UserMgmtActions.SignupStart>(UserMgmtActions.SIGNUP_START),
@@ -70,13 +76,24 @@ autoLogin = this.actions$.pipe(
     })
 );
 
-private handleSuccessfulAuthentication(user : User) {
-    user.tokenExpiryDate = new Date(new Date().getTime() + user.tokenValidTime);
-    sessionStorage.setItem('userData', JSON.stringify(user));
-    this.userMgmtService.setLogoutTimer(new Date(user.tokenExpiryDate).getTime() - new Date().getTime());
-    return new UserMgmtActions.AuthSuccess(user);
+//Common method to handle successful authentication for both signup and login.
+/* On successful authentication - store token into browser storage.
+ * Set timer for autologout.
+ * Dispatch action AUTHENTICATION_SUCCESS with authenticatedUser info as payload.
+ */
+private handleSuccessfulAuthentication(authenticatedUser : User) {
+    authenticatedUser.tokenExpiryDate = new Date(new Date().getTime() + authenticatedUser.tokenValidTime);
+    sessionStorage.setItem('userData', JSON.stringify(authenticatedUser));
+    this.userMgmtService.setLogoutTimer(new Date(authenticatedUser.tokenExpiryDate).getTime() - new Date().getTime());
+    return new UserMgmtActions.AuthSuccess(authenticatedUser);
 }
 
+//Common method to handle authentication error for both signup and login.
+/* On authentication failure,
+ * Clear browser storage
+ * Clear logout timer if it exists
+ * Dispatch AUTHENTICATION_ERROR with error message as payload.
+ */
 private handleAuthenticationError(error : any) {
     var defaultErrorMessage = 'There was an error authenticating the user.';
     sessionStorage.clear();

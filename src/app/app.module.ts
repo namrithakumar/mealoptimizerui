@@ -24,13 +24,15 @@ import { HeaderComponent } from './header/header.component';
 import { AppInfoModule } from '../app/app-info/app-info.module';
 import { UserMgmtModule } from '../app/user-mgmt/user-mgmt.module';
 import { MealPlannerModule } from '../app/meal-planner/meal-planner.module';
+import { AppOfflineStatusHandlerComponent } from './shared/app-offline-status-handler/app-offline-status-handler.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     ErrorPageComponent,
     AppLoadingSpinnerComponent,
-    HeaderComponent
+    HeaderComponent,
+    AppOfflineStatusHandlerComponent
   ],
   imports: [
     AppInfoModule,

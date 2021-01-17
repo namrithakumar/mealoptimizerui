@@ -9,6 +9,8 @@ import { UserPreferences } from '../store/reducers/user-preferences.reducer';
   styleUrls: ['./meal-selector.component.css']
 })
 
+/* This component is a holder for menu received from the backend.
+ */
 export class MealSelectorComponent implements OnInit {
 
   constructor(private store : Store<AppState>) {}
@@ -27,6 +29,5 @@ export class MealSelectorComponent implements OnInit {
   }
 
   afterViewInit() {
-    //this.collapseInd = this.displayService.canCollapseMealList;
   }
 }

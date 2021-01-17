@@ -1,17 +1,40 @@
 <form (ngSubmit)="onLogin()" #loginForm="ngForm">
     <div *ngIf="error">Sorry an error occurred : {{ error }}</div>
+    
     <label for="username">username:</label><br/>
-    <input type="text" id="username" name="username" ngModel name="username" required minlength="2" maxlength="20" #username="ngModel"><br><br>
+    <input type="text" 
+           id="username" 
+           name="username" 
+           ngModel 
+           name="username" 
+           required 
+           minlength="2" 
+           maxlength="20" 
+           #username="ngModel">
+    <br>
+    <br>
     <div *ngIf="!username.valid && username.touched">
-    <span class="help-block">Please enter a valid username</span>
+        <span class="help-block">Please enter a valid username</span>
     <br/>
     </div>
     <label for="password">password</label><br/>
-    <input type="password" id="password" name="password" ngModel name="password" required minlength="6" maxlength="10" #password="ngModel"><br><br>
+    <input type="password" 
+           id="password" 
+           name="password" 
+           ngModel 
+           name="password" 
+           required 
+           minlength="6" 
+           maxlength="10" 
+           #password="ngModel">
+    <br>
+    <br>
     <div *ngIf="!password.valid && password.touched">
-    <span class="help-block">Please enter a valid password</span>
-    <br/>
+        <span class="help-block">Please enter a valid password</span>
+        <br>
     </div>
-    <button type="submit" [disabled]="!loginForm.valid">Login</button>
-    <button type="button" (click)="switchToRegister()">Register</button>
+    <button type="submit" 
+            [disabled]="!loginForm.valid">Login</button>
+    <button type="button" 
+            (click)="switchToRegister()">Register</button>
 </form>

@@ -14,6 +14,7 @@ export class UseDietTypeResolver implements Resolve<IUserDietType[]> {
     constructor(private userDietService : UserDietService) {}
     
     resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) : Observable<IUserDietType[]> | Promise<IUserDietType[]> | IUserDietType[] {
+        //To be changed to fetch diet types from cache using service worker if a copy is available.
         return this.userDietService.getDietTypes();
     }
 }
