@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { ErrorHandler, NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
@@ -25,6 +25,8 @@ import { AppInfoModule } from '../app/app-info/app-info.module';
 import { UserMgmtModule } from '../app/user-mgmt/user-mgmt.module';
 import { MealPlannerModule } from '../app/meal-planner/meal-planner.module';
 import { AppOfflineStatusHandlerComponent } from './shared/app-offline-status-handler/app-offline-status-handler.component';
+import { interceptorProviders } from '../app/shared/services/interceptor/interceptors';
+import { AppErrorDisplayComponent } from '../app/shared/app-error-display/app-error-display.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +34,8 @@ import { AppOfflineStatusHandlerComponent } from './shared/app-offline-status-ha
     ErrorPageComponent,
     AppLoadingSpinnerComponent,
     HeaderComponent,
-    AppOfflineStatusHandlerComponent
+    AppOfflineStatusHandlerComponent,
+    AppErrorDisplayComponent
   ],
   imports: [
     AppInfoModule,
@@ -47,8 +50,8 @@ import { AppOfflineStatusHandlerComponent } from './shared/app-offline-status-ha
     StoreModule.forRoot(fromApp.appReducer),
     EffectsModule.forRoot([UserPreferencesEffects, MenuEffects, OrderEffects, RecipesEffects, UserMgmtEffects])    
   ],
-  providers: [{ provide : HTTP_INTERCEPTORS, useClass : AuthInterceptor, multi : true},
-              { provide: JWT_OPTIONS, useValue: JWT_OPTIONS },
+  providers: [ interceptorProviders,
+              { provide : JWT_OPTIONS, useValue : JWT_OPTIONS },
               JwtHelperService],
   bootstrap: [AppComponent]
 })

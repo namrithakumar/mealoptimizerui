@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Actions, Effect, ofType } from '@ngrx/effects';
 import * as UserMgmtActions from '../actions/user-mgmt.actions';
 import { switchMap, catchError, map, tap } from 'rxjs/operators';
