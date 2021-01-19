@@ -4,6 +4,7 @@ import { Actions, Effect, ofType } from "@ngrx/effects";
 import { Store } from "@ngrx/store";
 import { of } from "rxjs";
 import { catchError, map, switchMap } from "rxjs/operators";
+import { ErrorDisplayService } from "src/app/shared/services/error-display.service";
 import { Recipe } from "../../../../shared/model/recipe.model";
 import { AppState } from "../../../../store/reducers/app.reducer";
 import * as RecipesActions from '../actions/recipes.actions';
@@ -11,7 +12,10 @@ import * as RecipesActions from '../actions/recipes.actions';
 @Injectable()
 export class RecipesEffects {
 
-    constructor(private http : HttpClient, private actions$ : Actions, private store : Store<AppState>) {}
+    constructor(private http : HttpClient, 
+                private actions$ : Actions, 
+                private store : Store<AppState>,
+                private errorDisplayService : ErrorDisplayService) {}
 
     @Effect()
     fetchRecipes = this.actions$.pipe(
@@ -25,6 +29,7 @@ export class RecipesEffects {
                     return new RecipesActions.FetchRecipesSuccess(recipes);
                 }),
                 catchError((error : any) => {
+                    if(error.status !== 404 && error.status !== 0) this.errorDisplayService.showError();
                     return of(new RecipesActions.FetchRecipesFail(error.error.message));
                 })
             )

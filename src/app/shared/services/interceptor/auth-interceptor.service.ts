@@ -11,6 +11,7 @@ import { exhaustMap, take } from 'rxjs/operators';
 import { AppState } from 'src/app/store/reducers/app.reducer';
 import { Store } from '@ngrx/store';
 import { AuthenticatedUser } from 'src/app/user-mgmt/store/reducers/user-mgmt.reducer';
+import { ConnectionStatusProviderService } from '../connection-status-provider.service';
 
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
