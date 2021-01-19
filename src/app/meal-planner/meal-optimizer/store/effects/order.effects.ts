@@ -7,11 +7,15 @@ import { AppState } from '../../../../store/reducers/app.reducer';
 import * as OrderActions from '../actions/order.actions';
 import { of } from 'rxjs';
 import { OrderResponse } from '../../../../shared/model/order-response.model';
+import { ErrorDisplayService } from 'src/app/shared/services/error-display.service';
 
 @Injectable()
 export class OrderEffects {
 
-    constructor(private http : HttpClient, private actions$ : Actions, private store : Store<AppState>) {}
+    constructor(private http : HttpClient, 
+                private actions$ : Actions, 
+                private store : Store<AppState>,
+                private errorDisplayService : ErrorDisplayService) {}
 
 @Effect()
 placeOrder = this.actions$.pipe(
@@ -23,6 +27,7 @@ placeOrder = this.actions$.pipe(
                         return new OrderActions.CreateOrderSuccess(optimizedMealPlans);
                     }),
                     catchError((error : any) => {
+                        if(error.status !== 404 && error.status !== 0) this.errorDisplayService.showError();
                         return of(new OrderActions.CreateOrderFail(error.error.message));
                     })
                 )

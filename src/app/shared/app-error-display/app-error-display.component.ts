@@ -8,13 +8,12 @@ import { ErrorDisplayService } from '../services/error-display.service' ;
 })
 export class AppErrorDisplayComponent implements OnInit {
 
-  constructor() { }
+  constructor(private errorDisplayService : ErrorDisplayService) { }
 
   ngOnInit(): void {
   }
 
   public hideErrorDisplay() : void {
-    console.log('Hide overlay called');
-    //this.errorDisplayService.hideOverlay();
+    this.errorDisplayService.hideError();
   }
 }

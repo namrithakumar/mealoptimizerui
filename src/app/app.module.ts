@@ -1,20 +1,20 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { ErrorHandler, NgModule } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { HttpClientModule } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
 import { ErrorPageComponent } from './shared/error-page/error-page.component';
-import { AuthInterceptor } from './shared/services/interceptor/auth-interceptor.service';
 import { AppLoadingSpinnerComponent } from './shared/app-loading-spinner/app-loading-spinner.component';
 import { JwtHelperService, JWT_OPTIONS  } from '@auth0/angular-jwt';
 
 import * as fromApp from '../app/store/reducers/app.reducer';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
+import { OverlayModule } from "@angular/cdk/overlay";
 import { UserPreferencesEffects } from './meal-planner/meal-optimizer/store/effects/user-preferences.effects';
 import { MenuEffects } from '../app/meal-planner/meal-optimizer/store/effects/menu.effects';
 import { OrderEffects } from '../app/meal-planner/meal-optimizer/store/effects/order.effects';
@@ -47,6 +47,7 @@ import { AppErrorDisplayComponent } from '../app/shared/app-error-display/app-er
     ReactiveFormsModule,
     HttpClientModule,
     AppRoutingModule,
+    OverlayModule,
     StoreModule.forRoot(fromApp.appReducer),
     EffectsModule.forRoot([UserPreferencesEffects, MenuEffects, OrderEffects, RecipesEffects, UserMgmtEffects])    
   ],

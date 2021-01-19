@@ -16,21 +16,16 @@ export class ErrorInterceptor implements HttpInterceptor {
     constructor(private errorDisplayService : ErrorDisplayService) {}
 
     intercept(request : HttpRequest<any>, next : HttpHandler) : Observable<HttpEvent<any>> {
-        let errorMsg : String = 'Error: '
         return next.handle(request).pipe(
             retry(1),
             catchError( err => {
-                console.log('Http error - calling show overlay');
-                //this.errorDisplayService.showOverlay();
                 if(err instanceof ErrorEvent) { 
-                    //Replace console with log to common logging service
-                    console.log('Client side error');                    
-                    errorMsg += `{err.error.message}`;
+                    //Log to common logging service
                 }
                 else if(err instanceof HttpErrorResponse) {
-                    //Replace console with log to common logging service
-                    console.log('Server side error');                    
-                    errorMsg += `{err.status} , {err.message}`;
+                    //Log to common logging service 
+                    //If it is a 404 error, show common error page to the user
+                    if(err.status === 404 || err.status === 0) this.errorDisplayService.showError();
                 }
                 return throwError(err);
             })

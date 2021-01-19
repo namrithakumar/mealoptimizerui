@@ -5,23 +5,20 @@ import { AppErrorDisplayComponent } from '../app-error-display/app-error-display
 
 @Injectable({ providedIn:'root' })
 export class ErrorDisplayService {
- /*   private message = `Sorry, there was an error. Our engineers are  working hard to fix it, you will receive a notification as soon as it is fixed.`;
-    private overlayRef: OverlayRef = null;
+    private overlayRef : OverlayRef;
 
     constructor(private overlay : Overlay) {}
 
-    public showOverlay() {
-      console.log('Show overlay called');
-        if (!this.overlayRef) {
-            this.overlayRef = this.overlay.create();
-          }
-          const userProfilePortal = new ComponentPortal(AppErrorDisplayComponent);
-          this.overlayRef.attach(userProfilePortal);
+    public showError() {
+      this.overlayRef = this.overlay.create();
+      const componentPortal = new ComponentPortal(AppErrorDisplayComponent);
+      this.overlayRef.addPanelClass("example-overlay");
+      this.overlayRef.attach(componentPortal); 
+  }
+
+  public hideError() {      
+      if (!!this.overlayRef) {
+        this.overlayRef.detach();
+      }
     }
-    public hideOverlay() {
-      console.log('Hide overlay called');      
-        if (!!this.overlayRef) {
-          this.overlayRef.detach();
-        }
-      }*/
 }

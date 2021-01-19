@@ -5,12 +5,16 @@ import { switchMap, map, catchError, tap } from 'rxjs/operators';
 import { Store } from '@ngrx/store';
 import { AppState } from '../../../../store/reducers/app.reducer';
 import * as MenuActions from '../actions/menu.actions';
-import { of, throwError } from 'rxjs';
+import { of } from 'rxjs';
+import { ErrorDisplayService } from 'src/app/shared/services/error-display.service';
 
 @Injectable()
 export class MenuEffects {
 
-    constructor(private http : HttpClient, private actions$ : Actions, private store : Store<AppState>) {}
+    constructor(private http : HttpClient, 
+                private actions$ : Actions, 
+                private store : Store<AppState>,
+                private errorDisplayService : ErrorDisplayService) {}
 
     @Effect()
     fetchMenuFromBackend = this.actions$.pipe(
@@ -24,7 +28,8 @@ export class MenuEffects {
                 }),
                 catchError(
                     (errorRes : any) => {
-                        return of(new MenuActions.UpdateMenuFail('There was an error in retrieving the menu. Error was : ' + errorRes.error));
+                        if(errorRes.status !== 404 && errorRes.status !== 0) this.errorDisplayService.showError();
+                        return of(new MenuActions.UpdateMenuFail('There was an error in retrieving the menu.'));
                     }
                 ))
 }));
