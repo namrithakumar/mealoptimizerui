@@ -17,10 +17,19 @@ export class AppComponent implements OnInit {
   constructor(private store : Store<AppState>, private connectionStatusProviderService : ConnectionStatusProviderService, private connectionService : ConnectionService) {
     this.connectionService.monitor().subscribe((connectionStatus : boolean) => {
       this.isConnected = connectionStatus;
+      if(!connectionStatus) { 
+        console.log('Connection lost');        
+        this.offlineSync(); }
   });
   }
 
   ngOnInit() {
     this.store.dispatch(new UserMgmtActions.AutoLogin());
+  }
+
+  public offlineSync() {
+    navigator.serviceWorker.ready
+      .then((swRegistration) => swRegistration.sync.register('post-data'))
+      .catch(console.log);   
   }
 }

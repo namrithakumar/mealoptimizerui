@@ -1,8 +1,3 @@
 <app-header></app-header>
 <hr/>
-<div *ngIf="isConnected">
-    <router-outlet></router-outlet>
-</div>
-<div *ngIf="!isConnected">
-    <app-offline-status-handler></app-offline-status-handler>
-</div>
+<router-outlet></router-outlet>

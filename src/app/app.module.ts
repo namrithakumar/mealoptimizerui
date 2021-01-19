@@ -27,6 +27,8 @@ import { MealPlannerModule } from '../app/meal-planner/meal-planner.module';
 import { AppOfflineStatusHandlerComponent } from './shared/app-offline-status-handler/app-offline-status-handler.component';
 import { interceptorProviders } from '../app/shared/services/interceptor/interceptors';
 import { AppErrorDisplayComponent } from '../app/shared/app-error-display/app-error-display.component';
+import { ServiceWorkerModule } from '@angular/service-worker';
+import { environment } from '../environments/environment';
 
 @NgModule({
   declarations: [
@@ -49,7 +51,8 @@ import { AppErrorDisplayComponent } from '../app/shared/app-error-display/app-er
     AppRoutingModule,
     OverlayModule,
     StoreModule.forRoot(fromApp.appReducer),
-    EffectsModule.forRoot([UserPreferencesEffects, MenuEffects, OrderEffects, RecipesEffects, UserMgmtEffects])    
+    EffectsModule.forRoot([UserPreferencesEffects, MenuEffects, OrderEffects, RecipesEffects, UserMgmtEffects]),
+    ServiceWorkerModule.register('offline-service-worker.js', { scope : '/', enabled: environment.production })    
   ],
   providers: [ interceptorProviders,
               { provide : JWT_OPTIONS, useValue : JWT_OPTIONS },
