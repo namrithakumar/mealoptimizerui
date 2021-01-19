@@ -7,13 +7,14 @@ import { AppState } from '../../../../store/reducers/app.reducer';
 import * as MenuActions from '../actions/menu.actions';
 import { of } from 'rxjs';
 import { ErrorDisplayService } from 'src/app/shared/services/error-display.service';
+import { ConnectionStatusProviderService } from 'src/app/shared/services/connection-status-provider.service';
 
 @Injectable()
 export class MenuEffects {
 
     constructor(private http : HttpClient, 
                 private actions$ : Actions, 
-                private store : Store<AppState>,
+                private connectionStatusProviderService : ConnectionStatusProviderService,
                 private errorDisplayService : ErrorDisplayService) {}
 
     @Effect()
@@ -28,7 +29,7 @@ export class MenuEffects {
                 }),
                 catchError(
                     (errorRes : any) => {
-                        if(errorRes.status !== 404 && errorRes.status !== 0) this.errorDisplayService.showError();
+                        if(this.connectionStatusProviderService.getConnectionStatus() && errorRes.status !== 404 && errorRes.status !== 0) this.errorDisplayService.showError();
                         return of(new MenuActions.UpdateMenuFail('There was an error in retrieving the menu.'));
                     }
                 ))

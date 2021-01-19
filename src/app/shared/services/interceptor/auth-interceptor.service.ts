@@ -11,7 +11,6 @@ import { exhaustMap, take } from 'rxjs/operators';
 import { AppState } from 'src/app/store/reducers/app.reducer';
 import { Store } from '@ngrx/store';
 import { AuthenticatedUser } from 'src/app/user-mgmt/store/reducers/user-mgmt.reducer';
-import { ConnectionStatusProviderService } from '../connection-status-provider.service';
 
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
@@ -19,6 +18,7 @@ export class AuthInterceptor implements HttpInterceptor {
     constructor(private store : Store<AppState>) {}
 
     intercept(request : HttpRequest<any>, next : HttpHandler) : Observable<HttpEvent<any>> {
+        console.log('Inside AuthInterceptor');
         return this.store.select('authenticatedUser').pipe(take(1), exhaustMap(
             (authenticatedUser : AuthenticatedUser) =>{
                 if(!authenticatedUser.user) return next.handle(request);
