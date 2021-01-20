@@ -10,7 +10,8 @@ export class ConnectionStatusInterceptor implements HttpInterceptor {
 
     intercept(request : HttpRequest<any>, next : HttpHandler) : Observable<HttpEvent<any>> {
        
-        //All of the backend end points match this pattern, we need not use []
+        //All of the backend end points match the pattern $(backend url)/mealoptimizer/$(tag), we need not use [].
+        //We use [] to accomodate future changes.
         let result = request.url.match(/.*mealoptimizer\/([a-z]+\/[a-z]+)/) || [];
         let tag = result[1].replace('/', '-');
         if(this.connectionStatusProviderService.getConnectionStatus()) {
