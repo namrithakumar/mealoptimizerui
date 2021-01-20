@@ -25,3 +25,7 @@ self.addEventListener('sync', (event) => {
                             }
     }
 });
+
+retryRequest() {
+    //Read from IndexDB
+}

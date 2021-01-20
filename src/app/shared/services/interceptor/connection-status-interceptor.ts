@@ -17,10 +17,16 @@ export class ConnectionStatusInterceptor implements HttpInterceptor {
         if(this.connectionStatusProviderService.getConnectionStatus()) {
             return next.handle(request);
         }
+        //If network connection is not available
         else {
+            if(request.method === 'GET' || 
+               request.method === 'POST' || 
+               request.method === 'PUT' || 
+               request.method === 'DELETE') {
                 navigator.serviceWorker.ready
                   .then((swRegistration) => swRegistration.sync.register(tag))
                   .catch(console.log);
+            }  
         }
     }
 }
