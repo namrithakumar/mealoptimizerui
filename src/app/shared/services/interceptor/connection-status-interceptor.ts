@@ -9,9 +9,17 @@ export class ConnectionStatusInterceptor implements HttpInterceptor {
     constructor(private connectionStatusProviderService : ConnectionStatusProviderService) {}
 
     intercept(request : HttpRequest<any>, next : HttpHandler) : Observable<HttpEvent<any>> {
-        console.log('Inside ConnectionStatusInterceptor');
+       
+        //All of the backend end points match this pattern, we need not use []
+        let result = request.url.match(/.*mealoptimizer\/([a-z]+\/[a-z]+)/) || [];
+        let tag = result[1].replace('/', '-');
         if(this.connectionStatusProviderService.getConnectionStatus()) {
             return next.handle(request);
+        }
+        else {
+                navigator.serviceWorker.ready
+                  .then((swRegistration) => swRegistration.sync.register(tag))
+                  .catch(console.log);
         }
     }
 }

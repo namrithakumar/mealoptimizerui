@@ -17,7 +17,6 @@ export class ErrorInterceptor implements HttpInterceptor {
     constructor(private errorDisplayService : ErrorDisplayService, private connectionStatusProviderService : ConnectionStatusProviderService) {}
 
     intercept(request : HttpRequest<any>, next : HttpHandler) : Observable<HttpEvent<any>> {
-        console.log('Inside ErrorInterceptor');
         return next.handle(request).pipe(
             retry(1),
             catchError( err => {
@@ -26,9 +25,6 @@ export class ErrorInterceptor implements HttpInterceptor {
                 }
                 else if(err instanceof HttpErrorResponse) {
                     //Log to common logging service
-                    if(!this.connectionStatusProviderService.getConnectionStatus()) {
-                        console.log('Internet is not available, requests will be stored in order to a db and retried when internet is back');
-                    } 
                     //If user is connected to the internet and error is 404, show common error page to the user
                     if(this.connectionStatusProviderService.getConnectionStatus() && 
                        err.status === 404 || err.status === 0) this.errorDisplayService.showError();

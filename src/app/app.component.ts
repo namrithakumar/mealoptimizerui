@@ -19,16 +19,9 @@ export class AppComponent implements OnInit {
   ngOnInit() {
     this.store.dispatch(new UserMgmtActions.AutoLogin());
     this.connectionService.monitor().subscribe((connectionStatus : boolean) => {
-      if(!connectionStatus) {        
-        this.offlineSync();
+      if(!connectionStatus) {
         this.errorDisplayService.showError();
       }
     });
-  }
-
-  public offlineSync() {
-    navigator.serviceWorker.ready
-      .then((swRegistration) => swRegistration.sync.register('post-data'))
-      .catch(console.log);   
   }
 }
