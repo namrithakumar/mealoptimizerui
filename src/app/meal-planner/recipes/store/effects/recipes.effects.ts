@@ -1,22 +1,18 @@
 import { HttpClient, HttpParams } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Actions, Effect, ofType } from "@ngrx/effects";
-import { Store } from "@ngrx/store";
-import { of } from "rxjs";
 import { catchError, map, switchMap } from "rxjs/operators";
-import { ConnectionStatusProviderService } from "src/app/shared/services/connection-status-provider.service";
-import { ErrorDisplayService } from "src/app/shared/services/error-display.service";
+
 import { Recipe } from "../../../../shared/model/recipe.model";
-import { AppState } from "../../../../store/reducers/app.reducer";
 import * as RecipesActions from '../actions/recipes.actions';
+import { RecipeResponseHandler } from '../../../../shared/services/http/http-response-handlers/recipe-response-handler';
 
 @Injectable()
 export class RecipesEffects {
 
     constructor(private http : HttpClient, 
-                private actions$ : Actions, 
-                private connectionStatusProviderService : ConnectionStatusProviderService,
-                private errorDisplayService : ErrorDisplayService) {}
+                private actions$ : Actions,
+                private recipeResponseHandler : RecipeResponseHandler) {}
 
     @Effect()
     fetchRecipes = this.actions$.pipe(
@@ -27,11 +23,10 @@ export class RecipesEffects {
                         .set('names', fetchRecipesAction.payload.join());
             return this.http.get<Recipe[]>(url, {params}).pipe(
                 map((recipes : Recipe[]) => {
-                    return new RecipesActions.FetchRecipesSuccess(recipes);
+                    return this.recipeResponseHandler.handleSuccess(recipes);
                 }),
                 catchError((error : any) => {
-                    if(this.connectionStatusProviderService.getConnectionStatus() && error.status !== 404 && error.status !== 0) this.errorDisplayService.showError();
-                    return of(new RecipesActions.FetchRecipesFail(error.error.message));
+                    return this.recipeResponseHandler.handleFailure(error);
                 })
             )
         })

@@ -1,4 +1,4 @@
 export interface BaseResponseHandler {
-    handleSuccess(successResponse:  any);
-    handleFailure(errorResponse : any);
+    handleSuccess(successResponse:  any, action? : String);
+    handleFailure(errorResponse : any, action? : String);
 }
