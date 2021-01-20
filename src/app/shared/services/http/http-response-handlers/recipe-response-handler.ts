@@ -3,7 +3,7 @@ import { of } from 'rxjs';
 
 import { BaseResponseHandler } from "./base-response-handler";
 import * as RecipeActions from '../../../../meal-planner/recipes/store/actions/recipes.actions';
-import { ConnectionStatusProviderService } from '../../connection-status-provider.service';
+import { ConnectionStatusHandlerService } from '../../connection-status-handler.service';
 import { ErrorDisplayService } from '../../error-display.service';
 import { Recipe } from '../../../model/recipe.model';
 
@@ -11,7 +11,7 @@ import { Recipe } from '../../../model/recipe.model';
 export class RecipeResponseHandler implements BaseResponseHandler{
 
     constructor( 
-        private connectionStatusProviderService : ConnectionStatusProviderService,
+        private connectionStatusHandlerService : ConnectionStatusHandlerService,
         private errorDisplayService : ErrorDisplayService
         ) {}
 
@@ -19,7 +19,7 @@ export class RecipeResponseHandler implements BaseResponseHandler{
         return new RecipeActions.FetchRecipesSuccess(recipes);
     }
     handleFailure(errorResponse: any) {
-        if(this.connectionStatusProviderService.getConnectionStatus() && errorResponse.status !== 404 && errorResponse.status !== 0) this.errorDisplayService.showError();
+        if(this.connectionStatusHandlerService.getConnectionStatus() && errorResponse.status !== 404 && errorResponse.status !== 0) this.errorDisplayService.showError();
         return of(new RecipeActions.FetchRecipesFail('There was an error in fetching the recipes.'));
     }
 }

@@ -3,14 +3,14 @@ import { of } from 'rxjs';
 
 import { BaseResponseHandler } from "./base-response-handler";
 import * as OrderActions from '../../../../meal-planner/meal-optimizer/store/actions/order.actions';
-import { ConnectionStatusProviderService } from '../../connection-status-provider.service';
+import { ConnectionStatusHandlerService } from '../../connection-status-handler.service';
 import { ErrorDisplayService } from '../../error-display.service';
 import { OrderResponse } from '../../../model/order-response.model';
 
 @Injectable({ providedIn : 'root' })
 export class OrderResponseHandler implements BaseResponseHandler {
     constructor( 
-        private connectionStatusProviderService : ConnectionStatusProviderService,
+        private connectionStatusHandlerService : ConnectionStatusHandlerService,
         private errorDisplayService : ErrorDisplayService
         ) {}
 
@@ -21,7 +21,7 @@ export class OrderResponseHandler implements BaseResponseHandler {
         }
     }
     handleFailure(errorResponse: any, action : String) {
-        if(this.connectionStatusProviderService.getConnectionStatus() && errorResponse.status !== 404 && errorResponse.status !== 0) this.errorDisplayService.showError();
+        if(this.connectionStatusHandlerService.getConnectionStatus() && errorResponse.status !== 404 && errorResponse.status !== 0) this.errorDisplayService.showError();
         switch(action) {
             case 'create' : return of(new OrderActions.CreateOrderFail(
                                     'There was an error in creating the meal plan.'));

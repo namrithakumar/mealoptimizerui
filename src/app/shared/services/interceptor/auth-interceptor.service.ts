@@ -18,6 +18,7 @@ export class AuthInterceptor implements HttpInterceptor {
     constructor(private store : Store<AppState>) {}
 
     intercept(request : HttpRequest<any>, next : HttpHandler) : Observable<HttpEvent<any>> {
+        console.log('Inside AuthInterceptor.intercept');
         return this.store.select('authenticatedUser').pipe(take(1), exhaustMap(
             (authenticatedUser : AuthenticatedUser) =>{
                 if(!authenticatedUser.user) return next.handle(request);
