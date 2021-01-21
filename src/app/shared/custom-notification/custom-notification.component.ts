@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
+import { CONTAINER_DATA } from '../services/display.service';
 
 @Component({
   selector: 'app-custom-notification',
@@ -7,7 +8,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CustomNotificationComponent implements OnInit {
 
-  constructor() { }
+  message : String;
+
+  constructor(@Inject(CONTAINER_DATA) message) { 
+    this.message = message;
+  }
 
   ngOnInit(): void {
   }
