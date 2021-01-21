@@ -33,7 +33,7 @@ export class NotificationDisplayService extends DisplayService {
       public hideNotification() {
         //If atleast 1 container is created.
         if(this.notificationReferences.length > 0) {
-          //Get a reference to the earliest/first container created.
+          //Get a reference to the earliest/first container created (and remove it from the list).
           let notificationRef : OverlayRef = this.notificationReferences.shift();
           if(!!notificationRef) {
             //Clear the container.
@@ -43,11 +43,13 @@ export class NotificationDisplayService extends DisplayService {
       }
 
       private getNotificationConfig() : OverlayConfig {
+        //Set position of notification.
         const positionStrategy = this.overlay.position()
                                              .global()
                                              .bottom()
                                              .right();
   
+        //Return object holding all the config properties.
         const notificationConfig = new OverlayConfig({
           scrollStrategy: this.overlay.scrollStrategies.block(),
           positionStrategy
