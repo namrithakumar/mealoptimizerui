@@ -8,6 +8,7 @@ import { CustomNotificationComponent } from '../custom-notification/custom-notif
 @Injectable({ providedIn : 'root' })
 export class NotificationDisplayService extends DisplayService {
     
+    //OverlayRef is the container created dynamically. Store a list of all containers created dynamically for tracking.
     private notificationReferences : Array<OverlayRef> = new Array<OverlayRef>();
 
     constructor(private overlay : Overlay) {
@@ -15,19 +16,27 @@ export class NotificationDisplayService extends DisplayService {
     }
 
     public showNotification(content : String) {
+        //Create container dynamically.
         let notificationRef : OverlayRef = this.overlay.create(this.getNotificationConfig());
+        //Add to list of containers.
         this.notificationReferences.push(notificationRef);
+        //Create component dynamically.
         const componentPortal = new ComponentPortal(CustomNotificationComponent, 
                                                     null, 
                                                     this.createInjector(content));
+        //Attach component to container
         notificationRef.attach(componentPortal);
-        setTimeout(this.hideNotification.bind(this), 2000);       
+        //Auto hide notification after 20 secs.
+        setTimeout(this.hideNotification.bind(this), 20000);       
       }
 
       public hideNotification() {
+        //If atleast 1 container is created.
         if(this.notificationReferences.length > 0) {
+          //Get a reference to the earliest/first container created.
           let notificationRef : OverlayRef = this.notificationReferences.shift();
           if(!!notificationRef) {
+            //Clear the container.
             notificationRef.detach();
           }
         }
