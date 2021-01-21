@@ -8,27 +8,28 @@ import { CustomNotificationComponent } from '../custom-notification/custom-notif
 @Injectable({ providedIn : 'root' })
 export class NotificationDisplayService extends DisplayService {
     
-    private notificationRef : OverlayRef;
-    
+    private notificationReferences : Array<OverlayRef> = new Array<OverlayRef>();
+
     constructor(private overlay : Overlay) {
         super();
     }
 
     public showNotification(content : String) {
-        this.notificationRef = this.overlay.create(this.getNotificationConfig());
-        //Hide any existing notifications
-        this.hideNotification();
+        let notificationRef : OverlayRef = this.overlay.create(this.getNotificationConfig());
+        this.notificationReferences.push(notificationRef);
         const componentPortal = new ComponentPortal(CustomNotificationComponent, 
                                                     null, 
                                                     this.createInjector(content));
-        //this.overlayRef.addPanelClass("example-overlay");
-        this.notificationRef.attach(componentPortal);
-        setTimeout(this.hideNotification.bind(this),2000);       
-      }  
-  
+        notificationRef.attach(componentPortal);
+        setTimeout(this.hideNotification.bind(this), 2000);       
+      }
+
       public hideNotification() {
-        if(!!this.notificationRef) {
-          this.notificationRef.detach();
+        if(this.notificationReferences.length > 0) {
+          let notificationRef : OverlayRef = this.notificationReferences.shift();
+          if(!!notificationRef) {
+            notificationRef.detach();
+          }
         }
       }
 
