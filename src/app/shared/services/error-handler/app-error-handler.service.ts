@@ -5,6 +5,7 @@ import { OverlayDisplayService } from '../overlay-display.service';
 import { ConnectionStatusProviderService } from '../connection-status-provider.service';
 
 @Injectable({ providedIn : 'root' })
+//Handles server(HTTP call) and client errors. Called from inside ErrorInterceptor.
 export class AppErrorHandler extends ErrorHandler {
 
     constructor(private overlayDisplayService : OverlayDisplayService,
