@@ -2,19 +2,16 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Actions, Effect, ofType } from '@ngrx/effects';
 import { switchMap, map, catchError, tap } from 'rxjs/operators';
-import { Store } from '@ngrx/store';
-import { AppState } from '../../../../store/reducers/app.reducer';
 import * as MenuActions from '../actions/menu.actions';
 import { of } from 'rxjs';
-import { ErrorDisplayService } from 'src/app/shared/services/error-display.service';
+import { OverlayDisplayService } from 'src/app/shared/services/overlay-display.service';
 
 @Injectable()
 export class MenuEffects {
 
     constructor(private http : HttpClient, 
-                private actions$ : Actions, 
-                private store : Store<AppState>,
-                private errorDisplayService : ErrorDisplayService) {}
+                private actions$ : Actions,
+                private overlayDisplayService : OverlayDisplayService) {}
 
     @Effect()
     fetchMenuFromBackend = this.actions$.pipe(
@@ -28,7 +25,7 @@ export class MenuEffects {
                 }),
                 catchError(
                     (errorRes : any) => {
-                        if(errorRes.status !== 404 && errorRes.status !== 0) this.errorDisplayService.showError();
+                        if(errorRes.status !== 404 && errorRes.status !== 0) this.overlayDisplayService.showOverlay();
                         return of(new MenuActions.UpdateMenuFail('There was an error in retrieving the menu.'));
                     }
                 ))

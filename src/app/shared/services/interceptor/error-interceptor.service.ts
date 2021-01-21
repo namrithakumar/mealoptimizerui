@@ -8,12 +8,12 @@ import {
 } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { catchError, retry } from 'rxjs/operators';
-import { ErrorDisplayService } from '../error-display.service';
+import { OverlayDisplayService } from '../overlay-display.service';
 
 @Injectable()
 export class ErrorInterceptor implements HttpInterceptor {
 
-    constructor(private errorDisplayService : ErrorDisplayService) {}
+    constructor(private overlayDisplayService : OverlayDisplayService) {}
 
     intercept(request : HttpRequest<any>, next : HttpHandler) : Observable<HttpEvent<any>> {
         return next.handle(request).pipe(
@@ -25,7 +25,7 @@ export class ErrorInterceptor implements HttpInterceptor {
                 else if(err instanceof HttpErrorResponse) {
                     //Log to common logging service 
                     //If it is a 404 error, show common error page to the user
-                    if(err.status === 404 || err.status === 0) this.errorDisplayService.showError();
+                    if(err.status === 404 || err.status === 0) this.overlayDisplayService.showOverlay();
                 }
                 return throwError(err);
             })

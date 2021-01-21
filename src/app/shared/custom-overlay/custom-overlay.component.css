@@ -1,0 +1,17 @@
+.overlay {
+    background-color: #e9e9e9;
+    opacity: 0.5;
+}
+.grey {
+    background-color: #000000;
+    top: 20%;
+    right: 20%;
+    bottom: 20%;
+    left: 20%;
+    opacity: 1; 
+    position: absolute; 
+}
+.white {
+    color: white;
+    font-style: bold;
+  }

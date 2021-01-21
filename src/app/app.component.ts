@@ -14,7 +14,9 @@ export class AppComponent implements OnInit {
  
   isConnected : boolean = this.connectionStatusProviderService.getConnectionStatus();
  
-  constructor(private store : Store<AppState>, private connectionStatusProviderService : ConnectionStatusProviderService, private connectionService : ConnectionService) {
+  constructor(private store : Store<AppState>, 
+              private connectionStatusProviderService : ConnectionStatusProviderService, 
+              private connectionService : ConnectionService) {
     this.connectionService.monitor().subscribe((connectionStatus : boolean) => {
       this.isConnected = connectionStatus;
   });

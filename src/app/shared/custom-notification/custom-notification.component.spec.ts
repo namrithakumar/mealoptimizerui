@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { AppErrorDisplayComponent } from './app-error-display.component';
+import { CustomNotificationComponent } from './custom-notification.component';
 
-describe('AppErrorDisplayComponent', () => {
-  let component: AppErrorDisplayComponent;
-  let fixture: ComponentFixture<AppErrorDisplayComponent>;
+describe('CustomNotificationComponent', () => {
+  let component: CustomNotificationComponent;
+  let fixture: ComponentFixture<CustomNotificationComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ AppErrorDisplayComponent ]
+      declarations: [ CustomNotificationComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(AppErrorDisplayComponent);
+    fixture = TestBed.createComponent(CustomNotificationComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
