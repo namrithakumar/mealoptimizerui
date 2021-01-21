@@ -25,13 +25,15 @@ import { UserMgmtModule } from '../app/user-mgmt/user-mgmt.module';
 import { MealPlannerModule } from '../app/meal-planner/meal-planner.module';
 import { interceptorProviders } from '../app/shared/services/interceptor/interceptors';
 import { CustomOverlayComponent } from './shared/custom-overlay/custom-overlay.component';
+import { CustomNotificationComponent } from './shared/custom-notification/custom-notification.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     ErrorPageComponent,
     HeaderComponent,
-    CustomOverlayComponent
+    CustomOverlayComponent,
+    CustomNotificationComponent
   ],
   imports: [
     AppInfoModule,
