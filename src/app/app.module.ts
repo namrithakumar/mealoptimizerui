@@ -13,7 +13,7 @@ import { JwtHelperService, JWT_OPTIONS  } from '@auth0/angular-jwt';
 import * as fromApp from '../app/store/reducers/app.reducer';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
-import { OverlayModule } from "@angular/cdk/overlay";
+import { FullscreenOverlayContainer, OverlayContainer, OverlayModule } from "@angular/cdk/overlay";
 import { UserPreferencesEffects } from './meal-planner/meal-optimizer/store/effects/user-preferences.effects';
 import { MenuEffects } from '../app/meal-planner/meal-optimizer/store/effects/menu.effects';
 import { OrderEffects } from '../app/meal-planner/meal-optimizer/store/effects/order.effects';
@@ -24,12 +24,14 @@ import { AppInfoModule } from '../app/app-info/app-info.module';
 import { UserMgmtModule } from '../app/user-mgmt/user-mgmt.module';
 import { MealPlannerModule } from '../app/meal-planner/meal-planner.module';
 import { interceptorProviders } from '../app/shared/services/interceptor/interceptors';
+import { CustomOverlayComponent } from './shared/custom-overlay/custom-overlay.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     ErrorPageComponent,
-    HeaderComponent
+    HeaderComponent,
+    CustomOverlayComponent
   ],
   imports: [
     AppInfoModule,
@@ -47,7 +49,8 @@ import { interceptorProviders } from '../app/shared/services/interceptor/interce
   ],
   providers: [ interceptorProviders,
               { provide : JWT_OPTIONS, useValue : JWT_OPTIONS },
-              JwtHelperService],
+              JwtHelperService,
+              {provide: OverlayContainer, useClass: FullscreenOverlayContainer}],
   bootstrap: [AppComponent]
 })
 export class AppModule {}
