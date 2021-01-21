@@ -14,11 +14,11 @@ export class OverlayDisplayService extends DisplayService {
       super();
     }
 
-    public showOverlay() {
+    public showOverlay(message : String) {
         this.overlayRef = this.overlay.create(this.getOverlayConfig());
         const componentPortal = new ComponentPortal(CustomOverlayComponent, 
                                                     null, 
-                                                    super.createInjector('There was an error. This was not supposed to happen. We\'re sorry.. Our engineers are hard at work fixing your problem. We will notify you as soon as we have a fix.'));
+                                                    super.createInjector(message));
         this.overlayRef.attach(componentPortal); 
     }
 
