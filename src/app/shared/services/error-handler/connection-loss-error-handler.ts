@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 
-import { ErrorHandler } from './error-handler.service';
+import { ErrorHandler } from './error-handler';
 import { NotificationDisplayService } from '../notification-display.service';
 
 @Injectable({ providedIn : 'root' })

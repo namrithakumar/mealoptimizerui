@@ -1,15 +1,17 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Actions, Effect, ofType } from '@ngrx/effects';
-import { switchMap, map, catchError, tap } from 'rxjs/operators';
+import { switchMap, map, catchError } from 'rxjs/operators';
+
 import * as MenuActions from '../actions/menu.actions';
-import { of } from 'rxjs';
+import { MenuResponseHandler } from '../../../../shared/services/response-handler/menu-response-handler';
 
 @Injectable()
 export class MenuEffects {
 
     constructor(private http : HttpClient, 
-                private actions$ : Actions) {}
+                private actions$ : Actions,
+                private menuResponseHandler : MenuResponseHandler) {}
 
     @Effect()
     fetchMenuFromBackend = this.actions$.pipe(
@@ -19,11 +21,11 @@ export class MenuEffects {
                 {
                     'params' : new HttpParams().set('category', updateMenuAction.payload.toString())
                 }).pipe(map((menu : String[]) => {
-                    return new MenuActions.UpdateMenuSuccess(menu);
+                    return this.menuResponseHandler.handleSuccess(menu);
                 }),
                 catchError(
                     (errorRes : any) => {
-                        return of(new MenuActions.UpdateMenuFail(errorRes));
+                        return this.menuResponseHandler.handleFailure(errorRes);
                     }
                 ))
 }));

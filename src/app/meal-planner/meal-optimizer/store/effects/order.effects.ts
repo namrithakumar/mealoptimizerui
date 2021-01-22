@@ -2,15 +2,17 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Actions, Effect, ofType } from '@ngrx/effects';
 import { switchMap, map, catchError } from 'rxjs/operators';
-import * as OrderActions from '../actions/order.actions';
-import { of } from 'rxjs';
+
+import { OrderResponseHandler } from '../../../../shared/services/response-handler/order-response-handler';
 import { OrderResponse } from '../../../../shared/model/order-response.model';
+import * as OrderActions from '../actions/order.actions';
 
 @Injectable()
 export class OrderEffects {
 
     constructor(private http : HttpClient, 
-                private actions$ : Actions) {}
+                private actions$ : Actions,
+                private orderResponseHandler : OrderResponseHandler) {}
 
 @Effect()
 placeOrder = this.actions$.pipe(
@@ -19,10 +21,10 @@ placeOrder = this.actions$.pipe(
         return this.http.post<OrderResponse>('http://localhost:9090/mealoptimizer/orders/save',
                 createOrderAction.payload).pipe(
                     map((optimizedMealPlans : OrderResponse) => {
-                        return new OrderActions.CreateOrderSuccess(optimizedMealPlans);
+                        return this.orderResponseHandler.handleSuccess(optimizedMealPlans, 'create');
                     }),
-                    catchError((error : any) => {
-                        return of(new OrderActions.CreateOrderFail(error.error.message));
+                    catchError((errorRes : any) => {
+                        return this.orderResponseHandler.handleFailure(errorRes, 'create');
                     })
                 )
     })

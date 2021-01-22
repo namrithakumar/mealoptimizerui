@@ -1,14 +1,14 @@
 import { Injectable } from "@angular/core";
-
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Actions, Effect, ofType } from '@ngrx/effects';
 import * as UserMgmtActions from '../actions/user-mgmt.actions';
 import { switchMap, catchError, map, tap } from 'rxjs/operators';
-import { User } from '../../../shared/model/user.model';
-import { of } from "rxjs";
 import { JwtHelperService } from "@auth0/angular-jwt";
-import { UserMgmtService } from '../../../shared/services/user-mgmt.service';
 import { Router } from "@angular/router";
+
+import { UserMgmtService } from '../../../shared/services/user-mgmt.service';
+import { User } from '../../../shared/model/user.model';
+import { AuthenticationResponseHandler } from '../../../shared/services/response-handler/authentication-response-handler';
 
 @Injectable()
 export class UserMgmtEffects {
@@ -17,7 +17,8 @@ export class UserMgmtEffects {
                 private actions$ : Actions, 
                 private jwtHelper : JwtHelperService, 
                 private userMgmtService : UserMgmtService, 
-                private router : Router) {}
+                private router : Router,
+                private authenticationResponseHandler : AuthenticationResponseHandler) {}
 
 /*
  * All of the below methods send a request to the backend and handle a response.
@@ -79,26 +80,24 @@ autoLogin = this.actions$.pipe(
 //Common method to handle successful authentication for both signup and login.
 /* On successful authentication - store token into browser storage.
  * Set timer for autologout.
- * Dispatch action AUTHENTICATION_SUCCESS with authenticatedUser info as payload.
+ * Dispatch action AUTHENTICATION_SUCCESS with authenticatedUser info as payload - inside authenticationResponseHandler.
  */
 private handleSuccessfulAuthentication(authenticatedUser : User) {
     authenticatedUser.tokenExpiryDate = new Date(new Date().getTime() + authenticatedUser.tokenValidTime);
     sessionStorage.setItem('userData', JSON.stringify(authenticatedUser));
     this.userMgmtService.setLogoutTimer(new Date(authenticatedUser.tokenExpiryDate).getTime() - new Date().getTime());
-    return new UserMgmtActions.AuthSuccess(authenticatedUser);
+    return this.authenticationResponseHandler.handleSuccess(authenticatedUser);
 }
 
 //Common method to handle authentication error for both signup and login.
 /* On authentication failure,
  * Clear browser storage
  * Clear logout timer if it exists
- * Dispatch AUTHENTICATION_ERROR with error message as payload.
+ * Dispatch AUTHENTICATION_ERROR with error message as payload - inside authenticationResponseHandler.
  */
 private handleAuthenticationError(error : any) {
-    var defaultErrorMessage = 'There was an error authenticating the user.';
     sessionStorage.clear();
     this.userMgmtService.clearLogoutTimer();
-    if(!error || !error.error) return of(new UserMgmtActions.AuthError(defaultErrorMessage));
-    else return of(new UserMgmtActions.AuthError(error.error.error + error.error.message));
+    return this.authenticationResponseHandler.handleFailure(error);
     }
 }
