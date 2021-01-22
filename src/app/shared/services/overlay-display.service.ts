@@ -14,14 +14,18 @@ export class OverlayDisplayService extends DisplayService {
       super();
     }
 
-    public showOverlay() {
+    public showOverlay(message : String) {
+        //Create container
         this.overlayRef = this.overlay.create(this.getOverlayConfig());
+        //Create component
         const componentPortal = new ComponentPortal(CustomOverlayComponent, 
                                                     null, 
-                                                    super.createInjector('There was an error. This was not supposed to happen. We\'re sorry.. Our engineers are hard at work fixing your problem. We will notify you as soon as we have a fix.'));
+                                                    super.createInjector(message));
+        //Attach component to container.
         this.overlayRef.attach(componentPortal); 
     }
 
+    //Function to hide overlay.
     public hideOverlay() {
       if(!!this.overlayRef) {
           this.overlayRef.detach();
@@ -29,11 +33,12 @@ export class OverlayDisplayService extends DisplayService {
       }
 
     private getOverlayConfig() : OverlayConfig {
+      //Center the overlay.
       const positionStrategy = this.overlay.position()
-      .global()
-      .centerHorizontally()
-      .centerVertically();
-
+                              .global()
+                              .centerHorizontally()
+                              .centerVertically();
+      //Return object with all the config properties.
       const overlayConfig = new OverlayConfig({
         scrollStrategy: this.overlay.scrollStrategies.block(),
         positionStrategy

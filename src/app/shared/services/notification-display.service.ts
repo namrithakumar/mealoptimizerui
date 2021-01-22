@@ -8,36 +8,48 @@ import { CustomNotificationComponent } from '../custom-notification/custom-notif
 @Injectable({ providedIn : 'root' })
 export class NotificationDisplayService extends DisplayService {
     
-    private notificationRef : OverlayRef;
-    
+    //OverlayRef is the container created dynamically. Store a list of all containers created dynamically for tracking.
+    private notificationReferences : Array<OverlayRef> = new Array<OverlayRef>();
+
     constructor(private overlay : Overlay) {
         super();
     }
 
     public showNotification(content : String) {
-        this.notificationRef = this.overlay.create(this.getNotificationConfig());
-        //Hide any existing notifications
-        this.hideNotification();
+        //Create container dynamically.
+        let notificationRef : OverlayRef = this.overlay.create(this.getNotificationConfig());
+        //Add to list of containers.
+        this.notificationReferences.push(notificationRef);
+        //Create component dynamically.
         const componentPortal = new ComponentPortal(CustomNotificationComponent, 
                                                     null, 
                                                     this.createInjector(content));
-        //this.overlayRef.addPanelClass("example-overlay");
-        this.notificationRef.attach(componentPortal);
-        setTimeout(this.hideNotification.bind(this),2000);       
-      }  
-  
+        //Attach component to container
+        notificationRef.attach(componentPortal);
+        //Auto hide notification after 20 secs.
+        setTimeout(this.hideNotification.bind(this), 20000);       
+      }
+
       public hideNotification() {
-        if(!!this.notificationRef) {
-          this.notificationRef.detach();
+        //If atleast 1 container is created.
+        if(this.notificationReferences.length > 0) {
+          //Get a reference to the earliest/first container created (and remove it from the list).
+          let notificationRef : OverlayRef = this.notificationReferences.shift();
+          if(!!notificationRef) {
+            //Clear the container.
+            notificationRef.detach();
+          }
         }
       }
 
       private getNotificationConfig() : OverlayConfig {
+        //Set position of notification.
         const positionStrategy = this.overlay.position()
                                              .global()
                                              .bottom()
                                              .right();
   
+        //Return object holding all the config properties.
         const notificationConfig = new OverlayConfig({
           scrollStrategy: this.overlay.scrollStrategies.block(),
           positionStrategy
