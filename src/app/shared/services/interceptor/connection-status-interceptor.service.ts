@@ -3,14 +3,12 @@ import {
     HttpInterceptor,
     HttpRequest,
     HttpHandler,
-    HttpEvent,
-    HttpHeaderResponse
+    HttpEvent
 } from '@angular/common/http';
-import { Observable, throwError } from 'rxjs';
+import { Observable } from 'rxjs';
 
 import { ConnectionStatusHandlerService } from '../connection-status-handler.service';
 import { IndexedDBService } from '../indexeddb/indexed-db.service';
-import { catchError } from 'rxjs/operators';
 
 @Injectable()
 export class ConnectionStatusInterceptor implements HttpInterceptor {
