@@ -21,7 +21,6 @@ export function orderReducer(state : OptimizedMealPlans = defaultMealPlans, acti
             return { ...state, optimizedMealPlans : action.payload, error : null, status : OptimizationStatus.RESPONSE_RECEIVED };
 
         case OrderActions.CREATE_ORDER_FAIL:
-            console.log('Inside reducer. Error set as ' + JSON.stringify(action.payload));
             return { ...state, optimizedMealPlans : null, error : action.payload, status : OptimizationStatus.RESPONSE_RECEIVED };
 
         case OrderActions.UPDATE_OPTIMIZATION_STATUS:
