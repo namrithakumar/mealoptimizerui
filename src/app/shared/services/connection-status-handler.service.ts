@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { ConnectionService } from 'ng-connection-service';
 
-import { ConnectionLossErrorHandler } from '../services/error-handler/connection-loss-error-handler.service';
+import { ConnectionLossErrorHandler } from './error-handler/connection-loss-error-handler';
 import { NotificationDisplayService } from './notification-display.service';
 
 @Injectable({ providedIn : 'root' })

@@ -1,16 +1,18 @@
 import { HttpClient, HttpParams } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Actions, Effect, ofType } from "@ngrx/effects";
-import { of } from "rxjs";
 import { catchError, map, switchMap } from "rxjs/operators";
+
 import { Recipe } from "../../../../shared/model/recipe.model";
 import * as RecipesActions from '../actions/recipes.actions';
+import { RecipeResponseHandler } from '../../../../shared/services/response-handler/recipe-response-handler';
 
 @Injectable()
 export class RecipesEffects {
 
     constructor(private http : HttpClient, 
-                private actions$ : Actions) {}
+                private actions$ : Actions,
+                private recipeResponseHandler : RecipeResponseHandler) {}
 
     @Effect()
     fetchRecipes = this.actions$.pipe(
@@ -21,10 +23,10 @@ export class RecipesEffects {
                         .set('names', fetchRecipesAction.payload.join());
             return this.http.get<Recipe[]>(url, {params}).pipe(
                 map((recipes : Recipe[]) => {
-                    return new RecipesActions.FetchRecipesSuccess(recipes);
+                    return this.recipeResponseHandler.handleSuccess(recipes);
                 }),
-                catchError((error : any) => {
-                    return of(new RecipesActions.FetchRecipesFail(error.error.message));
+                catchError((errorRes : any) => {
+                    return this.recipeResponseHandler.handleFailure(errorRes);
                 })
             )
         })

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 
-import { ErrorHandler } from './error-handler.service';
+import { ErrorHandler } from './error-handler';
 import { OverlayDisplayService } from '../overlay-display.service';
 import { ConnectionStatusHandlerService } from '../connection-status-handler.service';
 
