@@ -2,20 +2,20 @@ import { Injectable } from '@angular/core';
 
 import { ErrorHandler } from './error-handler.service';
 import { OverlayDisplayService } from '../overlay-display.service';
-import { ConnectionStatusProviderService } from '../connection-status-provider.service';
+import { ConnectionStatusHandlerService } from '../connection-status-handler.service';
 
 @Injectable({ providedIn : 'root' })
 //Handles server(HTTP call) and client errors. Called from inside ErrorInterceptor.
 export class AppErrorHandler extends ErrorHandler {
 
     constructor(private overlayDisplayService : OverlayDisplayService,
-                private connectionStatusProviderService : ConnectionStatusProviderService) {
+                private connectionStatusHandlerService : ConnectionStatusHandlerService) {
                     super();
                 }
 
     public handleError(status? : number) : String {
         //Display the below error only is the connection is available.
-        if(this.connectionStatusProviderService.getConnectionStatus()) {
+        if(this.connectionStatusHandlerService.getConnectionStatus()) {
             if((status === undefined) || //Incase of ErrorEvent - client errors
                (status !== undefined && (status === 0 || status === 404))) { //Incase of HttpErrorResponse - Server errors from backend
                 this.overlayDisplayService.showOverlay(

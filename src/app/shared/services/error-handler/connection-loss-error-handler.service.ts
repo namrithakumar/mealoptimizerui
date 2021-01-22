@@ -4,7 +4,7 @@ import { ErrorHandler } from './error-handler.service';
 import { NotificationDisplayService } from '../notification-display.service';
 
 @Injectable({ providedIn : 'root' })
-//Handles connection loss. Called from inside ConnectionLossInterceptor.
+//Handles connection loss. Called from inside ConnectionStatusHandler.
 export class ConnectionLossErrorHandler extends ErrorHandler {
     
     constructor(private notificationDisplayService : NotificationDisplayService) {

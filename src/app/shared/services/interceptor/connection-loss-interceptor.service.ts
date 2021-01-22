@@ -7,17 +7,17 @@ import {
 } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
-import { ConnectionStatusProviderService } from '../../services/connection-status-provider.service';
+import { ConnectionStatusHandlerService } from '../connection-status-handler.service';
 
 @Injectable()
 export class ConnectionLossInterceptor implements HttpInterceptor {
 
-    constructor(private connectionStatusProviderService : ConnectionStatusProviderService) {}
+    constructor(private connectionStatusHandlerService : ConnectionStatusHandlerService) {}
 
     intercept(request : HttpRequest<any>, next : HttpHandler) : Observable<HttpEvent<any>> {
         
-        //If connection is available, proceed with handling the request
-        if(this.connectionStatusProviderService.getConnectionStatus()) {
+        //If network connection is available, proceed with handling the request
+        if(this.connectionStatusHandlerService.getConnectionStatus()) {
             return next.handle(request);
         }
         //If network connection is not available, write to indexedDB
