@@ -1,4 +1,5 @@
 import { Action } from '@ngrx/store';
+import { HttpRequestStatus } from 'src/app/shared/http-request-status.enum';
 
 import { UserSignUpRequest } from '../../../shared/model/user-signup-request.model';
 import { User } from '../../../shared/model/user.model';
@@ -13,6 +14,7 @@ export const AUTH_ERROR = '[User mgmt] AUTH_ERROR';
 export const LOGIN_START = '[User mgmt] LOGIN_START';
 export const LOGOUT = '[User mgmt] LOGOUT';
 export const AUTO_LOGIN = '[User mgmt] AUTO_LOGIN';
+export const UPDATE_REQUEST_STATUS = '[User mgmt] UPDATE_REQUEST_STATUS';
 
 export class SignupStart implements Action {
     readonly type = SIGNUP_START;
@@ -42,4 +44,9 @@ export class AutoLogin implements Action {
     readonly type = AUTO_LOGIN;
 }
 
-export type UserMgmtActions = SignupStart | AuthSuccess | AuthError | LoginStart | Logout | AutoLogin;
+export class UpdateRequestStatus implements Action {
+    readonly type = UPDATE_REQUEST_STATUS;
+    constructor(public payload : HttpRequestStatus) {}
+}
+
+export type UserMgmtActions = SignupStart | AuthSuccess | AuthError | LoginStart | Logout | AutoLogin | UpdateRequestStatus;

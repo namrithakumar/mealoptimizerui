@@ -1,8 +1,10 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Store } from '@ngrx/store';
+import { HttpRequestStatus } from 'src/app/shared/http-request-status.enum';
 import { AppState } from 'src/app/store/reducers/app.reducer';
 import * as UserPreferencesActions from '../../store/actions/user-preferences.actions';
 import { Menu } from '../../store/reducers/menu.reducer';
+import { defaultMessages } from '../../../../shared/default-messages';
 
 @Component({
   selector: 'app-meal-options',

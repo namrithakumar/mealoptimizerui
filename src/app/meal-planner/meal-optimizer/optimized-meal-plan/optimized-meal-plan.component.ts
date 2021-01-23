@@ -5,7 +5,7 @@ import { AppState } from 'src/app/store/reducers/app.reducer';
 import { UserPreferences } from '../store/reducers/user-preferences.reducer';
 import * as RecipesActions from '../../../meal-planner/recipes/store/actions/recipes.actions';
 import { OptimizedMealPlans } from '../store/reducers/order.reducer';
-import { OptimizationStatus } from 'src/app/shared/services/optimization-status.enum';
+import { HttpRequestStatus } from 'src/app/shared/http-request-status.enum';
 
 @Component({
   selector: 'app-optimized-meal-plan',
@@ -57,7 +57,7 @@ export class OptimizedMealPlanComponent implements OnInit, OnDestroy {
       if(optimizedMealPlans.optimizedMealPlans) {      
         this.optimizationState = optimizedMealPlans.optimizedMealPlans.optimizationState;
 
-        if(optimizedMealPlans.status !== OptimizationStatus.RESPONSE_RECEIVED) {
+        if(optimizedMealPlans.status !== HttpRequestStatus.RESPONSE_RECEIVED) {
           this.isValidOptimizationState = true;
         } else {
             if(this.optimizationState === 'DISTINCT' || 
