@@ -1,9 +1,12 @@
-<div class="row">
-    <div class="col-md-5">
-        <app-recipe-list></app-recipe-list>
-    </div>
-    <div class="col-md-7">
-        <app-recipe-start></app-recipe-start>
-        <router-outlet></router-outlet>
+<h4 text-align="center"> {{ defaultText }}</h4>
+<div *ngIf="recipes">
+    <div class="row">
+        <div class="col-md-5">
+            <app-recipe-list [recipes] = "recipes"></app-recipe-list>
+        </div>
+        <div class="col-md-7">
+            <app-recipe-start></app-recipe-start>
+            <router-outlet></router-outlet>
+        </div>
     </div>
 </div>

@@ -24,10 +24,12 @@ import { HttpRequestStatus } from 'src/app/shared/http-request-status.enum';
  */
 export class ManageMealPlanComponent implements OnInit, OnDestroy {
 
-  // Enable or disable the 'Get Meal Plan' button based 2 conditions. Enable button if:
-  // User inputs are valid
-  // The meals selected do not satisfy daily nutrition requirements - allow the user to edit meals selected
-  disableGetMealPlan : boolean = false;
+  /* Enable or disable the 'Get Meal Plan' button based 2 conditions. Enable button if:
+   * User inputs are valid and
+   * The meals selected do not satisfy daily nutrition requirements - allow the user to edit meals selected
+   * Initially disableGetMealPlan is set to true (because user inputs are invalid at this point)
+   */
+  disableGetMealPlan : boolean = true;
 
   //This value is truthy if a valid meal plan is generated atleast once. 
   //We need the ID of the generated meal plan for further updates.
@@ -56,7 +58,11 @@ export class ManageMealPlanComponent implements OnInit, OnDestroy {
 
         this.store.select('userPreferences').subscribe((userPrefs : UserPreferences) => {
           this.userPrefs = userPrefs;
-        });
+          //Enable get meal plan when 4 meals are selected.
+          this.disableGetMealPlan = (userPrefs.mealSelected.filter(
+                                                            (meal) => meal !== undefined )
+                                                            .length) !== 4;
+          });
 
         this.store.select('authenticatedUser').subscribe((authenticatedUser : AuthenticatedUser) => {
           this.authenticatedUser = authenticatedUser.user;
@@ -64,7 +70,7 @@ export class ManageMealPlanComponent implements OnInit, OnDestroy {
         
         this.store.select('optimizedPlans').subscribe((optimizedMealPlans : OptimizedMealPlans) => {
           
-          //Response received from backend. The user can choose to edit meals selected.
+          //Response received from backend. The user can choose to edit meals selected, so enable get meal plan.
           if(optimizedMealPlans.requestStatus === HttpRequestStatus.RESPONSE_RECEIVED) {
             this.disableGetMealPlan = false;
           }
