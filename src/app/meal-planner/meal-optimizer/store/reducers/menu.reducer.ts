@@ -22,7 +22,7 @@ export function menuReducer(state : Menu = defaultMenu, action : MenuActions.Men
             return defaultMenu;
 
         case MenuActions.UPDATE_REQUEST_STATUS:
-            return { ...state, status : action.payload };
+            return { ...state, requestStatus : action.payload };
 
         default: return state;
     }

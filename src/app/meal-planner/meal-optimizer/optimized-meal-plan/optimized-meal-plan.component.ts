@@ -57,7 +57,7 @@ export class OptimizedMealPlanComponent implements OnInit, OnDestroy {
       if(optimizedMealPlans.optimizedMealPlans) {      
         this.optimizationState = optimizedMealPlans.optimizedMealPlans.optimizationState;
 
-        if(optimizedMealPlans.status !== HttpRequestStatus.RESPONSE_RECEIVED) {
+        if(optimizedMealPlans.requestStatus !== HttpRequestStatus.RESPONSE_RECEIVED) {
           this.isValidOptimizationState = true;
         } else {
             if(this.optimizationState === 'DISTINCT' || 

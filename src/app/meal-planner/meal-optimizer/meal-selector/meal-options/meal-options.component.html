@@ -3,9 +3,9 @@
             (change)="onMealSelected()">
         <option 
             *ngFor="let item of itemList" 
-            [value]="item" 
+            [value]="item"
             [ngStyle]="{'visibility':( item === defaultText ) ? 'hidden' : 'visible'}">
-                {{ (item === undefined) ? defaultText:item }}
+            {{ (item === undefined) ? defaultText:item }}
         </option>
     </select>
 </div>
