@@ -2,8 +2,6 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 
 import { OrderService } from 'src/app/shared/services/order.service';
-import { OptimizationService } from 'src/app/shared/services/optimization.service';
-import { UserService } from 'src/app/shared/services/user.service';
 import { User } from 'src/app/shared/model/user.model';
 import { AppState } from 'src/app/store/reducers/app.reducer';
 import { Store } from '@ngrx/store';
@@ -12,6 +10,7 @@ import { AuthenticatedUser } from 'src/app/user-mgmt/store/reducers/user-mgmt.re
 import * as OrderActions from '../../store/actions/order.actions';
 import { OptimizedMealPlans } from '../../store/reducers/order.reducer';
 import { OrderResponse } from 'src/app/shared/model/order-response.model';
+import { HttpRequestStatus } from 'src/app/shared/http-request-status.enum';
 
 @Component({
   selector: 'app-manage-meal-plan',
@@ -42,7 +41,10 @@ export class ManageMealPlanComponent implements OnInit, OnDestroy {
   //or to update an existing meal plan.
   mode : String;
 
-  constructor(private store : Store<AppState>, private router : Router, private route:ActivatedRoute, private userService : UserService, private optimizationService : OptimizationService, private orderService : OrderService) { }
+  constructor(private store : Store<AppState>, 
+              private router : Router, 
+              private route:ActivatedRoute, 
+              private orderService : OrderService) { }
 
   ngOnInit(): void {
         // Get value of mode (create or edit)
@@ -60,8 +62,8 @@ export class ManageMealPlanComponent implements OnInit, OnDestroy {
 
         //Switch to 'update' mode if there is no error and optimization result state is DISTINCT OR OPTIMAL OR FEASIBLE
         this.store.select('optimizedPlans').subscribe((optimizedMealPlans : OptimizedMealPlans) => {
-          if(!optimizedMealPlans.error && (optimizedMealPlans.optimizedMealPlans && (optimizedMealPlans.optimizedMealPlans.optimizationState === "DISTINCT" || optimizedMealPlans.optimizedMealPlans.optimizationState === "OPTIMAL" || optimizedMealPlans.optimizedMealPlans.optimizationState === "FEASIBLE"))) {
-            this.savedMealPlans = optimizedMealPlans.optimizedMealPlans;
+          if(!optimizedMealPlans.error && (optimizedMealPlans.mealPlans && (optimizedMealPlans.mealPlans.optimizationState === "DISTINCT" || optimizedMealPlans.mealPlans.optimizationState === "OPTIMAL" || optimizedMealPlans.mealPlans.optimizationState === "FEASIBLE"))) {
+            this.savedMealPlans = optimizedMealPlans.mealPlans;
             this.router.navigate([],{
               relativeTo : this.route,
               queryParams : { optimizermode: 'update' }
@@ -78,6 +80,7 @@ export class ManageMealPlanComponent implements OnInit, OnDestroy {
       //If all inputs are received, create the order
       let orderRequest = this.orderService.createOrderRequest(this.userPrefs.deliveryDate, this.userPrefs.mealSelected, this.authenticatedUser);    
       //Call backend to get a meal plan
+      this.store.dispatch(new OrderActions.UpdateRequestStatus(HttpRequestStatus.REQUEST_SENT));
       this.store.dispatch(new OrderActions.CreateOrderStart(orderRequest));
       this.disableGetMealPlan = true;
     }

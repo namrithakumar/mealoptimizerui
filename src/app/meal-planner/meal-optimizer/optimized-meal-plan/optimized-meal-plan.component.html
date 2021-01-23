@@ -1,12 +1,17 @@
 <div *ngIf="optimizationError">
-    There was an internal error. Please try again later.
+    {{ optimizationError }}
 </div>
-<div *ngIf="!isValidOptimizationState">
+<div *ngIf="!isOptimizationFeasible">
     Sorry, the meals you have selected does not satisfy your daily nutrition requirements. Please choose a different meal plan.
 </div>
 <hr/>
 <h4><b><i>Result</i></b></h4>
-    <app-optimized-results-table></app-optimized-results-table>
+    <app-optimized-results-table 
+        [costOptimizedPlan] = "costOptimizedPlan"
+        [qualityOptimizedPlan] = "qualityOptimizedPlan"
+        [isOptimizationFeasible] = "isOptimizationFeasible"
+        [defaultText] = "defaultText">
+    </app-optimized-results-table>
 <br/>
 <div class="row">
     <button type="button" 
