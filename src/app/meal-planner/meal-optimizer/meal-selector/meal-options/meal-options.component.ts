@@ -39,12 +39,12 @@ export class MealOptionsComponent implements OnInit {
       switch(menu.requestStatus) {
         case HttpRequestStatus.NO_ACTION: {
                                           this.resetItemList();                                          
-                                          this.itemList.unshift(DefaultMessages.menu.get(HttpRequestStatus.NO_ACTION));                                          
+                                          this.defaultText = DefaultMessages.menu.get(HttpRequestStatus.NO_ACTION);                                          
                                           break;
                                           }
         case HttpRequestStatus.REQUEST_SENT: {                                      
                                           this.resetItemList();                                          
-                                          this.itemList.unshift(DefaultMessages.menu.get(HttpRequestStatus.REQUEST_SENT));                                                                                 
+                                          this.defaultText = DefaultMessages.menu.get(HttpRequestStatus.REQUEST_SENT);                                                                                 
                                           break;
                                           }
         case HttpRequestStatus.RESPONSE_RECEIVED: {

@@ -86,6 +86,8 @@ export class ManageMealPlanComponent implements OnInit, OnDestroy {
   }
 
   onGetMealPlan() {
+    //Clear existing meal plans
+    this.store.dispatch(new OrderActions.ClearOrder());
     if(this.userPrefs.deliveryDate !== null && this.userPrefs.dietType !==null && this.userPrefs.mealSelected.length === 4) {
       //If all inputs are received, create the order
       let orderRequest = this.orderService.createOrderRequest(this.userPrefs.deliveryDate, this.userPrefs.mealSelected, this.authenticatedUser);    
@@ -101,8 +103,9 @@ export class ManageMealPlanComponent implements OnInit, OnDestroy {
     /* We do not check if this.savedMealPlans !=null since this point is reached 
      * only if the order has been saved atleast once, 
      * if the order has never been saved, the optimizer is in create mode. 
-     */
-    
+     */  
+    //Clear existing meal plans
+    this.store.dispatch(new OrderActions.ClearOrder());  
     if(this.userPrefs.deliveryDate !== null && this.userPrefs.dietType !==null && this.userPrefs.mealSelected.length === 4)
       console.log('Order ID to be updated ' + this.savedMealPlans.orderId);
   }
