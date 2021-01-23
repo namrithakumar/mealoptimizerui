@@ -20,8 +20,12 @@ export class AppErrorHandler extends ErrorHandler {
                (status !== undefined && (status === 0 || status === 404))) { //Incase of HttpErrorResponse - Server errors from backend
                 this.overlayDisplayService.showOverlay(
                     'There was an error. This was not supposed to happen. We\'re sorry.. Our engineers are hard at work fixing your problem. We will notify you as soon as we have a fix.');
-            }
-        } 
+            }            
+        }
         return super.handleError();
     }
 }
+/*
+ * If connection is available and the status === 0, display overlay since it is an error in app setup.
+ * If connection is not available and status === 0, it means network connection is not available, do not display overlay.
+ */

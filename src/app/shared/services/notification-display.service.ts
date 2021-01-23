@@ -51,7 +51,7 @@ export class NotificationDisplayService extends DisplayService {
   
         //Return object holding all the config properties.
         const notificationConfig = new OverlayConfig({
-          scrollStrategy: this.overlay.scrollStrategies.block(),
+          scrollStrategy: this.overlay.scrollStrategies.noop(),
           positionStrategy
         });
   

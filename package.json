@@ -26,6 +26,7 @@
     "angular-calendar": "^0.28.16",
     "bootstrap": "^4.5.2",
     "date-fns": "^2.16.0",
+    "idb": "^6.0.0",
     "ng-connection-service": "^1.0.4",
     "rxjs": "~6.5.5",
     "tslib": "^2.0.0",

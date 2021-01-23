@@ -2,7 +2,9 @@ import { Injectable } from '@angular/core';
 import { ConnectionService } from 'ng-connection-service';
 
 import { ConnectionLossErrorHandler } from './error-handler/connection-loss-error-handler';
+import { IndexedDBService } from './indexeddb/indexed-db.service';
 import { NotificationDisplayService } from './notification-display.service';
+import { ActionDispatcher } from '../services/action-dispatcher.service';
 
 @Injectable({ providedIn : 'root' })
 export class ConnectionStatusHandlerService {
@@ -11,7 +13,10 @@ export class ConnectionStatusHandlerService {
  
     constructor(private connectionService : ConnectionService,
                 private connectionLossErrorHandler : ConnectionLossErrorHandler,
-                private notificationDisplayService : NotificationDisplayService) {
+                private notificationDisplayService : NotificationDisplayService,
+                private indexedDBService : IndexedDBService,
+                private actionDispatcher : ActionDispatcher) {
+                    
         this.connectionService.monitor().subscribe((connectionStatus : boolean) => {
             this.isConnected = connectionStatus;
             if(!connectionStatus) { this.handleConnectionLoss(); }
@@ -28,7 +33,16 @@ export class ConnectionStatusHandlerService {
     }
 
     handleConnectionFix() {
-        //Write code to read failed requests from indexedDB and call backend.
-        this.notificationDisplayService.showNotification('Connection fixed. We will try to process your requests');
+        //Show notification
+        this.notificationDisplayService.showNotification(
+            'Connection fixed. We will try to process your requests');
+        //Read failed requests from indexedDB and call backend.
+        this.indexedDBService.getAllEntries()
+                             .then((failedRequests : Map<string, any>) => {
+                                failedRequests.forEach(async (failedRequest, tag) => {
+                                    await this.actionDispatcher.dispatchAction(failedRequest, tag);
+                                    this.indexedDBService.deleteRequest(tag);
+                                });
+                             });    
     }
 }
