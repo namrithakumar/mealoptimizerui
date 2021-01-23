@@ -79,6 +79,7 @@ export class OptimizedMealPlanComponent implements OnInit, OnDestroy {
   }
 
   getRecipeSelected() {
+    this.store.dispatch(new RecipesActions.UpdateRequestStatus(HttpRequestStatus.REQUEST_SENT));
     this.store.dispatch(new RecipesActions.FetchRecipesStart(this.userPreferences.mealSelected));
     this.router.navigate([ 'meal-planner' , 
                          { outlets : { mealoptimizer : 'meal-optimizer', recipes : ['recipes'] } }] , 
