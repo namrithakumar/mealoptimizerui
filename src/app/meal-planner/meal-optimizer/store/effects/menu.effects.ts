@@ -28,5 +28,5 @@ export class MenuEffects {
                         return this.menuResponseHandler.handleFailure(errorRes);
                     }
                 ))
-}));
+    }));
 }

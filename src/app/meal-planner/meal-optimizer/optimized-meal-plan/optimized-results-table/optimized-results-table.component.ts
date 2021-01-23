@@ -43,13 +43,13 @@ export class OptimizedResultsTableComponent implements OnInit, OnDestroy {
     
     this.store.select('optimizedPlans').subscribe((optimizedMealPlans : OptimizedMealPlans) => {
 
-      this.optimizationStatus = optimizedMealPlans.status;
+      this.optimizationStatus = optimizedMealPlans.requestStatus;
       
       /*
        * Once meal plan is received from the backend, parse it into a suitable format 
        * and bind it to the individual tabs using attribute binding.
        */
-      if(optimizedMealPlans.status === HttpRequestStatus.RESPONSE_RECEIVED && !optimizedMealPlans.error) {
+      if(optimizedMealPlans.requestStatus === HttpRequestStatus.RESPONSE_RECEIVED && !optimizedMealPlans.error) {
         this.costOptimizedPlan = this.optimizationService.getMealPlanByOptimizationType('COST', optimizedMealPlans);
         this.qualityOptimizedPlan = this.optimizationService.getMealPlanByOptimizationType('QUALITY', optimizedMealPlans);
         this.optimizationState = optimizedMealPlans.optimizedMealPlans.optimizationState;
