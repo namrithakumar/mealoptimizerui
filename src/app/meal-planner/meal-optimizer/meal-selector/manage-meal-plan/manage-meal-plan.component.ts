@@ -24,7 +24,9 @@ import { HttpRequestStatus } from 'src/app/shared/http-request-status.enum';
  */
 export class ManageMealPlanComponent implements OnInit, OnDestroy {
 
-  //Enable or disable the 'Get Meal Plan' button based on whether the user inputs are valid or not
+  // Enable or disable the 'Get Meal Plan' button based 2 conditions. Enable button if:
+  // User inputs are valid
+  // The meals selected do not satisfy daily nutrition requirements - allow the user to edit meals selected
   disableGetMealPlan : boolean = false;
 
   //This value is truthy if a valid meal plan is generated atleast once. 
@@ -59,19 +61,27 @@ export class ManageMealPlanComponent implements OnInit, OnDestroy {
         this.store.select('authenticatedUser').subscribe((authenticatedUser : AuthenticatedUser) => {
           this.authenticatedUser = authenticatedUser.user;
         });
-
-        //Switch to 'update' mode if there is no error and optimization result state is DISTINCT OR OPTIMAL OR FEASIBLE
+        
         this.store.select('optimizedPlans').subscribe((optimizedMealPlans : OptimizedMealPlans) => {
-          if(!optimizedMealPlans.error && (optimizedMealPlans.mealPlans && (optimizedMealPlans.mealPlans.optimizationState === "DISTINCT" || optimizedMealPlans.mealPlans.optimizationState === "OPTIMAL" || optimizedMealPlans.mealPlans.optimizationState === "FEASIBLE"))) {
-            this.savedMealPlans = optimizedMealPlans.mealPlans;
-            this.router.navigate([],{
-              relativeTo : this.route,
-              queryParams : { optimizermode: 'update' }
-            });
+          
+          //Response received from backend. The user can choose to edit meals selected.
+          if(optimizedMealPlans.requestStatus === HttpRequestStatus.RESPONSE_RECEIVED) {
             this.disableGetMealPlan = false;
           }
+          
+          //Switch to 'update' mode if there is no error and optimization result state is DISTINCT OR OPTIMAL OR FEASIBLE
+          if(!optimizedMealPlans.error && 
+            (optimizedMealPlans.mealPlans && 
+              (optimizedMealPlans.mealPlans.optimizationState === "DISTINCT" || optimizedMealPlans.mealPlans.optimizationState === "OPTIMAL" || optimizedMealPlans.mealPlans.optimizationState === "FEASIBLE"))) {
+                this.savedMealPlans = optimizedMealPlans.mealPlans;
+                this.router.navigate([],{
+                  relativeTo : this.route,
+                  queryParams : { optimizermode: 'update' }
+                });
+          }
           else { 
-            this.savedMealPlans = null;}
+            this.savedMealPlans = null;
+          }
         });
   }
 
