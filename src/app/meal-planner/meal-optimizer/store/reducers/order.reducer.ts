@@ -1,30 +1,30 @@
 import { OrderResponse } from '../../../../shared/model/order-response.model';
-import { OptimizationStatus } from '../../../../shared/services/optimization-status.enum';
+import { HttpRequestStatus } from '../../../../shared/http-request-status.enum';
 import * as OrderActions from '../actions/order.actions';
 
 export interface OptimizedMealPlans {
     optimizedMealPlans : OrderResponse,
     error : String,
-    status : OptimizationStatus
+    requestStatus : HttpRequestStatus
 }
 
 const defaultMealPlans : OptimizedMealPlans = {
     optimizedMealPlans : null,
     error : null,
-    status : OptimizationStatus.NO_ACTION
+    requestStatus : HttpRequestStatus.NO_ACTION
 };
 
 export function orderReducer(state : OptimizedMealPlans = defaultMealPlans, action : OrderActions.OrderActions) {
     switch(action.type) {
 
         case OrderActions.CREATE_ORDER_SUCCESS :
-            return { ...state, optimizedMealPlans : action.payload, error : null, status : OptimizationStatus.RESPONSE_RECEIVED };
+            return { ...state, optimizedMealPlans : action.payload, error : null, requestStatus : HttpRequestStatus.RESPONSE_RECEIVED };
 
         case OrderActions.CREATE_ORDER_FAIL:
-            return { ...state, optimizedMealPlans : null, error : action.payload, status : OptimizationStatus.RESPONSE_RECEIVED };
+            return { ...state, optimizedMealPlans : null, error : action.payload, requestStatus : HttpRequestStatus.RESPONSE_RECEIVED };
 
-        case OrderActions.UPDATE_OPTIMIZATION_STATUS:
-            return { ...state, status : action.payload };
+        case OrderActions.UPDATE_REQUEST_STATUS:
+            return { ...state, requestStatus : action.payload };
 
         case OrderActions.CLEAR_ORDER:
             return defaultMealPlans;
