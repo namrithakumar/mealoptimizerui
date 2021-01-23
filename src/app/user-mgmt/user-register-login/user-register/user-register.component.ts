@@ -9,6 +9,8 @@ import { UserService } from 'src/app/shared/services/user.service';
 import { AppState } from 'src/app/store/reducers/app.reducer';
 import { AuthenticatedUser } from '../../store/reducers/user-mgmt.reducer';
 import * as UserMgmtActions from '../../store/actions/user-mgmt.actions';
+import { DefaultMessages } from 'src/app/shared/default-messages';
+import { HttpRequestStatus } from 'src/app/shared/http-request-status.enum';
 
 @Component({
   selector: 'app-user-register',
@@ -24,8 +26,9 @@ export class UserRegisterComponent implements OnInit {
   unavailableUsernames : String[];
 
   passwordPattern : string = "^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])[A-Za-z0-9$@$!%*?&]+$";
-//^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])[A-Za-z0-9$@$!%*?&].{3,7}$
 
+  defaultText : String = DefaultMessages.register.get(HttpRequestStatus.NO_ACTION);
+  
   dietTypes : Array<IUserDietType>;
 
   nutrientInitialLimits = new Array<FormGroup>();
@@ -128,11 +131,22 @@ export class UserRegisterComponent implements OnInit {
 
   signup() {
     let signupRequest = this.userService.createUserSignupRequest(this.signupForm.value);
+    this.store.dispatch(new UserMgmtActions.UpdateRequestStatus(HttpRequestStatus.REQUEST_SENT));
     this.store.dispatch(new UserMgmtActions.SignupStart(signupRequest));
     this.store.select('authenticatedUser').subscribe(( authenticatedUser : AuthenticatedUser ) => {
-      if(authenticatedUser.error) this.error = authenticatedUser.error;
-      else {
-        this.router.navigate(['/meal-planner', { outlets: { mealoptimizer : ['meal-optimizer'] } }], { queryParams: {optimizermode: 'create'} });
-    }});
+      
+      switch(authenticatedUser.requestStatus) {
+
+        case HttpRequestStatus.NO_ACTION :         this.defaultText = DefaultMessages.register.get(HttpRequestStatus.NO_ACTION);
+                                                   break;
+        case HttpRequestStatus.REQUEST_SENT :      this.defaultText = DefaultMessages.register.get(HttpRequestStatus.NO_ACTION);
+                                                   break;
+        case HttpRequestStatus.RESPONSE_RECEIVED : this.defaultText = DefaultMessages.register.get(HttpRequestStatus.NO_ACTION);
+                                                   if(authenticatedUser.error) this.error = authenticatedUser.error;
+                                                   else {
+                                                     this.router.navigate(['/meal-planner', { outlets: { mealoptimizer : ['meal-optimizer'] } }], { queryParams: {optimizermode: 'create'} });
+                                                    }                                                                    
+                                                   break;                                                                            
+      }});
   }
 }

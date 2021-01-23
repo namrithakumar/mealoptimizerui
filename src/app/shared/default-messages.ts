@@ -18,9 +18,22 @@ defaultMessagesRecipe.set(HttpRequestStatus.NO_ACTION, 'Select a meal plan to vi
 defaultMessagesRecipe.set(HttpRequestStatus.REQUEST_SENT, 'Fetching recipe');
 defaultMessagesRecipe.set(HttpRequestStatus.RESPONSE_RECEIVED, ''); //No message will be displayed, instead the actual recipe will be displayed
 
+//Setup default messages for User-login
+const defaultMessagesLogin = new Map<HttpRequestStatus, String>();
+defaultMessagesLogin.set(HttpRequestStatus.NO_ACTION, ''); //Login page is self explanatory, we need not display help-text 
+defaultMessagesLogin.set(HttpRequestStatus.REQUEST_SENT, 'Login in progress');
+defaultMessagesLogin.set(HttpRequestStatus.RESPONSE_RECEIVED, ''); //No message will be displayed, instead the user will be redirected to meal-optimizer/meal-planner page
 
-export const defaultMessages = { 
+//Setup default messages for User-registation
+const defaultMessagesRegister = new Map<HttpRequestStatus, String>();
+defaultMessagesRegister.set(HttpRequestStatus.NO_ACTION, ''); //Registration page is self explanatory, we need not display help-text
+defaultMessagesRegister.set(HttpRequestStatus.REQUEST_SENT, 'Registration in progress');
+defaultMessagesRegister.set(HttpRequestStatus.RESPONSE_RECEIVED, ''); //No message will be displayed, instead the user will be redirected to meal-optimizer/meal-planner page
+
+export const DefaultMessages = { 
                                 menu: defaultMessagesMenu, 
                                 mealPlan: defaultMessagesMealPlan, 
-                                recipe : defaultMessagesRecipe
+                                recipe : defaultMessagesRecipe,
+                                login : defaultMessagesLogin,
+                                register : defaultMessagesRegister
                                 };

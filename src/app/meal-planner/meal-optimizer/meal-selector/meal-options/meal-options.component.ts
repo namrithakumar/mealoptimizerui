@@ -5,7 +5,7 @@ import { HttpRequestStatus } from 'src/app/shared/http-request-status.enum';
 import { AppState } from 'src/app/store/reducers/app.reducer';
 import * as UserPreferencesActions from '../../store/actions/user-preferences.actions';
 import { Menu } from '../../store/reducers/menu.reducer';
-import { defaultMessages } from '../../../../shared/default-messages';
+import { DefaultMessages } from '../../../../shared/default-messages';
 
 @Component({
   selector: 'app-meal-options',
@@ -21,7 +21,7 @@ export class MealOptionsComponent implements OnInit {
   // Set inside meal-selector.html
   @Input() indexOfMeal : number; 
 
-  defaultText : String = defaultMessages.menu.get(HttpRequestStatus.NO_ACTION);
+  defaultText : String = DefaultMessages.menu.get(HttpRequestStatus.NO_ACTION);
 
   // Menu received from the backend.
   itemList : String[]; 
@@ -39,16 +39,16 @@ export class MealOptionsComponent implements OnInit {
       switch(menu.requestStatus) {
         case HttpRequestStatus.NO_ACTION: {
                                           this.resetItemList();                                          
-                                          this.itemList.unshift(defaultMessages.menu.get(HttpRequestStatus.NO_ACTION));                                          
+                                          this.itemList.unshift(DefaultMessages.menu.get(HttpRequestStatus.NO_ACTION));                                          
                                           break;
                                           }
         case HttpRequestStatus.REQUEST_SENT: {                                      
                                           this.resetItemList();                                          
-                                          this.itemList.unshift(defaultMessages.menu.get(HttpRequestStatus.REQUEST_SENT));                                                                                 
+                                          this.itemList.unshift(DefaultMessages.menu.get(HttpRequestStatus.REQUEST_SENT));                                                                                 
                                           break;
                                           }
         case HttpRequestStatus.RESPONSE_RECEIVED: {
-                                          this.defaultText = defaultMessages.menu.get(HttpRequestStatus.RESPONSE_RECEIVED);
+                                          this.defaultText = DefaultMessages.menu.get(HttpRequestStatus.RESPONSE_RECEIVED);
                                           this.resetItemList();
                                           // Only one of the 2 values can be truthy - menu.itemList | menu.error
                                           // If menu.itemList if truthy, display item list to the user
