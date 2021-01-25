@@ -1,13 +1,26 @@
 import { DatePipe } from '@angular/common';
 import { Injectable } from '@angular/core';
+import { Store } from '@ngrx/store';
+import { UserPreferences } from 'src/app/meal-planner/meal-optimizer/store/reducers/user-preferences.reducer';
+import { AppState } from 'src/app/store/reducers/app.reducer';
 import { User } from '../model/user.model';
 
 @Injectable({providedIn:'root'})
 export class OrderService {
 
-    orderRequest : { deliveryDate: String, mealSelected: Array<String>, optimizationTypes: Array<String>, username : String }; // This is different from order.model.ts since it will have the order response, this on the other hand is the order info entered by the user
+    orderRequest : { deliveryDate: String, 
+                     mealSelected: Array<String>, 
+                     optimizationTypes: Array<String>, 
+                     username : String }; // This is different from order.model.ts since it will have the order response, this on the other hand is the order info entered by the user
 
-    constructor(private datePipe: DatePipe) { }
+    userPrefs : UserPreferences;
+
+    constructor(private datePipe: DatePipe,
+                private store : Store<AppState>) { 
+                this.store.select('userPreferences').subscribe((userPrefs : UserPreferences) => {
+                    this.userPrefs = userPrefs;
+                  });
+                }
 
     createOrderRequest(deliveryDate: Date, mealList: Array<String>, user : User) {
       this.orderRequest =  {
@@ -18,5 +31,12 @@ export class OrderService {
         };
         
         return this.orderRequest;
+    }
+
+    verifyAllInputsAreReceived() {
+        return (this.userPrefs.dietType !==null &&
+                this.userPrefs.deliveryDate !==null && 
+                (this.userPrefs.mealSelected.filter(
+                    (meal) => meal !== undefined ).length) === 4);
     }
 }

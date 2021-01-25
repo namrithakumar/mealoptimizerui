@@ -3,13 +3,13 @@ import { HttpRequestStatus } from '../../../../shared/http-request-status.enum';
 import * as OrderActions from '../actions/order.actions';
 
 export interface OptimizedMealPlans {
-    optimizedMealPlans : OrderResponse,
+    mealPlans : OrderResponse,
     error : String,
     requestStatus : HttpRequestStatus
 }
 
 const defaultMealPlans : OptimizedMealPlans = {
-    optimizedMealPlans : null,
+    mealPlans : null,
     error : null,
     requestStatus : HttpRequestStatus.NO_ACTION
 };
@@ -18,10 +18,10 @@ export function orderReducer(state : OptimizedMealPlans = defaultMealPlans, acti
     switch(action.type) {
 
         case OrderActions.CREATE_ORDER_SUCCESS :
-            return { ...state, optimizedMealPlans : action.payload, error : null, requestStatus : HttpRequestStatus.RESPONSE_RECEIVED };
+            return { ...state, mealPlans : action.payload, error : null, requestStatus : HttpRequestStatus.RESPONSE_RECEIVED };
 
         case OrderActions.CREATE_ORDER_FAIL:
-            return { ...state, optimizedMealPlans : null, error : action.payload, requestStatus : HttpRequestStatus.RESPONSE_RECEIVED };
+            return { ...state, mealPlans : null, error : action.payload, requestStatus : HttpRequestStatus.RESPONSE_RECEIVED };
 
         case OrderActions.UPDATE_REQUEST_STATUS:
             return { ...state, requestStatus : action.payload };

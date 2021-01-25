@@ -1,4 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import { Store } from '@ngrx/store';
+import { DefaultMessages } from 'src/app/shared/default-messages';
+import { HttpRequestStatus } from 'src/app/shared/http-request-status.enum';
+import { Recipe } from 'src/app/shared/model/recipe.model';
+import { AppState } from 'src/app/store/reducers/app.reducer';
+import { Recipes } from './store/reducers/recipes.reducer';
 
 @Component({
   selector: 'app-recipes',
@@ -15,9 +21,27 @@ import { Component, OnInit } from '@angular/core';
  */
 export class RecipesComponent implements OnInit {
 
-  ngOnInit(): void { }
+  defaultText : String = DefaultMessages.recipe.get(HttpRequestStatus.NO_ACTION);
+  
+  recipes: Recipe[];
 
-  constructor() {
+  constructor(private store : Store<AppState>) {}
 
+  ngOnInit(): void {
+    this.store.select('recipes').subscribe((recipes : Recipes) => {
+      
+      switch(recipes.requestStatus) {
+
+        case HttpRequestStatus.NO_ACTION : this.defaultText = DefaultMessages.recipe.get(HttpRequestStatus.NO_ACTION);
+                                           break;
+  
+        case HttpRequestStatus.REQUEST_SENT : this.defaultText = DefaultMessages.recipe.get(HttpRequestStatus.REQUEST_SENT);
+                                              break;
+                                           
+        case HttpRequestStatus.RESPONSE_RECEIVED : this.defaultText = DefaultMessages.recipe.get(HttpRequestStatus.RESPONSE_RECEIVED);
+                                                   if(!recipes.error) this.recipes = recipes.recipes; 
+                                                   break;
+      }
+    }); 
   }
 }

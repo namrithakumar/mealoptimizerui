@@ -13,7 +13,8 @@ import { AppState } from 'src/app/store/reducers/app.reducer';
  */
 export class OrderInfoComponent implements OnInit, OnDestroy {
 
-  orderInfo : { dietType: String, deliveryDate: Date, mealSelected: Array<String> } = { dietType : null, deliveryDate: null, mealSelected: null };
+  orderInfo : { dietType: String, deliveryDate: Date, mealSelected: Array<String> } = 
+              { dietType : null, deliveryDate: null, mealSelected: null };
 
   constructor(private store : Store<AppState>) { }
 

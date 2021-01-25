@@ -6,6 +6,9 @@ import { UserPreferences } from '../store/reducers/user-preferences.reducer';
 import * as RecipesActions from '../../../meal-planner/recipes/store/actions/recipes.actions';
 import { OptimizedMealPlans } from '../store/reducers/order.reducer';
 import { HttpRequestStatus } from 'src/app/shared/http-request-status.enum';
+import { Meal } from 'src/app/shared/model/order-response.model';
+import { OptimizationService } from 'src/app/shared/services/optimization.service';
+import { DefaultMessages } from 'src/app/shared/default-messages';
 
 @Component({
   selector: 'app-optimized-meal-plan',
@@ -30,14 +33,21 @@ export class OptimizedMealPlanComponent implements OnInit, OnDestroy {
   // value in userPreferences.optimizationTypeSelected (optimize by cost | optimize by quality)
   userPreferences : UserPreferences;
 
-  // Display help text if optimization state != DISTINCT | OPTIMAL | FEASIBLE
-  optimizationState : String;
-  
   optimizationError : String;
 
-  isValidOptimizationState : boolean = true;
+  //We do not know if optimization is possible, set to true preemptively
+  isOptimizationFeasible : boolean = true;
 
-  constructor(private router : Router, private store : Store<AppState>, private route : ActivatedRoute) { }
+  costOptimizedPlan : { mealList : Meal[], planCost: number, optimizationType : String };
+  
+  qualityOptimizedPlan : { mealList : Meal[], planCost: number, optimizationType : String };
+  
+  defaultText : String = DefaultMessages.mealPlan.get(HttpRequestStatus.NO_ACTION);
+
+  constructor(private router : Router, 
+              private store : Store<AppState>, 
+              private route : ActivatedRoute,
+              private optimizationService : OptimizationService) { }
 
   ngOnInit(): void {
 
@@ -47,26 +57,42 @@ export class OptimizedMealPlanComponent implements OnInit, OnDestroy {
 
     // Display optimized meal plan received from the backend.
     this.store.select('optimizedPlans').subscribe((optimizedMealPlans : OptimizedMealPlans) => {
-      
-      //If there is an error, display error message.
-      if(optimizedMealPlans.error) {
-        this.optimizationError = optimizedMealPlans.error;
+      switch(optimizedMealPlans.requestStatus) {
+        
+        case HttpRequestStatus.NO_ACTION : this.isOptimizationFeasible = true;
+                                           this.defaultText = DefaultMessages.mealPlan.get(HttpRequestStatus.NO_ACTION); 
+                                           break;
+        
+        case HttpRequestStatus.REQUEST_SENT : this.isOptimizationFeasible = true;
+                                              this.defaultText = DefaultMessages.mealPlan.get(HttpRequestStatus.REQUEST_SENT);
+                                              break;
+                                              
+        case HttpRequestStatus.RESPONSE_RECEIVED : {
+                                        this.defaultText = DefaultMessages.mealPlan.get(HttpRequestStatus.RESPONSE_RECEIVED);
+                                        //If there is an error, display error message.
+                                        if(optimizedMealPlans.error) {
+                                          this.optimizationError = optimizedMealPlans.error;
+                                        }
+                                        else {
+                                          //If there is no error
+                                          if(optimizedMealPlans.mealPlans) {  
+                                            let optimizationState = optimizedMealPlans.mealPlans.optimizationState;
+                                            //Check if optimization was successful - one of the below 3 states
+                                            if(optimizationState === 'DISTINCT' || 
+                                               optimizationState === 'OPTIMAL' || 
+                                               optimizationState === 'FEASIBLE') {
+                                              this.isOptimizationFeasible = true;
+                                              this.costOptimizedPlan = this.optimizationService.getMealPlanByOptimizationType('COST', optimizedMealPlans.mealPlans);
+                                              this.qualityOptimizedPlan = this.optimizationService.getMealPlanByOptimizationType('QUALITY', optimizedMealPlans.mealPlans);  
+                                            }
+                                            //If optimization was not successful. OptimizationState is not DISTINCT | OPTIMAL | FEASIBLE
+                                            else {
+                                              this.isOptimizationFeasible = false;
+                                            }
+                                        }
+        }                                      
       }
-      
-      //If there is no error, verify if response is received and optimizationState belongs to one of the 3 valid states - DISTINCT | OPTIMAL | FEASIBLE
-      if(optimizedMealPlans.optimizedMealPlans) {      
-        this.optimizationState = optimizedMealPlans.optimizedMealPlans.optimizationState;
-
-        if(optimizedMealPlans.requestStatus !== HttpRequestStatus.RESPONSE_RECEIVED) {
-          this.isValidOptimizationState = true;
-        } else {
-            if(this.optimizationState === 'DISTINCT' || 
-               this.optimizationState === 'OPTIMAL' || 
-               this.optimizationState === 'FEASIBLE') {
-               this.isValidOptimizationState = true; 
-              } else this.isValidOptimizationState = false;
-        }}
-    });
+    }});
   }
 
   /*
@@ -89,7 +115,7 @@ export class OptimizedMealPlanComponent implements OnInit, OnDestroy {
   get allowUserToPlaceOrderOrGetRecipe() : boolean {
     if(this.userPreferences.optimizationTypeSelected && 
        this.userPreferences.optimizationTypeSelected !== 'orderInfo' && 
-       this.isValidOptimizationState) return true;
+       this.isOptimizationFeasible) return true;
     else return false;
   }
 

@@ -8,8 +8,6 @@ export class IndexedDBService {
     private db : IDBPDatabase<RequestDB>;
     private dbName = 'request-db';
 
-    private error;
-
     constructor() {
         this.connectToDB();
     }
@@ -33,6 +31,7 @@ export class IndexedDBService {
 
     async getAllEntries() : Promise<Map<string, any>> {
         let entries : Map<string, any> = new Map();
+        let error : any;
         let request = this.db.transaction(['failed-request-store'], 'readonly')
                              .objectStore('failed-request-store')
                              .openCursor();
@@ -42,13 +41,12 @@ export class IndexedDBService {
                 let value = event.value;
                 entries.set(key, value);
                 event.continue();
-            }
-        })
-        .catch((err) => this.error = err);        
+            }})
+        .catch((err) => error = err );        
         
         return new Promise((resolve, reject) => {
             resolve(entries);
-            reject(this.error);
+            reject(error);
         });
     }
 }
