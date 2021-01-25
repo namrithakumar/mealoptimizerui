@@ -60,8 +60,7 @@ export class ManageMealPlanComponent implements OnInit, OnDestroy {
           this.userPrefs = userPrefs;
           //Enable get meal plan when 4 meals are selected.
           this.disableGetMealPlan = (userPrefs.mealSelected.filter(
-                                                            (meal) => meal !== undefined )
-                                                            .length) !== 4;
+                                                            (meal) => meal !== undefined ).length) !== 4;
           });
 
         this.store.select('authenticatedUser').subscribe((authenticatedUser : AuthenticatedUser) => {
@@ -94,7 +93,7 @@ export class ManageMealPlanComponent implements OnInit, OnDestroy {
   onGetMealPlan() {
     //Clear existing meal plans
     this.store.dispatch(new OrderActions.ClearOrder());
-    if(this.userPrefs.deliveryDate !== null && this.userPrefs.dietType !==null && this.userPrefs.mealSelected.length === 4) {
+    if(this.orderService.verifyAllInputsAreReceived()) {
       //If all inputs are received, create the order
       let orderRequest = this.orderService.createOrderRequest(this.userPrefs.deliveryDate, this.userPrefs.mealSelected, this.authenticatedUser);    
       //Call backend to get a meal plan
@@ -112,9 +111,10 @@ export class ManageMealPlanComponent implements OnInit, OnDestroy {
      */  
     //Clear existing meal plans
     this.store.dispatch(new OrderActions.ClearOrder());  
-    if(this.userPrefs.deliveryDate !== null && this.userPrefs.dietType !==null && this.userPrefs.mealSelected.length === 4)
+    if(this.orderService.verifyAllInputsAreReceived())
       console.log('Order ID to be updated ' + this.savedMealPlans.orderId);
-  }
+    else alert('One of the required inputs is missing');
+    }
 
   ngOnDestroy() : void {}
 }
