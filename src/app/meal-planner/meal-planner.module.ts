@@ -4,8 +4,10 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule, DatePipe } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
-import { CalendarModule, DateAdapter } from 'angular-calendar';
-import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
+
+import { FullCalendarModule } from '@fullcalendar/angular';
+import dayGridPlugin from '@fullcalendar/daygrid';
+import interactionPlugin from '@fullcalendar/interaction';
 
 import { MealPlannerRoutingModule } from '../meal-planner/meal-planner.routing.module';
 import { MealOptimizerComponent } from './meal-optimizer/meal-optimizer.component';
@@ -28,6 +30,11 @@ import { ShoppingListComponent } from '../meal-planner/shopping-list/shopping-li
 import { ShoppingEditComponent } from '../meal-planner/shopping-list/shopping-edit/shopping-edit.component';
 import { OnlineOrderComponent } from './meal-optimizer/online-order/online-order.component';
 import { MealPlannerComponent } from './meal-planner.component';
+
+FullCalendarModule.registerPlugins([ // register FullCalendar plugins
+    dayGridPlugin,
+    interactionPlugin
+  ]);
 
 @NgModule({
     declarations : [
@@ -58,11 +65,8 @@ import { MealPlannerComponent } from './meal-planner.component';
         FormsModule,
         ReactiveFormsModule,
         HttpClientModule,
-        CalendarModule.forRoot({
-            provide: DateAdapter,
-            useFactory: adapterFactory,
-          }),
-          MealPlannerRoutingModule
+        MealPlannerRoutingModule,
+        FullCalendarModule
     ],
     providers : [ DatePipe ]
 })

@@ -1,3 +1,4 @@
+import { getMatScrollStrategyAlreadyAttachedError } from '@angular/cdk/overlay/scroll/scroll-strategy';
 import * as UserPreferenceActions from '../actions/user-preferences.actions';
 
 export interface UserPreferences {
@@ -9,7 +10,7 @@ export interface UserPreferences {
 
 const defaultPreferences : UserPreferences = {
         dietType : null,
-        deliveryDate : new Date(), //Current date is set as default date
+        deliveryDate : getStartDate(), //next day is set as default date
         mealSelected : new Array<String>(4),
 	    optimizationTypeSelected : null
 };
@@ -37,4 +38,10 @@ export function userPreferencesReducer(state : UserPreferences = defaultPreferen
 
         default : return state;
     }
+}
+
+function getStartDate() :Date {
+    const startDate : Date = new Date();
+    startDate.setDate(new Date().getDate() + 1);
+    return startDate;
 }

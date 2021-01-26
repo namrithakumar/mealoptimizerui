@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { CalendarWeekViewCurrentTimeMarkerComponent } from 'angular-calendar/modules/week/calendar-week-view-current-time-marker.component';
 
 import { AppState } from 'src/app/store/reducers/app.reducer';
 import * as MenuActions from '../../meal-planner/meal-optimizer/store/actions/menu.actions';

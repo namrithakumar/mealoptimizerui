@@ -1,14 +1,10 @@
 import {
     Component,
     OnInit,
-    ViewEncapsulation
+    ViewChild
   } from '@angular/core';
   
-  import {
-    CalendarView, 
-    CalendarEvent, 
-    CalendarMonthViewDay,
-  } from 'angular-calendar';
+import { CalendarOptions, FullCalendarComponent } from '@fullcalendar/angular';
 
 import { AppState } from 'src/app/store/reducers/app.reducer';
 import { Store } from '@ngrx/store';
@@ -17,39 +13,35 @@ import * as UserPreferencesActions from '../store/actions/user-preferences.actio
   @Component({
     selector: 'app-delivery-date-selector',
     styleUrls: ['delivery-date-selector.component.css'],
-    templateUrl: './delivery-date-selector.component.html',
-    encapsulation: ViewEncapsulation.None
+    templateUrl: './delivery-date-selector.component.html'
   })
   // This component performs only 1 action - save delivery date chosen to store.
   export class DeliveryDateSelectorComponent implements OnInit {
 
     propertyName = 'deliveryDate';
 
-    activeDayIsOpen: boolean = true;
-  
-    view: CalendarView = CalendarView.Month;
-  
-    CalendarView = CalendarView;
-  
-    viewDate: Date = new Date();
+    currentDate : Date = new Date();
+
+    @ViewChild('calendar') calendarComponent: FullCalendarComponent;
     
+    calendarOptions: CalendarOptions = {
+      initialView: 'dayGridMonth',
+      dateClick: this.handleDateClick.bind(this),
+      validRange : {
+        start : this.clone(this.currentDate).setDate(this.currentDate.getDate() + 1),
+        end : this.clone(this.currentDate).setMonth(this.currentDate.getMonth() + 6)
+      }
+    };
+
     constructor(private store : Store<AppState>) {}
   
-    dateOfDeliveryChosen({ date, events }: { date: Date; events: CalendarEvent[] }):void {
-      this.store.dispatch(new UserPreferencesActions.EditDeliveryDate(date));
-    }
-  
-    closeOpenMonthViewDay() {
-      this.activeDayIsOpen = false;
-    }
-
-    beforeMonthViewRender({ body }: { body: CalendarMonthViewDay[] }): void {
-
-      body.forEach((day : CalendarMonthViewDay) => {
-        if(day.isPast || day.isToday) {
-          day.cssClass = 'cal-day-past';
-        }});
+    handleDateClick(arg) {
+      this.store.dispatch(new UserPreferencesActions.EditDeliveryDate(arg.date));
     }
 
     ngOnInit() { }
+
+    private clone(currentDate : Date) : Date {
+      return new Date(currentDate);
+    }
   }
