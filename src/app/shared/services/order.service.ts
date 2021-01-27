@@ -8,7 +8,8 @@ import { User } from '../model/user.model';
 @Injectable({providedIn:'root'})
 export class OrderService {
 
-    orderRequest : { deliveryDate: String, 
+    orderRequest : { id?: number,
+                     deliveryDate: String, 
                      mealSelected: Array<String>, 
                      optimizationTypes: Array<String>, 
                      username : String }; // This is different from order.model.ts since it will have the order response, this on the other hand is the order info entered by the user
@@ -22,13 +23,16 @@ export class OrderService {
                   });
                 }
 
-    createOrderRequest(deliveryDate: Date, mealList: Array<String>, user : User) {
+    createOrderRequest(deliveryDate: Date, mealList: Array<String>, user : User, id? : number) {
       this.orderRequest =  {
             deliveryDate : this.datePipe.transform(deliveryDate, 'MM/dd/yyyy'),
             mealSelected : mealList,
             optimizationTypes : ['COST','REWARD'],
             username : user.username
         };
+
+        //Set optional param id(orderId) if it is available. 'id' is available for update meal plan only, not for create meal plan.
+        if(id) this.orderRequest.id = id;
         
         return this.orderRequest;
     }

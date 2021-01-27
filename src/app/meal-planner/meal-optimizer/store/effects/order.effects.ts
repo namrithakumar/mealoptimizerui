@@ -16,15 +16,15 @@ export class OrderEffects {
 
 @Effect()
 placeOrder = this.actions$.pipe(
-    ofType<OrderActions.CreateOrderStart>(OrderActions.CREATE_ORDER_START),
-    switchMap((createOrderAction : OrderActions.CreateOrderStart) => {
+    ofType<OrderActions.SaveOrderStart>(OrderActions.SAVE_ORDER_START),
+    switchMap((createOrderAction : OrderActions.SaveOrderStart) => {
         return this.http.post<OrderResponse>('http://localhost:9090/mealoptimizer/orders/save',
                 createOrderAction.payload).pipe(
                     map((optimizedMealPlans : OrderResponse) => {
-                        return this.orderResponseHandler.handleSuccess(optimizedMealPlans, 'create');
+                        return this.orderResponseHandler.handleSuccess(optimizedMealPlans);
                     }),
                     catchError((errorRes : any) => {
-                        return this.orderResponseHandler.handleFailure(errorRes, 'create');
+                        return this.orderResponseHandler.handleFailure(errorRes);
                     })
                 )
     })

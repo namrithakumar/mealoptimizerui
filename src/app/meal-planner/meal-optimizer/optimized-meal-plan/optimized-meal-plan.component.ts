@@ -1,6 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
+
 import { AppState } from 'src/app/store/reducers/app.reducer';
 import { UserPreferences } from '../store/reducers/user-preferences.reducer';
 import * as RecipesActions from '../../../meal-planner/recipes/store/actions/recipes.actions';
@@ -44,6 +45,8 @@ export class OptimizedMealPlanComponent implements OnInit, OnDestroy {
   
   defaultText : String = DefaultMessages.mealPlan.get(HttpRequestStatus.NO_ACTION);
 
+  responseReceived : boolean = false;
+
   constructor(private router : Router, 
               private store : Store<AppState>, 
               private route : ActivatedRoute,
@@ -60,15 +63,18 @@ export class OptimizedMealPlanComponent implements OnInit, OnDestroy {
       switch(optimizedMealPlans.requestStatus) {
         
         case HttpRequestStatus.NO_ACTION : this.isOptimizationFeasible = true;
+                                           this.responseReceived = false; 
                                            this.defaultText = DefaultMessages.mealPlan.get(HttpRequestStatus.NO_ACTION); 
                                            break;
         
         case HttpRequestStatus.REQUEST_SENT : this.isOptimizationFeasible = true;
+                                              this.responseReceived = false;
                                               this.defaultText = DefaultMessages.mealPlan.get(HttpRequestStatus.REQUEST_SENT);
                                               break;
                                               
         case HttpRequestStatus.RESPONSE_RECEIVED : {
                                         this.defaultText = DefaultMessages.mealPlan.get(HttpRequestStatus.RESPONSE_RECEIVED);
+                                        this.responseReceived = true;
                                         //If there is an error, display error message.
                                         if(optimizedMealPlans.error) {
                                           this.optimizationError = optimizedMealPlans.error;
@@ -115,7 +121,8 @@ export class OptimizedMealPlanComponent implements OnInit, OnDestroy {
   get allowUserToPlaceOrderOrGetRecipe() : boolean {
     if(this.userPreferences.optimizationTypeSelected && 
        this.userPreferences.optimizationTypeSelected !== 'orderInfo' && 
-       this.isOptimizationFeasible) return true;
+       this.isOptimizationFeasible &&
+       this.responseReceived) return true;
     else return false;
   }
 
