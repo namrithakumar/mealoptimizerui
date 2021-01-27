@@ -21,10 +21,10 @@ placeOrder = this.actions$.pipe(
         return this.http.post<OrderResponse>('http://localhost:9090/mealoptimizer/orders/save',
                 createOrderAction.payload).pipe(
                     map((optimizedMealPlans : OrderResponse) => {
-                        return this.orderResponseHandler.handleSuccess(optimizedMealPlans, 'create');
+                        return this.orderResponseHandler.handleSuccess(optimizedMealPlans);
                     }),
                     catchError((errorRes : any) => {
-                        return this.orderResponseHandler.handleFailure(errorRes, 'create');
+                        return this.orderResponseHandler.handleFailure(errorRes);
                     })
                 )
     })
