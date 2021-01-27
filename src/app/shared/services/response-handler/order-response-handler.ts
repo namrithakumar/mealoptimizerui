@@ -12,12 +12,12 @@ export class OrderResponseHandler implements BaseResponseHandler {
     //action can be create/update    
     handleSuccess(optimizedMealPlans : OrderResponse, action: String) {
         switch(action) {
-            case 'create' : return new OrderActions.CreateOrderSuccess(optimizedMealPlans);
+            case 'create' : return new OrderActions.SaveOrderSuccess(optimizedMealPlans);
         }
     }
     handleFailure(errorResponse: any, action : String) {
         switch(action) {
-            case 'create' : return of(new OrderActions.CreateOrderFail(
+            case 'create' : return of(new OrderActions.SaveOrderFail(
                                     errorResponse));
         }
     }

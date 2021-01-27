@@ -23,7 +23,7 @@ export class ActionDispatcher {
                                }
             case 'orders-save' : {
                                     let orderRequest = request.body;
-                                    this.store.dispatch(new OrderActions.CreateOrderStart(orderRequest));
+                                    this.store.dispatch(new OrderActions.SaveOrderStart(orderRequest));
                                     break;
                                  }                   
             case 'recipe-find' : {

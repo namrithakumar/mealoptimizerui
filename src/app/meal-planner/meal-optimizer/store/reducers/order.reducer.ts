@@ -17,10 +17,10 @@ const defaultMealPlans : OptimizedMealPlans = {
 export function orderReducer(state : OptimizedMealPlans = defaultMealPlans, action : OrderActions.OrderActions) {
     switch(action.type) {
 
-        case OrderActions.CREATE_ORDER_SUCCESS :
+        case OrderActions.SAVE_ORDER_SUCCESS :
             return { ...state, mealPlans : action.payload, error : null, requestStatus : HttpRequestStatus.RESPONSE_RECEIVED };
 
-        case OrderActions.CREATE_ORDER_FAIL:
+        case OrderActions.SAVE_ORDER_FAIL:
             return { ...state, mealPlans : null, error : action.payload, requestStatus : HttpRequestStatus.RESPONSE_RECEIVED };
 
         case OrderActions.UPDATE_REQUEST_STATUS:

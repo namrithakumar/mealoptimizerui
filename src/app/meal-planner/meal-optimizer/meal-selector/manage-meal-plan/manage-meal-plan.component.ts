@@ -29,7 +29,7 @@ export class ManageMealPlanComponent implements OnInit, OnDestroy {
    * The meals selected do not satisfy daily nutrition requirements - allow the user to edit meals selected
    * Initially disableGetMealPlan is set to true (because user inputs are invalid at this point)
    */
-  disableGetMealPlan : boolean = true;
+  disableGetOrUpdateMealPlan : boolean = true;
 
   //This value is truthy if a valid meal plan is generated atleast once. 
   //We need the ID of the generated meal plan for further updates.
@@ -59,7 +59,7 @@ export class ManageMealPlanComponent implements OnInit, OnDestroy {
         this.store.select('userPreferences').subscribe((userPrefs : UserPreferences) => {
           this.userPrefs = userPrefs;
           //Enable get meal plan when 4 meals are selected.
-          this.disableGetMealPlan = (userPrefs.mealSelected.filter(
+          this.disableGetOrUpdateMealPlan = (userPrefs.mealSelected.filter(
                                                             (meal) => meal !== undefined ).length) !== 4;
           });
 
@@ -71,22 +71,23 @@ export class ManageMealPlanComponent implements OnInit, OnDestroy {
           
           //Response received from backend. The user can choose to edit meals selected, so enable get meal plan.
           if(optimizedMealPlans.requestStatus === HttpRequestStatus.RESPONSE_RECEIVED) {
-            this.disableGetMealPlan = false;
+            this.disableGetOrUpdateMealPlan = false;
+
+            //Switch to 'update' mode if there is no error and optimization result state is DISTINCT OR OPTIMAL OR FEASIBLE
+            if(!optimizedMealPlans.error && 
+              (optimizedMealPlans.mealPlans && 
+                (optimizedMealPlans.mealPlans.optimizationState === "DISTINCT" || optimizedMealPlans.mealPlans.optimizationState === "OPTIMAL" || optimizedMealPlans.mealPlans.optimizationState === "FEASIBLE"))) {
+                  this.savedMealPlans = optimizedMealPlans.mealPlans;
+                  this.router.navigate([],{
+                    relativeTo : this.route,
+                    queryParams : { optimizermode: 'update' }
+                  });
+            }
+            else { 
+              this.savedMealPlans = null;
+            }
           }
           
-          //Switch to 'update' mode if there is no error and optimization result state is DISTINCT OR OPTIMAL OR FEASIBLE
-          if(!optimizedMealPlans.error && 
-            (optimizedMealPlans.mealPlans && 
-              (optimizedMealPlans.mealPlans.optimizationState === "DISTINCT" || optimizedMealPlans.mealPlans.optimizationState === "OPTIMAL" || optimizedMealPlans.mealPlans.optimizationState === "FEASIBLE"))) {
-                this.savedMealPlans = optimizedMealPlans.mealPlans;
-                this.router.navigate([],{
-                  relativeTo : this.route,
-                  queryParams : { optimizermode: 'update' }
-                });
-          }
-          else { 
-            this.savedMealPlans = null;
-          }
         });
   }
 
@@ -96,10 +97,7 @@ export class ManageMealPlanComponent implements OnInit, OnDestroy {
     if(this.orderService.verifyAllInputsAreReceived()) {
       //If all inputs are received, create the order
       let orderRequest = this.orderService.createOrderRequest(this.userPrefs.deliveryDate, this.userPrefs.mealSelected, this.authenticatedUser);    
-      //Call backend to get a meal plan
-      this.store.dispatch(new OrderActions.UpdateRequestStatus(HttpRequestStatus.REQUEST_SENT));
-      this.store.dispatch(new OrderActions.CreateOrderStart(orderRequest));
-      this.disableGetMealPlan = true;
+      this.fetchMealPlan(orderRequest);
     }
     else alert('One of the required inputs is missing');
   }
@@ -110,11 +108,21 @@ export class ManageMealPlanComponent implements OnInit, OnDestroy {
      * if the order has never been saved, the optimizer is in create mode. 
      */  
     //Clear existing meal plans
-    this.store.dispatch(new OrderActions.ClearOrder());  
-    if(this.orderService.verifyAllInputsAreReceived())
-      console.log('Order ID to be updated ' + this.savedMealPlans.orderId);
+    this.store.dispatch(new OrderActions.ClearOrder());
+    if(this.orderService.verifyAllInputsAreReceived()) {
+      //If all inputs are received, create the order
+      let orderRequest = this.orderService.createOrderRequest(this.userPrefs.deliveryDate, this.userPrefs.mealSelected, this.authenticatedUser, this.savedMealPlans.orderId);    
+      this.fetchMealPlan(orderRequest);
+      }
     else alert('One of the required inputs is missing');
     }
+
+  private fetchMealPlan(orderRequest) : void {
+      //Call backend to get a meal plan
+      this.store.dispatch(new OrderActions.UpdateRequestStatus(HttpRequestStatus.REQUEST_SENT));
+      this.store.dispatch(new OrderActions.SaveOrderStart(orderRequest));
+      this.disableGetOrUpdateMealPlan = true;
+  }
 
   ngOnDestroy() : void {}
 }
