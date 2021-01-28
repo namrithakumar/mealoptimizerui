@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
+import { Store } from '@ngrx/store';
+
 import { User } from '../../../app/shared/model/user.model';
 import { AppState } from '../../../app/store/reducers/app.reducer';
-import { Store } from '@ngrx/store';
 import { AuthenticatedUser } from '../store/reducers/user-mgmt.reducer';
 
 @Component({
@@ -29,6 +30,8 @@ export class UserProfileComponent implements OnInit {
 
   /**TODO : Move to an env file */
   passwordPattern : any = '^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])[A-Za-z\d$@$!%?&]{6,10}$';
+
+  get nutrients() { return this.userProfileForm.get('nutrients') as FormArray; }
 
   constructor(private route: ActivatedRoute, 
               private formBuilder : FormBuilder, 
@@ -67,11 +70,19 @@ export class UserProfileComponent implements OnInit {
       });
     }
     
-  private mergeNutrientMinMaxLimits(nutrientMaxLimits : Array<{String, number}>, nutrientMinLimits : Array<{String, number}>) {
-    let mergedArrayNoKeys : Array<{String, number}> = 
-    Object.values(nutrientMinLimits).map( (nutrientMin,i) => Object.assign( {}, nutrientMin, nutrientMaxLimits[i]));
+  private mergeNutrientMinMaxLimits(nutrientMaxLimits : Map<String, number>, nutrientMinLimits : Map<String, number>) : FormGroup[] {
+    let nutrientInfoArray : Array<FormGroup> = new Array<FormGroup>();
     let mergedArray = new Array<{ name : String, min:Number, max:number }>();
-    mergedArrayNoKeys.forEach((nutrient) => mergedArray.push({name : nutrient.String, min: nutrient.number, max : nutrient.number}));
-    return mergedArray;
+    for(let [key, value] of Object.entries(nutrientMaxLimits)) {
+      mergedArray.push({ name : key, min : nutrientMinLimits[key], max : value});
+    }
+    mergedArray.forEach((nutrient) => {
+      nutrientInfoArray.push(this.formBuilder.group({
+        name : nutrient.name,
+        min : nutrient.min,
+        max : nutrient.max
+      }));
+    });
+  return nutrientInfoArray;  
   }
 }

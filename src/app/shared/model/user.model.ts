@@ -6,13 +6,13 @@ export class User {
     public firstName : String;
     public lastName : String;
     public address : String;
-    public nutrientMinLimits : Array<{String, number}>;
-    public nutrientMaxLimits : Array<{String, number}>;
+    public nutrientMinLimits : Map<String,number>;
+    public nutrientMaxLimits : Map<String, number>;
     public token : String;
     public tokenValidTime : number;
     public tokenExpiryDate? : Date;
 
-    constructor(id:number, username:String, email:String, preferredDietType:String, firstName:String, lastName:String, address:String, nutrientMinLimits : Array<{String, number}>, nutrientMaxLimits : Array<{String, number}>, token : String, tokenValidTime : number, tokenExpiryDate? : Date) {
+    constructor(id:number, username:String, email:String, preferredDietType:String, firstName:String, lastName:String, address:String, nutrientMinLimits : Map<String, number>, nutrientMaxLimits : Map<String, number>, token : String, tokenValidTime : number, tokenExpiryDate? : Date) {
         this.id = id;
         this.username = username;
         this.email = email;
