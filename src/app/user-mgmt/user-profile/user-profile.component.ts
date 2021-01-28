@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { User } from '../../../app/shared/model/user.model';
 import { AppState } from '../../../app/store/reducers/app.reducer';
 import { Store } from '@ngrx/store';
@@ -13,7 +13,7 @@ import { AuthenticatedUser } from '../store/reducers/user-mgmt.reducer';
 })
 /* The user can perform 2 actions in this component - 
  * View profile - profile information is loaded from the user currently logged in (which is loaded from store.select('authenticatedUser'))
- * Edit profile - If any of the profile info is changed, the changes are saved to the backend. 
+ * Edit profile - If any of the profile info is changed, the changes are saved to the backend. - Refer #133 - will be handled later.
  * We automatically switch to edit mode if the user changes any of the profile info
  */
 export class UserProfileComponent implements OnInit {
@@ -30,8 +30,7 @@ export class UserProfileComponent implements OnInit {
   /**TODO : Move to an env file */
   passwordPattern : any = '^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])[A-Za-z\d$@$!%?&]{6,10}$';
 
-  constructor(private router : Router, 
-              private route: ActivatedRoute, 
+  constructor(private route: ActivatedRoute, 
               private formBuilder : FormBuilder, 
               private store : Store<AppState>) { }
 
@@ -66,23 +65,8 @@ export class UserProfileComponent implements OnInit {
       (queryParams) => {
         this.mode = queryParams['mode'];
       });
-
-    //Automatically switch to edit mode if the user edits any of the fields.  
-    this.userProfileForm.valueChanges.subscribe((value) => {
-      this.onEditUserProfile();
-      });
-  }
-
-  //If the user edits any of the fields, automatically switch to edit mode by setting mode = edit
-  onEditUserProfile() {
-    this.router.navigate(['user-mgmt','user','user-profile'], { queryParams: {mode: 'edit'} });
-  }
-
-  //Save profile changes to backend
-  onSaveProfileChanges() {
-    console.log('Profile changes updated');
-  }
-
+    }
+    
   private mergeNutrientMinMaxLimits(nutrientMaxLimits : Array<{String, number}>, nutrientMinLimits : Array<{String, number}>) {
     let mergedArrayNoKeys : Array<{String, number}> = 
     Object.values(nutrientMinLimits).map( (nutrientMin,i) => Object.assign( {}, nutrientMin, nutrientMaxLimits[i]));
