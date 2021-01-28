@@ -20,16 +20,14 @@ import * as UserPreferencesActions from '../store/actions/user-preferences.actio
 
     propertyName = 'deliveryDate';
 
-    currentDate : Date = new Date();
-
     @ViewChild('calendar') calendarComponent: FullCalendarComponent;
     
     calendarOptions: CalendarOptions = {
       initialView: 'dayGridMonth',
       dateClick: this.handleDateClick.bind(this),
       validRange : {
-        start : this.clone(this.currentDate).setDate(this.currentDate.getDate() + 1),
-        end : this.clone(this.currentDate).setMonth(this.currentDate.getMonth() + 6)
+        start : new Date(),
+        end : new Date().setMonth(new Date().getMonth() + 6)
       }
     };
 
@@ -40,8 +38,4 @@ import * as UserPreferencesActions from '../store/actions/user-preferences.actio
     }
 
     ngOnInit() { }
-
-    private clone(currentDate : Date) : Date {
-      return new Date(currentDate);
-    }
   }
