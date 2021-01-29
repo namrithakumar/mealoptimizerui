@@ -33,14 +33,14 @@
               class="form-control" 
               formControlName="address">
     </textarea>
-    <label for="nutrients">Address:</label>
+    <label for="nutrients">Nutritional requirements (daily):</label>
                 <div id="nutrients" formArrayName="nutrients">
                     <div class="form-group"  *ngFor="let nutrient of nutrients.controls; let i = index">
                      <div [formGroupName]="i">       
                      <div>
                                 <input [ngStyle]="{'background-color':'rgba(0,0,0,0)', 'border': 'none'}" formControlName="name" readonly/>
-                                <input type="number" formControlName="min"/>
-                                <input type="number" formControlName="max"/>
+                                <input type="number" formControlName="min" min="1" max="3000"/>
+                                <input type="number" formControlName="max" min="1" max="3000"/>
                             </div>
                             </div>
                     </div>
