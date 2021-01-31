@@ -3,7 +3,6 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
@@ -23,6 +22,7 @@ import { HeaderComponent } from './header/header.component';
 import { AppInfoModule } from '../app/app-info/app-info.module';
 import { UserMgmtModule } from '../app/user-mgmt/user-mgmt.module';
 import { MealPlannerModule } from '../app/meal-planner/meal-planner.module';
+import { CoreModule } from '../app/shared/core/core.module';
 import { interceptorProviders } from '../app/shared/services/interceptor/interceptors';
 import { CustomOverlayComponent } from './shared/custom-overlay/custom-overlay.component';
 import { CustomNotificationComponent } from './shared/custom-notification/custom-notification.component';
@@ -37,10 +37,10 @@ import { CustomNotificationComponent } from './shared/custom-notification/custom
   ],
   imports: [
     AppInfoModule,
+    CoreModule,
     UserMgmtModule,
     MealPlannerModule,
     BrowserModule,
-    BrowserAnimationsModule,
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
