@@ -1,6 +1,4 @@
 import { NgModule } from '@angular/core';
-
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CommonModule } from '@angular/common';
 
 import { UserMgmtComponent } from '../user-mgmt/user-mgmt.component';
@@ -21,7 +19,6 @@ import { CoreModule } from '../shared/core/core.module';
     ],
     imports : [
         CommonModule,
-        BrowserAnimationsModule,
         CoreModule,
         UserMgmtRoutingModule
     ]

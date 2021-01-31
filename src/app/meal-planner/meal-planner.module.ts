@@ -1,6 +1,4 @@
 import { NgModule } from '@angular/core';
-
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { DatePipe } from '@angular/common';
 
 import { FullCalendarModule } from '@fullcalendar/angular';
@@ -59,7 +57,6 @@ FullCalendarModule.registerPlugins([ // register FullCalendar plugins
         OnlineOrderComponent
     ],
     imports : [
-        BrowserAnimationsModule,
         CoreModule,
         MealPlannerRoutingModule,
         FullCalendarModule
