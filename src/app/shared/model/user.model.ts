@@ -12,7 +12,7 @@ export class User {
     public tokenValidTime : number;
     public tokenExpiryDate? : Date;
 
-    constructor(id:number, username:String, email:String, preferredDietType:String, firstName:String, lastName:String, address:String, nutrientMinLimits : Array<{String, number}>, nutrientMaxLimits : Array<{String, number}>, token : String, tokenValidTime : number, tokenExpiryDate? : Date) {
+    constructor(username:String, id?:number, email?:String, preferredDietType?:String, firstName?:String, lastName?:String, address?:String, nutrientMinLimits? : Array<{String, number}>, nutrientMaxLimits? : Array<{String, number}>, token? : String, tokenValidTime? : number, tokenExpiryDate? : Date) {
         this.id = id;
         this.username = username;
         this.email = email;
