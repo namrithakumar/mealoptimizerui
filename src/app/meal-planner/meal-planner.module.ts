@@ -1,9 +1,5 @@
 import { NgModule } from '@angular/core';
-
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { CommonModule, DatePipe } from '@angular/common';
-import { HttpClientModule } from '@angular/common/http';
+import { DatePipe } from '@angular/common';
 
 import { FullCalendarModule } from '@fullcalendar/angular';
 import dayGridPlugin from '@fullcalendar/daygrid';
@@ -30,6 +26,7 @@ import { ShoppingListComponent } from '../meal-planner/shopping-list/shopping-li
 import { ShoppingEditComponent } from '../meal-planner/shopping-list/shopping-edit/shopping-edit.component';
 import { OnlineOrderComponent } from './meal-optimizer/online-order/online-order.component';
 import { MealPlannerComponent } from './meal-planner.component';
+import { CoreModule } from '../shared/core/core.module';
 
 FullCalendarModule.registerPlugins([ // register FullCalendar plugins
     dayGridPlugin,
@@ -60,11 +57,7 @@ FullCalendarModule.registerPlugins([ // register FullCalendar plugins
         OnlineOrderComponent
     ],
     imports : [
-        CommonModule,
-        BrowserAnimationsModule,
-        FormsModule,
-        ReactiveFormsModule,
-        HttpClientModule,
+        CoreModule,
         MealPlannerRoutingModule,
         FullCalendarModule
     ],

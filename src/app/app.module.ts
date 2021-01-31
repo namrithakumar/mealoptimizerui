@@ -1,13 +1,8 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { HttpClientModule } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
-import { ErrorPageComponent } from './shared/error-page/error-page.component';
 import { JwtHelperService, JWT_OPTIONS  } from '@auth0/angular-jwt';
 
 import * as fromApp from '../app/store/reducers/app.reducer';
@@ -23,27 +18,20 @@ import { HeaderComponent } from './header/header.component';
 import { AppInfoModule } from '../app/app-info/app-info.module';
 import { UserMgmtModule } from '../app/user-mgmt/user-mgmt.module';
 import { MealPlannerModule } from '../app/meal-planner/meal-planner.module';
+import { CoreModule } from '../app/shared/core/core.module';
 import { interceptorProviders } from '../app/shared/services/interceptor/interceptors';
-import { CustomOverlayComponent } from './shared/custom-overlay/custom-overlay.component';
-import { CustomNotificationComponent } from './shared/custom-notification/custom-notification.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    ErrorPageComponent,
-    HeaderComponent,
-    CustomOverlayComponent,
-    CustomNotificationComponent
+    HeaderComponent
   ],
   imports: [
     AppInfoModule,
+    CoreModule,
     UserMgmtModule,
     MealPlannerModule,
     BrowserModule,
-    BrowserAnimationsModule,
-    FormsModule,
-    ReactiveFormsModule,
-    HttpClientModule,
     AppRoutingModule,
     OverlayModule,
     StoreModule.forRoot(fromApp.appReducer),
