@@ -1,5 +1,5 @@
 import { Component, Inject, OnInit } from '@angular/core';
-import { CONTAINER_DATA } from '../services/display.service';
+import { CONTAINER_DATA } from '../../services/display.service';
 
 @Component({
   selector: 'app-custom-notification',

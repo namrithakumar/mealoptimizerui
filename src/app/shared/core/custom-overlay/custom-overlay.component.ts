@@ -1,7 +1,7 @@
 import { Component, Inject, OnInit } from '@angular/core';
 
-import { CONTAINER_DATA } from '../services/display.service';
-import { OverlayDisplayService } from '../services/overlay-display.service';
+import { CONTAINER_DATA } from '../../services/display.service';
+import { OverlayDisplayService } from '../../services/overlay-display.service';
 
 @Component({
   selector: 'app-custom-overlay',

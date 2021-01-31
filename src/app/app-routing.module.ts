@@ -1,7 +1,7 @@
-import { Routes, UrlSerializer } from '@angular/router';
+import { Routes } from '@angular/router';
 import { RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
-import { ErrorPageComponent } from '../app/shared/error-page/error-page.component';
+import { ErrorPageComponent } from '../app/shared/core/error-page/error-page.component';
 
 const appRoutes : Routes = [
     {path: '', redirectTo:'/app-info/home', pathMatch: 'full'},

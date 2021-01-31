@@ -2,7 +2,7 @@ import { Overlay, OverlayConfig, OverlayRef } from '@angular/cdk/overlay';
 import { ComponentPortal } from '@angular/cdk/portal';
 import { Injectable } from '@angular/core';
 
-import { CustomOverlayComponent } from '../custom-overlay/custom-overlay.component'; 
+import { CustomOverlayComponent } from '../core/custom-overlay/custom-overlay.component'; 
 import { DisplayService } from './display.service';
 
 @Injectable({ providedIn:'root' })
