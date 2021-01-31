@@ -23,7 +23,8 @@ import { CustomNotificationComponent } from '../custom-notification/custom-notif
     CustomNotificationComponent,
     FormsModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    CommonModule
   ]
 })
 export class CoreModule { }
