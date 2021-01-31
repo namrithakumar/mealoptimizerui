@@ -8,6 +8,7 @@ import { Router } from "@angular/router";
 
 import { UserMgmtService } from '../../../shared/services/user-mgmt.service';
 import { User } from '../../../shared/model/user.model';
+import { UserBuilder } from '../../../shared/model/user-builder.model';
 import { AuthenticationResponseHandler } from '../../../shared/services/response-handler/authentication-response-handler';
 
 @Injectable()
@@ -70,7 +71,20 @@ autoLogin = this.actions$.pipe(
             return { type : 'NO_ACTION' }
         }
         else {
-            loadedUser = new User(userData.id, userData.username, userData.email, userData.preferredDietType, userData.firstName, userData.lastName, userData.address, userData.nutrientMinLimits, userData.nutrientMaxLimits, userData.token, userData._tokenValidTime, userData.tokenExpiryDate);
+            //Builder pattern - only username is set for guest, all fields are set for authenticated/logged in user.
+            loadedUser = new UserBuilder(userData.username)
+                            .setId(userData.id)
+                            .setEmail(userData.email)
+                            .setPreferredDietType(userData.preferredDietType)
+                            .setFirstName(userData.firstName)
+                            .setLastName(userData.lastName)
+                            .setAddress(userData.address)
+                            .setMinLimits(userData.nutrientMinLimits)
+                            .setMaxLimits(userData.nutrientMaxLimits)
+                            .setToken(userData.token)
+                            .setTokenValidTime(userData._tokenValidTime)
+                            .setTokenExpiryDate(userData.tokenExpiryDate)
+                            .build();
             this.userMgmtService.setLogoutTimer(new Date(loadedUser.tokenExpiryDate).getTime() - new Date().getTime());
             return new UserMgmtActions.AuthSuccess(loadedUser);   
         }

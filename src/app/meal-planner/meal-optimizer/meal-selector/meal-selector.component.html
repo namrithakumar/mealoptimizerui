@@ -9,7 +9,7 @@
         </thead>
         <tbody>
             <tr>
-                <td>{{dateOfDelivery | date}}</td>
+                <td>{{ dateOfDelivery | date }}</td>
                 <td *ngFor="let i of [0,1,2,3]; index as indexOfMeal">
                     <app-meal-options [indexOfMeal] = "indexOfMeal"></app-meal-options>
             </td>

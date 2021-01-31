@@ -3,7 +3,7 @@ import { Overlay, OverlayConfig, OverlayRef } from '@angular/cdk/overlay';
 
 import { DisplayService } from "./display.service";
 import { ComponentPortal } from "@angular/cdk/portal";
-import { CustomNotificationComponent } from '../custom-notification/custom-notification.component';
+import { CustomNotificationComponent } from '../core/custom-notification/custom-notification.component';
 
 @Injectable({ providedIn : 'root' })
 export class NotificationDisplayService extends DisplayService {

@@ -4,9 +4,9 @@ import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 
-import { ErrorPageComponent } from '../error-page/error-page.component';
-import { CustomOverlayComponent } from '../custom-overlay/custom-overlay.component';
-import { CustomNotificationComponent } from '../custom-notification/custom-notification.component';
+import { ErrorPageComponent } from '../core/error-page/error-page.component';
+import { CustomOverlayComponent } from '../core/custom-overlay/custom-overlay.component';
+import { CustomNotificationComponent } from '../core/custom-notification/custom-notification.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +23,8 @@ import { CustomNotificationComponent } from '../custom-notification/custom-notif
     CustomNotificationComponent,
     FormsModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    CommonModule
   ]
 })
 export class CoreModule { }
