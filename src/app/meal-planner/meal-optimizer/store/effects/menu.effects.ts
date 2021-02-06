@@ -6,6 +6,8 @@ import { switchMap, map, catchError } from 'rxjs/operators';
 import * as MenuActions from '../actions/menu.actions';
 import { MenuResponseHandler } from '../../../../shared/services/response-handler/menu-response-handler';
 
+import { environment } from '../../../../../environments/environment';
+
 @Injectable()
 export class MenuEffects {
 
@@ -17,7 +19,7 @@ export class MenuEffects {
     fetchMenuFromBackend = this.actions$.pipe(
         ofType<MenuActions.UpdateMenuStart>(MenuActions.UPDATE_MENU_START),
         switchMap((updateMenuAction : MenuActions.UpdateMenuStart) => {
-            return this.http.get<String[]>('http://localhost:9090/mealoptimizer/menu/find',
+            return this.http.get<String[]>(`${environment.hostUrl}:${environment.port}/${environment.applicationName}/menu/find`,
                 {
                     'params' : new HttpParams().set('category', updateMenuAction.payload.toString())
                 }).pipe(map((menu : String[]) => {

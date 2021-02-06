@@ -1,13 +1,15 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
+import { Store } from '@ngrx/store';
+
 import { RecipeService } from 'src/app/shared/services/recipe.service';
 import { OptimizationService } from 'src/app/shared/services/optimization.service';
 import { ShoppingItem } from 'src/app/shared/model/shopping-item-model';
 import { AppState } from 'src/app/store/reducers/app.reducer';
-import { Store } from '@ngrx/store';
 import { UserPreferences } from 'src/app/meal-planner/meal-optimizer/store/reducers/user-preferences.reducer';
 import { Recipe } from 'src/app/shared/model/recipe.model';
 import { Ingredient } from 'src/app/shared/model/ingredient.model';
+
 import * as ShoppingListActions from '../../shopping-list/store/shopping-list.actions';
 
 @Component({
@@ -56,7 +58,7 @@ export class RecipeDetailComponent implements OnInit, OnDestroy {
     this.recipeSelected.ingredients.forEach((ingredient : Ingredient) => {
       this.shoppingItems.push(
         new ShoppingItem(ingredient.name, 
-              ingredient.quantity.count * this.noOfPortions, 
+              ingredient.quantity.amount * this.noOfPortions, 
               ingredient.quantity.measure,
               (ingredient.labels === undefined)?[this.recipeSelected.name]:ingredient.labels
       ));

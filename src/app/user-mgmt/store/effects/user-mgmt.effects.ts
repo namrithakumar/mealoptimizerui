@@ -11,6 +11,8 @@ import { User } from '../../../shared/model/user.model';
 import { UserBuilder } from '../../../shared/model/user-builder.model';
 import { AuthenticationResponseHandler } from '../../../shared/services/response-handler/authentication-response-handler';
 
+import { environment } from '../../../../environments/environment';
+
 @Injectable()
 export class UserMgmtEffects {
 
@@ -29,7 +31,7 @@ export class UserMgmtEffects {
 signup = this.actions$.pipe(
     ofType<UserMgmtActions.SignupStart>(UserMgmtActions.SIGNUP_START),
     switchMap( (signup : UserMgmtActions.SignupStart) => {
-        return this.http.post<User>('http://localhost:9090/mealoptimizer/user/register', signup.payload).pipe(
+        return this.http.post<User>(`${environment.hostUrl}:${environment.port}/${environment.applicationName}/user/register`, signup.payload).pipe(
                             map((user : User) => { 
                                 return this.handleSuccessfulAuthentication(user) }),
                             catchError((error : any) => { 
@@ -42,7 +44,7 @@ signup = this.actions$.pipe(
 login = this.actions$.pipe(
     ofType<UserMgmtActions.LoginStart>(UserMgmtActions.LOGIN_START),
     switchMap( (login : UserMgmtActions.LoginStart) => {
-        return this.http.post<User>('http://localhost:9090/mealoptimizer/user/login', login.payload).pipe(
+        return this.http.post<User>(`${environment.hostUrl}:${environment.port}/${environment.applicationName}/user/login`, login.payload).pipe(
                             map((user : User) => {
                                 return this.handleSuccessfulAuthentication(user) }),
                             catchError((error : any) => { 
