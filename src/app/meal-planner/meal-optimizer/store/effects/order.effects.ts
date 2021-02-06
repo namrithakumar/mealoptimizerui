@@ -7,6 +7,8 @@ import { OrderResponseHandler } from '../../../../shared/services/response-handl
 import { OrderResponse } from '../../../../shared/model/order-response.model';
 import * as OrderActions from '../actions/order.actions';
 
+import { environment } from '../../../../../environments/environment';
+
 @Injectable()
 export class OrderEffects {
 
@@ -18,7 +20,7 @@ export class OrderEffects {
 placeOrder = this.actions$.pipe(
     ofType<OrderActions.SaveOrderStart>(OrderActions.SAVE_ORDER_START),
     switchMap((createOrderAction : OrderActions.SaveOrderStart) => {
-        return this.http.post<OrderResponse>('http://localhost:9090/mealoptimizer/orders/save',
+        return this.http.post<OrderResponse>(`${environment.hostUrl}:${environment.port}/${environment.applicationName}/orders/save`,
                 createOrderAction.payload).pipe(
                     map((optimizedMealPlans : OrderResponse) => {
                         return this.orderResponseHandler.handleSuccess(optimizedMealPlans);

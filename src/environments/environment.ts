@@ -8,7 +8,7 @@ export const environment = {
   hostUrl : 'http://localhost',
   applicationName : 'mealoptimizer',
   port : 9090,
-  envName : 'local'
+  envName : 'dev'
 };
 
 /*

@@ -1,3 +1,3 @@
 export class Quantity {
-    constructor(public count : number, public measure : String) {}
+    constructor(public amount : number, public measure : String) {}
 }

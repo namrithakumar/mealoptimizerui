@@ -17,7 +17,7 @@
         <table>
         <tr *ngFor="let ingredient of recipeSelected.ingredients">
                 <td class="col-xs-12">{{ ingredient.name }}</td>
-                <td class="col-xs-12" style="text-align:right">: {{ ingredient.quantity.count * noOfPortions }} ({{ ingredient.quantity.measure}})</td>
+                <td class="col-xs-12" style="text-align:right">: {{ ingredient.quantity.amount * noOfPortions }} ({{ ingredient.quantity.measure}})</td>
         </tr>        
     </table>
     </div>

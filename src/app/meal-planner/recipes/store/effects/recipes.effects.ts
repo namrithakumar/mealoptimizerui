@@ -7,6 +7,8 @@ import { Recipe } from "../../../../shared/model/recipe.model";
 import * as RecipesActions from '../actions/recipes.actions';
 import { RecipeResponseHandler } from '../../../../shared/services/response-handler/recipe-response-handler';
 
+import { environment } from '../../../../../environments/environment';
+
 @Injectable()
 export class RecipesEffects {
 
@@ -18,7 +20,7 @@ export class RecipesEffects {
     fetchRecipes = this.actions$.pipe(
         ofType<RecipesActions.FetchRecipesStart>(RecipesActions.FETCH_RECIPES_START),
         switchMap((fetchRecipesAction : RecipesActions.FetchRecipesStart) => {
-            const url = 'http://localhost:9090/mealoptimizer/recipe/find';
+            const url = `${environment.hostUrl}:${environment.port}/${environment.applicationName}/recipe/find`;
             const params = new HttpParams()
                         .set('names', fetchRecipesAction.payload.join());
             return this.http.get<Recipe[]>(url, {params}).pipe(

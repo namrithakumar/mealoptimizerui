@@ -1,6 +1,6 @@
 export const environment = {
     production: false,
-    hostUrl : 'http://test.site',
+    hostUrl : 'http://localhost',
     applicationName : 'mealoptimizer',
     port : 9090,
     envName : 'test'
