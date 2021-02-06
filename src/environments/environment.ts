@@ -2,8 +2,13 @@
 // `ng build --prod` replaces `environment.ts` with `environment.prod.ts`.
 // The list of file replacements can be found in `angular.json`.
 
+// Usually the environments are local, dev, test, staging, pre prod and prod. Here we restrict to dev, test and prod.
 export const environment = {
-  production: false
+  production: false,
+  hostUrl : 'http://localhost',
+  applicationName : 'mealoptimizer',
+  port : 9090,
+  envName : 'local'
 };
 
 /*

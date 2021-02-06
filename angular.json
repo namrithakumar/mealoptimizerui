@@ -30,6 +30,22 @@
             "scripts": []
           },
           "configurations": {
+            "development": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.dev.ts"
+                }
+              ]
+            },
+            "test": {
+                "fileReplacements": [
+                  {
+                    "replace": "src/environments/environment.ts",
+                    "with": "src/environments/environment.test.ts"
+                  }
+                ]
+              },              
             "production": {
               "fileReplacements": [
                 {
@@ -66,6 +82,12 @@
             "browserTarget": "mealoptimizerui:build"
           },
           "configurations": {
+            "development": {
+              "browserTarget": "mealoptimizerui:build:development"
+            },
+            "test": {
+              "browserTarget": "mealoptimizerui:build:test"
+            },
             "production": {
               "browserTarget": "mealoptimizerui:build:production"
             }
