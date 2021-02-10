@@ -30,18 +30,7 @@ export class OptimizationService {
         var portionCount = 0;
  
         this.optimizedMealPlans.mealPlan.forEach((mealPlan : MealPlan) => {
-            console.log('Inside getPortionCountByOptimizationTypeMealName');
-            console.log('optimization type chosen by user: ' + optimizationType);
-            console.log('optimization type inside meal plan : ' + OptimizationSelectionMapping[mealPlan.optimizationType.toString()]);
-            console.log(optimizationType === OptimizationSelectionMapping[mealPlan.optimizationType.toString()]);
-            console.log('***************************************************************');
-            if(optimizationType === 'optimizedByCost' && mealPlan.optimizationType === 'COST') {
-                mealPlan.meals.forEach((meal : Meal) => {
-                    if(mealName.toLowerCase() === meal.itemName.toLowerCase()) portionCount = meal.portion;
-                });
-            }
-
-            if(optimizationType === 'optimizedByQuality' && mealPlan.optimizationType === 'REWARD') {
+            if(optimizationType === OptimizationSelectionMapping[mealPlan.optimizationType.toString()]) {
                 mealPlan.meals.forEach((meal : Meal) => {
                     if(mealName.toLowerCase() === meal.itemName.toLowerCase()) portionCount = meal.portion;
                 });
