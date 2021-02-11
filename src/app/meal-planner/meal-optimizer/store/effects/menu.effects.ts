@@ -1,7 +1,7 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Actions, Effect, ofType } from '@ngrx/effects';
-import { switchMap, map, catchError } from 'rxjs/operators';
+import { switchMap, map, catchError, share } from 'rxjs/operators';
 
 import * as MenuActions from '../actions/menu.actions';
 import { MenuResponseHandler } from '../../../../shared/services/response-handler/menu-response-handler';
@@ -22,8 +22,10 @@ export class MenuEffects {
             return this.http.get<String[]>(`${environment.hostUrl}:${environment.port}/${environment.applicationName}/menu/find`,
                 {
                     'params' : new HttpParams().set('category', updateMenuAction.payload.toString())
-                }).pipe(map((menu : String[]) => {
-                    return this.menuResponseHandler.handleSuccess(menu);
+                }).pipe(share(),
+                map(
+                    (menu : String[]) => {
+                        return this.menuResponseHandler.handleSuccess(menu);
                 }),
                 catchError(
                     (errorRes : any) => {
