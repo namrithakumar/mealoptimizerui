@@ -15,7 +15,8 @@ export class UserDietService {
         
         return this.http.get<{ categoryName : String, displayValue : String }[]>(
             `${environment.hostUrl}:${environment.port}/${environment.applicationName}/categories/fetchAll`
-        ).pipe(map(responseData => {
+        ).pipe(
+            map(responseData => {
             const userDietTypes = new Array<IUserDietType>();
             responseData.forEach(category => {
                 userDietTypes.push({dietType: category.categoryName, displayValue: category.displayValue});
