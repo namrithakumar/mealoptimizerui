@@ -25,6 +25,7 @@ import * as UserPreferencesActions from '../store/actions/user-preferences.actio
     calendarOptions: CalendarOptions = {
       initialView: 'dayGridMonth',
       dateClick: this.handleDateClick.bind(this),
+      aspectRatio : 2,
       validRange : {
         start : new Date(),
         end : new Date().setMonth(new Date().getMonth() + 6)

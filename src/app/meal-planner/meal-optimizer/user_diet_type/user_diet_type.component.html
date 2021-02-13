@@ -1,10 +1,12 @@
-<h4><b><i>Step 1: Select diet type</i></b></h4>
-        <div *ngFor="let dietType of dietTypes">
-                <input type="radio" 
+<h4 class="sec-heading">Step 1: Select diet type</h4>
+    <div class="mt-5 ml-4">
+        <div class="p-2" *ngFor="let dietType of dietTypes">
+                <input type="radio"
+                       class="form-check-input" 
                        [id]='dietType.dietType' 
                        [(ngModel)]="userDietType" 
                        name="user_diet_type" 
                        [value]="dietType.dietType" 
                        (click)="onDietTypeSelect(dietType.dietType)">{{dietType.displayValue}}<br/>
         </div>
-<hr/>
+    </div>

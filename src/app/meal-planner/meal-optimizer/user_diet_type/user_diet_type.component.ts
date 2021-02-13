@@ -9,6 +9,7 @@ import { HttpRequestStatus } from 'src/app/shared/http-request-status.enum';
 
 @Component({
     selector: 'app-user-diet-type',
+    styleUrls: ['user_diet_type.component.css'],
     templateUrl: './user_diet_type.component.html' 
 })
 // This class displays the list of diet types and allows the user to choose a diet type.

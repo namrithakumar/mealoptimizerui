@@ -1,6 +1,20 @@
-<app-user-diet-type [dietTypes]='dietTypes'></app-user-diet-type>
-<app-delivery-date-selector></app-delivery-date-selector>
-<app-meal-selector></app-meal-selector>
-<app-manage-meal-plan></app-manage-meal-plan>
-<hr/>
-<app-optimized-meal-plan></app-optimized-meal-plan>
+<div class="container">
+    <div class="row h-10">
+        <div class="col-md-6">
+            <app-user-diet-type [dietTypes]='dietTypes'></app-user-diet-type>
+        </div>
+        <div class="col-md-6">
+            <app-delivery-date-selector></app-delivery-date-selector>
+        </div>    
+    </div>
+    <div class="row">
+        <app-meal-selector></app-meal-selector>
+    </div>
+    <div class="row">
+        <app-manage-meal-plan></app-manage-meal-plan>
+    </div>
+    <hr/>
+    <div class="row">
+        <app-optimized-meal-plan></app-optimized-meal-plan>
+    </div>    
+</div>
