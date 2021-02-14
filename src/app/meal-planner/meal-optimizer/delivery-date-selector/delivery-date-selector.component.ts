@@ -4,7 +4,6 @@ import {
   } from '@angular/core';
 
   import {
-    CalendarEvent,
     CalendarMonthViewDay,
     CalendarView,
   } from 'angular-calendar';
@@ -26,8 +25,7 @@ import * as UserPreferencesActions from '../store/actions/user-preferences.actio
     propertyName = 'deliveryDate';
  
     view: CalendarView = CalendarView.Month;
-    customDate = new Date(new Date().setDate(20));
-    viewDate: Date = this.customDate;
+    viewDate: Date = new Date();
     selectedDay: WeekDay;
 
     constructor(private store : Store<AppState>) {}
@@ -41,17 +39,18 @@ import * as UserPreferencesActions from '../store/actions/user-preferences.actio
       this.store.dispatch(new UserPreferencesActions.EditDeliveryDate(day.date));
     }
 
-    setView(view: CalendarView) {
-      this.view = view;
-    }
-
     beforeMonthViewRender({ body }: { body: CalendarMonthViewDay[] }): void {
       body.forEach((day) => {
-        if (day.date < new Date()) {
+        if (!this.dateIsValid(day.date)) {
           day.cssClass = 'cal-disabled';
         }
       });
     }
     
     ngOnInit() { }
+
+    dateIsValid(date : Date) {
+      let endDate : Date = new Date(new Date().setMonth(new Date().getMonth() + 6));
+      return (date >= new Date() && date < endDate);
+    }
   }

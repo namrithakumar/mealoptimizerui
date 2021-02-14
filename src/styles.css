@@ -15,7 +15,6 @@
 .cal-month-view .cal-cell-row {
         height: 80%;
         display: flex;
-        width: 140%;
       }
 
 .cal-month-view .cal-cell-top {
@@ -33,8 +32,15 @@
 .cal-month-view .cal-days .cal-cell-row {
       border-bottom: 1px solid #e1e1e1;
       height: 80%;
+    }  
+
+    .cal-month-view {
+      width: 140%;
     }
-  
+    .cal-month-view .cal-days {
+      border-right:  1px solid #e1e1e1;
+    }
+
 .cal-month-view .cal-day-number {
       font-size: 100%;
       font-weight: bolder;
