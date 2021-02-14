@@ -46,7 +46,7 @@
     }
   
     .cal-month-view .cal-day-cell.cal-today {
-      background-color: #fdf9e7;
+      background-color: azure;
       height: 50%;
       font-weight: bolder;
       opacity : 1;
@@ -67,4 +67,8 @@
     
     .cal-month-view .cal-disabled .cal-day-number {
       opacity: 0.1;
+    }
+
+    .cal-month-view .cal-day-selected {
+      background-color: #f3e9be
     }
