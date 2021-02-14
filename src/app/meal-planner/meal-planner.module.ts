@@ -4,6 +4,9 @@ import { DatePipe } from '@angular/common';
 import { FullCalendarModule } from '@fullcalendar/angular';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import interactionPlugin from '@fullcalendar/interaction';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { CalendarModule, DateAdapter } from 'angular-calendar';
+import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 
 import { MealPlannerRoutingModule } from '../meal-planner/meal-planner.routing.module';
 import { MealOptimizerComponent } from './meal-optimizer/meal-optimizer.component';
@@ -59,7 +62,12 @@ FullCalendarModule.registerPlugins([ // register FullCalendar plugins
     imports : [
         CoreModule,
         MealPlannerRoutingModule,
-        FullCalendarModule
+        FullCalendarModule,
+        BrowserAnimationsModule,
+        CalendarModule.forRoot({
+          provide: DateAdapter,
+          useFactory: adapterFactory,
+        })
     ],
     providers : [ DatePipe ]
 })

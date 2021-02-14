@@ -1,10 +1,13 @@
 import {
     Component,
-    OnInit,
-    ViewChild
+    OnInit
   } from '@angular/core';
-  
-import { CalendarOptions, FullCalendarComponent } from '@fullcalendar/angular';
+
+  import {
+    CalendarEvent,
+    CalendarMonthViewDay,
+    CalendarView,
+  } from 'angular-calendar';
 
 import { AppState } from 'src/app/store/reducers/app.reducer';
 import { Store } from '@ngrx/store';
@@ -19,24 +22,29 @@ import * as UserPreferencesActions from '../store/actions/user-preferences.actio
   export class DeliveryDateSelectorComponent implements OnInit {
 
     propertyName = 'deliveryDate';
-
-    @ViewChild('calendar') calendarComponent: FullCalendarComponent;
-    
-    calendarOptions: CalendarOptions = {
-      initialView: 'dayGridMonth',
-      dateClick: this.handleDateClick.bind(this),
-      aspectRatio : 2,
-      validRange : {
-        start : new Date(),
-        end : new Date().setMonth(new Date().getMonth() + 6)
-      }
-    };
+ 
+    view: CalendarView = CalendarView.Month;
+    customDate = new Date(new Date().setDate(20));
+    viewDate: Date = this.customDate;
 
     constructor(private store : Store<AppState>) {}
-  
-    handleDateClick(arg) {
-      this.store.dispatch(new UserPreferencesActions.EditDeliveryDate(arg.date));
+
+    dayClicked({ date, events }: { date: Date; events: CalendarEvent[] }): void {
+      this.store.dispatch(new UserPreferencesActions.EditDeliveryDate(date));
     }
 
+    setView(view: CalendarView) {
+      this.view = view;
+    }
+
+    beforeMonthViewRender({ body }: { body: CalendarMonthViewDay[] }): void {
+      body.forEach((day) => {
+        if (day.date < new Date()) {
+          console.log(day.date + 'check : ' + (day.date < new Date()));
+          day.cssClass = 'cal-disabled';
+        }
+      });
+    }
+    
     ngOnInit() { }
   }

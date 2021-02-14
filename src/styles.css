@@ -1,7 +1,70 @@
 /* You can add global styles to this file, and also import other style files */
 @import '~@angular/cdk/overlay-prebuilt.css';
+@import "../node_modules/angular-calendar/css/angular-calendar.css";
+
 .sec-heading {
     font-weight: bold;
     font-style: italic;
     text-align: left;
 }
+  
+.cal-month-view .cal-cell-row:hover {
+      background-color: #cac3c3;
+    }
+
+.cal-month-view .cal-cell-row {
+        height: 80%;
+        display: flex;
+        width: 140%;
+      }
+
+.cal-month-view .cal-cell-top {
+      min-height: 1%;  
+      height: 1%;
+      flex: 1;
+    }
+
+.cal-month-view .cal-day-cell {
+      min-height: 50%;  
+      height: 50%;
+      cursor:pointer;
+    }
+  
+.cal-month-view .cal-days .cal-cell-row {
+      border-bottom: 1px solid #e1e1e1;
+      height: 80%;
+    }
+  
+.cal-month-view .cal-day-number {
+      font-size: 100%;
+      font-weight: bolder;
+    }
+  
+.cal-month-view .cal-day-cell.cal-weekend .cal-day-number {
+      color: darkred;
+      font-weight: bolder;
+    }
+  
+    .cal-month-view .cal-day-cell.cal-today {
+      background-color: #fdf9e7;
+      height: 50%;
+      font-weight: bolder;
+      opacity : 1;
+      cursor:pointer;
+    }
+  
+    .cal-month-view .cal-day-cell.cal-today .cal-day-number {
+      font-size: 100%;
+      height: 50%;
+      font-weight: bolder;
+      opacity : 1;
+    }
+
+    .cal-month-view .cal-disabled {
+      background-color: #eee;
+      cursor: not-allowed;
+    }
+    
+    .cal-month-view .cal-disabled .cal-day-number {
+      opacity: 0.1;
+    }
