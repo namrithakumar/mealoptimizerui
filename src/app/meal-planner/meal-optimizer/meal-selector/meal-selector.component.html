@@ -1,19 +1,31 @@
-<h4 class="sec-heading m-5">Step 3: Select meals - Choose wisely</h4>
-    <table>
-        <thead>
-            <th>Date of Delivery</th>
-            <th>Meal 1</th>
-            <th>Meal 2</th>
-            <th>Meal 3</th>
-            <th>Meal 4</th>
-        </thead>
-        <tbody>
-            <tr>
-                <td>{{ dateOfDelivery | date }}</td>
-                <td *ngFor="let i of [0,1,2,3]; index as indexOfMeal">
-                    <app-meal-options [indexOfMeal] = "indexOfMeal"></app-meal-options>
-            </td>
-            </tr>
-            <br/>
-        </tbody>
-    </table>
+<h4 class="row justify-content-start py-md-4 pr-md-4 font-weight-bold font-italic">Step 3: Select meals - Choose wisely</h4>
+<div class="row justify-content-start">
+    <div class="col-lg">
+                <p class="row">Date of Delivery</p>
+                <div class="row">{{ dateOfDelivery | date }}</div>
+            </div>
+            <div class="col-lg ml-lg-4">
+                <p class="row">Meal 1</p>
+                <div class="row">
+                    <app-meal-options [indexOfMeal] = "0"></app-meal-options>
+                </div>
+            </div> 
+            <div class="col-lg ml-lg-4">
+                <p class="row">Meal 2</p>
+                <div class="row">
+                    <app-meal-options [indexOfMeal] = "1"></app-meal-options>
+                </div>
+            </div> 
+            <div class="col-lg ml-lg-4">
+                <p class="row">Meal 3</p>
+                <div class="row">
+                    <app-meal-options [indexOfMeal] = "2"></app-meal-options>
+                </div>
+            </div> 
+            <div class="col-lg ml-lg-4">
+                <p class="row">Meal 4</p>
+                <div class="row">
+                    <app-meal-options [indexOfMeal] = "3"></app-meal-options>
+                </div>
+            </div>                                                
+        </div>

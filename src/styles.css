@@ -6,6 +6,7 @@
     font-weight: bold;
     font-style: italic;
     text-align: left;
+    padding: 10px;
 }
   
 .cal-month-view .cal-cell-row:hover {

@@ -1,11 +1,20 @@
-<div>
-    <select [(ngModel)]="itemSelected" 
-            (change)="onMealSelected()">
-        <option 
-            *ngFor="let item of itemList" 
-            [value]="item"
-            [ngStyle]="{'visibility':( item === defaultText ) ? 'hidden' : 'visible'}">
-            {{ (item === undefined) ? defaultText:item }}
-        </option>
-    </select>
-</div>
+<div class="dropdown">
+    <button class="btn btn-secondary dropdown-toggle" 
+            type="button" 
+            id="dropdownMeal" 
+            data-toggle="dropdown" 
+            aria-haspopup="true" 
+            aria-expanded="false">
+        {{ (itemSelected === undefined) ? defaultText:itemSelected }}
+    </button>
+    <div class="dropdown-menu" 
+         aria-labelledby="dropdownMeal">
+      <div *ngFor="let item of itemList">
+          <button class="dropdown-item" 
+                  [value]="item" 
+                  (click)="onMealSelected(item)">
+                  {{ item }}
+          </button>
+      </div>
+    </div>
+  </div>
