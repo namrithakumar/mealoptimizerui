@@ -69,11 +69,11 @@ export class MealOptionsComponent implements OnInit {
   onMealSelected(item : String) : void {
     console.log('Item selected ' + item + this.indexOfMeal);
     this.itemSelected = item;
-    /*this.store.dispatch(
+    this.store.dispatch(
       new UserPreferencesActions.UpdateMeal({
         itemPosition: this.indexOfMeal, 
         itemName: this.itemSelected
-      }));*/
+      }));
   }
 
   private resetItemList() {
