@@ -1,11 +1,11 @@
-<div *ngIf="optimizationError">
+<div class="row" *ngIf="optimizationError">
     {{ optimizationError }}
 </div>
-<div *ngIf="!isOptimizationFeasible">
+<div class="row" *ngIf="!isOptimizationFeasible">
     Sorry, the meals you have selected does not satisfy your daily nutrition requirements. Please choose a different meal plan.
-</div>
 <hr/>
-<h4><b><i>Result</i></b></h4>
+</div>
+<h4 class="row justify-content-start py-md-4 pr-md-4 font-weight-bold font-italic">Result</h4>
     <app-optimized-results-table 
         [costOptimizedPlan] = "costOptimizedPlan"
         [qualityOptimizedPlan] = "qualityOptimizedPlan"
@@ -15,12 +15,12 @@
 <br/>
 <div class="row">
     <button type="button" 
-        class="btn btn-dark" 
+        class="btn btn-dark ml-5" 
         (click)="placeOrderSelected()" 
-        [disabled]="!allowUserToPlaceOrderOrGetRecipe">Place order</button>
+        [hidden]="!allowUserToPlaceOrderOrGetRecipe">Place order</button>
     <button type="button" 
-        class="btn btn-dark" 
+        class="btn btn-dark ml-3" 
         (click)="getRecipeSelected()" 
-        [disabled]="!allowUserToPlaceOrderOrGetRecipe">Get recipe</button>
+        [hidden]="!allowUserToPlaceOrderOrGetRecipe">Get recipe</button>
 </div>
 <router-outlet></router-outlet>

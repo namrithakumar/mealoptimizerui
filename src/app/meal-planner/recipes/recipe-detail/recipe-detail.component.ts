@@ -26,7 +26,7 @@ export class RecipeDetailComponent implements OnInit, OnDestroy {
   shoppingItems : ShoppingItem[];
 
   optimizationTypeSelected : String;
-
+  
   ngOnInit(): void {
 
     this.optimizationTypeSelected = 'COST';
