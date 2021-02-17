@@ -12,7 +12,7 @@ import { UserPreferences } from '../store/reducers/user-preferences.reducer';
 /* This component is a holder for menu received from the backend.
  */
 export class MealSelectorComponent implements OnInit {
-
+  
   constructor(private store : Store<AppState>) {}
   
   dateOfDelivery : Date;
@@ -26,8 +26,5 @@ export class MealSelectorComponent implements OnInit {
 
         this.mealsSelected = userPrefs.mealSelected;
       });
-  }
-
-  afterViewInit() {
-  }
+   }
 }
