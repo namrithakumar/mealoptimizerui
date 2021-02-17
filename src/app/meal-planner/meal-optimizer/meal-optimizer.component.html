@@ -1,17 +1,17 @@
 <div class="container">
-    <div class="row h-10 justify-content-between">
-        <div class="col-md-4">
+    <div class="row h-10 justify-content-start m-md-1">
+        <div class="col-md-3 ml-md-1 mr-md-5 mb-md-5">
             <app-user-diet-type [dietTypes]='dietTypes'></app-user-diet-type>
         </div>
-        <div class="col-md-7">
+        <div class="col-md-7 ml-md-5 mr-md-1 mb-md-5">
             <app-delivery-date-selector></app-delivery-date-selector>
         </div>    
     </div>
-    <div class="row">
-        <app-meal-selector></app-meal-selector>
+    <div class="row h-2 justify-content-start m-md-1">
+        <app-meal-selector class="col-md-12 justify-content-start m-md-1"></app-meal-selector>
     </div>
     <hr/>
     <div class="row">
-        <app-optimized-meal-plan></app-optimized-meal-plan>
+        <app-optimized-meal-plan class="col-md-9 justify-content-start m-md-1"></app-optimized-meal-plan>
     </div>    
 </div>

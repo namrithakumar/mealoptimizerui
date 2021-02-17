@@ -1,6 +1,6 @@
 <h4 class="row justify-content-start py-md-4 pr-md-4 font-weight-bold font-italic">Step 2: Select date of delivery</h4>
-<div class="row justify-content-start mb-md-4">
-  <div class="col-md-4">
+<div class="row justify-content-start">
+  <div class="col-md-3 ml-md-2">
     <div class="btn-group">
       <div
         class="btn btn-dark btn-sm"
@@ -27,11 +27,11 @@
       </div>
     </div>
   </div>
-  <div class="col-md-4 offset-md-4">
+  <div class="col-md-3 offset-md-3">
     <h5>{{ viewDate | calendarDate:(view + 'ViewTitle'):'en' }}</h5>
   </div>
 </div>
-<div class="row mb-md-4">
+<div class="row justify-content-start ml-md-2">
   <mwl-calendar-month-view
     [viewDate]="viewDate"    
     (dayClicked)="dayClicked($event.day)"

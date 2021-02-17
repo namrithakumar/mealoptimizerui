@@ -1,20 +1,22 @@
-<div class="dropdown">
-    <button class="btn btn-secondary dropdown-toggle" 
+<div class="row w-100">
+    <div class="dropdown">
+    <button class="btn btn-secondary dropdown-toggle text-wrap" 
             type="button" 
             id="dropdownMeal" 
             data-toggle="dropdown" 
             aria-haspopup="true" 
             aria-expanded="false">
-        {{ (itemSelected === undefined) ? defaultText:itemSelected }}
+        <span class="p-0 m-0">{{ (itemSelected === undefined) ? defaultText:itemSelected }}</span>
     </button>
     <div class="dropdown-menu" 
          aria-labelledby="dropdownMeal">
       <div *ngFor="let item of itemList">
-          <button class="dropdown-item" 
+          <button class="dropdown-item text-wrap" 
                   [value]="item" 
                   (click)="onMealSelected(item)">
-                  {{ item }}
+          <span>{{ item }} </span>
           </button>
       </div>
     </div>
   </div>
+</div>  
