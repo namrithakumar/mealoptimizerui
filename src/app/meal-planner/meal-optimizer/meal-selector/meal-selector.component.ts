@@ -1,7 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,   ElementRef, Renderer2 } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/store/reducers/app.reducer';
 import { UserPreferences } from '../store/reducers/user-preferences.reducer';
+
+import { BreakpointObserver, Breakpoints, BreakpointState } from '@angular/cdk/layout';
 
 @Component({
   selector: 'app-meal-selector',
@@ -13,7 +15,10 @@ import { UserPreferences } from '../store/reducers/user-preferences.reducer';
  */
 export class MealSelectorComponent implements OnInit {
   
-  constructor(private store : Store<AppState>) {}
+  constructor(private store : Store<AppState>,
+              private breakpointObserver: BreakpointObserver,
+              private renderer: Renderer2, 
+              private el: ElementRef) {}
   
   dateOfDelivery : Date;
 
@@ -26,5 +31,52 @@ export class MealSelectorComponent implements OnInit {
 
         this.mealsSelected = userPrefs.mealSelected;
       });
+
+      //Track the size of the window and pivot row -> column accordingly.
+      this.breakpointObserver.observe([
+        Breakpoints.XSmall,
+        Breakpoints.Small,
+        Breakpoints.Medium,
+        Breakpoints.Large,
+        Breakpoints.XLarge
+      ]).subscribe( (state: BreakpointState) => {
+        if (state.breakpoints[Breakpoints.XSmall]) {
+             this.resetSelectorLayout('column');
+        }
+        if (state.breakpoints[Breakpoints.Small]) {
+             this.resetSelectorLayout('column');
+        }
+        if (state.breakpoints[Breakpoints.Medium]) {
+             this.resetSelectorLayout('row');
+        }
+        if (state.breakpoints[Breakpoints.Large]) {
+             this.resetSelectorLayout('row');
+        }
+        if (state.breakpoints[Breakpoints.XLarge]) {
+             this.resetSelectorLayout('row'); 
+        }
+      });  
+   }
+
+   //Function to pivot row -> column using JQuery selector and css classes.
+   resetSelectorLayout(layout : String) : void {
+ 
+    let tableBody = this.el.nativeElement.querySelector("div table tbody");
+    let tableRows = this.el.nativeElement.querySelectorAll("div table tbody tr");
+
+    switch(layout) {
+
+       case 'row' : this.renderer.removeClass(tableBody,'flex_container_column');
+                    tableRows.forEach((row) => this.renderer.removeClass(row, 'flex_container_row'));    
+                    this.renderer.addClass(tableBody,'flex_container_row');
+                    tableRows.forEach((row) => this.renderer.addClass(row, 'flex_container_column'));    
+                    break;
+      
+       case 'column' : this.renderer.addClass(tableBody,'flex_container_row');
+                       tableRows.forEach((row) => this.renderer.addClass(row, 'flex_container_column'));    
+                       this.renderer.addClass(tableBody,'flex_container_column');
+                       tableRows.forEach((row) => this.renderer.addClass(row, 'flex_container_row'));    
+                       break;
+     }     
    }
 }

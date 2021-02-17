@@ -1,33 +1,37 @@
 <h4 class="row justify-content-start py-md-4 pr-md-4 font-weight-bold font-italic">Step 3: Select meals - Choose wisely</h4>
-<div class="row justify-content-start w-100">
-    <div class="col-md text-wrap mt-2 mr-sm-5 mr-md-1 ml-md-4">
-        <h6 class="row label label-default">Date of Delivery</h6>
-        <div class="row w-100">{{ dateOfDelivery | date }}</div>
-    </div>
-    <div class="col-md mt-2 mr-sm-5 mr-md-1">
-        <h6 class="row label label-default">Meal 1</h6>
-        <div class="row w-100">
-            <app-meal-options [indexOfMeal] = "1"></app-meal-options>
-        </div>
-    </div> 
-    <div class="col-md mt-2 mr-sm-5 mr-md-1">
-        <h6 class="row label label-default">Meal 2</h6>
-        <div class="row w-100">
-            <app-meal-options [indexOfMeal] = "1"></app-meal-options>
-        </div>
-    </div> 
-    <div class="col-md mt-2 mr-sm-5 mr-md-1">
-        <h6 class="row label label-default">Meal 3</h6>
-        <div class="row w-100">
-            <app-meal-options [indexOfMeal] = "2"></app-meal-options>
-        </div>
-    </div> 
-    <div class="col-md mt-2 mr-sm-5 mr-md-1">
-        <h6 class="row label label-default">Meal 4</h6>
-        <div class="row w-100">
-            <app-meal-options [indexOfMeal] = "3"></app-meal-options>
-        </div>
-    </div>                                               
+    <div class="row justify-content-start w-100">
+        <table class="table table-borderless">
+          <tbody>
+              <tr>
+                  <td><h6>Date of Delivery</h6></td>
+                  <td>{{ dateOfDelivery | date }}</td>
+              </tr>
+              <tr>
+                    <td><h6>Meal 1</h6></td>
+                    <td>
+                        <app-meal-options [indexOfMeal] = "0"></app-meal-options>
+                    </td>
+              </tr>
+              <tr>
+                <td><h6>Meal 2</h6></td>
+                <td>
+                    <app-meal-options [indexOfMeal] = "1"></app-meal-options>
+                </td>
+              </tr> 
+              <tr>
+                <td><h6>Meal 3</h6></td>
+                <td>
+                    <app-meal-options [indexOfMeal] = "2"></app-meal-options>
+                </td>
+              </tr>              
+              <tr>
+                <td><h6>Meal 3</h6></td>
+                <td>
+                    <app-meal-options [indexOfMeal] = "3"></app-meal-options>
+                </td>
+              </tr>               
+          </tbody>      
+        </table>                                               
         </div>
         <div class="row my-md-5 my-3 justify-content-md-center justify-content-start">
             <app-manage-meal-plan></app-manage-meal-plan>
