@@ -31,7 +31,7 @@
     <h5>{{ viewDate | calendarDate:(view + 'ViewTitle'):'en' }}</h5>
   </div>
 </div>
-<div class="row justify-content-start ml-md-2">
+<div class="row justify-content-start ml-md-2 w-100">
   <mwl-calendar-month-view
     [viewDate]="viewDate"    
     (dayClicked)="dayClicked($event.day)"
