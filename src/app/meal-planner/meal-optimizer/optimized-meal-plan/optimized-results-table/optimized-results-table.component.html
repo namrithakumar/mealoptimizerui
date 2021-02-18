@@ -23,7 +23,7 @@
     </ul>
   
     <!-- Tab panes -->
-    <div class="tab-content vh-50">
+    <div class="tab-content">
       <div id="orderInfo" class="tab-pane active"><br>
         <app-order-info></app-order-info>
       </div>
@@ -33,7 +33,7 @@
           <div *ngIf="costOptimizedPlan">
             <table class="table">
               <thead>
-                <tr class="d-flex">
+                <tr>
                   <th>Item Name</th>
                   <th>Optimized by cost</th>
                 </tr>
@@ -56,7 +56,7 @@
           <div *ngIf="qualityOptimizedPlan">
             <table class="table">
               <thead>
-                <tr class="d-flex">
+                <tr>
                   <th>Item Name</th>
                   <th>Optimized by quality</th>
                 </tr>

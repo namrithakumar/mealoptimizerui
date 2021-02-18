@@ -1,6 +1,6 @@
 <div *ngIf="orderInfo !== undefined">
     <h3>You chose</h3>
-    <ul>
+    <ul class = "list-unstyled">
         <li>{{ orderInfo.dietType }}</li>
         <li>{{ orderInfo.deliveryDate | date: 'fullDate' }}</li>
         <li *ngFor = 'let meal of orderInfo.mealSelected'>{{ meal }}</li>

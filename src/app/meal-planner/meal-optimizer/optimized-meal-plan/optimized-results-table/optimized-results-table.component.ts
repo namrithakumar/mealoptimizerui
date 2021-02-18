@@ -2,7 +2,6 @@ import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 
 import { AppState } from 'src/app/store/reducers/app.reducer';
-import { HttpRequestStatus } from '../../../../shared/http-request-status.enum';
 import * as UserPreferencesActions from '../../store/actions/user-preferences.actions';
 
 @Component({
@@ -35,7 +34,8 @@ export class OptimizedResultsTableComponent implements OnInit, OnDestroy {
   
   constructor(private store : Store<AppState>) { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {   
+  }
 
   /*
    * Once a tab is selected, update user preferences (stored as optimizationTypeSelected)
