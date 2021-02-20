@@ -6,14 +6,15 @@
     </tr>
   </thead>
   <tbody>
-    <div *ngFor="let meal of qualityOptimizedPlan.mealList">
-      <tr class="d-flex">
-        <td class="col-5">{{meal.itemName}}</td>
-        <td class="col-5">portion: {{meal.portion}}, cost: ${{meal.mealCost}}</td>
-      </tr>
-    </div>
-  <tr>
-    <td [attr.colspan]="2">Total cost: {{ qualityOptimizedPlan.planCost }}</td>
-  </tr>
+  <ng-container *ngFor="let meal of qualityOptimizedPlan.mealList">
+    <tr>
+      <td>{{meal.itemName}}</td>
+      <td>portion: {{meal.portion}}, cost: ${{meal.mealCost}}</td>
+    </tr>
+  </ng-container>
+<tr>
+  <td>Total cost:</td>
+  <td>{{ qualityOptimizedPlan.planCost }}</td>
+</tr>
 </tbody>
 </table>

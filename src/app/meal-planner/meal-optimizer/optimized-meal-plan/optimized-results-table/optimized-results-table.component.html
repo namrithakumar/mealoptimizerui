@@ -24,7 +24,7 @@
   
     <!-- Tab panes -->
   `   <div class="tab-content">
-      <div id="orderInfo" class="tab-pane active"><br>
+      <div id="orderInfo" class="tab-pane active">
         <app-order-info></app-order-info>
       </div>
       <div id="optimizedByCost" class="tab-pane">
@@ -36,10 +36,9 @@
             <app-optimized-result-cost 
               [costOptimizedPlan]="costOptimizedPlan">
             </app-optimized-result-cost>
-            <tr>
         </ng-template>
       </div>
-      <div id="optimizedByQuality" class="tab-pane"><br>
+      <div id="optimizedByQuality" class="tab-pane">
         <div *ngIf="!qualityOptimizedPlan else qualityOptimizedResult" class="row-fixed-height">
           <h3>Meal Plan - Optimized by Quality</h3>
           <p>{{ defaultText }}</p>
