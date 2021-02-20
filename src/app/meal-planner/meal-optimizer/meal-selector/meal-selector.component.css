@@ -7,3 +7,15 @@
 	display: flex;
 	flex-direction : column;
 }
+
+.custom-col-width {
+	width: 22%;
+    flex: 0 0 22%;
+	max-width: 22%;
+}
+
+.date-of-delivery {
+	width: 12%;
+    flex: 0 0 12%;
+	max-width: 12%;
+}
