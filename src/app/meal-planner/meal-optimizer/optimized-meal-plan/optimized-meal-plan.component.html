@@ -6,7 +6,7 @@
 <hr/>
 </div>
 <h4 class="row justify-content-start py-md-4 pr-md-4 font-weight-bold font-italic">Step 4: Results</h4>
-<div class="row w-100 ml-md-1">
+<div class="row w-100">
     <app-optimized-results-table
     class="w-100 border"
         [costOptimizedPlan] = "costOptimizedPlan"
@@ -17,11 +17,11 @@
 </div>    
 <div class="row py-md-2">
     <button type="button" 
-        class="btn btn-dark ml-5" 
+        class="btn btn-dark" 
         (click)="placeOrderSelected()" 
         [hidden]="!allowUserToPlaceOrderOrGetRecipe">Place order</button>
     <button type="button" 
-        class="btn btn-dark ml-3" 
+        class="btn btn-dark" 
         (click)="getRecipeSelected()" 
         [hidden]="!allowUserToPlaceOrderOrGetRecipe">Get recipe</button>
 </div>
