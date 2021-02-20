@@ -63,19 +63,24 @@ export class MealSelectorComponent implements OnInit {
  
     let tableBody = this.el.nativeElement.querySelector("div table tbody");
     let tableRows = this.el.nativeElement.querySelectorAll("div table tbody tr");
+    let tableElements = this.el.nativeElement.querySelectorAll("div table tbody td");
 
     switch(layout) {
 
        case 'row' : this.renderer.removeClass(tableBody,'flex_container_column');
-                    tableRows.forEach((row) => this.renderer.removeClass(row, 'flex_container_row'));    
+                    tableRows.forEach((row) => this.renderer.removeClass(row, 'flex_container_row'));
+                    tableElements.forEach((element) => this.renderer.removeClass(element, 'w-50'));    
                     this.renderer.addClass(tableBody,'flex_container_row');
-                    tableRows.forEach((row) => this.renderer.addClass(row, 'flex_container_column'));    
+                    tableRows.forEach((row) => this.renderer.addClass(row, 'flex_container_column'));  
+                    tableElements.forEach((element) => this.renderer.addClass(element, 'w-100'));      
                     break;
       
-       case 'column' : this.renderer.addClass(tableBody,'flex_container_row');
-                       tableRows.forEach((row) => this.renderer.addClass(row, 'flex_container_column'));    
+       case 'column' : this.renderer.removeClass(tableBody,'flex_container_row');
+                       tableRows.forEach((row) => this.renderer.removeClass(row, 'flex_container_column'));    
+                       tableElements.forEach((element) => this.renderer.removeClass(element, 'w-100'));    
                        this.renderer.addClass(tableBody,'flex_container_column');
-                       tableRows.forEach((row) => this.renderer.addClass(row, 'flex_container_row'));    
+                       tableRows.forEach((row) => this.renderer.addClass(row, 'flex_container_row'));
+                       tableElements.forEach((element) => this.renderer.addClass(element, 'w-50'));    
                        break;
      }     
    }
