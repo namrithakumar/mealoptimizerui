@@ -29,8 +29,8 @@
       </div>
       <div id="optimizedByCost" class="tab-pane">
         <div *ngIf="!costOptimizedPlan else costOptimizedResult" class="row-fixed-height">
-          <h3 class="d-flex flex-column">Meal Plan - Optimized by Cost</h3>
-          <p class="d-flex flex-column">{{ defaultText }}</p>
+          <h3>Meal Plan - Optimized by Cost</h3>
+          <p>{{ defaultText }}</p>
         </div>  
           <ng-template #costOptimizedResult>
             <app-optimized-result-cost 
