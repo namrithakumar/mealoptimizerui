@@ -33,23 +33,10 @@
           <p>{{ defaultText }}</p>
         </div>  
           <ng-template #costOptimizedResult>
-            <table class="table py-0 my-0">
-              <thead>
-                <tr>
-                  <th>Item Name</th>
-                  <th>Optimized by cost</th>
-                </tr>
-              </thead>
-              <tbody>
-            <app-optimized-result-cost  
-              *ngFor="let meal of costOptimizedPlan.mealList" 
-              [meal]="meal">
+            <app-optimized-result-cost 
+              [costOptimizedPlan]="costOptimizedPlan">
             </app-optimized-result-cost>
             <tr>
-              <td [attr.colspan]="2">Total cost: {{ costOptimizedPlan.planCost }}</td>
-            </tr>
-          </tbody>
-          </table>
         </ng-template>
       </div>
       <div id="optimizedByQuality" class="tab-pane"><br>
@@ -58,23 +45,9 @@
           <p>{{ defaultText }}</p>
         </div>  
           <ng-template #qualityOptimizedResult>
-            <table class="table py-0 my-0">
-              <thead>
-                <tr>
-                  <th>Item Name</th>
-                  <th>Optimized by quality</th>
-                </tr>
-              </thead>
-              <tbody>
-            <app-optimized-result-quality 
-              *ngFor="let meal of qualityOptimizedPlan.mealList" 
-              [meal]="meal">
+            <app-optimized-result-quality  
+              [qualityOptimizedPlan]="qualityOptimizedPlan">
             </app-optimized-result-quality>
-              <tr>
-                <td [attr.colspan]="2">Total cost: {{ qualityOptimizedPlan.planCost }}</td>
-              </tr>
-            </tbody>
-            </table>
           </ng-template>
       </div>
     </div>

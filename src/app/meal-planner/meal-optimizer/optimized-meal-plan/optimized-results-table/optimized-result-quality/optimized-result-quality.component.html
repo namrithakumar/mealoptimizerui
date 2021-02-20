@@ -1,5 +1,19 @@
-<tr class="d-flex">
-  <td class="col-5">{{meal.itemName}}</td>
-  <td class="col-5">portion: {{meal.portion}}, cost: ${{meal.mealCost}}</td>
-</tr>
-<br/>
+<table class="table py-0 my-0 h-100 w-100">
+  <thead>
+    <tr>
+      <th>Item Name</th>
+      <th>Optimized by quality</th>
+    </tr>
+  </thead>
+  <tbody>
+    <div *ngFor="let meal of qualityOptimizedPlan.mealList">
+      <tr class="d-flex">
+        <td class="col-5">{{meal.itemName}}</td>
+        <td class="col-5">portion: {{meal.portion}}, cost: ${{meal.mealCost}}</td>
+      </tr>
+    </div>
+  <tr>
+    <td [attr.colspan]="2">Total cost: {{ qualityOptimizedPlan.planCost }}</td>
+  </tr>
+</tbody>
+</table>
