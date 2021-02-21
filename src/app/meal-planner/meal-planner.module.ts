@@ -1,5 +1,7 @@
 import { NgModule } from '@angular/core';
 import { DatePipe } from '@angular/common';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
 
 import { FullCalendarModule } from '@fullcalendar/angular';
 import dayGridPlugin from '@fullcalendar/daygrid';
@@ -64,6 +66,8 @@ FullCalendarModule.registerPlugins([ // register FullCalendar plugins
         MealPlannerRoutingModule,
         FullCalendarModule,
         BrowserAnimationsModule,
+        MatDatepickerModule,
+        MatNativeDateModule,        
         CalendarModule.forRoot({
           provide: DateAdapter,
           useFactory: adapterFactory,

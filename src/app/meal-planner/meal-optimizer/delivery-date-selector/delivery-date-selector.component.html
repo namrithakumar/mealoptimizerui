@@ -1,41 +1,12 @@
 <h4 class="row justify-content-start py-md-4 pr-md-4 font-weight-bold font-italic">Step 2: Select date of delivery</h4>
 <div class="row justify-content-start">
-  <div class="col-md-3">
-    <div class="btn-group">
-      <div
-        class="btn btn-dark btn-sm"
-        mwlCalendarPreviousView
-        [view]="view"
-        [(viewDate)]="viewDate"
-      >
-        Previous
-      </div>
-      <div
-        class="btn btn-light btn-sm"
-        mwlCalendarToday
-        [(viewDate)]="viewDate"
-      >
-        Today
-      </div>
-      <div
-        class="btn btn-dark btn-sm"
-        mwlCalendarNextView
-        [view]="view"
-        [(viewDate)]="viewDate"
-      >
-        Next
-      </div>
-    </div>
-  </div>
-  <div class="col-md-3 offset-md-3">
-    <h5>{{ viewDate | calendarDate:(view + 'ViewTitle'):'en' }}</h5>
-  </div>
-</div>
-<div class="row justify-content-start w-100">
-  <mwl-calendar-month-view
-    [viewDate]="viewDate"    
-    (dayClicked)="dayClicked($event.day)"
-    (beforeViewRender)="beforeMonthViewRender($event)"
-  >
-  </mwl-calendar-month-view>
+ <div class="col-md-7 col-sm-11">
+    <mat-calendar
+      [selected]="selectedDate" 
+      [startAt]="startAt"
+      [minDate]="minDate" 
+      [maxDate]="maxDate"
+      (selectedChange)="onSelect($event)">
+    </mat-calendar>
+ </div>  
 </div>

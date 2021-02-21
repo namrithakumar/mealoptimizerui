@@ -3,13 +3,6 @@ import {
     OnInit
   } from '@angular/core';
 
-  import {
-    CalendarMonthViewDay,
-    CalendarView,
-  } from 'angular-calendar';
-  
-import { WeekDay } from 'calendar-utils';
-
 import { AppState } from 'src/app/store/reducers/app.reducer';
 import { Store } from '@ngrx/store';
 import * as UserPreferencesActions from '../store/actions/user-preferences.actions';
@@ -23,34 +16,18 @@ import * as UserPreferencesActions from '../store/actions/user-preferences.actio
   export class DeliveryDateSelectorComponent implements OnInit {
 
     propertyName = 'deliveryDate';
- 
-    view: CalendarView = CalendarView.Month;
-    viewDate: Date = new Date();
-    selectedDay: WeekDay;
+    
+    selectedDate = new Date();
+    startAt = this.selectedDate;
+    minDate = this.selectedDate;
+    maxDate = new Date(new Date().setMonth(new Date().getMonth() + 6));
 
     constructor(private store : Store<AppState>) {}
-
-    dayClicked(day: CalendarMonthViewDay): void {
-      if (this.selectedDay) {
-        delete this.selectedDay.cssClass;
-      }
-      day.cssClass = 'cal-day-selected';
-      this.selectedDay = day;
-      this.store.dispatch(new UserPreferencesActions.EditDeliveryDate(day.date));
-    }
-
-    beforeMonthViewRender({ body }: { body: CalendarMonthViewDay[] }): void {
-      body.forEach((day) => {
-        if (!this.dateIsValid(day.date)) {
-          day.cssClass = 'cal-disabled';
-        }
-      });
-    }
-    
+   
     ngOnInit() { }
 
-    dateIsValid(date : Date) {
-      let endDate : Date = new Date(new Date().setMonth(new Date().getMonth() + 6));
-      return (date >= new Date() && date < endDate);
+    onSelect(selectedDate : Date) {
+      console.log(selectedDate);
+      this.selectedDate = selectedDate;
     }
   }
