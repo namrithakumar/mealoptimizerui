@@ -1,5 +1,5 @@
   <!-- Nav tabs -->
-<div class="w-80 ml-md-4 border">
+<div class="w-80 ml-4 border">
     <ul class="nav nav-tabs" #optimizationResultsTab>
       <li class="nav-item">
         <a class="nav-link active" 
@@ -29,7 +29,7 @@
         <app-order-info></app-order-info>
       </div>
       <div id="optimizedByCost" class="tab-pane">
-        <div *ngIf="!costOptimizedPlan else costOptimizedResult" class="row-fixed-height ml-md-5 mt-md-2">
+        <div *ngIf="!costOptimizedPlan else costOptimizedResult" class="row-fixed-height ml-5 mt-2">
           <h3>Meal Plan - Optimized by Cost</h3>
           <p>{{ defaultText }}</p>
         </div>  
@@ -40,7 +40,7 @@
         </ng-template>
       </div>
       <div id="optimizedByQuality" class="tab-pane">
-        <div *ngIf="!qualityOptimizedPlan else qualityOptimizedResult" class="row-fixed-height w-100 ml-md-5 mt-md-2">
+        <div *ngIf="!qualityOptimizedPlan else qualityOptimizedResult" class="row-fixed-height w-100 ml-5 mt-2">
           <h3>Meal Plan - Optimized by Quality</h3>
           <p>{{ defaultText }}</p>
         </div>  
