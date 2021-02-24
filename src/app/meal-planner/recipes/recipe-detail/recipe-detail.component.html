@@ -1,29 +1,19 @@
-<div class="row">
-    <div class="col-xs-12 col-md-8 w-100">
         <img 
         [src]="recipeSelected.imageUrl" 
         alt="{{ recipeSelected.name }}" 
         class="img-responsive"
         style="max-height : 300px">
-    </div>
-</div>
-<div class="row">
-    <div class="col-xs-12 col-md-8 w-100">
         <h4>{{recipeSelected.name}}</h4>
         <a href="{{recipeSelected.tutorialPath}}"> Watch the tutorial here </a><br/>
         <label for="noOfPortions">No. of portions</label>
-        <input class="col-sm-3" type="number" id="noOfPortions" [(ngModel)]="noOfPortions" min="1"><br/>
+        <input class="col-lg-2 col-md-3 col-xs-4" type="number" id="noOfPortions" [(ngModel)]="noOfPortions" min="1"><br/>
         <p>Ingredients</p>
         <table>
         <tr *ngFor="let ingredient of recipeSelected.ingredients">
-                <td class="col-xs-12 col-md-8 w-100">{{ ingredient.name }}</td>
-                <td class="col-xs-12 col-md-8 w-100" style="text-align:right">: {{ ingredient.quantity.amount * noOfPortions }} ({{ ingredient.quantity.measure}})</td>
+                <td>{{ ingredient.name }}</td>
+                <td style="text-align:right">: {{ ingredient.quantity.amount * noOfPortions }} ({{ ingredient.quantity.measure}})</td>
         </tr>        
     </table>
-    </div>
-</div>
-<div class="row">
-    <div class="col-xs-12 col-md-8 w-100">
+    <div class="col-xs-12 col-md-8">
         <button type="button" class="btn btn-primary" (click)="onAddToShoppingList()">Add ingredients to shopping list</button>
     </div>
-</div>
