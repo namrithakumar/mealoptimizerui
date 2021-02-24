@@ -33,6 +33,7 @@ export class MealSelectorComponent implements OnInit {
       });
 
       //Track the size of the window and pivot row -> column accordingly.
+      //Note that angular cdk screen sizes(small, medium, large etc.) are different from bootstrap sizes.
       this.breakpointObserver.observe([
         Breakpoints.XSmall,
         Breakpoints.Small,
