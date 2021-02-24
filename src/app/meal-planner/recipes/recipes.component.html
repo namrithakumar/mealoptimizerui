@@ -1,16 +1,21 @@
-    <h4 style="text-align : center"> {{ defaultText }}</h4>
-    <div *ngIf="recipes">
-        <div class="row custom-layout border">
-            <div class="col-xs-12 col-md-4 recipe-list-layout">
-                <app-recipe-list [recipes] = "recipes"></app-recipe-list>
-            </div>
-            <div class="col-xs-12 col-md-5 border">
-                <div *ngIf="!recipeSelected; else recipe_detail">                    
-                        <app-recipe-start></app-recipe-start>
+<div class="row mt-md-5">
+    <div class="col-md-12">
+        <h4 style="text-align : center"> {{ defaultText }}</h4>
+        <div *ngIf="recipes">
+            <h4 class="row justify-content-start py-md-4 font-weight-bold font-italic">Recipes</h4>
+            <div class="row custom-layout justify-content-between ml-md-4 border">
+                <div class="col-xs-12 col-md-4 recipe-list-layout">
+                    <app-recipe-list [recipes] = "recipes"></app-recipe-list>
                 </div>
-            </div>
-                <ng-template #recipe_detail>
-                    <router-outlet></router-outlet>
-                </ng-template>
-        </div>    
+                <div class="col-xs-12 col-md-7 border">
+                    <div *ngIf="!recipeSelected; else recipe_detail">                    
+                            <app-recipe-start></app-recipe-start>
+                    </div>
+                </div>
+                    <ng-template #recipe_detail>
+                        <router-outlet></router-outlet>
+                    </ng-template>
+            </div>    
+        </div>
     </div>
+</div>    

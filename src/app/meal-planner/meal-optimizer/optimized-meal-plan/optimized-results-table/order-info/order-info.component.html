@@ -1,8 +1,8 @@
-<div *ngIf="orderInfo !== undefined">
+<div *ngIf="orderInfo !== undefined" class="ml-md-5 mt-md-2">
     <h3>You chose</h3>
     <ul class = "list-unstyled">
-        <li>{{ orderInfo.dietType }}</li>
-        <li>{{ orderInfo.deliveryDate | date: 'fullDate' }}</li>
-        <li *ngFor = 'let meal of orderInfo.mealSelected'>{{ meal }}</li>
+        <li class="mt-md-2 ml-md-2">{{ orderInfo.dietType }}</li>
+        <li class="mt-md-2 ml-md-2">{{ orderInfo.deliveryDate | date: 'fullDate' }}</li>
+        <li *ngFor = 'let meal of orderInfo.mealSelected' class="mt-md-2 ml-md-2">{{ meal }}</li>
     </ul>
 </div>

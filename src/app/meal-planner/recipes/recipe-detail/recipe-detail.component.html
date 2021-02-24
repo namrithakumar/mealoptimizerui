@@ -1,4 +1,4 @@
-        <img 
+<img 
         [src]="recipeSelected.imageUrl" 
         alt="{{ recipeSelected.name }}" 
         class="img-responsive"
@@ -12,8 +12,11 @@
         <tr *ngFor="let ingredient of recipeSelected.ingredients">
                 <td>{{ ingredient.name }}</td>
                 <td style="text-align:right">: {{ ingredient.quantity.amount * noOfPortions }} ({{ ingredient.quantity.measure}})</td>
+        </tr>
+        <tr>
+            <td>
+                <button type="button" class="btn btn-primary mt-2" (click)="onAddToShoppingList()">Add ingredients to shopping list
+                </button>
+            </td>
         </tr>        
     </table>
-    <div class="col-xs-12 col-md-8">
-        <button type="button" class="btn btn-primary" (click)="onAddToShoppingList()">Add ingredients to shopping list</button>
-    </div>
