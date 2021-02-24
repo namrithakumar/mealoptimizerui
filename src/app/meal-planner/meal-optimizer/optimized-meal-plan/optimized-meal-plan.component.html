@@ -5,24 +5,20 @@
     Sorry, the meals you have selected does not satisfy your daily nutrition requirements. Please choose a different meal plan.
 <hr/>
 </div>
-<h4 class="row justify-content-start py-md-4 pr-md-4 font-weight-bold font-italic">Step 4: Results</h4>
-<div class="row w-100">
-    <app-optimized-results-table
+<h4>Step 4: Results</h4>
+<app-optimized-results-table
     class="w-100 border"
         [costOptimizedPlan] = "costOptimizedPlan"
         [qualityOptimizedPlan] = "qualityOptimizedPlan"
         [isOptimizationFeasible] = "isOptimizationFeasible"
         [defaultText] = "defaultText">
-    </app-optimized-results-table>
-</div>    
-<div class="row py-md-2">
-    <button type="button" 
+</app-optimized-results-table>
+<button type="button" 
         class="btn btn-dark" 
         (click)="placeOrderSelected()" 
         [hidden]="!allowUserToPlaceOrderOrGetRecipe">Place order</button>
-    <button type="button" 
+<button type="button" 
         class="btn btn-dark" 
         (click)="getRecipeSelected()" 
         [hidden]="!allowUserToPlaceOrderOrGetRecipe">Get recipe</button>
-</div>
 <router-outlet></router-outlet>

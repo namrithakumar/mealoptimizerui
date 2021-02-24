@@ -1,16 +1,18 @@
-<div class="container">
-    <div class="row h-10 col-sm-11 justify-content-start custom-display border">
+    <div class="row custom-display border">
         <div class="col-md-4 border">
             <app-user-diet-type [dietTypes]='dietTypes'></app-user-diet-type>
         </div>
-        <div class="col-md-7 border ml-auto">
+        <div class="col-md-8 border">
             <app-delivery-date-selector></app-delivery-date-selector>
         </div>    
     </div>
-    <div class="row col-md-11 justify-content-start border">
-        <app-meal-selector class="w-100 justify-content-start"></app-meal-selector>
+    <div class="row border">
+        <div class="col-md-12">
+            <app-meal-selector></app-meal-selector>
+        </div>    
     </div>
-    <div class="row col-md-11 justify-content-start">
-        <app-optimized-meal-plan class="col-md-12 justify-content-start"></app-optimized-meal-plan>
-    </div>    
-</div>
+    <div class="row">
+        <div class="col-md-12">
+            <app-optimized-meal-plan class="col-md-12 justify-content-start"></app-optimized-meal-plan>
+        </div>    
+    </div>
