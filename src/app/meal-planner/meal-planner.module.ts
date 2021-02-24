@@ -3,7 +3,6 @@ import { DatePipe } from '@angular/common';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 
-import { FullCalendarModule } from '@fullcalendar/angular';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import interactionPlugin from '@fullcalendar/interaction';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -33,11 +32,6 @@ import { OnlineOrderComponent } from './meal-optimizer/online-order/online-order
 import { MealPlannerComponent } from './meal-planner.component';
 import { CoreModule } from '../shared/core/core.module';
 
-FullCalendarModule.registerPlugins([ // register FullCalendar plugins
-    dayGridPlugin,
-    interactionPlugin
-  ]);
-
 @NgModule({
     declarations : [
         MealPlannerComponent,
@@ -64,7 +58,6 @@ FullCalendarModule.registerPlugins([ // register FullCalendar plugins
     imports : [
         CoreModule,
         MealPlannerRoutingModule,
-        FullCalendarModule,
         BrowserAnimationsModule,
         MatDatepickerModule,
         MatNativeDateModule,        
