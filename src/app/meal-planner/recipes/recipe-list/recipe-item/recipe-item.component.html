@@ -1,9 +1,9 @@
 <button class="list-group-item clearfix w-100" (click) = "onItemSelect()">
 <div>
         <h4 class="list-group-item-heading">{{recipe.name}}</h4>
-        <p class="list-group-item-text">{{recipe.description}}</p>
+        <p class="list-group-item-text custom-item-display">{{recipe.description}}</p>
     </div>
-    <span class="pull-right">
+    <span class="pull-right custom-item-display">
         <img src="{{recipe.imageUrl}}" alt="{{recipe.name}}" class="img-responsive" style="max-height : 50px;">
         <a href="{{recipe.tutorialPath}}"> Watch the tutorial here </a>
     </span>
