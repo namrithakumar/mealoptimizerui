@@ -1,18 +1,18 @@
-    <div class="row custom-display mt-4">
-        <div class="col-md-4">
-            <app-user-diet-type [dietTypes]='dietTypes'></app-user-diet-type>
-        </div>
-        <div class="col-md-7">
-            <app-delivery-date-selector></app-delivery-date-selector>
-        </div>    
+    <div class="row custom-display mt-4 ml-1">
+            <div class="custom-diet-type-width">
+                <app-user-diet-type [dietTypes]='dietTypes'></app-user-diet-type>
+            </div>
+            <div class="custom-delivery-date-width">
+                <app-delivery-date-selector></app-delivery-date-selector>
+            </div>
     </div>
-    <div class="row mt-4">
-        <div class="col-md-12">
+    <div class="row mt-4 ml-1">
+        <div class="col-md-11">
             <app-meal-selector></app-meal-selector>
         </div>    
     </div>
-    <div class="row mt-4">
-        <div class="col-md-12">
-            <app-optimized-meal-plan class="col-md-12 justify-content-start"></app-optimized-meal-plan>
+    <div class="row mt-4 ml-1">
+        <div class="col-md-11">
+            <app-optimized-meal-plan class="col-md-11 justify-content-start"></app-optimized-meal-plan>
         </div>    
     </div>

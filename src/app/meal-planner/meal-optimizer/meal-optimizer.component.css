@@ -4,6 +4,12 @@
         flex-direction: row;
         width: 100%;
 	}
+        .custom-diet-type-width {
+          width: 40%;      
+        }
+        .custom-delivery-date-width {
+          width: 50%;      
+        }
 }
 
 @media only screen and (max-width: 959px) {
@@ -12,4 +18,10 @@
         flex-direction: column;
         width: 100%;
 	}
+        .custom-diet-type-width {
+                width: 100%;    
+        }
+              .custom-delivery-date-width {
+                width: 100%;    
+              }
 }
