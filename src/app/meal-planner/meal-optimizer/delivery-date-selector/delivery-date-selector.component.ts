@@ -23,8 +23,6 @@ import * as UserPreferencesActions from '../store/actions/user-preferences.actio
     @ViewChild('calendar') cal : ElementRef;
     calendar: Calendar;
 
-    //defaultConfigurations: any;
-
     propertyName = 'deliveryDate';
 
     constructor(private store : Store<AppState>) { }
@@ -43,6 +41,7 @@ import * as UserPreferencesActions from '../store/actions/user-preferences.actio
           end: new Date().setMonth(new Date().getMonth() + 6)
         },
         aspectRatio: 2.4,
+        fixedWeekCount: false,
         dateClick: this.handleDateClick.bind(this)
       });
 

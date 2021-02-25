@@ -1,25 +1,24 @@
-<div class="ml-4">
-  <h2>Meal Optimizer</h2>
-  <h4>Eat what you wish, on a budget</h4>
+<div class="header ml-5 bg-light">
+    <h3>Meal Optimizer</h3>
+    <h6>Eat what you wish, on a budget</h6>
 </div>
-<hr/>
-<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
-    <ul class="navbar-nav ml-2">
+<nav class="navbar navbar-expand-sm bg-dark navbar-dark sticky-top">
+    <ul class="navbar-nav ml-4">
       <li class="nav-item">
-        <a class="nav-link" routerLink="/app-info/home">Home</a>
+        <a class="nav-link h6" routerLink="/app-info/home">Home</a>
       </li>
         <li class="nav-item">
-        <a class="nav-link" routerLink="/app-info/contact-us">Contact us</a>
+        <a class="nav-link h6" routerLink="/app-info/contact-us">Contact us</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" routerLink="/user-mgmt/login" [hidden] = "authenticatedUser">Register/Login</a>
+        <a class="nav-link h6" routerLink="/user-mgmt/login" [hidden] = "authenticatedUser">Register/Login</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" [routerLink]="['/meal-planner', { outlets : { 'mealoptimizer' : ['meal-optimizer'] } }]" [queryParams] = "{ optimizermode : 'create' }">Meal Planner</a>
+        <a class="nav-link h6" [routerLink]="['/meal-planner', { outlets : { 'mealoptimizer' : ['meal-optimizer'] } }]" [queryParams] = "{ optimizermode : 'create' }">Meal Planner</a>
       </li>   
       <!-- Dropdown -->
       <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" id="navbardrop" data-toggle="dropdown">
+        <a class="nav-link dropdown-toggle h6" id="navbardrop" data-toggle="dropdown">
           {{ authenticatedUser? authenticatedUser.username : 'Guest' }}
         </a>
         <div class="dropdown-menu" [hidden] = "!authenticatedUser">
