@@ -52,6 +52,7 @@ import * as UserPreferencesActions from '../store/actions/user-preferences.actio
           start: new Date(),
           end: new Date().setMonth(new Date().getMonth() + 6)
         },
+        aspectRatio: 2.4,
         dateClick: this.handleDateClick.bind(this)
       });
       this.calendar.render();

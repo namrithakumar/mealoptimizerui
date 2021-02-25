@@ -2,6 +2,7 @@
 	.custom-display {
         display: flex;
         flex-direction: row;
+        width: 100%;
 	}
 }
 
@@ -9,5 +10,6 @@
 	.custom-display {
         display: flex;
         flex-direction: column;
+        width: 100%;
 	}
 }
