@@ -13,12 +13,14 @@
         [isOptimizationFeasible] = "isOptimizationFeasible"
         [defaultText] = "defaultText">
 </app-optimized-results-table>
-<button type="button" 
-        class="btn btn-dark" 
-        (click)="placeOrderSelected()" 
-        [hidden]="!allowUserToPlaceOrderOrGetRecipe">Place order</button>
-<button type="button" 
-        class="btn btn-dark" 
-        (click)="getRecipeSelected()" 
-        [hidden]="!allowUserToPlaceOrderOrGetRecipe">Get recipe</button>
+<div class="col-12">
+    <button type="button" 
+            class="btn btn-dark m-2" 
+            (click)="placeOrderSelected()" 
+            [hidden]="!allowUserToPlaceOrderOrGetRecipe">Place order</button>
+    <button type="button" 
+            class="btn btn-dark m-2" 
+            (click)="getRecipeSelected()" 
+            [hidden]="!allowUserToPlaceOrderOrGetRecipe">Get recipe</button>
+</div>        
 <router-outlet></router-outlet>
