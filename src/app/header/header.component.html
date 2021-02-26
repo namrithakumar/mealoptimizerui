@@ -1,30 +1,31 @@
-<div class="header ml-5 bg-light">
-    <h3>Meal Optimizer</h3>
-    <h6>Eat what you wish, on a budget</h6>
-</div>
-<nav class="navbar navbar-expand-sm bg-dark navbar-dark sticky-top">
-    <ul class="navbar-nav ml-4">
-      <li class="nav-item">
-        <a class="nav-link h6" routerLink="/app-info/home">Home</a>
-      </li>
-        <li class="nav-item">
-        <a class="nav-link h6" routerLink="/app-info/contact-us">Contact us</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link h6" routerLink="/user-mgmt/login" [hidden] = "authenticatedUser">Register/Login</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link h6" [routerLink]="['/meal-planner', { outlets : { 'mealoptimizer' : ['meal-optimizer'] } }]" [queryParams] = "{ optimizermode : 'create' }">Meal Planner</a>
-      </li>   
-      <!-- Dropdown -->
-      <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle h6" id="navbardrop" data-toggle="dropdown">
-          {{ authenticatedUser? authenticatedUser.username : 'Guest' }}
-        </a>
-        <div class="dropdown-menu" [hidden] = "!authenticatedUser">
-          <a class="dropdown-item" (click)="viewOrModifyProfile()">Profile</a>
-          <a class="dropdown-item" (click)="logout()">Logout</a>
-        </div>
-      </li>
-    </ul>
-  </nav>
+<nav class="navbar navbar-expand-lg navbar-light al-navbar fixed-top">
+  <a class="navbar-brand" href="#">MEAL OPTIMIZER</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#primaryNav" aria-controls="primaryNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="primaryNav">
+      <ul class="navbar-nav ml-auto">
+          <li class="nav-item">
+              <a class="nav-link" routerLink="/app-info/home">Home</a>
+          </li>
+          <li class="nav-item">
+              <a class="nav-link" routerLink="/app-info/contact-us">Contact us</a>
+          </li>
+          <li class="nav-item active">
+              <a class="nav-link" routerLink="/user-mgmt/login" [hidden] = "authenticatedUser">Register/Login</a>
+          </li>
+          <li class="nav-item">
+              <a class="nav-link" [routerLink]="['/meal-planner', { outlets : { 'mealoptimizer' : ['meal-optimizer'] } }]" [queryParams] = "{ optimizermode : 'create' }">Meal Planner</a>
+          </li>
+          <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  {{ authenticatedUser? authenticatedUser.username : 'Guest' }}
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown" [hidden] = "!authenticatedUser">
+                  <a class="dropdown-item" (click)="viewOrModifyProfile()">Profile</a>
+                  <a class="dropdown-item" (click)="logout()">Logout</a>
+              </div>
+          </li>
+      </ul>
+  </div>
+</nav>
