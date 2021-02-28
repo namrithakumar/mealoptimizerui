@@ -1,11 +1,11 @@
-<h4>What we do</h4>
-<p>Our app takes in a list of meals you would like to eat, and tells you the cheapest meal plan and the healthiest meal plan to meet your daily nutrition requirements.</p>
-<h4><i>What sets us apart</i></h4>
-<p>From every other meal planning app.</p> <br/>
-<p>Nobody likes an app that tells them what to eat. Instead, with our app you eat what you like. You form healthy habits, not restrictions.</p><br/>
-<p>We won't tell you what you want. You choose for you!</p>
-<p>We still care for you though, so if you select meals that will not meet your daily nutrition requirements, we will give you a tailored meal plan.</p>
-<br/>
-<br/>
-<button *ngIf="!authenticatedUser" (click)='goToLoginOrRegister()'>Login/Register</button>
-<button *ngIf="authenticatedUser" (click)='goToMealPlanner()'>Take me to Meal Planner</button>
+<div class="row">
+  <div class="col-6">
+    <img src="../../../assets/images/background.png" alt="Meal Optimizer" class="img-fluid vh-100">
+  </div>
+  <div class="col-6 align-self-center home_text">
+    <h1>Meal Optimizer</h1>
+    <p>Eat what you wish, on a budget</p>
+    <button class="home_btn" *ngIf="!authenticatedUser" (click)='goToLoginOrRegister()'>Login/Register</button>
+    <button class="home_btn" *ngIf="authenticatedUser" (click)='goToMealPlanner()'>Take me to Meal Planner</button>
+  </div>
+</div>
