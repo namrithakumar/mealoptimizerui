@@ -1,11 +1,10 @@
-<div class="row">
-  <div class="col-6">
-    <img src="../../../assets/images/background.png" alt="Meal Optimizer" class="img-fluid vh-100">
+<section id="home">
+	<div class="home_text">
+    <div class="right">
+      <h1>Meal Optimizer</h1>
+      <p>Eat what you wish, on a budget</p>
+      <a href="" class="home_btn">learn more</a>
+    </div>
+		<img src="../../../assets/images/background.jpg" alt="meal optimizer">
   </div>
-  <div class="col-6 align-self-center home_text">
-    <h1>Meal Optimizer</h1>
-    <p>Eat what you wish, on a budget</p>
-    <button class="home_btn" *ngIf="!authenticatedUser" (click)='goToLoginOrRegister()'>Login/Register</button>
-    <button class="home_btn" *ngIf="authenticatedUser" (click)='goToMealPlanner()'>Take me to Meal Planner</button>
-  </div>
-</div>
+</section>
