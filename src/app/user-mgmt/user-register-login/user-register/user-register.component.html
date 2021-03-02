@@ -1,5 +1,4 @@
-<div class="container">
-    <div class="row">
+    <div class="row mt-5 justify-content-center">
         <div class="col-xs-12 col-sm-10 col-md-8 col-sm-offset-1 col-md-offset-2">
             <form [formGroup]="signupForm" (ngSubmit)="signup()">
                 <div *ngIf="error">Sorry an error occurred : {{ error }}</div>
@@ -58,4 +57,3 @@
             <p>{{ defaultText }}</p>
         </div>
     </div>
-</div>
