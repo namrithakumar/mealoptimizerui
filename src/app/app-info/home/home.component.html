@@ -1,9 +1,10 @@
 <section id="home">
 	<div class="home_text">
-    <div class="right">
+    <div class="left">
       <h1>Meal Optimizer</h1>
       <p>Eat what you wish, on a budget</p>
-      <a href="" class="home_btn">learn more</a>
+      <button *ngIf="!authenticatedUser" (click)='goToLoginOrRegister()' class="home_btn">Login/Register</button>
+      <button *ngIf="authenticatedUser" (click)='goToMealPlanner()' class="home_btn">Take me to Meal Planner</button>
     </div>
 		<img src="../../../assets/images/background.jpg" alt="meal optimizer">
   </div>
