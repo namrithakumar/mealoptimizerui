@@ -22,16 +22,19 @@
 }
 
 .home_text h1 {
-  font-family: "Caveat", cursive;
+  font-family: 'Times New Roman', Times, serif;
   font-size: 72px;
   z-index: 1;
   padding-bottom: 0.25em;
+  text-transform: capitalize;
+  color: #716823;
 }
 
 .home_text p {
   z-index: 1;
   margin-bottom: 2.2em;
   line-height: 1.5;
+  text-align: center;
 }
 
 .home_text img {
@@ -45,13 +48,21 @@
 }
 
 .home_btn {
-  background-color: #aa5d27;
+  background-color: whitesmoke;
   padding: 0.625em;
   border-radius: 4px;
+  margin: 0 auto;
+  display: block;
 }
 
 @media only screen and (max-width: 1026px) {
 	.left {
-    background-color: #c8f098;
+    background-color: #e3ebd9;
 	}
+  .home_text p {
+    text-align: left;
+  }
+  .home_btn {
+    margin: 0 0;
+  }
 }
