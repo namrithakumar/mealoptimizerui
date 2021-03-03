@@ -1,59 +1,88 @@
-    <div class="row mt-5 justify-content-center">
-        <div class="col-xs-12 col-sm-10 col-md-8 col-sm-offset-1 col-md-offset-2">
-            <form [formGroup]="signupForm" (ngSubmit)="signup()">
-                <div *ngIf="error">Sorry an error occurred : {{ error }}</div>
-                <div class="form-group" formGroupName="signupInfo">
-                    <label for="email">Email:</label>
-                    <input type="text" id="email" class="form-control" formControlName="email">
-                    <div *ngFor="let validation of account_validation_messages.email">
-                        <span class="help-block" *ngIf="signupForm.get('signupInfo.email').errors && signupForm.get('signupInfo.email').errors[validation.type] && (signupForm.get('signupInfo.email').dirty || signupForm.get('signupInfo.email').touched)">{{ validation.message }}</span>
-                    </div>
-                    <label for="username">Username:</label>
-                    <input type="text" id="username" class="form-control" formControlName="username"/>
-                    <div *ngFor="let validation of account_validation_messages.username">
-                        <span class="help-block" *ngIf="signupForm.get('signupInfo.username').errors && signupForm.get('signupInfo.username').errors[validation.type] && (signupForm.get('signupInfo.username').dirty || signupForm.get('signupInfo.username').touched)">{{ validation.message }}</span>
-                    </div>                   
-                    <label for="password">Password:</label>
-                    <input type="password" id="password" class="form-control" formControlName="password"/>
-                    <div *ngFor="let validation of account_validation_messages.password">
-                        <span class="help-block" *ngIf="signupForm.get('signupInfo.password').errors && signupForm.get('signupInfo.password').errors[validation.type] && (signupForm.get('signupInfo.password').dirty || signupForm.get('signupInfo.password').touched)">{{ validation.message }}</span>
-                    </div>  
-                </div>
-                <label for="dietType">Preferred diet type:</label>
-                <select id="dietType" class="form-control" formControlName="preferredDietType">
-                    <option *ngFor="let diet of dietTypes" [value]="diet.dietType" [id]="diet.dietType">{{ diet.displayValue }}</option>
-                </select>
-                <div formArrayName="nutrients">
-                    <div class="form-group" *ngFor="let nutrient of nutrients.controls; let i = index">
-                        <div [formGroupName]="i">
-                            <div>
-                                <input [ngStyle]="{'background-color':'rgba(0,0,0,0)', 'border': 'none'}" formControlName="name" readonly/>
-                                <input type="number" formControlName="min"/>
-                                <input type="number" formControlName="max"/>
-                                <input [ngStyle]="{'background-color':'rgba(0,0,0,0)', 'border': 'none'}" formControlName="unitOfMeasure"/>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="form-group" formGroupName="personalInfo">
-                    <label for="firstName">First name:</label>
-                    <input type="text" id="firstName" class="form-control" formControlName="firstName"/>
-                    <div *ngFor="let validation of account_validation_messages.firstName">
-                        <span class="help-block" *ngIf="signupForm.get('personalInfo.firstName').errors && signupForm.get('personalInfo.firstName').errors[validation.type] && (signupForm.get('personalInfo.firstName').dirty || signupForm.get('personalInfo.firstName').touched)">{{ validation.message }}</span>
-                    </div>
-                    <label for="lastName">Last name:</label>
-                    <input type="text" id="lastName" class="form-control" formControlName="lastName"/>
-                    <div *ngFor="let validation of account_validation_messages.lastName">
-                        <span class="help-block" *ngIf="signupForm.get('personalInfo.lastName').errors && signupForm.get('personalInfo.lastName').errors[validation.type] && (signupForm.get('personalInfo.lastName').dirty || signupForm.get('personalInfo.lastName').touched)">{{ validation.message }}</span>
-                    </div>
-                    <label for="address">Address:</label>
-                    <textarea id="address" rows="4" class="form-control" formControlName="address"></textarea>
-                    <div *ngFor="let validation of account_validation_messages.address">
-                        <span class="help-block" *ngIf="signupForm.get('personalInfo.address').errors && signupForm.get('personalInfo.address').errors[validation.type] && (signupForm.get('personalInfo.address').dirty || signupForm.get('personalInfo.address').touched)">{{ validation.message }}</span>
-                    </div>                    
-                </div>
-                <button type="submit" [disabled] = "!signupForm.valid">Sign up</button>
-            </form>
-            <p>{{ defaultText }}</p>
-        </div>
-    </div>
+<div class="row mt-5 justify-content-center">
+    <div class="col-md-8">
+        <div class="card">
+            <div class="card-header">Register</div>
+            <div class="card-body">
+				<p>{{ defaultText }}</p>
+				<form [formGroup]="signupForm" (ngSubmit)="signup()">
+					<div *ngIf="error">Sorry an error occurred : {{ error }}</div>
+					<div class="form-group" formGroupName="signupInfo">
+					<!-- Label -->
+					<div class="row mb-2">
+						<div class="col-md-4"></div>
+						<div class="col-md-6" *ngFor="let validation of account_validation_messages.email">
+							<span class="help-block" *ngIf="signupForm.get('signupInfo.email').errors && signupForm.get('signupInfo.email').errors[validation.type] && (signupForm.get('signupInfo.email').dirty || signupForm.get('signupInfo.email').touched)">{{ validation.message }}</span>
+						</div>
+					</div>
+					<div class="row">	
+						<label for="email" class="col-md-4 col-form-label text-md-right">Email:</label>
+						<div class="col-md-6">
+							<input type="text" id="email" class="form-control" formControlName="email">
+						</div>
+					</div>	
+					<!-- End of Label -->
+					<div class="row mb-2">
+						<div class="col-md-4"></div>
+						<div class="col-md-6" *ngFor="let validation of account_validation_messages.username">
+							<span class="help-block" *ngIf="signupForm.get('signupInfo.username').errors && signupForm.get('signupInfo.username').errors[validation.type] && (signupForm.get('signupInfo.username').dirty || signupForm.get('signupInfo.username').touched)">{{ validation.message }}</span>
+						</div>
+					</div>
+					<div class="row">	
+						<label class="col-md-4 col-form-label text-md-right" for="username">Username:</label>
+						<div class="col-md-6">
+							<input type="text" id="username" class="form-control" formControlName="username"/>
+						</div>
+					</div>	
+					<!-- End of Username -->
+					<div class="row mb-2">
+						<div class="col-md-4"></div>
+						<div class="col-md-6" *ngFor="let validation of account_validation_messages.password">
+							<span class="help-block" *ngIf="signupForm.get('signupInfo.password').errors && signupForm.get('signupInfo.password').errors[validation.type] && (signupForm.get('signupInfo.password').dirty || signupForm.get('signupInfo.password').touched)">{{ validation.message }}</span>
+						</div>
+					</div>
+					<div class="row">	
+						<label class="col-md-4 col-form-label text-md-right" for="password">Password:</label>
+						<div class="col-md-6">
+							<input type="password" id="password" class="form-control" formControlName="password"/> 
+						</div>	
+					</div>
+					<!--End of password-->
+				</div>
+				<div class="row">
+					<label class="col-md-4 col-form-label text-md-right" for="dietType">Preferred diet type:</label>
+					<div class="col-md-6">
+						<select id="dietType" class="form-control" formControlName="preferredDietType">
+							<option *ngFor="let diet of dietTypes" [value]="diet.dietType" [id]="diet.dietType">{{ diet.displayValue }}</option>
+						</select>
+					</div>
+				</div>
+				<div class="row">		
+				<table class="table table-borderless">	
+					<div formArrayName="nutrients">
+						<div class="form-group" 
+							*ngFor="let nutrient of nutrients.controls; let i = index">
+							<div [formGroupName]="i">
+								<tr class="d-flex justify-content-center">
+									<td class="col-md-2">
+										<input class="w-100" [ngStyle]="{'background-color':'rgba(0,0,0,0)', 'border':'none'}" formControlName="name" readonly/>
+									</td>
+									<td class="col-md-2">
+										<input class="w-100" type="number" formControlName="min"/>
+									</td>
+									<td class="col-md-2">
+										<input class="w-100" type="number" formControlName="max"/>
+									</td>
+									<td class="col-md-2">
+										<input class="w-100" [ngStyle]="{'background-color':'rgba(0,0,0,0)'}" formControlName="unitOfMeasure" readonly/>
+									</td>
+								</tr>
+							</div>
+						</div>
+					</div>
+				</table>
+			</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
