@@ -22,13 +22,13 @@
 
 @media only screen and (max-width: 959px) {
 	.custom-col-width {
-		width: 100%;
-		flex: 0 0 100%;
-		max-width: 100%;
+		width: 90%;
+		flex: 0 0 90%;
+		max-width: 90%;
 	}
 	.date-of-delivery {
-		width: 100%;
-		flex: 0 0 100%;
-		max-width: 100%;
+		width: 90%;
+		flex: 0 0 90%;
+		max-width: 90%;
 	}
 }

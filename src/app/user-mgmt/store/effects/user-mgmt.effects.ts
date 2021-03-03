@@ -32,7 +32,7 @@ signup = this.actions$.pipe(
     ofType<UserMgmtActions.SignupStart>(UserMgmtActions.SIGNUP_START),
     switchMap( (signup : UserMgmtActions.SignupStart) => {
         return this.http.post<User>(`${environment.hostUrl}:${environment.port}/${environment.applicationName}/user/register`, signup.payload).pipe(
-                            map((user : User) => { 
+                            map((user : User) => {
                                 return this.handleSuccessfulAuthentication(user) }),
                             catchError((error : any) => { 
                                 return this.handleAuthenticationError(error);

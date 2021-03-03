@@ -1,3 +1,11 @@
-.custom-cal-width {
-    width: 100% !important;
-  }
+@media only screen and (max-width: 959px) {
+  .custom-cal-width {
+      width: 100% !important;
+    }
+}
+
+@media only screen and (min-width: 960px) {
+  .custom-cal-width {
+      width: 100% !important;
+    }
+}
