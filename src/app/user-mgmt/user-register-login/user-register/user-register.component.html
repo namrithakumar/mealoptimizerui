@@ -7,6 +7,11 @@
 				<form [formGroup]="signupForm" (ngSubmit)="signup()">
 					<div *ngIf="error">Sorry an error occurred : {{ error }}</div>
 					<div class="form-group" formGroupName="signupInfo">
+						<div class="row mt-3 mb-2">
+							<div class="col-md-12 text-center">
+								<h4>Signup info</h4>
+							</div>
+						</div>
 					<!-- Label -->
 					<div class="row mb-2">
 						<div class="col-md-4"></div>
@@ -54,6 +59,12 @@
 						<select id="dietType" class="form-control" formControlName="preferredDietType">
 							<option *ngFor="let diet of dietTypes" [value]="diet.dietType" [id]="diet.dietType">{{ diet.displayValue }}</option>
 						</select>
+					</div>
+				</div>
+				<hr/>
+				<div class="row mt-3 mb-2">
+					<div class="col-md-12 text-center">
+						<h4>Nutritional info</h4>
 					</div>
 				</div>
 				<div class="row">		
