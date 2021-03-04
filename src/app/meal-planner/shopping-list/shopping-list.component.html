@@ -1,16 +1,25 @@
 <div class="row mt-4 ml-1">
-  <div class="col-md-11 ml-4">
-    <app-shopping-edit class="w-100"></app-shopping-edit>
-    <ul class="list-group col-md-6">
-      <button
-        class="list-group-item"
-        style="cursor: pointer"
-        *ngFor="let shoppingItem of shoppingItems; let i = index"
-        (click)="onEditItem(i)"
-      >
-        {{ shoppingItem.name }} ({{ shoppingItem.amount }}) {{ shoppingItem.measure }}
-        <span class="badge badge-secondary float-right" *ngFor="let label of shoppingItem.labels">{{ label }}</span>
-    </button>
-    </ul>
+  <div class="col-md-11">
+    <h4 class="py-4">Shopping List</h4>
   </div>
-</div>
+</div>    
+    <div class="row justify-content-start ml-5">
+      <div class="col-md-11">
+      <app-shopping-edit class="w-100"></app-shopping-edit>
+    </div>
+    </div>
+    <div class="row justify-content-start ml-5">
+      <div class="col-md-11">    
+        <ul class="list-group col-md-6">
+          <button
+            class="list-group-item"
+            style="cursor: pointer"
+            *ngFor="let shoppingItem of shoppingItems; let i = index"
+            (click)="onEditItem(i)"
+          >
+            {{ shoppingItem.name }} ({{ shoppingItem.amount }}) {{ shoppingItem.measure }}
+            <span class="badge badge-secondary float-right" *ngFor="let label of shoppingItem.labels">{{ label }}</span>
+        </button>
+        </ul>
+      </div>
+  </div>
