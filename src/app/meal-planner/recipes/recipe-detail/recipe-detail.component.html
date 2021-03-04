@@ -1,22 +1,24 @@
-<img 
-        [src]="recipeSelected.imageUrl" 
-        alt="{{ recipeSelected.name }}" 
-        class="img-responsive"
-        style="max-height : 300px">
-        <h4>{{recipeSelected.name}}</h4>
-        <a href="{{recipeSelected.tutorialPath}}"> Watch the tutorial here </a><br/>
-        <label for="noOfPortions">No. of portions</label>
-        <input class="col-lg-2 col-md-3 col-xs-4" type="number" id="noOfPortions" [(ngModel)]="noOfPortions" min="1"><br/>
-        <p>Ingredients</p>
-        <table>
-        <tr *ngFor="let ingredient of recipeSelected.ingredients">
-                <td>{{ ingredient.name }}</td>
-                <td style="text-align:right">: {{ ingredient.quantity.amount * noOfPortions }} ({{ ingredient.quantity.measure}})</td>
-        </tr>
-        <tr>
-            <td>
-                <button type="button" class="btn btn-dark my-2" (click)="onAddToShoppingList()">Add ingredients to shopping list
-                </button>
-            </td>
-        </tr>        
-    </table>
+<div class="mt-md-0 mt-sm-5">
+    <img 
+            [src]="recipeSelected.imageUrl" 
+            alt="{{ recipeSelected.name }}" 
+            class="img-responsive"
+            style="max-height : 300px">
+            <h4>{{recipeSelected.name}}</h4>
+            <a href="{{recipeSelected.tutorialPath}}"> Watch the tutorial here </a><br/>
+            <label for="noOfPortions">No. of portions</label>
+            <input class="col-lg-2 col-md-3 col-sm-2 ml-1" type="number" id="noOfPortions" [(ngModel)]="noOfPortions" min="1"><br/>
+            <p>Ingredients</p>
+            <table>
+            <tr *ngFor="let ingredient of recipeSelected.ingredients">
+                    <td>{{ ingredient.name }}</td>
+                    <td style="text-align:right">: {{ ingredient.quantity.amount * noOfPortions }} ({{ ingredient.quantity.measure}})</td>
+            </tr>
+            <tr>
+                <td>
+                    <button type="button" class="btn btn-dark my-2" (click)="onAddToShoppingList()">Add ingredients to shopping list
+                    </button>
+                </td>
+            </tr>        
+        </table>
+</div>    
