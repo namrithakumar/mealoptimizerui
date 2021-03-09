@@ -1,9 +1,13 @@
 import { NgModule } from '@angular/core';
 import { DatePipe } from '@angular/common';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
 
-import { FullCalendarModule } from '@fullcalendar/angular';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import interactionPlugin from '@fullcalendar/interaction';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { CalendarModule, DateAdapter } from 'angular-calendar';
+import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 
 import { MealPlannerRoutingModule } from '../meal-planner/meal-planner.routing.module';
 import { MealOptimizerComponent } from './meal-optimizer/meal-optimizer.component';
@@ -27,11 +31,6 @@ import { ShoppingEditComponent } from '../meal-planner/shopping-list/shopping-ed
 import { OnlineOrderComponent } from './meal-optimizer/online-order/online-order.component';
 import { MealPlannerComponent } from './meal-planner.component';
 import { CoreModule } from '../shared/core/core.module';
-
-FullCalendarModule.registerPlugins([ // register FullCalendar plugins
-    dayGridPlugin,
-    interactionPlugin
-  ]);
 
 @NgModule({
     declarations : [
@@ -59,7 +58,13 @@ FullCalendarModule.registerPlugins([ // register FullCalendar plugins
     imports : [
         CoreModule,
         MealPlannerRoutingModule,
-        FullCalendarModule
+        BrowserAnimationsModule,
+        MatDatepickerModule,
+        MatNativeDateModule,        
+        CalendarModule.forRoot({
+          provide: DateAdapter,
+          useFactory: adapterFactory,
+        })
     ],
     providers : [ DatePipe ]
 })

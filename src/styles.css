@@ -1,2 +1,10 @@
 /* You can add global styles to this file, and also import other style files */
 @import '~@angular/cdk/overlay-prebuilt.css';
+@import "~@fullcalendar/core/main.css";
+
+.sec-heading {
+    font-weight: bold;
+    font-style: italic;
+    text-align: left;
+    padding: 10px;
+}

@@ -1,10 +1,12 @@
 import {
     Component,
+    ElementRef,
     OnInit,
     ViewChild
   } from '@angular/core';
-  
-import { CalendarOptions, FullCalendarComponent } from '@fullcalendar/angular';
+import dayGridPlugin from "@fullcalendar/daygrid";
+import interactionPlugin from "@fullcalendar/interaction";
+import { Calendar } from "@fullcalendar/core";
 
 import { AppState } from 'src/app/store/reducers/app.reducer';
 import { Store } from '@ngrx/store';
@@ -18,24 +20,31 @@ import * as UserPreferencesActions from '../store/actions/user-preferences.actio
   // This component performs only 1 action - save delivery date chosen to store.
   export class DeliveryDateSelectorComponent implements OnInit {
 
+    @ViewChild('calendar') cal : ElementRef;
+    calendar: Calendar;
+
     propertyName = 'deliveryDate';
 
-    @ViewChild('calendar') calendarComponent: FullCalendarComponent;
-    
-    calendarOptions: CalendarOptions = {
-      initialView: 'dayGridMonth',
-      dateClick: this.handleDateClick.bind(this),
-      validRange : {
-        start : new Date(),
-        end : new Date().setMonth(new Date().getMonth() + 6)
-      }
-    };
+    constructor(private store : Store<AppState>) { }
+   
+    ngOnInit() { }
 
-    constructor(private store : Store<AppState>) {}
-  
     handleDateClick(arg) {
       this.store.dispatch(new UserPreferencesActions.EditDeliveryDate(arg.date));
     }
 
-    ngOnInit() { }
+    ngAfterViewInit() {
+      this.calendar = new Calendar(this.cal.nativeElement, {
+        plugins: [dayGridPlugin, interactionPlugin],
+        validRange: {
+          start: new Date(),
+          end: new Date().setMonth(new Date().getMonth() + 6)
+        },
+        aspectRatio: 2.4,
+        fixedWeekCount: false,
+        dateClick: this.handleDateClick.bind(this)
+      });
+
+      this.calendar.render();
+    }
   }

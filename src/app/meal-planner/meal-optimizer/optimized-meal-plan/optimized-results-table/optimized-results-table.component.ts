@@ -1,9 +1,10 @@
-import { Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { Component, ElementRef, Input, OnDestroy, OnInit, ViewChild, Renderer2 } from '@angular/core';
 import { Store } from '@ngrx/store';
 
 import { AppState } from 'src/app/store/reducers/app.reducer';
-import { HttpRequestStatus } from '../../../../shared/http-request-status.enum';
 import * as UserPreferencesActions from '../../store/actions/user-preferences.actions';
+
+import { BreakpointObserver, Breakpoints, BreakpointState } from '@angular/cdk/layout';
 
 @Component({
   selector: 'app-optimized-results-table',
@@ -33,9 +34,34 @@ export class OptimizedResultsTableComponent implements OnInit, OnDestroy {
 
   @Input() defaultText;
   
-  constructor(private store : Store<AppState>) { }
+  @ViewChild('optimizationResultsTab') optimizationResultsTab : ElementRef;
 
-  ngOnInit(): void {}
+  constructor(private store : Store<AppState>,
+              private breakpointObserver: BreakpointObserver,
+              private renderer: Renderer2) { }
+
+  ngOnInit(): void { }
+
+  ngAfterViewInit() {
+              //Track the size of the window and stack tabs for sizes < large
+              this.breakpointObserver.observe([
+                Breakpoints.XSmall,
+                Breakpoints.Small,
+                Breakpoints.Medium,
+                Breakpoints.Large,
+                Breakpoints.XLarge
+              ]).subscribe( (state: BreakpointState) => {
+                if (state.breakpoints[Breakpoints.XSmall] || 
+                    state.breakpoints[Breakpoints.Small]) {
+                      this.renderer.addClass(this.optimizationResultsTab.nativeElement as HTMLElement,'flex-column');
+                }
+                else if (state.breakpoints[Breakpoints.Medium] ||
+                         state.breakpoints[Breakpoints.Large] || 
+                         state.breakpoints[Breakpoints.XLarge]) {
+                      this.renderer.removeClass(this.optimizationResultsTab.nativeElement as HTMLElement,'flex-column');
+                }
+              });
+  }
 
   /*
    * Once a tab is selected, update user preferences (stored as optimizationTypeSelected)

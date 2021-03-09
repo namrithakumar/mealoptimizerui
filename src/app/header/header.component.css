@@ -1,0 +1,23 @@
+.al-navbar {
+    border-bottom:1px solid #f0f0f0;
+    background:#fff;
+    box-shadow:0 0 3px #f0f0f0;
+}
+.al-navbar .navbar-brand {
+    font-weight:600;
+}
+.al-navbar .active a {
+    font-weight: bold;
+}
+.al-navbar .dropdown-menu {
+    border-radius:0;
+    border-color:#f0f0f0;
+    box-shadow:0 0 2px #f0f0f0;
+}
+.al-navbar .dropdown-menu a {
+    color:#999;
+}
+.al-navbar .dropdown-menu a:hover {
+    color:#fff;
+    background:#D95D39;
+}

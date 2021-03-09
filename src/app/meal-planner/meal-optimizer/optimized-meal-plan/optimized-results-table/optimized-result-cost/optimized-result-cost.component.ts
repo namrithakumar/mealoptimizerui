@@ -9,9 +9,9 @@ import { Meal } from '../../../../../shared/model/order-response.model';
 export class OptimizedResultCostComponent implements OnInit {
   
   /*
-   * meal is set as input from optimized results table.
+   * costOptimizedPlan is set as input from optimized results table.
    */
-  @Input() meal : Meal;
+  @Input() costOptimizedPlan;
 
   constructor() { }
 

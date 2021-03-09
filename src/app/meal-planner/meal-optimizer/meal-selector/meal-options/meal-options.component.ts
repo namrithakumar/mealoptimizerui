@@ -54,8 +54,6 @@ export class MealOptionsComponent implements OnInit {
                                           // If menu.itemList if truthy, display item list to the user
                                           if(menu.itemList) { 
                                             this.itemList = menu.itemList.slice();
-                                            //Insert default text 'Please select a meal' as the first entry of the list
-                                            this.itemList.unshift(this.defaultText);
                                           }
                                           //If menu.error is true, display the error
                                           if(menu.error) { this.itemList = [menu.error]; }                                          
@@ -68,7 +66,8 @@ export class MealOptionsComponent implements OnInit {
   /* If a meal is selected by the user from the dropdown, save it to store.userPreferences by dispatching an action. 
    *
    */
-  onMealSelected() : void {
+  onMealSelected(item : String) : void {
+    this.itemSelected = item;
     this.store.dispatch(
       new UserPreferencesActions.UpdateMeal({
         itemPosition: this.indexOfMeal, 
@@ -77,6 +76,6 @@ export class MealOptionsComponent implements OnInit {
   }
 
   private resetItemList() {
-    this.itemList = new Array<String>(1);
+    this.itemList = new Array<String>();
   }
 }

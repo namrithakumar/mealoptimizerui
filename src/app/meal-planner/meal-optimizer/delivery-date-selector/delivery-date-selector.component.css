@@ -1,18 +1,11 @@
-h3 {
-  margin: 0 0 10px;
+@media only screen and (max-width: 959px) {
+  .custom-cal-width {
+      width: 100% !important;
+    }
 }
 
-pre {
-  background-color: #8aaeaf;
-  padding: 15px;
-}
-
-.month-view {
-  background-color: #fff; 
-  width: 50%
-}
-
-::ng-deep .cal-day-past {
-  background-color: blueviolet;   
-  display: none;
+@media only screen and (min-width: 960px) {
+  .custom-cal-width {
+      width: 100% !important;
+    }
 }

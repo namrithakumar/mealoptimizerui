@@ -26,7 +26,7 @@ export class RecipeDetailComponent implements OnInit, OnDestroy {
   shoppingItems : ShoppingItem[];
 
   optimizationTypeSelected : String;
-
+  
   ngOnInit(): void {
 
     this.optimizationTypeSelected = 'COST';
@@ -43,6 +43,7 @@ export class RecipeDetailComponent implements OnInit, OnDestroy {
      */
     this.route.params.subscribe((params : Params) => {
       this.id = +params['id'];
+      console.log('Recipe ID ' + this.id);
       this.recipeSelected = this.recipeService.getRecipeById(this.id);
       this.noOfPortions = this.optimizationService.getPortionCountByOptimizationTypeMealName(this.optimizationTypeSelected, this.recipeSelected.name);
   });

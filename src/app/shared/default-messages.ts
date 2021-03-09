@@ -2,7 +2,7 @@ import { HttpRequestStatus } from './http-request-status.enum';
 
 //Setup default messages for Fetch-Menu
 const defaultMessagesMenu = new Map<HttpRequestStatus, String>();
-defaultMessagesMenu.set(HttpRequestStatus.NO_ACTION, 'Please select diet type');
+defaultMessagesMenu.set(HttpRequestStatus.NO_ACTION, 'Please select diet');
 defaultMessagesMenu.set(HttpRequestStatus.REQUEST_SENT, 'Fetching menu');
 defaultMessagesMenu.set(HttpRequestStatus.RESPONSE_RECEIVED, 'Please select a meal');
 

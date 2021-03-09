@@ -1,10 +1,15 @@
-<h4><b><i>Step 1: Select diet type</i></b></h4>
-        <div *ngFor="let dietType of dietTypes">
-                <input type="radio" 
+<h4 class="justify-content-start py-4">Step 1: Select diet type</h4>
+<div class="custom-top-margin">
+        <div *ngFor="let dietType of dietTypes" class="form-check ml-4 my-2">
+                <input type="radio"
+                       class="form-check-input" 
                        [id]='dietType.dietType' 
                        [(ngModel)]="userDietType" 
                        name="user_diet_type" 
                        [value]="dietType.dietType" 
-                       (click)="onDietTypeSelect(dietType.dietType)">{{dietType.displayValue}}<br/>
+                       (click)="onDietTypeSelect(dietType.dietType)">
+                <label class="form-check-label" for="dietType.dietType">       
+                {{dietType.displayValue}}
+                </label>
         </div>
-<hr/>
+</div>                

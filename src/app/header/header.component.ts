@@ -8,8 +8,8 @@ import * as UserMgmtActions from '../user-mgmt/store/actions/user-mgmt.actions';
 
 @Component({
     selector: 'app-header',
-    templateUrl: './header.component.html'
-    
+    templateUrl: './header.component.html',
+    styleUrls: ['./header.component.css']    
 })
 export class HeaderComponent implements OnInit {
     
