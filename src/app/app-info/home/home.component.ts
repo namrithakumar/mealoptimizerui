@@ -23,7 +23,7 @@ export class HomeComponent implements OnInit {
   }
 
   goToLoginOrRegister() : void {
-    this.router.navigate(['/user-mgmt','login']);
+    //this.router.navigate(['/user-mgmt','login']);
   }
 
   goToMealPlanner() : void {
