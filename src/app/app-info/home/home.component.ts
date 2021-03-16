@@ -4,6 +4,7 @@ import { Store } from '@ngrx/store';
 import { User } from 'src/app/shared/model/user.model';
 import { AppState } from 'src/app/store/reducers/app.reducer';
 import { AuthenticatedUser } from 'src/app/user-mgmt/store/reducers/user-mgmt.reducer';
+import { AuthenticationService } from '../../shared/services/authentication.service';
 
 @Component({
   selector: 'app-home',
@@ -14,7 +15,9 @@ export class HomeComponent implements OnInit {
 
   authenticatedUser : User;
 
-  constructor(private router:Router, private store : Store<AppState>) { }
+  constructor(private router:Router, 
+              private store : Store<AppState>, 
+              private authenticationService : AuthenticationService) { }
 
   ngOnInit(): void {
     this.store.select('authenticatedUser').subscribe(( authenticatedUser : AuthenticatedUser ) => {
@@ -24,6 +27,10 @@ export class HomeComponent implements OnInit {
 
   goToLoginOrRegister() : void {
     //this.router.navigate(['/user-mgmt','login']);
+    //If user is not logged in
+    if(!this.authenticatedUser) {
+      this.authenticationService.dispatchAuthorizationCodeRequest();
+    }
   }
 
   goToMealPlanner() : void {
