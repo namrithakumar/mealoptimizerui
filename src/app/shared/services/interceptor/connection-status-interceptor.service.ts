@@ -21,16 +21,18 @@ export class ConnectionStatusInterceptor implements HttpInterceptor {
         //All of the backend end points match the pattern $(backend url)/mealoptimizer/$(tag), we need not use [].
         //We use [] to accomodate future changes.
         let result = request.url.match(/.*mealoptimizer\/([a-z]+\/[a-z]+)/) || [];
-        let tag = result[1].replace('/', '-');
+        let tag = (result.length > 0)?result[1].replace('/', '-'):'keycloak';
 
         //If network connection is available, proceed with handling the request
         if(this.connectionStatusHandlerService.getConnectionStatus()) {
+            console.log('Connection available. Allowing request to proceed');
             return next.handle(request);
         }
         //If network connection is not available, write to indexedDB
         //Showing notification will be handled inside ConnectionStatusHandler
         else {
             //Write to indexed DB
+            console.log('Connection not available. Storing request to indexed db');
             this.indexedDBService.addFailedRequest(request, tag);
             return next.handle(request);
         }

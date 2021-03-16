@@ -1,33 +1,60 @@
 import { Injectable } from "@angular/core";
 
 @Injectable({ providedIn : 'root'})
-export class AuthenticationService {
+export class AuthorizationService {
 
-	private authorizationUrl : string = 'http://localhost:8080/auth/realms/mealplanner/protocol/openid-connect/auth';
-	private client_id : string = 'meal-planner-app-client';
-	private redirect_uri : string = 'http://localhost:4200/user-mgmt/auth/authCodeReader';
+	private _authorizationUrl : string = 'http://localhost:8080/auth/realms/mealplanner/protocol/openid-connect/auth';
+	private _client_id : string = 'meal-planner-app-client';
+	private _redirect_uri : string = 'http://localhost:4200/user-mgmt/auth/authCodeReader';
 	
-	private originalState : string = this.generateState(30);
-	private codeVerifier : string = this.generateCodeVerifier();
-	private codeChallenge : string;
+	private _originalState : string = this.generateState(30);
+	private _codeVerifier : string = this.generateCodeVerifier();
+	private _codeChallenge : string;
 		
-	public dispatchAuthorizationCodeRequest() {
-        
-        this.generateCodeChallenge().then((challenge) => {
-            this.codeChallenge = challenge;
-        });
+    public get authorizationUrl() {
+        return this._authorizationUrl;
+    }
 
+    public get clientId() {
+        return this._client_id;
+    }
+
+    public get redirectUri() {
+        return this._redirect_uri;
+    }
+
+    public get originalState() {
+        return this._originalState;
+    }
+
+    public get codeVerifier() {
+        return this._codeVerifier;
+    }
+
+    public get codeChallenge() {
+        return this._codeChallenge;
+    }
+
+	public dispatchAuthorizationCodeRequest() {
+
+        this.generateCodeChallenge().then((challenge) => {
+            console.log('Code challenge generated as ' + challenge);
+            this._codeChallenge = challenge;
+            
+        console.log('Inside dispatchAuthorizationCodeRequest. Code challenge retrieved as ' + this.codeChallenge);
 		let authRequestUrl : string = this.authorizationUrl;
-		authRequestUrl += "?client_id=" + this.client_id;
+		authRequestUrl += "?client_id=" + this._client_id;
 		authRequestUrl += "&response_type=code";
 		authRequestUrl += "&scope=openid";
-		authRequestUrl += "&redirect_uri=" + this.redirect_uri;
+		authRequestUrl += "&redirect_uri=" + this._redirect_uri;
 		authRequestUrl += "&state=" + this.originalState;
 		authRequestUrl += "&code_challenge=" + this.codeChallenge;
 		authRequestUrl += "&code_challenge_method=S256";
 		
 		//Open a new window to get Authorization code
-		window.open(authRequestUrl, 'Authorization Request Window', 'width=800, height=600, left=200, top=200');
+        console.log('Sending new request ' + authRequestUrl);
+		window.open(authRequestUrl, "Authorization", 'width=800, height=600, left=200, top=200');
+        });
 	}
 
     private generateState(length : number) : string {

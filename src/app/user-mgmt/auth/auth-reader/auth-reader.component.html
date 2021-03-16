@@ -1,6 +1,4 @@
 <p>auth-reader page</p>
-<p>url : {{ url }}}</p>
-<p>authCode : {{ authCode }}</p>
-<p>state : {{ state }}</p>
-<p>error : {{ error }}</p>
-<p>errorDescription : {{ errorDescription }}</p>
+<p>authCode : {{ authorizationCode }}</p>
+<button (click)="requestAccessToken()">Get access token</button>
+<p>accessToken : {{ accessToken }}</p>
