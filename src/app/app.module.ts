@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { APP_INITIALIZER, NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 
 import { AppComponent } from './app.component';
@@ -20,6 +20,9 @@ import { UserMgmtModule } from '../app/user-mgmt/user-mgmt.module';
 import { MealPlannerModule } from '../app/meal-planner/meal-planner.module';
 import { CoreModule } from '../app/shared/core/core.module';
 import { interceptorProviders } from '../app/shared/services/interceptor/interceptors';
+import { KeycloakAngularModule, KeycloakService } from 'keycloak-angular';
+
+import { initializeKeycloak } from '../app/shared/app.init';
 
 @NgModule({
   declarations: [
@@ -34,13 +37,16 @@ import { interceptorProviders } from '../app/shared/services/interceptor/interce
     BrowserModule,
     AppRoutingModule,
     OverlayModule,
+    KeycloakAngularModule,
     StoreModule.forRoot(fromApp.appReducer),
     EffectsModule.forRoot([UserPreferencesEffects, MenuEffects, OrderEffects, RecipesEffects, UserMgmtEffects])    
   ],
   providers: [ interceptorProviders,
               { provide : JWT_OPTIONS, useValue : JWT_OPTIONS },
               JwtHelperService,
-              {provide: OverlayContainer, useClass: FullscreenOverlayContainer}],
+              {provide: OverlayContainer, useClass: FullscreenOverlayContainer},
+              {provide: APP_INITIALIZER, useFactory: initializeKeycloak, multi: true, deps: [KeycloakService]}
+            ],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

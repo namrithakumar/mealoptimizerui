@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
+import { KeycloakService } from 'keycloak-angular';
 import { User } from 'src/app/shared/model/user.model';
 import { AppState } from 'src/app/store/reducers/app.reducer';
 import { AuthenticatedUser } from 'src/app/user-mgmt/store/reducers/user-mgmt.reducer';
@@ -23,7 +24,7 @@ export class HomeComponent implements OnInit {
   }
 
   goToLoginOrRegister() : void {
-    this.router.navigate(['/user-mgmt','login']);
+    //this.router.navigate(['/user-mgmt','login']);
   }
 
   goToMealPlanner() : void {
