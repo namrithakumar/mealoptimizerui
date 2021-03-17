@@ -13,7 +13,6 @@ import { UserPreferencesEffects } from './meal-planner/meal-optimizer/store/effe
 import { MenuEffects } from '../app/meal-planner/meal-optimizer/store/effects/menu.effects';
 import { OrderEffects } from '../app/meal-planner/meal-optimizer/store/effects/order.effects';
 import { RecipesEffects } from '../app/meal-planner/recipes/store/effects/recipes.effects';
-import { UserMgmtEffects } from '../app/user-mgmt/store/effects/user-mgmt.effects';
 import { HeaderComponent } from './header/header.component';
 import { AppInfoModule } from '../app/app-info/app-info.module';
 import { UserMgmtModule } from '../app/user-mgmt/user-mgmt.module';
@@ -39,7 +38,7 @@ import { initializeKeycloak } from '../app/shared/app.init';
     OverlayModule,
     KeycloakAngularModule,
     StoreModule.forRoot(fromApp.appReducer),
-    EffectsModule.forRoot([UserPreferencesEffects, MenuEffects, OrderEffects, RecipesEffects, UserMgmtEffects])    
+    EffectsModule.forRoot([UserPreferencesEffects, MenuEffects, OrderEffects, RecipesEffects])    
   ],
   providers: [ interceptorProviders,
               { provide : JWT_OPTIONS, useValue : JWT_OPTIONS },

@@ -9,6 +9,10 @@ import * as UserPreferencesActions from './store/actions/user-preferences.action
 import * as MenuActions from './store/actions/menu.actions';
 import * as OrderActions from './store/actions/order.actions';
 import { KeycloakService } from 'keycloak-angular';
+import { AuthenticationResponseHandler } from '../../shared/services/response-handler/authentication-response-handler';
+import { User } from 'src/app/shared/model/user.model';
+import { UserBuilder } from 'src/app/shared/model/user-builder.model';
+import { UserService } from 'src/app/shared/services/user.service';
 
 //This component handles routing, link to optimizationService via controller
 @Component({
@@ -20,7 +24,8 @@ export class MealOptimizerComponent implements OnInit, CanComponentDeactivate {
 
   constructor(private route: ActivatedRoute, 
               private store : Store<AppState>, 
-              private keycloakService : KeycloakService) {
+              private authenticationResponseHandler : AuthenticationResponseHandler,
+              private userService : UserService) {
   }
 
   dietTypes : Array<IUserDietType>;
@@ -31,15 +36,10 @@ export class MealOptimizerComponent implements OnInit, CanComponentDeactivate {
     });
 
     //This page is loaded only when user authentication on Keycloak is successful. Hence log the username + token
-
-    console.log('username ' + this.keycloakService.getUsername());
-    console.log('isLoggedIn ' + this.keycloakService.isLoggedIn().then((loggedIn) => { console.log('Logged In : ' + loggedIn); }));
-    console.log('token ' + this.keycloakService.getToken().then((token) => { console.log('Token : ' + token); }));
-    console.log('user roles ' + JSON.stringify(this.keycloakService.getUserRoles()));
-    console.log('user profile : ' + this.keycloakService.loadUserProfile().then((userProfile) => {
-      console.log('user profile : ' + JSON.stringify(userProfile));
-    }));
-  }
+    this.userService.parseAuthenticatedUserDetails()
+                    .then((authenticatedUser) => this.authenticationResponseHandler.handleSuccess(authenticatedUser))
+                    .catch((error) => this.authenticationResponseHandler.handleFailure(error));
+}
 
   canDeactivate() : Observable<boolean> | Promise<boolean> | boolean {
     if(confirm('You are navigating away from the page. Your inputs will be reset.')) {

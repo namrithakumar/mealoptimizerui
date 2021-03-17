@@ -7,9 +7,14 @@ export class UserBuilder {
     constructor(username : String) {
         this.user = new User(username);
     }
-    
-    setId(id : number) : UserBuilder {
-        this.user.id = id;
+
+    setFirstName(firstName : String) : UserBuilder {
+        this.user.firstName = firstName;
+        return this;
+    }
+
+    setLastName(lastName : String) : UserBuilder {
+        this.user.lastName = lastName;
         return this;
     }
 
@@ -20,16 +25,6 @@ export class UserBuilder {
 
     setPreferredDietType(preferredDietType : String) : UserBuilder {
         this.user.preferredDietType = preferredDietType;
-        return this;
-    }
-
-    setFirstName(firstName : String) : UserBuilder {
-        this.user.firstName = firstName;
-        return this;
-    }
-
-    setLastName(lastName : String) : UserBuilder {
-        this.user.lastName = lastName;
         return this;
     }
 
@@ -53,13 +48,8 @@ export class UserBuilder {
         return this;
     }
 
-    setTokenValidTime(tokenValidTime : number) : UserBuilder {
-        this.user.tokenValidTime = tokenValidTime;
-        return this;
-    }
-
-    setTokenExpiryDate(tokenExpiryDate : Date) : UserBuilder {
-        this.user.tokenExpiryDate = tokenExpiryDate;
+    setLoggedIn(loggedIn : Boolean) : UserBuilder {
+        this.user.loggedIn = loggedIn;
         return this;
     }
 

@@ -4,21 +4,18 @@ import { of } from 'rxjs';
 import { BaseResponseHandler } from "./base-response-handler";
 import * as UserMgmtActions from '../../../user-mgmt/store/actions/user-mgmt.actions';
 import { User } from '../../../shared/model/user.model';
+import { Store } from '@ngrx/store';
+import { AppState } from 'src/app/store/reducers/app.reducer';
 
 @Injectable({ providedIn : 'root' })
 export class AuthenticationResponseHandler implements BaseResponseHandler{
 
-    defaultErrorMessage = 'There was an error authenticating the user.';
+    constructor(private store : Store<AppState>) {}
 
-    constructor() {}
-
-    handleSuccess(authenticatedUser : User) {      
-        return new UserMgmtActions.AuthSuccess(authenticatedUser);
+    handleSuccess(authenticatedUser : User) { 
+        this.store.dispatch(new UserMgmtActions.LoginSuccess(authenticatedUser));
     }
-    handleFailure(errorResponse: any) {
-        if(!errorResponse || !errorResponse.error) 
-            return of(new UserMgmtActions.AuthError(this.defaultErrorMessage));
-        else return of(new UserMgmtActions.AuthError(
-            errorResponse.error.error + errorResponse.error.message));
+    handleFailure(errorResponse: String) {
+            this.store.dispatch(new UserMgmtActions.LoginError(errorResponse));
     }
 }

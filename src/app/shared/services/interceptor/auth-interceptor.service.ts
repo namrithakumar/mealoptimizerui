@@ -20,7 +20,7 @@ export class AuthInterceptor implements HttpInterceptor {
     intercept(request : HttpRequest<any>, next : HttpHandler) : Observable<HttpEvent<any>> {
         return this.store.select('authenticatedUser').pipe(take(1), exhaustMap(
             (authenticatedUser : AuthenticatedUser) =>{
-                if(!authenticatedUser.user) return next.handle(request);
+                if(!authenticatedUser.user.token) return next.handle(request);
                 else {
                     const modifiedReq = request.clone({
                         setHeaders : {'Authorization' : 'Bearer ' + authenticatedUser.user.token}
