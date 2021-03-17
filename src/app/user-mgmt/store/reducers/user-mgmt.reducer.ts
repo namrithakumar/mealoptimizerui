@@ -8,7 +8,7 @@ export interface AuthenticatedUser {
 }
 
 const defaultUser : AuthenticatedUser = {
-    user : new UserBuilder('guest').build(),
+    user : new UserBuilder('guest').setLoggedIn(false).build(),
     error : null
 };
 
@@ -16,14 +16,13 @@ export function userMgmtReducer(state : AuthenticatedUser = defaultUser, action 
     switch(action.type) {
         
         case UserMgmtActions.LOGIN_SUCCESS :
-            console.log('Received inside user-mgmt-reducer ' + JSON.stringify(action.payload));
             return { ...state, user : action.payload, error : null };
         
         case UserMgmtActions.LOGIN_ERROR:
             return { ...state, user : null, error : action.payload };
 
         case UserMgmtActions.LOGOUT:
-            return { ...state, user : new UserBuilder('guest').build(), error : null};
+            return { ...state, user : new UserBuilder('guest').setLoggedIn(false).build(), error : null};
 
         default : return state;
     }

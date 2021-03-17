@@ -57,4 +57,13 @@ export class UserService {
 
         return authenticatedUserBuilder.build();
     }
+
+    async parseUserProfile() : Promise<User> {
+        let userProfile = await this.keycloakService.loadUserProfile();
+        return new UserBuilder(userProfile.username)
+                        .setFirstName(userProfile.firstName)
+                        .setLastName(userProfile.lastName)
+                        .setEmail(userProfile.email)
+                        .build();
+    }
 }

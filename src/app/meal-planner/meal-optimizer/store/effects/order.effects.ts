@@ -20,7 +20,7 @@ export class OrderEffects {
 placeOrder = this.actions$.pipe(
     ofType<OrderActions.SaveOrderStart>(OrderActions.SAVE_ORDER_START),
     switchMap((createOrderAction : OrderActions.SaveOrderStart) => {
-        return this.http.post<OrderResponse>(`${environment.hostUrl}:${environment.port}/${environment.applicationName}/orders/save`,
+        return this.http.post<OrderResponse>(`${environment.hostUrl}:${environment.port}/${environment.applicationName}/orders/user/save`,
                 createOrderAction.payload).pipe(
                     map((optimizedMealPlans : OrderResponse) => {
                         return this.orderResponseHandler.handleSuccess(optimizedMealPlans);

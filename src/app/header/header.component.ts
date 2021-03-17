@@ -27,10 +27,6 @@ export class HeaderComponent implements OnInit {
         this.router.navigate(['/meal-optimizer'], { queryParams: {mode: 'create'} });
     }
 
-    viewOrModifyProfile() : void {
-        this.router.navigate(['/user-mgmt','user','user-profile'], { queryParams: {mode: 'view'} });
-    }
-
     logout() : void {
         this.store.dispatch(new UserMgmtActions.Logout());
         this.router.navigate(['/app-info','home']);

@@ -8,7 +8,7 @@ export class User {
     public nutrientMinLimits? : Array<{String, number}>;
     public nutrientMaxLimits? : Array<{String, number}>;
     public token : String;
-    public loggedIn: Boolean;
+    public loggedIn: Boolean = false;
 
     constructor(username:String, firstName?:String, lastName?:String, email?:String, token? : String, loggedIn?: Boolean, preferredDietType?:String, address?:String, nutrientMinLimits? : Array<{String, number}>, nutrientMaxLimits? : Array<{String, number}>) {
         this.username = username;
