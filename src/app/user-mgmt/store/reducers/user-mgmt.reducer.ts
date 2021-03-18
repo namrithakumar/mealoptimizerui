@@ -22,7 +22,9 @@ export function userMgmtReducer(state : AuthenticatedUser = defaultUser, action 
             return { ...state, user : null, error : action.payload };
 
         case UserMgmtActions.LOGOUT:
-            return { ...state, user : new UserBuilder('guest').setLoggedIn(false).build(), error : null};
+            return { ...state, 
+                     user : new UserBuilder('guest').setLoggedIn(false).build(), 
+                     error : null};
 
         default : return state;
     }
