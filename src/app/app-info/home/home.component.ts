@@ -15,7 +15,8 @@ export class HomeComponent implements OnInit {
 
   authenticatedUser : User;
 
-  constructor(private router:Router, private store : Store<AppState>) { }
+  constructor(private router:Router, 
+              private store : Store<AppState>) { }
 
   ngOnInit(): void {
     this.store.select('authenticatedUser').subscribe(( authenticatedUser : AuthenticatedUser ) => {
@@ -23,10 +24,17 @@ export class HomeComponent implements OnInit {
     });
   }
 
+  //Displayed if user has not logged in
   goToLoginOrRegister() : void {
-    //this.router.navigate(['/user-mgmt','login']);
+    this.router.navigate(['/meal-planner', { outlets: { mealoptimizer : ['meal-optimizer'] } }], { queryParams: {optimizermode: 'create'} });
   }
 
+  //Displayed if user has not logged in
+  continueAsGuest() : void {
+    console.log('Code to be written to continue as unauthenticated guest'); 
+  }
+
+  //Displayed if user has logged in
   goToMealPlanner() : void {
     this.router.navigate(['/meal-planner', { outlets: { mealoptimizer : ['meal-optimizer'] } }], { queryParams: {optimizermode: 'create'} });
   }

@@ -3,8 +3,11 @@
     <div class="left">
       <h1>Meal Optimizer</h1>
       <p>Eat what you wish, on a budget</p>
-        <button *ngIf="!authenticatedUser" (click)='goToLoginOrRegister()' class="home_btn">Login/Register</button>
-        <button *ngIf="!authenticatedUser" (click)='goToMealPlanner()' class="home_btn">Take me to Meal Planner</button>
+      <div class="d-flex justify-content-center">
+        <button *ngIf="!authenticatedUser.loggedIn" (click)='goToLoginOrRegister()' class="home_btn">Login/Register</button>
+        <button *ngIf="!authenticatedUser.loggedIn" (click)='continueAsGuest()' class="home_btn">Continue as Guest</button>
+        <button *ngIf="authenticatedUser.loggedIn" (click)='goToMealPlanner()' class="home_btn">Go to Meal Planner</button>
+      </div>  
     </div>
 		<img src="../../../assets/images/background.jpg" alt="meal optimizer">
   </div>
