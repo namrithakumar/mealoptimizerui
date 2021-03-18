@@ -54,7 +54,7 @@ export class UserService {
 
         authenticatedUserBuilder.setLoggedIn(isLoggedIn);
         authenticatedUserBuilder.setToken(token);
-
+        
         return authenticatedUserBuilder.build();
     }
 
