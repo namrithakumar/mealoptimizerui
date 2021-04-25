@@ -5,6 +5,7 @@ import { AppState } from '../store/reducers/app.reducer';
 import { Store } from '@ngrx/store';
 import { AuthenticatedUser } from '../user-mgmt/store/reducers/user-mgmt.reducer';
 import * as UserMgmtActions from '../user-mgmt/store/actions/user-mgmt.actions';
+import { KeycloakService } from 'keycloak-angular';
 
 @Component({
     selector: 'app-header',
@@ -15,7 +16,9 @@ export class HeaderComponent implements OnInit {
     
     authenticatedUser : User;
 
-    constructor(private store : Store<AppState>, private router: Router) {}
+    constructor(private store : Store<AppState>, 
+                private router: Router, 
+                private keyCloakService : KeycloakService) {}
 
     ngOnInit(){
         this.store.select('authenticatedUser').subscribe((authenticatedUser : AuthenticatedUser) => {
@@ -27,12 +30,12 @@ export class HeaderComponent implements OnInit {
         this.router.navigate(['/meal-optimizer'], { queryParams: {mode: 'create'} });
     }
 
-    viewOrModifyProfile() : void {
-        this.router.navigate(['/user-mgmt','user','user-profile'], { queryParams: {mode: 'view'} });
-    }
-
     logout() : void {
+
+        //Clear User state
         this.store.dispatch(new UserMgmtActions.Logout());
-        this.router.navigate(['/app-info','home']);
+        
+        //Logout of Keycloak
+        this.keyCloakService.logout('http://localhost:4200/app-info/home');
     }
 }

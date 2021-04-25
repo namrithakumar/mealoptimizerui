@@ -12,19 +12,16 @@
               <a class="nav-link" routerLink="/app-info/contact-us">Contact us</a>
           </li>
           <li class="nav-item active">
-              <a class="nav-link" routerLink="/user-mgmt/login" [hidden] = "authenticatedUser">Register/Login</a>
+              <a class="nav-link" [routerLink]="['/meal-planner', { outlets : { 'mealoptimizer' : ['meal-optimizer'] } }]" [queryParams] = "{ optimizermode : 'create' }" [hidden] = "authenticatedUser.loggedIn">Register/Login</a>
           </li>
           <li class="nav-item">
               <a class="nav-link" [routerLink]="['/meal-planner', { outlets : { 'mealoptimizer' : ['meal-optimizer'] } }]" [queryParams] = "{ optimizermode : 'create' }">Meal Planner</a>
           </li>
-          <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  {{ authenticatedUser? authenticatedUser.username : 'Guest' }}
-              </a>
-              <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown" [hidden] = "!authenticatedUser">
-                  <a class="dropdown-item" (click)="viewOrModifyProfile()">Profile</a>
-                  <a class="dropdown-item" (click)="logout()">Logout</a>
-              </div>
+          <li class="nav-item">
+              <a *ngIf="authenticatedUser.loggedIn; else loggedOut" class="nav-link" (click)="logout()">Logout</a>
+              <ng-template #loggedOut>
+                  <a [routerLink]="['/meal-planner', { outlets : { 'mealoptimizer' : ['meal-optimizer'] } }]" [queryParams] = "{ optimizermode : 'create' }" class="nav-link">Guest</a>
+              </ng-template>    
           </li>
       </ul>
   </div>

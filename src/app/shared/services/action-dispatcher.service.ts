@@ -30,17 +30,7 @@ export class ActionDispatcher {
                                     let itemNames : Array<String> = request.params.map.get('names');
                                     this.store.dispatch(new RecipeActions.FetchRecipesStart(itemNames));
                                     break;
-                                 }
-            case 'user-login' : {
-                                    let loginRequest = request.body;
-                                    this.store.dispatch(new UserMgmtActions.LoginStart(loginRequest));
-                                    break;
-                                }                     
-            case 'user-register' : {
-                                    let signupReq = request.body;
-                                    this.store.dispatch(new UserMgmtActions.SignupStart(signupReq));
-                                    break;
-                                    }                   
+                                 }                
         }
         return;
     }    

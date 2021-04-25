@@ -1,16 +1,17 @@
 import { Injectable } from "@angular/core";
 import { Observable, throwError } from "rxjs";
-import { UserSignUpRequest } from "../model/user-signup-request.model";
 import { catchError } from "rxjs/operators";
 import { Nutrient } from "../model/nutrient.model";
 import { HttpClient } from '@angular/common/http';
-import { Router } from '@angular/router';
-import { JwtHelperService } from '@auth0/angular-jwt';
+import { UserBuilder } from "../model/user-builder.model";
+import { KeycloakService } from "keycloak-angular";
+import { User } from "../model/user.model";
 
 @Injectable({ providedIn : 'root' })
 export class UserService {
  
-    constructor(private http : HttpClient, private router : Router, private jwtHelper:JwtHelperService) {}
+    constructor(private http : HttpClient, 
+                private keycloakService : KeycloakService) {}
 
     fetchAllUsernames() : Observable<Array<String>> {
         const url = 'http://localhost:9090/mealoptimizer/user/fetchAllUsernames';
@@ -33,13 +34,6 @@ export class UserService {
         return defaultNutrients;
     }
 
-    createUserSignupRequest(userSignupInputs) : UserSignUpRequest {
-        //userSignupInputs.nutrients is an array of objects
-        let minMaxNutrientLimits = this.parseNutrientLimits(userSignupInputs.nutrients);
-        let usersignupReq = new UserSignUpRequest(userSignupInputs.signupInfo.username, userSignupInputs.signupInfo.password, userSignupInputs.signupInfo.email, userSignupInputs.preferredDietType, minMaxNutrientLimits.nutrientMinLimits, minMaxNutrientLimits.nutrientMinLimits);
-        return usersignupReq;
-    }
-
     // The nutrient min-max elements for each user is stored as { nutrientName, min, max }
     // We split it into 2 separate objects - { nutrientName, min } and { nutrientName, max} to mae it easier to handle. 
     private parseNutrientLimits(limitInfo : { name: String, min:number, max:number}[]) :  { nutrientMinLimits : {}, nutrientMaxLimits: {}} {
@@ -51,5 +45,25 @@ export class UserService {
         });
         //return { nutrientMinLimits : this.convertMapToObj(nutrientMinLimitMap), nutrientMaxLimits: this.convertMapToObj(nutrientMaxLimitMap)};
         return { nutrientMinLimits : Object.fromEntries(nutrientMinLimitMap), nutrientMaxLimits: Object.fromEntries(nutrientMaxLimitMap)};
+    }
+
+    async parseAuthenticatedUserDetails() : Promise<User> {
+        let authenticatedUserBuilder : UserBuilder = new UserBuilder(this.keycloakService.getUsername());
+        let isLoggedIn = await this.keycloakService.isLoggedIn();
+        let token = await this.keycloakService.getToken();
+
+        authenticatedUserBuilder.setLoggedIn(isLoggedIn);
+        authenticatedUserBuilder.setToken(token);
+        
+        return authenticatedUserBuilder.build();
+    }
+
+    async parseUserProfile() : Promise<User> {
+        let userProfile = await this.keycloakService.loadUserProfile();
+        return new UserBuilder(userProfile.username)
+                        .setFirstName(userProfile.firstName)
+                        .setLastName(userProfile.lastName)
+                        .setEmail(userProfile.email)
+                        .build();
     }
 }

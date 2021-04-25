@@ -32,7 +32,7 @@
 
 .home_text p {
   z-index: 1;
-  margin-bottom: 2.2em;
+  margin-bottom: 1em;
   line-height: 1.5;
   text-align: center;
 }
@@ -51,8 +51,8 @@
   background-color: whitesmoke;
   padding: 0.625em;
   border-radius: 4px;
-  margin: 0 auto;
-  display: block;
+  margin: 1em 2em;
+  display: inline;
 }
 
 @media only screen and (max-width: 1026px) {
@@ -63,6 +63,9 @@
     text-align: left;
   }
   .home_btn {
-    margin: 0 0;
+    margin: 1em;
+  }
+  .home_text h1 {
+    font-size: 50px;
   }
 }

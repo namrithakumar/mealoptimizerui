@@ -4,6 +4,18 @@
     }
 }
 
+@media only screen and (max-width: 440px) {
+  #calendar {
+    font-size: 0.7em;
+  } 
+}
+
+@media only screen and (max-width: 300px) {
+  #calendar {
+    font-size: 0.4em;
+  } 
+}
+
 @media only screen and (min-width: 960px) {
   .custom-cal-width {
       width: 100% !important;
