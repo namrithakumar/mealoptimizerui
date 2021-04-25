@@ -15,7 +15,6 @@ import { OrderEffects } from '../app/meal-planner/meal-optimizer/store/effects/o
 import { RecipesEffects } from '../app/meal-planner/recipes/store/effects/recipes.effects';
 import { HeaderComponent } from './header/header.component';
 import { AppInfoModule } from '../app/app-info/app-info.module';
-import { UserMgmtModule } from '../app/user-mgmt/user-mgmt.module';
 import { MealPlannerModule } from '../app/meal-planner/meal-planner.module';
 import { CoreModule } from '../app/shared/core/core.module';
 import { interceptorProviders } from '../app/shared/services/interceptor/interceptors';
@@ -31,7 +30,6 @@ import { initializeKeycloak } from '../app/shared/app.init';
   imports: [
     AppInfoModule,
     CoreModule,
-    UserMgmtModule,
     MealPlannerModule,
     BrowserModule,
     AppRoutingModule,
