@@ -13,6 +13,7 @@ const defaultUser : AuthenticatedUser = {
 };
 
 export function userMgmtReducer(state : AuthenticatedUser = defaultUser, action : UserMgmtActions.UserMgmtActions) : AuthenticatedUser {
+    
     switch(action.type) {
         
         case UserMgmtActions.LOGIN_SUCCESS :
@@ -26,6 +27,7 @@ export function userMgmtReducer(state : AuthenticatedUser = defaultUser, action 
                      user : new UserBuilder('guest').setLoggedIn(false).build(), 
                      error : null};
 
-        default : return state;
+        default : 
+            return state;
     }
 }
