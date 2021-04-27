@@ -22,7 +22,7 @@ export class ConnectionStatusInterceptor implements HttpInterceptor {
         //We use [] to accomodate future changes.
         let result = request.url.match(/.*mealoptimizer\/([a-z]+\/[a-z]+)/) || [];
         let tag = result[1].replace('/', '-');
-        
+
         //If network connection is available, proceed with handling the request
         if(this.connectionStatusHandlerService.getConnectionStatus()) {
             return next.handle(request);
