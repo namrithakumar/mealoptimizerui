@@ -20,7 +20,7 @@
           <li class="nav-item">
               <a *ngIf="authenticatedUser.loggedIn; else loggedOut" class="nav-link" (click)="logout()">Logout</a>
               <ng-template #loggedOut>
-                  <a [routerLink]="['/meal-planner', { outlets : { 'mealoptimizer' : ['meal-optimizer'] } }]" [queryParams] = "{ optimizermode : 'create' }" class="nav-link">Guest</a>
+                  <a routerLink="/meal-planner/meal-optimizer/user-redirect" class="nav-link">Guest</a>
               </ng-template>    
           </li>
       </ul>
