@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { KeycloakService } from 'keycloak-angular';
+
 import { User } from 'src/app/shared/model/user.model';
 import { AppState } from 'src/app/store/reducers/app.reducer';
 import { AuthenticatedUser } from 'src/app/user-mgmt/store/reducers/user-mgmt.reducer';
@@ -25,13 +25,15 @@ export class HomeComponent implements OnInit {
   }
 
   //Displayed if user has not logged in
+  //If the user wants to login, display an intermediate auth-redirect page (this page in turn will redirect to keycloak authentication)
   goToLoginOrRegister() : void {
-    this.router.navigate(['/meal-planner', { outlets: { mealoptimizer : ['meal-optimizer'] } }], { queryParams: {optimizermode: 'create'} });
+    this.router.navigateByUrl('/meal-planner/meal-optimizer/user-redirect');
   }
 
   //Displayed if user has not logged in
+  //If the user wants to continue as guest, redirect to meal-planner homepage. No intermediate auth-redirect page is required.
   continueAsGuest() : void {
-    console.log('Code to be written to continue as unauthenticated guest'); 
+    this.router.navigate(['/meal-planner', { outlets: { mealoptimizer : ['meal-optimizer'] } }], { queryParams: {optimizermode: 'create'} });
   }
 
   //Displayed if user has logged in

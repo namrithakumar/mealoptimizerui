@@ -16,6 +16,7 @@ import { RecipesEffects } from '../app/meal-planner/recipes/store/effects/recipe
 import { HeaderComponent } from './header/header.component';
 import { AppInfoModule } from '../app/app-info/app-info.module';
 import { MealPlannerModule } from '../app/meal-planner/meal-planner.module';
+import { UserMgmtModule } from '../app/user-mgmt/user-mgmt.module';
 import { CoreModule } from '../app/shared/core/core.module';
 import { interceptorProviders } from '../app/shared/services/interceptor/interceptors';
 import { KeycloakAngularModule, KeycloakService } from 'keycloak-angular';
@@ -31,6 +32,7 @@ import { initializeKeycloak } from '../app/shared/app.init';
     AppInfoModule,
     CoreModule,
     MealPlannerModule,
+    UserMgmtModule,
     BrowserModule,
     AppRoutingModule,
     OverlayModule,

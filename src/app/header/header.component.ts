@@ -3,8 +3,8 @@ import { Router } from '@angular/router';
 import { User } from '../shared/model/user.model';
 import { AppState } from '../store/reducers/app.reducer';
 import { Store } from '@ngrx/store';
-import { AuthenticatedUser } from '../user-mgmt/store/reducers/user-mgmt.reducer';
-import * as UserMgmtActions from '../user-mgmt/store/actions/user-mgmt.actions';
+import { AuthenticatedUser } from 'src/app/user-mgmt/store/reducers/user-mgmt.reducer';
+import * as UserMgmtActions from 'src/app/user-mgmt/store/actions/user-mgmt.actions';
 import { KeycloakService } from 'keycloak-angular';
 
 @Component({

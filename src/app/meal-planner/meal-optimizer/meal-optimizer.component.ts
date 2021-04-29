@@ -8,11 +8,6 @@ import { Action, Store } from '@ngrx/store';
 import * as UserPreferencesActions from './store/actions/user-preferences.actions';
 import * as MenuActions from './store/actions/menu.actions';
 import * as OrderActions from './store/actions/order.actions';
-import { KeycloakService } from 'keycloak-angular';
-import { AuthenticationResponseHandler } from '../../shared/services/response-handler/authentication-response-handler';
-import { User } from 'src/app/shared/model/user.model';
-import { UserBuilder } from 'src/app/shared/model/user-builder.model';
-import { UserService } from 'src/app/shared/services/user.service';
 
 //This component handles routing, link to optimizationService via controller
 @Component({
@@ -23,9 +18,7 @@ import { UserService } from 'src/app/shared/services/user.service';
 export class MealOptimizerComponent implements OnInit, CanComponentDeactivate {
 
   constructor(private route: ActivatedRoute, 
-              private store : Store<AppState>, 
-              private authenticationResponseHandler : AuthenticationResponseHandler,
-              private userService : UserService) {
+              private store : Store<AppState>) {
   }
 
   dietTypes : Array<IUserDietType>;
@@ -34,11 +27,6 @@ export class MealOptimizerComponent implements OnInit, CanComponentDeactivate {
     this.route.data.subscribe(data => {
       this.dietTypes = data['userDietTypes'];
     });
-
-    //This page is loaded only when user authentication on Keycloak is successful. Hence log the username + token
-    this.userService.parseAuthenticatedUserDetails()
-                    .then((authenticatedUser) => this.authenticationResponseHandler.handleSuccess(authenticatedUser))
-                    .catch((error) => this.authenticationResponseHandler.handleFailure(error));
 }
 
   canDeactivate() : Observable<boolean> | Promise<boolean> | boolean {

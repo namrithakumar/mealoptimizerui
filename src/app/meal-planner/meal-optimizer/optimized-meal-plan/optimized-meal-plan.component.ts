@@ -80,7 +80,8 @@ export class OptimizedMealPlanComponent implements OnInit, OnDestroy {
                                           this.optimizationError = optimizedMealPlans.error;
                                         }
                                         else {
-                                          //If there is no error
+                                          //If there is no error, clear existing error first
+                                          this.optimizationError = null;
                                           if(optimizedMealPlans.mealPlans) {  
                                             let optimizationState = optimizedMealPlans.mealPlans.optimizationState;
                                             //Check if optimization was successful - one of the below 3 states
