@@ -36,6 +36,6 @@ export class HeaderComponent implements OnInit {
         this.store.dispatch(new UserMgmtActions.Logout());
         
         //Logout of Keycloak
-        this.keyCloakService.logout('http://localhost:4200/app-info/home');
+        this.keyCloakService.logout('http://localhost:80/app-info/home');
     }
 }
