@@ -14,7 +14,7 @@ export class UserService {
                 private keycloakService : KeycloakService) {}
 
     fetchAllUsernames() : Observable<Array<String>> {
-        const url = 'http://localhost:9090/mealoptimizer/user/fetchAllUsernames';
+        const url = '/mealoptimizer/user/fetchAllUsernames';
         return this.http.get<String[]>(url).pipe(
             catchError((errorRes : any) => {
                 return throwError(errorRes.error.error + errorRes.error.message);

@@ -19,7 +19,7 @@ export class MenuEffects {
     fetchMenuFromBackend = this.actions$.pipe(
         ofType<MenuActions.UpdateMenuStart>(MenuActions.UPDATE_MENU_START),
         switchMap((updateMenuAction : MenuActions.UpdateMenuStart) => {
-            return this.http.get<String[]>(`${environment.hostUrl}:${environment.port}/${environment.applicationName}/menu/find`,
+            return this.http.get<String[]>(`${environment.hostUrl}/${environment.applicationName}/menu/find`,
                 {
                     'params' : new HttpParams().set('category', updateMenuAction.payload.toString())
                 }).pipe(share(),
