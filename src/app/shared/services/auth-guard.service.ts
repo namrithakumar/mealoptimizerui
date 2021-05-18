@@ -30,7 +30,7 @@ export class AuthGuardService extends KeycloakAuthGuard {
             
       //NOTE: For future reference Request triggered from : window.location.origin + state.url);
       await this.keycloak.login({
-        redirectUri: 'http://www.mealplanner.com:80/#/meal-planner/meal-optimizer/user-redirect'
+        redirectUri: `${environment.apiUrl}:80/#/meal-planner/meal-optimizer/user-redirect`
       });
     }
 
