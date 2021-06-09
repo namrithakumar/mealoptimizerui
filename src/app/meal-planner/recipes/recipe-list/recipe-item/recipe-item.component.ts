@@ -1,7 +1,9 @@
 import { Component, OnInit, Input, OnDestroy } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
 import { Recipe } from 'src/app/shared/model/recipe.model';
-import { RecipeService } from 'src/app/shared/services/recipe.service';
+
+import { Store } from '@ngrx/store';
+import { AppState } from 'src/app/store/reducers/app.reducer';
+import * as UserDisplayPreferencesActions from '../../../../user-mgmt/store/actions/user-display-preferences.actions';
 
 @Component({
   selector: 'app-recipe-item',
@@ -15,19 +17,14 @@ export class RecipeItemComponent implements OnInit, OnDestroy {
 
   @Input() indexOfRecipe: number;
 
-  constructor(private router : Router, 
-              private route : ActivatedRoute,
-              private recipeService : RecipeService) { }
+  constructor(private store : Store<AppState>) { }
 
   ngOnInit(): void {
   }
 
   onItemSelect() : void {
-    this.recipeService.recipeSelected.next(true);    
-    this.router.navigate([ 'meal-planner' , { outlets : { mealoptimizer : 'meal-optimizer', recipes : [ 'recipes' , this.indexOfRecipe ] } }] , { queryParams : this.route.snapshot.queryParams });
+    this.store.dispatch(new UserDisplayPreferencesActions.ShowRecipeDetail({ id: this.indexOfRecipe, name : this.recipe.name}));
   }
 
-  ngOnDestroy() : void {
-    this.recipeService.recipeSelected.complete();
-  }
+  ngOnDestroy() : void { }
 }

@@ -27,17 +27,17 @@ export class HomeComponent implements OnInit {
   //Displayed if user has not logged in
   //If the user wants to login, display an intermediate auth-redirect page (this page in turn will redirect to keycloak authentication)
   goToLoginOrRegister() : void {
-    this.router.navigateByUrl('/meal-planner/meal-optimizer/user-redirect');
+    this.router.navigateByUrl('/meal-planner/user-redirect');
   }
 
   //Displayed if user has not logged in
   //If the user wants to continue as guest, redirect to meal-planner homepage. No intermediate auth-redirect page is required.
   continueAsGuest() : void {
-    this.router.navigate(['/meal-planner', { outlets: { mealoptimizer : ['meal-optimizer'] } }], { queryParams: {optimizermode: 'create'} });
+    this.router.navigate(['/meal-planner']);
   }
 
   //Displayed if user has logged in
   goToMealPlanner() : void {
-    this.router.navigate(['/meal-planner', { outlets: { mealoptimizer : ['meal-optimizer'] } }], { queryParams: {optimizermode: 'create'} });
+    this.router.navigate(['/meal-planner']);
   }
 }

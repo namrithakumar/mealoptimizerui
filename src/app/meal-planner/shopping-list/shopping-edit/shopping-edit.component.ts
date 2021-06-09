@@ -7,6 +7,9 @@ import { ShoppingItem } from '../../../shared/model/shopping-item-model';
 import * as ShoppingListActions from '../store/shopping-list.actions';
 import * as fromApp from '../../../store/reducers/app.reducer';
 import { ActivatedRoute, Router } from '@angular/router';
+import * as UserDisplayPreferencesActions from '../../../user-mgmt/store/actions/user-display-preferences.actions';
+import { UserDisplayPreferences } from 'src/app/user-mgmt/store/reducers/user-display-preferences.reducer';
+import { ShoppingListMode } from 'src/app/shared/shopping-list-mode.enum';
 
 @Component({
   selector: 'app-shopping-edit',
@@ -18,20 +21,19 @@ export class ShoppingEditComponent implements OnInit, OnDestroy {
   @ViewChild('f', { static: false }) slForm: NgForm;
   
   subscription: Subscription;
-  mode : String = 'Add';
+  mode : String = ShoppingListMode.ADD;
   editedItem: ShoppingItem = null;
 
   defaultLabel : String = 'Added by user';
 
-  constructor(
-    private store: Store<fromApp.AppState>, private router : Router, private route : ActivatedRoute
-  ) {}
+  constructor(private store: Store<fromApp.AppState>) {}
 
   ngOnInit() {
 
     // Get value of mode (create or update)
-    this.route.queryParams.subscribe((queryParams : String) => {
-      this.mode = queryParams['shoppinglistmode'];
+    this.store.select('userDisplayPreferences').subscribe((userDisplayPreferences : UserDisplayPreferences) => {
+      
+      this.mode = userDisplayPreferences.shoppingListMode;
     });
 
     this.subscription = this.store
@@ -44,17 +46,7 @@ export class ShoppingEditComponent implements OnInit, OnDestroy {
             amount: this.editedItem.amount,
             measure: this.editedItem.measure
           });
-          this.router.navigate([],{
-            relativeTo : this.route,
-            queryParams : { shoppinglistmode: 'update' },
-            queryParamsHandling : 'merge'
-          });
-        } else {
-          this.router.navigate([],{
-            relativeTo : this.route,
-            queryParams : { shoppinglistmode: 'add' },
-            queryParamsHandling : 'merge'
-          });
+          this.store.dispatch(new UserDisplayPreferencesActions.UpdateShoppingListMode(ShoppingListMode.UPDATE));
         }
       });
   }
@@ -76,24 +68,16 @@ export class ShoppingEditComponent implements OnInit, OnDestroy {
       //Create the ingredient to be added
       newIngredient = new ShoppingItem(value.name, value.amount, value.measure, [this.defaultLabel]);
       this.store.dispatch(new ShoppingListActions.AddIngredient(newIngredient));
-    }    
-    this.router.navigate([],{
-      relativeTo : this.route,
-      queryParams : { shoppinglistmode: 'add' },
-      queryParamsHandling : 'merge'
-    });
-    this.mode = 'add';
+    }
+    this.store.dispatch(new UserDisplayPreferencesActions.UpdateShoppingListMode(ShoppingListMode.ADD));
+    this.mode = ShoppingListMode.ADD;
     form.reset();
   }
 
   onClear() {
     this.slForm.reset();
     this.store.dispatch(new ShoppingListActions.StopEdit());
-    this.router.navigate([],{
-      relativeTo : this.route,
-      queryParams : { shoppinglistmode: 'add' },
-      queryParamsHandling : 'merge'
-    });
+    this.store.dispatch(new UserDisplayPreferencesActions.UpdateShoppingListMode(ShoppingListMode.ADD));
   }
 
   onDelete() {

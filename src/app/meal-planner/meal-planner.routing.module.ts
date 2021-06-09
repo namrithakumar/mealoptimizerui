@@ -12,13 +12,8 @@ import { MealPlannerComponent } from './meal-planner.component';
 import { ShoppingListComponent } from './shopping-list/shopping-list.component';
 
 const mealPlannerRoutes : Routes = [
-    {path:'meal-planner', component: MealPlannerComponent, children: [
-        {path:'meal-optimizer', outlet:'mealoptimizer', canDeactivate: [CanExitPageService], component: MealOptimizerComponent, resolve:{userDietTypes: UseDietTypeResolver}},
-        {path:'recipes', outlet:'recipes', component: RecipesComponent, children: [
-            {path:':id', component: RecipeDetailComponent} ]},
-        {path:'online-order', outlet:'onlineorder', component : OnlineOrderComponent},
-        {path:'shopping-list', outlet:'shoppinglist', component : ShoppingListComponent}
-    ]}];
+    {path:'meal-planner', component: MealPlannerComponent, canDeactivate: [CanExitPageService], resolve:{userDietTypes: UseDietTypeResolver}}
+];
 
 @NgModule({
     imports: [RouterModule.forChild(mealPlannerRoutes)],

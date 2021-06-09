@@ -1,13 +1,13 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { Subscription, Observable } from 'rxjs';
 import { Store } from '@ngrx/store';
+import { ActivatedRoute, Router } from '@angular/router';
 
 import { ShoppingItem } from '../../shared/model/shopping-item-model';
 import * as ShoppingListActions from './store/shopping-list.actions';
 import * as fromApp from '../../../app/store/reducers/app.reducer';
 import { ShoppingList } from './store/shopping-list.reducer';
-import { ActivatedRoute, Router, RoutesRecognized } from '@angular/router';
-import { filter } from 'rxjs/operators';
+import { ShoppingListMode } from 'src/app/shared/shopping-list-mode.enum';
+import * as UserDisplayPreferencesActions from '../../user-mgmt/store/actions/user-display-preferences.actions';
 
 @Component({
   selector: 'app-shopping-list',
@@ -21,9 +21,7 @@ export class ShoppingListComponent implements OnInit, OnDestroy {
   shoppingItems: ShoppingItem[];
 
   constructor(
-    private store: Store<fromApp.AppState>,
-    private router : Router,
-    private route : ActivatedRoute
+    private store: Store<fromApp.AppState>
   ) {}
 
   ngOnInit() {
@@ -34,11 +32,7 @@ export class ShoppingListComponent implements OnInit, OnDestroy {
 
   onEditItem(index: number) {
     this.store.dispatch(new ShoppingListActions.StartEdit(index));
-    this.router.navigate([],{
-      relativeTo : this.route,
-      queryParams : { shoppinglistmode: 'update' },
-      queryParamsHandling : 'merge'
-    });
+    this.store.dispatch(new UserDisplayPreferencesActions.UpdateShoppingListMode(ShoppingListMode.UPDATE));
   }
 
   ngOnDestroy() { }

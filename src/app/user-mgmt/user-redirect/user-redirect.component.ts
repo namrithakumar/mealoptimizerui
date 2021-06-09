@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Router, UrlTree } from '@angular/router';
+import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { ActivatedRoute } from '@angular/router';
 
 import { AuthenticationResponseHandler } from '../../shared/services/response-handler/authentication-response-handler';
 import { User } from 'src/app/shared/model/user.model';
@@ -22,8 +21,7 @@ export class UserRedirectComponent implements OnInit {
     private authenticationResponseHandler : AuthenticationResponseHandler,
     private userService : UserService,
     private store : Store<AppState>,
-    private router: Router,
-    private route: ActivatedRoute) { }
+    private router: Router) { }
 
   ngOnInit(): void {
     
@@ -37,7 +35,7 @@ export class UserRedirectComponent implements OnInit {
         });
         
         setTimeout(()=>{
-          this.router.navigateByUrl('/meal-planner/(mealoptimizer:meal-optimizer)?optimizermode=create');
+          this.router.navigateByUrl('/meal-planner');
         },3000);
   }
 }

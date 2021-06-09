@@ -6,6 +6,7 @@ export const FETCH_RECIPES_START = '[Recipes] FETCH_RECIPES_START';
 export const FETCH_RECIPES_SUCCESS = '[Recipes] FETCH_RECIPES_SUCCESS';
 export const FETCH_RECIPES_FAIL = '[Recipes] FETCH_RECIPES_FAIL';
 export const UPDATE_REQUEST_STATUS = '[Recipes] UPDATE_REQUEST_STATUS';
+export const CLEAR_RECIPES = '[Recipes] CLEAR_RECIPES';
 
 export class FetchRecipesStart implements Action {
     readonly type = FETCH_RECIPES_START;
@@ -27,4 +28,8 @@ export class UpdateRequestStatus implements Action {
     constructor(public payload : HttpRequestStatus) {}
 }
 
-export type RecipesActions = FetchRecipesStart | FetchRecipesSuccess | FetchRecipesFail | UpdateRequestStatus;
+export class ClearRecipes implements Action {
+    readonly type = CLEAR_RECIPES;
+}
+
+export type RecipesActions = FetchRecipesStart | FetchRecipesSuccess | FetchRecipesFail | UpdateRequestStatus | ClearRecipes;

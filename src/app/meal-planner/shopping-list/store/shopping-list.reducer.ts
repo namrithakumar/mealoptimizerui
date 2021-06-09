@@ -84,6 +84,9 @@ export function shoppingListReducer(
         editedshoppingItemIndex: -1
       };
     
+    case ShoppingListActions.CLEAR_SHOPPING_LIST:
+      return defaultShoppingList;
+             
     default:
       return state;
   }

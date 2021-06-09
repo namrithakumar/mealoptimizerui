@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { ActivatedRoute, Params, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 
 import { RecipeService } from 'src/app/shared/services/recipe.service';
@@ -11,6 +11,8 @@ import { Recipe } from 'src/app/shared/model/recipe.model';
 import { Ingredient } from 'src/app/shared/model/ingredient.model';
 
 import * as ShoppingListActions from '../../shopping-list/store/shopping-list.actions';
+import * as UserDisplayPreferencesActions from '../../../user-mgmt/store/actions/user-display-preferences.actions';
+import { UserDisplayPreferences } from 'src/app/user-mgmt/store/reducers/user-display-preferences.reducer';
 
 @Component({
   selector: 'app-recipe-detail',
@@ -39,22 +41,24 @@ export class RecipeDetailComponent implements OnInit, OnDestroy {
     });
 
     /*
-     * When /meal-planner/recipes/recipeID is loaded, select the recipe based on the ID. 
+     * Select the recipe based on the ID and name. 
      */
-    this.route.params.subscribe((params : Params) => {
-      this.id = +params['id'];
-      console.log('Recipe ID ' + this.id);
-      this.recipeSelected = this.recipeService.getRecipeById(this.id);
-      this.noOfPortions = this.optimizationService.getPortionCountByOptimizationTypeMealName(this.optimizationTypeSelected, this.recipeSelected.name);
-  });
+    this.store.select('userDisplayPreferences').subscribe((userDisplayPreferences : UserDisplayPreferences) => {
+      if(userDisplayPreferences.recipeSelected != null) {
+        this.id = userDisplayPreferences.recipeSelected.id;
+        this.recipeSelected = this.recipeService.getRecipeById(this.id);
+        this.noOfPortions = this.optimizationService.getPortionCountByOptimizationTypeMealName(this.optimizationTypeSelected, this.recipeSelected.name);
+      }
+    });
   }
 
-  constructor(private route: ActivatedRoute, private recipeService: RecipeService, private optimizationService : OptimizationService, private router : Router, private store : Store<AppState>) {}
+  constructor(private recipeService: RecipeService, private optimizationService : OptimizationService, private router : Router, private store : Store<AppState>) {}
 
   /*
-   * When 'Add to Shopping List' is clicked, add named router-outlet shoppinglist, and dispatch a ShoppingList action.
+   * When 'Add to Shopping List' is clicked, show shopping list section, and dispatch a ShoppingList action.
    */
   onAddToShoppingList(): void {
+    this.store.dispatch(new UserDisplayPreferencesActions.ShowShoppingList());
     this.shoppingItems = new Array<ShoppingItem>();
     this.recipeSelected.ingredients.forEach((ingredient : Ingredient) => {
       this.shoppingItems.push(
@@ -65,8 +69,6 @@ export class RecipeDetailComponent implements OnInit, OnDestroy {
       ));
     });
     this.store.dispatch(new ShoppingListActions.AddIngredients(this.shoppingItems));
-    //id can either be taken from the current route or from this.id in this component.
-    this.router.navigate([ 'meal-planner' , { outlets : { mealoptimizer : 'meal-optimizer', recipes : ['recipes', this.route.snapshot.params['id']], shoppinglist : 'shopping-list' } }], { queryParams : { shoppinglistmode : 'add' }, queryParamsHandling : 'merge' });
   }
 
   ngOnDestroy() {}

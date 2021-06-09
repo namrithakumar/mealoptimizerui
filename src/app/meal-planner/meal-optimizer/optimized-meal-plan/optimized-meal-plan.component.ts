@@ -5,6 +5,7 @@ import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/store/reducers/app.reducer';
 import { UserPreferences } from '../store/reducers/user-preferences.reducer';
 import * as RecipesActions from '../../../meal-planner/recipes/store/actions/recipes.actions';
+import * as UserDisplayPreferencesActions from '../../../user-mgmt/store/actions/user-display-preferences.actions';
 import { OptimizedMealPlans } from '../store/reducers/order.reducer';
 import { HttpRequestStatus } from 'src/app/shared/http-request-status.enum';
 import { Meal } from 'src/app/shared/model/order-response.model';
@@ -112,11 +113,9 @@ export class OptimizedMealPlanComponent implements OnInit, OnDestroy {
   }
 
   getRecipeSelected() {
+    this.store.dispatch(new UserDisplayPreferencesActions.ShowRecipes());
     this.store.dispatch(new RecipesActions.UpdateRequestStatus(HttpRequestStatus.REQUEST_SENT));
     this.store.dispatch(new RecipesActions.FetchRecipesStart(this.userPreferences.mealSelected));
-    this.router.navigate([ 'meal-planner' , 
-                         { outlets : { mealoptimizer : 'meal-optimizer', recipes : ['recipes'] } }] , 
-                         { queryParams : this.route.snapshot.queryParams });
   }
 
   get allowUserToPlaceOrderOrGetRecipe() : boolean {

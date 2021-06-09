@@ -1,4 +1,3 @@
-    <router-outlet name="mealoptimizer"></router-outlet>
-    <router-outlet name="recipes"></router-outlet>
-    <router-outlet name="onlineorder"></router-outlet>
-    <router-outlet name="shoppinglist"></router-outlet>
+<app-meal-optimizer [dietTypes]='dietTypes'></app-meal-optimizer>
+<app-recipes *ngIf="showRecipes"></app-recipes>
+<app-shopping-list *ngIf="showShoppingList"></app-shopping-list>

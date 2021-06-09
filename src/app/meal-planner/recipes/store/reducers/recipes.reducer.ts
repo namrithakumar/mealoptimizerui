@@ -25,6 +25,9 @@ export function recipesReducer(state : Recipes = defaultRecipes, action : Recipe
 
         case RecipesActions.UPDATE_REQUEST_STATUS:
             return { ...state, requestStatus : action.payload };
+              
+        case RecipesActions.CLEAR_RECIPES:
+            return defaultRecipes;
                 
         default : return state;
     }

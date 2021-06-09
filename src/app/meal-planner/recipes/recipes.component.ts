@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
+
 import { DefaultMessages } from 'src/app/shared/default-messages';
 import { HttpRequestStatus } from 'src/app/shared/http-request-status.enum';
 import { Recipe } from 'src/app/shared/model/recipe.model';
-import { RecipeService } from 'src/app/shared/services/recipe.service';
 import { AppState } from 'src/app/store/reducers/app.reducer';
 import { Recipes } from './store/reducers/recipes.reducer';
+import { UserDisplayPreferences } from 'src/app/user-mgmt/store/reducers/user-display-preferences.reducer';
 
 @Component({
   selector: 'app-recipes',
@@ -28,7 +29,7 @@ export class RecipesComponent implements OnInit {
 
   recipeSelected : boolean = false;
 
-  constructor(private store : Store<AppState>, private recipeService : RecipeService) {}
+  constructor(private store : Store<AppState>) {}
 
   ngOnInit(): void {
     
@@ -48,8 +49,8 @@ export class RecipesComponent implements OnInit {
       }
     });
     
-    this.recipeService.recipeSelected.subscribe((recipeSelected : boolean) => {
-      this.recipeSelected = recipeSelected;
+    this.store.select('userDisplayPreferences').subscribe((userDisplayPreferences : UserDisplayPreferences) => {
+      this.recipeSelected = (userDisplayPreferences.recipeSelected !== null)?true:false;
     });
   }
 }

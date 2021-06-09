@@ -1,16 +1,20 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
+import { Store } from '@ngrx/store';
 
 import { OrderService } from 'src/app/shared/services/order.service';
 import { User } from 'src/app/shared/model/user.model';
 import { AppState } from 'src/app/store/reducers/app.reducer';
-import { Store } from '@ngrx/store';
 import { UserPreferences } from '../../store/reducers/user-preferences.reducer';
 import { AuthenticatedUser } from 'src/app/user-mgmt/store/reducers/user-mgmt.reducer';
-import * as OrderActions from '../../store/actions/order.actions';
 import { OptimizedMealPlans } from '../../store/reducers/order.reducer';
 import { OrderResponse } from 'src/app/shared/model/order-response.model';
 import { HttpRequestStatus } from 'src/app/shared/http-request-status.enum';
+import { OptimizationMode } from 'src/app/shared/optimization-mode.enum';
+import { UserDisplayPreferences } from 'src/app/user-mgmt/store/reducers/user-display-preferences.reducer';
+
+import * as OrderActions from '../../store/actions/order.actions';
+import * as UserDisplayPreferencesActions from '../../../../user-mgmt/store/actions/user-display-preferences.actions';
+import * as RecipeActions from '../../../recipes/store/actions/recipes.actions';
 
 @Component({
   selector: 'app-manage-meal-plan',
@@ -46,14 +50,12 @@ export class ManageMealPlanComponent implements OnInit, OnDestroy {
   mode : String;
 
   constructor(private store : Store<AppState>, 
-              private router : Router, 
-              private route:ActivatedRoute, 
               private orderService : OrderService) { }
 
   ngOnInit(): void {
         // Get value of mode (create or edit)
-        this.route.queryParams.subscribe((queryParams : String) => {
-          this.mode = queryParams['optimizermode'];
+        this.store.select('userDisplayPreferences').subscribe((userDisplayPreferences : UserDisplayPreferences) => {
+          this.mode = userDisplayPreferences.optimizationMode;
         });
 
         this.store.select('userPreferences').subscribe((userPrefs : UserPreferences) => {
@@ -78,10 +80,7 @@ export class ManageMealPlanComponent implements OnInit, OnDestroy {
               (optimizedMealPlans.mealPlans && 
                 (optimizedMealPlans.mealPlans.optimizationState === "DISTINCT" || optimizedMealPlans.mealPlans.optimizationState === "OPTIMAL" || optimizedMealPlans.mealPlans.optimizationState === "FEASIBLE"))) {
                   this.savedMealPlans = optimizedMealPlans.mealPlans;
-                  this.router.navigate([],{
-                    relativeTo : this.route,
-                    queryParams : { optimizermode: 'update' }
-                  });
+                  this.store.dispatch(new UserDisplayPreferencesActions.UpdateOptimizationMode(OptimizationMode.UPDATE));
             }
             else { 
               this.savedMealPlans = null;
@@ -107,6 +106,9 @@ export class ManageMealPlanComponent implements OnInit, OnDestroy {
      * only if the order has been saved atleast once, 
      * if the order has never been saved, the optimizer is in create mode. 
      */  
+    //Hide recipes section
+    this.store.dispatch(new UserDisplayPreferencesActions.HideRecipes());
+    this.store.dispatch(new RecipeActions.ClearRecipes());
     //Clear existing meal plans
     this.store.dispatch(new OrderActions.ClearOrder());
     if(this.orderService.verifyAllInputsAreReceived()) {
