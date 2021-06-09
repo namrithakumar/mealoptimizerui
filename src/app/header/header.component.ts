@@ -6,6 +6,7 @@ import { Store } from '@ngrx/store';
 import { AuthenticatedUser } from 'src/app/user-mgmt/store/reducers/user-mgmt.reducer';
 import * as UserMgmtActions from 'src/app/user-mgmt/store/actions/user-mgmt.actions';
 import { KeycloakService } from 'keycloak-angular';
+import { environment } from '../../environments/environment';
 
 @Component({
     selector: 'app-header',
@@ -36,6 +37,6 @@ export class HeaderComponent implements OnInit {
         this.store.dispatch(new UserMgmtActions.Logout());
         
         //Logout of Keycloak
-        this.keyCloakService.logout('http://localhost:4200/app-info/home');
+        this.keyCloakService.logout(`${environment.apiUrl}:80/`);
     }
 }

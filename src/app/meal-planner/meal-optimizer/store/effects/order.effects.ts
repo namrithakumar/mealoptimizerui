@@ -37,14 +37,14 @@ placeOrder = this.actions$.pipe(
     ofType<OrderActions.SaveOrderStart>(OrderActions.SAVE_ORDER_START),
     switchMap((createOrderAction : OrderActions.SaveOrderStart) => {
         /* 
-         * If the user is logged in, the url to get meal plan is `${environment.hostUrl}:${environment.port}/${environment.applicationName}/orders/user/save`
-         * If the user is not logged in (user is guest), the url to get meal plan is `${environment.hostUrl}:${environment.port}/${environment.applicationName}/orders/guest/compute`
+         * If the user is logged in, the url to get meal plan is `${environment.hostUrl}/${environment.applicationName}/orders/user/save`
+         * If the user is not logged in (user is guest), the url to get meal plan is `${environment.hostUrl}/${environment.applicationName}/orders/guest/compute`
          */
         if(this.authenticatedUser.loggedIn) {
-            this.url = `${environment.hostUrl}:${environment.port}/${environment.applicationName}/orders/user/save`;
+            this.url = `${environment.hostUrl}/${environment.applicationName}/orders/user/save`;
         }
         else {
-            this.url = `${environment.hostUrl}:${environment.port}/${environment.applicationName}/orders/guest/compute`;
+            this.url = `${environment.hostUrl}/${environment.applicationName}/orders/guest/compute`;
         }
 
         return this.http.post<OrderResponse>(this.url,

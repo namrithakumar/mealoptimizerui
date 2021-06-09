@@ -6,6 +6,7 @@ import {
 } from '@angular/router';
 import { KeycloakAuthGuard, KeycloakService } from 'keycloak-angular';
 import { ConnectionStatusHandlerService } from './connection-status-handler.service';
+import { environment } from '../../../environments/environment';
 
 @Injectable({
   providedIn: 'root',
@@ -26,7 +27,7 @@ export class AuthGuardService extends KeycloakAuthGuard {
     
     // Force the user to log in if currently unauthenticated.
     if (!this.authenticated) {
-      
+            
       //NOTE: For future reference Request triggered from : window.location.origin + state.url);
       await this.keycloak.login({
         redirectUri: 'http://localhost:4200/meal-planner/user-redirect'

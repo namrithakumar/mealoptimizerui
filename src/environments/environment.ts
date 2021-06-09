@@ -5,9 +5,9 @@
 // Usually the environments are local, dev, test, staging, pre prod and prod. Here we restrict to dev, test and prod.
 export const environment = {
   production: false,
-  hostUrl : 'http://localhost',
+  hostUrl : window.location.protocol + '//' + window.location.host,
+  apiUrl: '',
   applicationName : 'mealoptimizer',
-  port : 9090,
   envName : 'dev'
 };
 

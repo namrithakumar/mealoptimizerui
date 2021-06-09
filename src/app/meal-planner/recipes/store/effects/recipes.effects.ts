@@ -20,7 +20,7 @@ export class RecipesEffects {
     fetchRecipes = this.actions$.pipe(
         ofType<RecipesActions.FetchRecipesStart>(RecipesActions.FETCH_RECIPES_START),
         switchMap((fetchRecipesAction : RecipesActions.FetchRecipesStart) => {
-            const url = `${environment.hostUrl}:${environment.port}/${environment.applicationName}/recipe/find`;
+            const url = `${environment.hostUrl}/${environment.applicationName}/recipe/find`;
             const params = new HttpParams()
                         .set('names', fetchRecipesAction.payload.join());
             return this.http.get<Recipe[]>(url, {params}).pipe(

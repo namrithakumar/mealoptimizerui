@@ -12,9 +12,8 @@ export class UserDietService {
     constructor(private http : HttpClient) {}
 
     getDietTypes() {
-        
         return this.http.get<{ categoryName : String, displayValue : String }[]>(
-            `${environment.hostUrl}:${environment.port}/${environment.applicationName}/categories/fetchAll`
+            `${environment.hostUrl}/${environment.applicationName}/categories/fetchAll`
         ).pipe(
             map(responseData => {
             const userDietTypes = new Array<IUserDietType>();
