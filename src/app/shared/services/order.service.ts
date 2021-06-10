@@ -32,6 +32,7 @@ export class OrderService {
         };
 
         //Set optional param id(orderId) if it is available. 'id' is available for update meal plan only, not for create meal plan.
+        //id is also unavailable for guest accounts since the meal plans are not saved in the DB for guests.
         if(id) this.orderRequest.id = id;
         
         return this.orderRequest;

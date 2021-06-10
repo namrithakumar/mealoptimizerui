@@ -7,6 +7,7 @@ export const environment = {
   production: false,
   hostUrl : window.location.protocol + '//' + window.location.host,
   apiUrl: '',
+  apiPort: 4200,
   applicationName : 'mealoptimizer',
   envName : 'dev'
 };
