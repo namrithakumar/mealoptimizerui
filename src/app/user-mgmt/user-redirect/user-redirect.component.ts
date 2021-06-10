@@ -36,6 +36,6 @@ export class UserRedirectComponent implements OnInit {
         
         setTimeout(()=>{
           this.router.navigateByUrl('/meal-planner');
-        },3000);
+        },1000);
   }
 }
