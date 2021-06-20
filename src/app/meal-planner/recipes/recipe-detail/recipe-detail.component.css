@@ -1,0 +1,6 @@
+@media only screen and (max-width: 767px) {
+    .custom-recipe-detail-layout {
+        max-height: 300px;
+        margin-top: 50px;
+    }
+}

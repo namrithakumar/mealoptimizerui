@@ -28,7 +28,7 @@
 		}
 		}	
 
-		@media only screen and (max-width: 502px) {
+		@media only screen and (max-width: 359px) {
 			.custom-font {
 				font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
 				font-size: x-small;
