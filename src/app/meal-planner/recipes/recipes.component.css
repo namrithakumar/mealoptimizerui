@@ -1,27 +1,14 @@
 @media only screen and (min-width: 768px) {
-	.custom-layout {
+	.recipes-custom-layout {
         display: flex;
         flex-direction: row;
 	}
 }
 
 @media only screen and (max-width: 767px) {
-	.custom-layout {
+	.recipes-custom-layout {
         display: flex;
         flex-direction: column;
-	}
-}
-
-@media only screen and (min-width: 768px) {
-	.recipe-list-layout {
-        display: flex;
-        flex-direction: row;
-	}
-}
-
-@media only screen and (max-width: 767px) {
-	.recipe-list-layout {
-        display: flex;
-        flex-direction: column;
+        max-width: 100%;
 	}
 }

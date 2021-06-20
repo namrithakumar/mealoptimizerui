@@ -9,5 +9,6 @@
 	.custom-item-layout {
         display: flex;
         flex-direction: row;
-	}
+	}    
+        
 }
