@@ -1,71 +1,93 @@
-#home {
-  display: flex;
-  position: relative;
-  width: 100%;
-  height: 85vh;
-  align-items: center;
-  z-index: 1;
+.background {
+  background-image: url('/assets/images/background.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: bottom right;
+  height: 100%;
 }
 
 .left {
-  position: relative;
-  top: 50%;
-  border: 3px solid #73AD21;
-  margin: 1em 3em;
-  padding: 0.4em 1.6em 1.6em 3em;
-  width: fit-content;
-   }
-
-.home_text {
-  color: #071410;
-  text-align: left;
+  width: 40vw;
+  text-align:center;
 }
 
-.home_text h1 {
-  font-family: 'Times New Roman', Times, serif;
-  font-size: 72px;
-  z-index: 1;
-  padding-bottom: 0.25em;
-  text-transform: capitalize;
-  color: #716823;
-}
-
-.home_text p {
-  z-index: 1;
-  margin-bottom: 1em;
-  line-height: 1.5;
-  text-align: center;
-}
-
-.home_text img {
-  display: flex;
-  position: absolute;
-  right: 0.3em;
-  bottom: 0;
-  z-index: -1;
-  max-height: 160vh;
-  max-width: 100%;
+.left h3 {
+  font-family: "Source Serif Pro", "Georgia", "Cambria", "Times New Roman", "Times", serif;
+  font-size: 2em;
+  color: hsl(148, 84%, 25%);
+  font-weight: bold;
 }
 
 .home_btn {
-  background-color: whitesmoke;
+  background-color: #fafbf2;
   padding: 0.625em;
   border-radius: 4px;
-  margin: 1em 2em;
   display: inline;
+  margin-top: 1%;
+  border: 1px solid hsl(148, 84%, 25%);
+  width: 7rem;
+  font-family: 'Segoe UI','Arial Narrow', sans-serif;
+  font-size: 15px;
+  color: #654322;
 }
 
-@media only screen and (max-width: 1026px) {
-	.left {
-    background-color: #e3ebd9;
-	}
-  .home_text p {
-    text-align: left;
-  }
-  .home_btn {
-    margin: 1em;
-  }
-  .home_text h1 {
-    font-size: 50px;
+@media only screen and (max-width: 1024px) {
+  .left {
+    width: 100vw;
   }
 }
+
+@media only screen and (max-width: 576px) {
+  .left h3 {
+    font-size: 1.5em;
+  }
+}
+
+.custom {
+	font-family: "Source Sans Pro", "Georgia", "Cambria", "Times New Roman", "Times", serif;
+    font-size: 30px;
+    font-weight: 200;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+/*-- Workflow Section CSS --*/
+.section-title h4 {
+  color: #626919;
+  font-family: 'Segoe UI','Arial Narrow', sans-serif;
+  text-align: left;
+}
+#Workflow {
+  margin-top: 100px;
+}
+#Workflow .work-process {
+    background-color: #fafbf2;
+    padding: 10px;
+    position: relative;
+    border-bottom: 3px solid #92A355;
+    text-align: center;
+    height : 100%;
+}
+#Workflow .work-process i {
+    margin: 0 auto;
+    display: table;
+    background-color: #92A355;
+    width: 70px;
+    height: 70px;
+    border-radius: 8px;
+    font-size: 40px;
+    text-align: center;
+    color: #fff;
+    line-height: 70px;
+}
+#Workflow .work-process h3 {
+    margin: 15px 0px;
+}
+#Workflow .work-process h3 p {
+    font-size: 20px;
+    color: #654322;
+}
+#Workflow .work-process p {
+    color: #654322;
+}
+/*-- Workflow Section CSS --*/

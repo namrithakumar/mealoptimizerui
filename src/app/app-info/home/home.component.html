@@ -1,14 +1,38 @@
-<section id="home">
-	<div class="home_text">
+<div class="background">
     <div class="left">
-      <h1>Meal Optimizer</h1>
-      <p>Eat what you wish, on a budget</p>
-      <div class="d-flex justify-content-center">
-        <button *ngIf="!authenticatedUser.loggedIn" (click)='goToLoginOrRegister()' class="home_btn">Login/Register</button>
-        <button *ngIf="!authenticatedUser.loggedIn" (click)='continueAsGuest()' class="home_btn">Continue as Guest</button>
-        <button *ngIf="authenticatedUser.loggedIn" (click)='goToMealPlanner()' class="home_btn">Go to Meal Planner</button>
-      </div>  
+      <hr class="border-green mb-4 mt-1">
+      <h3 class="mx-3">Eat what you wish, on a budget</h3>
+      <hr class="border-green mb-4 mt-1">
+      <div *ngIf="!authenticatedUser.loggedIn">
+      <button (click)='continueAsGuest()' class="home_btn">Try for Free</button>
+      <button *ngIf="authenticatedUser.loggedIn" (click)='goToMealPlanner()' class="home_btn">Go to Meal Planner</button>
     </div>
-		<img src="../../../assets/images/background.jpg" alt="meal optimizer">
-  </div>
-</section>
+          <!-- Workflow Section -->
+    <section id="Workflow">          
+          <div class="row">
+              <div class="col-md-4">
+                  <div class="work-process">
+                      <i>1</i>
+                      <h3><p>Choose diet type</p></h3>
+                      <p>Gluten Free, Dairy Free, Vegan and so on</p>
+                  </div>
+              </div>
+              <div class="col-md-4">
+                  <div class="work-process">
+                      <i>2</i>
+                      <h3><p>Choose date</p></h3>
+                      <p>Plan for upto 6 months ahead</p>
+                  </div>
+              </div>
+              <div class="col-md-4">
+                  <div class="work-process">
+                      <i>3</i>
+                      <h3><p>Choose meals</p></h3>
+                      <p>Tell us what you want to eat</p>
+                  </div>
+              </div>
+          </div>
+  </section>
+  <!-- Workflow Section -->
+    </div>
+</div>
