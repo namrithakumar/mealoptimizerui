@@ -11,15 +11,16 @@
   text-align:center;
 }
 
-.left h3 {
-  font-family: "Source Serif Pro", "Georgia", "Cambria", "Times New Roman", "Times", serif;
-  font-size: 2em;
-  color: hsl(148, 84%, 25%);
-  font-weight: bold;
-}
-
 .tagline {
   width: 100vw;
+}
+
+.tagline h1 { 
+  color: #654322; 
+  font-family: 'Tangerine', serif; 
+  font-weight: normal; 
+  line-height: 48px; 
+  margin: 0; 
 }
 
 .custom {
@@ -31,11 +32,6 @@
 }
 
 /*-- Workflow Section CSS --*/
-.section-title h4 {
-  color: #626919;
-  font-family: 'Segoe UI','Arial Narrow', sans-serif;
-  text-align: left;
-}
 #Workflow .work-process {
     background-color: #fafbf2;
     padding: 2px;
@@ -44,6 +40,7 @@
 }
 #Workflow .work-process p {
     color: #654322;
+    font-family: "Roboto Slab","Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
 }
 
 @media only screen and (max-width: 576px) {
@@ -53,6 +50,10 @@
 }
 
 @media only screen and (max-width: 767px) {
+  .tagline h1 {
+    font-size: 45px;
+    text-align: center;
+  }
   #Workflow {
     margin-top: 20px;
   }
@@ -69,7 +70,7 @@
     font-size: 12px;
     font-weight: normal;
     color: #654322;
-    font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
+    font-family: "Roboto Slab","Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
   }
   #Workflow .work-process i {
     margin: 0 auto;
@@ -103,6 +104,9 @@
   .tagline {
     text-align: center;
   }
+  .tagline h1 {
+    font-size: 88px;
+  }
   .left {
     width: 100vw;
     text-align: center;
@@ -124,7 +128,10 @@
     font-size: 15px;
     font-weight: normal;
     color: #654322;
-    font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
+    font-family: "Roboto Slab","Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
+  }
+  #Workflow .work-process p {
+    font-size: 12px;
   }
   #Workflow .work-process i {
     margin: 0 auto;
@@ -155,8 +162,11 @@
   .tagline {
     text-align: left;
   }
+  .tagline h1 {
+    font-size: 88px;
+  }
   #Workflow {
-    margin-top: 90px;
+    margin-top: 110px;
   }
   #Workflow .work-process {
     background-color: #fafbf2;
@@ -171,7 +181,10 @@
     font-size: 20px;
     font-weight: normal;
     color: #654322;
-    font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
+    font-family: "Roboto Slab","Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
+  }
+  #Workflow .work-process p {
+    font-size: 12px;
   }
   #Workflow .work-process i {
     margin: 0 auto;
