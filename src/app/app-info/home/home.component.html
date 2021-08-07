@@ -1,13 +1,9 @@
 <div class="background">
-    <div class="left">
-      <div class="tagline">
+    <div class="tagline">
         <h3 class="mx-3 mt-1 mb-4">Eat what you wish, on a budget</h3>      
-      </div>  
-      <div *ngIf="!authenticatedUser.loggedIn" class="w-100">
-      <button (click)='continueAsGuest()' class="home_btn">Try for Free</button>
-      <button *ngIf="authenticatedUser.loggedIn" (click)='goToMealPlanner()' class="home_btn">Go to Meal Planner</button>
-    </div>
-          <!-- Workflow Section -->
+      </div>
+    <div class="left">  
+    <!-- Workflow Section -->
     <section id="Workflow">          
           <div class="row mx-lg-2 mx-md-2">
               <div class="col-md-4">
@@ -33,6 +29,10 @@
               </div>
           </div>
   </section>
-  <!-- Workflow Section -->
-    </div>
+  <!-- Workflow Section -->  
+    <div *ngIf="!authenticatedUser.loggedIn">
+    <button (click)='continueAsGuest()' class="home_btn">Try for Free</button>
+    <button *ngIf="authenticatedUser.loggedIn" (click)='goToMealPlanner()' class="home_btn">Go to Meal Planner</button>
+  </div>
+</div>
 </div>

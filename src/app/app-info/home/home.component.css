@@ -18,20 +18,8 @@
   font-weight: bold;
 }
 
-.left .tagline {
+.tagline {
   width: 100vw;
-}
-.home_btn {
-  background-color: #fafbf2;
-  padding: 0.625em;
-  border-radius: 4px;
-  display: inline;
-  margin-top: 1%;
-  border: 1px solid hsl(148, 84%, 25%);
-  width: 7rem;
-  font-family: 'Segoe UI','Arial Narrow', sans-serif;
-  font-size: 15px;
-  color: #654322;
 }
 
 .custom {
@@ -40,6 +28,22 @@
     font-weight: 200;
     padding-left: 10px;
     padding-right: 10px;
+}
+
+/*-- Workflow Section CSS --*/
+.section-title h4 {
+  color: #626919;
+  font-family: 'Segoe UI','Arial Narrow', sans-serif;
+  text-align: left;
+}
+#Workflow .work-process {
+    background-color: #fafbf2;
+    padding: 2px;
+    position: relative;
+    border-bottom: 1px solid #92A355;
+}
+#Workflow .work-process p {
+    color: #654322;
 }
 
 @media only screen and (max-width: 576px) {
@@ -51,6 +55,11 @@
 @media only screen and (max-width: 767px) {
   #Workflow {
     margin-top: 20px;
+  }
+  #Workflow .work-process {    
+    max-width: 60%;
+    margin:auto;
+    margin-top: 10px;
   }
   #Workflow .work-process p {
     display: none; 
@@ -76,33 +85,31 @@
   .left {
     width: 100vw;
   }
-}
-/*-- Workflow Section CSS --*/
-.section-title h4 {
-  color: #626919;
-  font-family: 'Segoe UI','Arial Narrow', sans-serif;
-  text-align: left;
-}
-#Workflow .work-process {
-    background-color: #fafbf2;
-    padding: 2px;
-    position: relative;
-    border-bottom: 1px solid #92A355;
-}
-#Workflow .work-process p {
-    color: #654322;
+  .home_btn {
+    background-color: #92A355;
+    padding: 0.225em;
+    border-radius: 4px;
+    display: inline;
+    margin-top: 10%;
+    border: 1px solid #92A355;
+    width: 10rem;
+    font-family: 'Segoe UI','Arial Narrow', sans-serif;
+    font-size: 14px;
+    color: #fff;
+  }
 }
 
 @media only screen and (min-width: 768px) and (max-width: 1024px) {  
-  .left .tagline {
+  .tagline {
     text-align: center;
   }
   .left {
     width: 100vw;
     text-align: center;
   }
+  
   #Workflow {
-    margin-top: 80px;
+    margin-top: 70px;
   }
   #Workflow .work-process {
     background-color: #fafbf2;
@@ -131,13 +138,25 @@
     color: #fff;    
     line-height: 1.5;
   }
+  .home_btn {
+    background-color: #fafbf2;
+    padding: 0.625em;
+    border-radius: 4px;
+    display: inline;
+    margin-top: 10%;
+    border: 1px solid #92A355;
+    width: 12rem;
+    font-family: 'Segoe UI','Arial Narrow', sans-serif;
+    font-size: 16px;
+    color: #654322;
+  }
 }
 @media only screen and (min-width: 1025px) {
-  .left .tagline {
+  .tagline {
     text-align: left;
   }
   #Workflow {
-    margin-top: 140px;
+    margin-top: 90px;
   }
   #Workflow .work-process {
     background-color: #fafbf2;
@@ -166,6 +185,18 @@
     text-align: center;
     color: #fff;
     line-height: 70px;
+  }
+  .home_btn {
+    background-color: #fafbf2;
+    padding: 0.625em;
+    border-radius: 4px;
+    display: inline;
+    margin-top: 10%;
+    border: 1px solid #92A355;
+    width: 12rem;
+    font-family: 'Segoe UI','Arial Narrow', sans-serif;
+    font-size: 16px;
+    color: #654322;
   }
 }
 /*-- Workflow Section CSS --*/
