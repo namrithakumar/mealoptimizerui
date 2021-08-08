@@ -4,14 +4,14 @@
   </div>
 </div>    
     <div class="row justify-content-start ml-5">
-      <div class="col-md-11">
+      <div class="col-md-11 col-11">
       <app-shopping-edit class="w-100"></app-shopping-edit>
     </div>
     </div>
     <div class="row justify-content-start ml-5"> 
-        <ul class="list-group col-xl-7 col-lg-7 col-md-8 col-sm-10">
+        <ul class="list-group col-xl-7 col-lg-7 col-md-8 col-sm-10 col-11">
           <button
-            class="list-group-item"
+            class="list-group-item text-left"
             style="cursor: pointer"
             *ngFor="let shoppingItem of shoppingItems; let i = index"
             (click)="onEditItem(i)"

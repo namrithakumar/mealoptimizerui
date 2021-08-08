@@ -28,7 +28,6 @@ export class RecipeListComponent implements OnInit, OnDestroy {
       //Set initial slider to true - if size is <767px, false - if size >=768px.
       if (this.breakpointObserver.isMatched('(max-width: 767px)')) {
         this.showSlider = true;
-        console.log(this.showSlider);
       }
 
       //Track the size of the window and display slider for recipes accordingly.
@@ -39,7 +38,6 @@ export class RecipeListComponent implements OnInit, OnDestroy {
 
   screenSizeListener(event) : void {
     this.showSlider = event.matches ? true : false;
-    console.log(this.showSlider);
   }
 
   ngOnDestroy() {
