@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Recipe } from 'src/app/shared/model/recipe.model';
 import { Input } from '@angular/core';
+import { BreakpointObserver, MediaMatcher } from '@angular/cdk/layout';
 
 @Component({
   selector: 'app-recipe-list',
@@ -14,11 +15,34 @@ import { Input } from '@angular/core';
  * Tasks : Takes recipes from 'Recipes' store and passes them to RecipeItem.
  * Technique used : Attribute Binding 
  */
-export class RecipeListComponent implements OnInit {
+export class RecipeListComponent implements OnInit, OnDestroy {
+  matcher: MediaQueryList;
+  showSlider : boolean = false;
 
   @Input() recipes: Recipe[];
 
-  constructor() { }
+  constructor(private mediaMatcher: MediaMatcher,
+              private breakpointObserver: BreakpointObserver) { }
 
-  ngOnInit(): void { }
+  ngOnInit(): void {
+      //Set initial slider to true - if size is <767px, false - if size >=768px.
+      if (this.breakpointObserver.isMatched('(max-width: 767px)')) {
+        this.showSlider = true;
+        console.log(this.showSlider);
+      }
+
+      //Track the size of the window and display slider for recipes accordingly.
+      this.matcher = this.mediaMatcher.matchMedia('(max-width: 767px)');
+
+      this.matcher.addListener(this.screenSizeListener);
+  }
+
+  screenSizeListener(event) : void {
+    this.showSlider = event.matches ? true : false;
+    console.log(this.showSlider);
+  }
+
+  ngOnDestroy() {
+    this.matcher.removeListener(this.screenSizeListener);
+  }
 }

@@ -1,5 +1,29 @@
 <div class="row">
     <div class="col-12 custom-item-layout">
+        <div *ngIf="showSlider; else noSlider">
+            <div id="recipeCarousel" class="carousel slide" data-ride="carousel">
+  
+                <!-- The slideshow -->
+                <div class="carousel-inner center">
+                    <div class="carousel-item"
+                          *ngFor="let recipeEl of recipes; index as indexOfRecipe"
+                           [ngClass]="{'active': indexOfRecipe == 0 }">
+                           <app-recipe-item [recipe]="recipeEl" 
+                                            [indexOfRecipe]="indexOfRecipe"></app-recipe-item>
+                  </div> 
+                </div>
+                
+                <!-- Left and right controls -->
+                <a class="carousel-control-prev" href="#recipeCarousel" data-slide="prev">
+                  <span class="carousel-control-prev-icon"></span>
+                </a>
+                <a class="carousel-control-next" href="#recipeCarousel" data-slide="next">
+                  <span class="carousel-control-next-icon"></span>
+                </a>  
+              </div>
+        </div>
+        <ng-template #noSlider>
             <app-recipe-item class="flex-fill" *ngFor = "let recipeEl of recipes; index as indexOfRecipe" [recipe]="recipeEl" [indexOfRecipe]="indexOfRecipe"></app-recipe-item>
+        </ng-template>    
     </div>
 </div>
