@@ -1,3 +1,9 @@
+@media only screen and (min-width: 768px) {
+	.custom-item-display {
+		width: 100%;
+	}
+}
+
 @media only screen and (max-width: 767px) {
 	.custom-description-display {
         display: none;
@@ -7,20 +13,14 @@
 	}
 }
 
-@media only screen and (min-width: 768px) {
-	.custom-item-display {
-		width: 100%;
-	}
-}
-
 @media only screen and (min-width: 630px) {
-.custom-font {
-	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-	font-size: x-large;
-	font-weight: bolder;
-}
-}
-
+	.custom-font {
+		font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+		font-size: x-large;
+		font-weight: bolder;
+	}
+	}
+	
 @media only screen and (max-width: 629px) {
 	.custom-font {
 		font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;

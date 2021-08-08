@@ -1,13 +1,13 @@
-<div class="mt-md-0 mt-sm-5">
+<div class="mt-md-0 mt-sm-5 custom-recipe-detail-layout">
     <img 
             [src]="recipeSelected.imageUrl" 
             alt="{{ recipeSelected.name }}" 
-            class="img-responsive custom-recipe-detail-layout"
+            class="img-responsive custom-recipe-image-layout"
             style="max-height : 300px">
             <h4>{{recipeSelected.name}}</h4>
             <a href="{{recipeSelected.tutorialPath}}"> Watch the tutorial here </a><br/>
             <label for="noOfPortions">No. of portions</label>
-            <input class="col-lg-2 col-md-3 col-sm-2 ml-1" type="number" id="noOfPortions" [(ngModel)]="noOfPortions" min="1"><br/>
+            <input class="col-lg-2 col-md-3 col-sm-2 col-4 ml-1" type="number" id="noOfPortions" [(ngModel)]="noOfPortions" min="1"><br/>
             <p>Ingredients</p>
             <table>
             <tr *ngFor="let ingredient of recipeSelected.ingredients">
