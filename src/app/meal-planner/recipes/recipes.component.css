@@ -1,3 +1,8 @@
+.custom-recipes-display {
+        color: #654322;
+        font-family: "Roboto Slab","Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
+    }
+
 @media only screen and (min-width: 768px) {
 	.recipes-custom-layout {
         display: flex;

@@ -2,9 +2,102 @@
 @import '~@angular/cdk/overlay-prebuilt.css';
 @import "~@fullcalendar/core/main.css";
 
-.sec-heading {
-    font-weight: bold;
-    font-style: italic;
-    text-align: left;
-    padding: 10px;
+.section-text {
+    color: #654322;
+}
+@media only screen and (max-width: 767px) {
+    .section-no {
+        margin: auto 10px 0;
+        background-color:#92A355;
+        border-radius: 8px;
+        width: 30px;
+        height: 30px;
+        font-size: 20px;
+        text-align: center;
+        color: #fff;
+        display:inline-block;
+      }
+    .section-name {
+        margin: 15px 0px;    
+        font-size: 20px;
+        font-weight: normal;
+        color: #654322;
+        font-family: "Roboto Slab","Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
+        display:inline-block;
+      } 
+}
+
+@media only screen and (min-width: 768px) and (max-width: 1024px) {
+    .section-no {
+        margin: 0 auto;
+        background-color:#92A355;
+        border-radius: 8px;
+        width: 30px;
+        height: 30px;
+        font-size: 20px;
+        text-align: center;
+        color: #fff;
+        display:inline-block;
+      }
+    .section-name {
+        margin: 15px 10px;    
+        font-size: 20px;
+        font-weight: normal;
+        color: #654322;
+        font-family: "Roboto Slab","Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
+        display:inline-block;
+      }      
+}
+
+@media only screen and (min-width: 1025px) {
+    .section-no {
+        margin: 0 auto;
+        background-color:#92A355;
+        border-radius: 8px;
+        width: 30px;
+        height: 30px;
+        font-size: 20px;
+        text-align: center;
+        color: #fff;
+        display:inline-block;
+      }
+    .section-name {
+        margin: 15px 10px;    
+        font-size: 25px;
+        font-weight: normal;
+        color: #654322;
+        font-family: "Roboto Slab","Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
+        display:inline-block;
+      }     
+}
+
+#calendar .fc-toolbar h2 {
+  margin: 0;
+  font-size: 20px;
+  font-weight: normal;
+  color: #654322;
+  font-family: "Roboto Slab","Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
+}
+
+#calendar .fc-button-primary:disabled {
+  color: #fff;
+  background-color: #a7b673;
+  border-color: #2C3E50;
+}
+
+#calendar .fc-button-primary {
+  color: #fff;
+  background-color: #839447;
+  border-color: #2C3E50;
+}
+
+#calendar .fc-row.fc-widget-header {
+  background-color: #fafbf2;
+  border-top: 1px solid #92A355;
+  border-bottom: 1px solid #92A355;
+  color: #654322;
+}
+
+.fc {
+  text-align: center !important;
 }

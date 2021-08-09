@@ -1,3 +1,7 @@
+.custom-manage-recipe {
+    background-color:#92A355;
+    color: #fff;    
+}
 @media only screen and (min-width: 401px) and (max-width: 767px) {
     .custom-recipe-detail-layout {
         margin-top: 50px;

@@ -1,23 +1,25 @@
 <div class="row mt-4 ml-1">
   <div class="col-md-11">
-    <h4 class="py-4">Shopping List</h4>
+    <div class="justify-content-start py-4">
+      <p class="section-name">Shopping List</p>
+    </div>
   </div>
 </div>    
     <div class="row justify-content-start ml-5">
       <div class="col-md-11 col-11">
-      <app-shopping-edit class="w-100"></app-shopping-edit>
+      <app-shopping-edit class="w-100 custom-shopping-item-display"></app-shopping-edit>
     </div>
     </div>
     <div class="row justify-content-start ml-5"> 
         <ul class="list-group col-xl-7 col-lg-7 col-md-8 col-sm-10 col-11">
           <button
-            class="list-group-item text-left"
+            class="list-group-item text-left custom-shopping-item-display"
             style="cursor: pointer"
             *ngFor="let shoppingItem of shoppingItems; let i = index"
             (click)="onEditItem(i)"
           >
             {{ shoppingItem.name }} ({{ shoppingItem.amount }}) {{ shoppingItem.measure }}
-            <span class="badge badge-secondary float-right" *ngFor="let label of shoppingItem.labels">{{ label }}</span>
+            <span class="badge custom-shopping-item-label float-right mx-1" *ngFor="let label of shoppingItem.labels">{{ label }}</span>
         </button>
         </ul>
   </div>

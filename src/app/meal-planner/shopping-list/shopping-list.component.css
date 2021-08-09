@@ -1,0 +1,11 @@
+.custom-shopping-item-display {
+    color: #654322;
+    font-family: "Roboto Slab","Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
+    background-color: #fafbf2;
+}
+
+.custom-shopping-item-label {
+    background-color:#92A355;
+    color: #fff;
+    font-weight: lighter;
+}

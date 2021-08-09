@@ -1,25 +1,28 @@
   <!-- Nav tabs -->
-<div class="w-80 ml-4 border">
+<div class="w-80 ml-4 border custom-results-display">
     <ul class="nav nav-tabs" #optimizationResultsTab>
       <li class="nav-item">
         <a class="nav-link active" 
            data-toggle="tab" 
            href="#orderInfo" 
-           (click)="onTabSelected('orderInfo')"> User's Choice </a>
+           (click)="onTabSelected('orderInfo')"
+           style="color: #654322;"> User's Choice </a>
       </li>
       <li class="nav-item">
         <a class="nav-link" 
            data-toggle="tab" 
            href="#optimizedByCost" 
            (click)="onTabSelected('optimizedByCost')" 
-           [class.disabled]="!isOptimizationFeasible">Optimized by Cost</a>
+           [class.disabled]="!isOptimizationFeasible"
+           style="color: #654322;">Optimized by Cost</a>
       </li>
       <li class="nav-item">
         <a class="nav-link" 
         data-toggle="tab" 
         href="#optimizedByQuality" 
         (click)="onTabSelected('optimizedByQuality')" 
-        [class.disabled]="!isOptimizationFeasible"> Optimized by Quality</a>
+        [class.disabled]="!isOptimizationFeasible"
+        style="color: #654322;"> Optimized by Quality</a>
       </li>
     </ul>
   

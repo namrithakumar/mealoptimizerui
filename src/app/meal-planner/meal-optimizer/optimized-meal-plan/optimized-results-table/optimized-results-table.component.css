@@ -15,4 +15,9 @@
   
   .tab-content > .active {
     visibility: visible;
-  }  
+  }
+
+  .custom-results-display {
+    color: #654322;
+    font-family: "Roboto Slab","Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
+}

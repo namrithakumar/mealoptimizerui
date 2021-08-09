@@ -2,6 +2,9 @@
 	.custom-item-display {
 		width: 100%;
 	}
+	.custom-description-display {
+        color: #654322;
+	}
 }
 
 @media only screen and (max-width: 767px) {
@@ -15,7 +18,8 @@
 
 @media only screen and (min-width: 630px) {
 	.custom-font {
-		font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+		color: black;
+		font-family: "Roboto Slab","Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
 		font-size: x-large;
 		font-weight: bolder;
 	}
@@ -23,7 +27,8 @@
 	
 @media only screen and (max-width: 629px) {
 	.custom-font {
-		font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+		color: black;
+		font-family: "Roboto Slab","Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
 		font-size: medium;
 		font-weight: bolder;
 	}
@@ -31,7 +36,8 @@
 
 	@media only screen and (max-width: 576px) {
 		.custom-font {
-			font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+			color: black;
+			font-family: "Roboto Slab","Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
 			font-size: small;
 			font-weight: bolder;
 		}
@@ -39,7 +45,8 @@
 
 		@media only screen and (max-width: 359px) {
 			.custom-font {
-				font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+				color: black;
+				font-family: "Roboto Slab","Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
 				font-size: x-small;
 				font-weight: bolder;
 			}
