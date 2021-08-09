@@ -10,7 +10,7 @@
     <div class="dropdown-menu" 
          aria-labelledby="dropdownMeal">
       <div *ngFor="let item of itemList">
-          <button class="dropdown-item text-wrap w-100 btn-block" 
+          <button class="dropdown-item border-0 custom-dropdown-button text-wrap w-100 btn-block" 
                   [value]="item" 
                   (click)="onMealSelected(item)">
           <span>{{ item }} </span>
