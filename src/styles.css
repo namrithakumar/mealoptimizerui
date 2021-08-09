@@ -2,10 +2,57 @@
 @import '~@angular/cdk/overlay-prebuilt.css';
 @import "~@fullcalendar/core/main.css";
 
+@font-face {
+  font-family: 'Tangerine';
+  src: url('src/assets/fonts/Tangerine-Regular.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Roboto Slab';
+  src: url('src/assets/fonts/RobotoSlab-Regular.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Cinzel';
+  src: url('src/assets/fonts/Cinzel-Regular.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
 .section-text {
     color: #654322;
 }
-@media only screen and (max-width: 767px) {
+@media only screen and (max-width: 375px) {
+  .section-no {
+      margin: 0 auto;
+      background-color:#92A355;
+      border-radius: 18px;
+      width: 20px;
+      height: 20px;
+      line-height: 18px;
+      font-size: 15px;
+      text-align: center;
+      color: #fff;
+      display:inline-block;
+    }
+  .section-name {
+      margin: 15px 10px;    
+      font-size: 17px;
+      font-weight: normal;
+      color: #654322;
+      font-family: "Roboto Slab","Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
+      display:inline-block;
+    }      
+}
+
+@media only screen and (min-width: 376px) and (max-width: 767px) {
     .section-no {
         margin: auto 10px 0;
         background-color:#92A355;
