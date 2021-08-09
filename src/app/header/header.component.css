@@ -21,3 +21,14 @@
     color:#fff;
     background:#D95D39;
 }
+/* Logo */
+.navbar-brand.logo-holder.logo h3 {
+    background-color: #fff;
+    color: #654322;    
+    font-family: 'Cinzel', serif;
+    font-weight: 300;
+    font-size: 20px;
+}
+.navbar-brand.logo-holder.logo :hover {
+    color: #654322;
+}
