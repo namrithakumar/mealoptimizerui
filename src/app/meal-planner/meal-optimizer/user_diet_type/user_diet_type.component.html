@@ -2,15 +2,17 @@
         <p class="section-no">1</p>
         <p class="section-name">Select diet type</p>
 </div>
-<div *ngFor="let dietType of dietTypes" class="form-check ml-5 my-2">
-                <input type="radio"
-                       class="form-check-input" 
-                       [id]='dietType.dietType' 
-                       [(ngModel)]="userDietType" 
-                       name="user_diet_type" 
-                       [value]="dietType.dietType" 
-                       (click)="onDietTypeSelect(dietType.dietType)">
-                <label class="form-check-label section-text" for="dietType.dietType">       
-                {{dietType.displayValue}}
-                </label>
+<div class="my-2 ml-2">
+        <div *ngFor="let dietType of dietTypes" class="form-check ml-5 my-2">
+                        <input type="radio"
+                        class="form-check-input" 
+                        [id]='dietType.dietType' 
+                        [(ngModel)]="userDietType" 
+                        name="user_diet_type" 
+                        [value]="dietType.dietType" 
+                        (click)="onDietTypeSelect(dietType.dietType)">
+                        <label class="form-check-label section-text" for="dietType.dietType">       
+                        {{dietType.displayValue}}
+                        </label>
+        </div>
 </div>       

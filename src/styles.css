@@ -28,6 +28,8 @@
 
 .section-text {
     color: #654322;
+    font-family: "Roboto Slab","Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
+    font-size: 15px;
 }
 @media only screen and (max-width: 375px) {
   .section-no {
