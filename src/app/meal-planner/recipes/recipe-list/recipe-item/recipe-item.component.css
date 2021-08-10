@@ -17,37 +17,29 @@
 }
 
 @media only screen and (min-width: 630px) {
-	.custom-font {
-		color: black;
-		font-family: "Roboto Slab","Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
+	.custom-recipe-item-font {
 		font-size: x-large;
 		font-weight: bolder;
 	}
 	}
 	
 @media only screen and (max-width: 629px) {
-	.custom-font {
-		color: black;
-		font-family: "Roboto Slab","Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
+	.custom-recipe-item-font {
 		font-size: medium;
 		font-weight: bolder;
 	}
 	}
 
 	@media only screen and (max-width: 576px) {
-		.custom-font {
-			color: black;
-			font-family: "Roboto Slab","Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
+		.custom-recipe-item-font {
 			font-size: small;
 			font-weight: bolder;
 		}
 		}	
 
 		@media only screen and (max-width: 359px) {
-			.custom-font {
-				color: black;
-				font-family: "Roboto Slab","Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
+			.custom-recipe-item-font {
 				font-size: x-small;
 				font-weight: bolder;
 			}
-			}			
+			}

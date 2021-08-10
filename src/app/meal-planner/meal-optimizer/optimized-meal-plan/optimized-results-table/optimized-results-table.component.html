@@ -1,57 +1,57 @@
-  <!-- Nav tabs -->
-<div class="w-80 ml-4 border custom-results-display">
-    <ul class="nav nav-tabs" #optimizationResultsTab>
-      <li class="nav-item">
-        <a class="nav-link active" 
-           data-toggle="tab" 
-           href="#orderInfo" 
-           (click)="onTabSelected('orderInfo')"
-           style="color: #654322;"> User's Choice </a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" 
-           data-toggle="tab" 
-           href="#optimizedByCost" 
-           (click)="onTabSelected('optimizedByCost')" 
-           [class.disabled]="!isOptimizationFeasible"
-           style="color: #654322;">Optimized by Cost</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" 
-        data-toggle="tab" 
-        href="#optimizedByQuality" 
-        (click)="onTabSelected('optimizedByQuality')" 
-        [class.disabled]="!isOptimizationFeasible"
-        style="color: #654322;"> Optimized by Quality</a>
-      </li>
-    </ul>
-  
-    <!-- Tab panes -->
-  `   <div class="tab-content">
-      <div id="orderInfo" class="tab-pane active">
-        <app-order-info></app-order-info>
-      </div>
-      <div id="optimizedByCost" class="tab-pane">
-        <div *ngIf="!costOptimizedPlan else costOptimizedResult" class="row-fixed-height mx-5 mt-2">
-          <h3>Meal Plan - Optimized by Cost</h3>
-          <p>{{ defaultText }}</p>
-        </div>  
-          <ng-template #costOptimizedResult>
-            <app-optimized-result-cost
-              [costOptimizedPlan]="costOptimizedPlan">
-            </app-optimized-result-cost>
-        </ng-template>
-      </div>
-      <div id="optimizedByQuality" class="tab-pane">
-        <div *ngIf="!qualityOptimizedPlan else qualityOptimizedResult" class="row-fixed-height mx-5 mt-2">
-          <h3>Meal Plan - Optimized by Quality</h3>
-          <p>{{ defaultText }}</p>
-        </div>  
-          <ng-template #qualityOptimizedResult>
-            <app-optimized-result-quality  
-              [qualityOptimizedPlan]="qualityOptimizedPlan">
-            </app-optimized-result-quality>
-          </ng-template>
-      </div>
+<!-- Nav tabs -->
+<div class="w-80 ml-4 border section-text">
+  <ul class="nav nav-tabs" #optimizationResultsTab>
+    <li class="nav-item">
+      <a class="nav-link active" 
+         data-toggle="tab" 
+         href="#orderInfo" 
+         (click)="onTabSelected('orderInfo')"
+         style="color: #654322;"> User's Choice </a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" 
+         data-toggle="tab" 
+         href="#optimizedByCost" 
+         (click)="onTabSelected('optimizedByCost')" 
+         [class.disabled]="!isOptimizationFeasible"
+         style="color: #654322;">Optimized by Cost</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" 
+      data-toggle="tab" 
+      href="#optimizedByQuality" 
+      (click)="onTabSelected('optimizedByQuality')" 
+      [class.disabled]="!isOptimizationFeasible"
+      style="color: #654322;"> Optimized by Quality</a>
+    </li>
+  </ul>
+
+  <!-- Tab panes -->
+`   <div class="tab-content">
+    <div id="orderInfo" class="tab-pane active">
+      <app-order-info></app-order-info>
     </div>
-  </div>      
+    <div id="optimizedByCost" class="tab-pane">
+      <div *ngIf="!costOptimizedPlan else costOptimizedResult" class="row-fixed-height mx-5 mt-2">
+        <h3>Meal Plan - Optimized by Cost</h3>
+        <p>{{ defaultText }}</p>
+      </div>  
+        <ng-template #costOptimizedResult>
+          <app-optimized-result-cost
+            [costOptimizedPlan]="costOptimizedPlan">
+          </app-optimized-result-cost>
+      </ng-template>
+    </div>
+    <div id="optimizedByQuality" class="tab-pane">
+      <div *ngIf="!qualityOptimizedPlan else qualityOptimizedResult" class="row-fixed-height mx-5 mt-2">
+        <h3>Meal Plan - Optimized by Quality</h3>
+        <p>{{ defaultText }}</p>
+      </div>  
+        <ng-template #qualityOptimizedResult>
+          <app-optimized-result-quality  
+            [qualityOptimizedPlan]="qualityOptimizedPlan">
+          </app-optimized-result-quality>
+        </ng-template>
+    </div>
+  </div>
+</div>

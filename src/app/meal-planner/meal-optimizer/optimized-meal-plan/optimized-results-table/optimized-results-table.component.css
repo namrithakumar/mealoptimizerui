@@ -1,23 +1,18 @@
 .row-fixed-height {
-    height: 50vh;
-  }
+  height: 50vh;
+}
 
-  .tab-content {
-    display: flex;
-  }
+.tab-content {
+  display: flex;
+}
 
 .tab-content > .tab-pane {
-    display: block; /* undo "display: none;" */
-    visibility: hidden;
-    margin-right: -100%;
-    width: 100%;
-  }
-  
-  .tab-content > .active {
-    visibility: visible;
-  }
+  display: block; /* undo "display: none;" */
+  visibility: hidden;
+  margin-right: -100%;
+  width: 100%;
+}
 
-  .custom-results-display {
-    color: #654322;
-    font-family: "Roboto Slab","Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
+.tab-content > .active {
+  visibility: visible;
 }

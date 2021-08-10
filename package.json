@@ -6,7 +6,7 @@
     "start": "ng serve",
     "build": "ng build",
     "build-dev": "ng build --configuration=dev",
-    "build-test": "ng build --configuration=test",    
+    "build-test": "ng build --configuration=test",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"
@@ -29,7 +29,6 @@
     "@fullcalendar/interaction": "4.4.2",
     "@ngrx/effects": "^10.0.1",
     "@ngrx/store": "^10.0.1",
-    "angular-calendar": "^0.28.22",
     "bootstrap": "^4.5.2",
     "date-fns": "^2.17.0",
     "idb": "^6.0.0",

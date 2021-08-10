@@ -1,9 +1,9 @@
-        <button type="button" 
-                class="btn custom-manage-meal-plan" 
-                *ngIf="mode === 'create'" 
-                (click)="onGetMealPlan()" 
-                [disabled]='disableGetMealPlan'>Get Meal Plan</button>
-        <button type="button" 
-                class="btn custom-manage-meal-plan" 
-                *ngIf="mode === 'update'" 
-                (click)="onUpdateMealPlan()">Update Meal Plan</button>
+<button type="button" 
+        class="btn custom-submit-button" 
+        *ngIf="mode === 'create'" 
+        (click)="onGetMealPlan()" 
+        [disabled]='disableGetMealPlan'>Get Meal Plan</button>
+<button type="button" 
+        class="btn custom-submit-button" 
+        *ngIf="mode === 'update'" 
+        (click)="onUpdateMealPlan()">Update Meal Plan</button>

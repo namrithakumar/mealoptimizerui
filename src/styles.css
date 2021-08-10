@@ -120,6 +120,11 @@
       }     
 }
 
+.custom-submit-button {
+    background-color: #92A355;
+    color: #fff;
+}
+
 #calendar .fc-toolbar h2 {
   margin: 0;
   font-size: 20px;
