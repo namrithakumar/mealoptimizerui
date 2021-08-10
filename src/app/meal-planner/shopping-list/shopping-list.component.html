@@ -19,7 +19,7 @@
             (click)="onEditItem(i)"
           >
             {{ shoppingItem.name }} ({{ shoppingItem.amount }}) {{ shoppingItem.measure }}
-            <span class="badge custom-shopping-item-label float-right mx-1" *ngFor="let label of shoppingItem.labels">{{ label }}</span>
+            <span class="badge custom-shopping-item-label float-right mx-1 mt-1" *ngFor="let label of shoppingItem.labels">{{ label }}</span>
         </button>
         </ul>
   </div>
