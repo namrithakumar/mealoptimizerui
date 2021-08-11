@@ -1,14 +1,14 @@
-<h4 class="justify-content-start my-4 ml-1">Redirecting to meal planner ...</h4>
-<div class="mt-1 ml-1 border col-md-10 col-xs-12">
+<h4 class="justify-content-start my-4 ml-1 section-text">Redirecting to meal planner ...</h4>
+<div class="mt-1 ml-1 border col-md-10 col-xs-12 section-text">
     <div class="m-3">
-        <p>You have logged in as</p>
+        <p class="section-text">You have logged in as</p>
         <table class="table table-borderless table-hover table-responsive mt-4">
             <tbody>
-                <tr>
+                <tr class="section-text">
                   <td class="font-weight-bold">Username</td>
                   <td>{{ authenticatedUser.username }}</td>  
                 </tr>
-                <tr>
+                <tr class="section-text">
                   <td class="font-weight-bold">Login status</td>
                   <td>{{ (authenticatedUser.loggedIn)?'logged in':'not logged in' }}</td>  
                 </tr>

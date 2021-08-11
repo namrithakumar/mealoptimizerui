@@ -32,7 +32,7 @@
       <app-order-info></app-order-info>
     </div>
     <div id="optimizedByCost" class="tab-pane">
-      <div *ngIf="!costOptimizedPlan else costOptimizedResult" class="row-fixed-height mx-5 mt-2">
+      <div *ngIf="!costOptimizedPlan else costOptimizedResult" class="row-fixed-height ml-3 ml-lg-5 mr-5 mt-2">
         <h3>Meal Plan - Optimized by Cost</h3>
         <p>{{ defaultText }}</p>
       </div>  
@@ -43,7 +43,7 @@
       </ng-template>
     </div>
     <div id="optimizedByQuality" class="tab-pane">
-      <div *ngIf="!qualityOptimizedPlan else qualityOptimizedResult" class="row-fixed-height mx-5 mt-2">
+      <div *ngIf="!qualityOptimizedPlan else qualityOptimizedResult" class="row-fixed-height ml-3 ml-lg-5 mr-5 mt-2">
         <h3>Meal Plan - Optimized by Quality</h3>
         <p>{{ defaultText }}</p>
       </div>  

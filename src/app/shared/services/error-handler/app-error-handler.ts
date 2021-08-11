@@ -19,7 +19,7 @@ export class AppErrorHandler extends ErrorHandler {
             if((status === undefined) || //Incase of ErrorEvent - client errors
                (status !== undefined && (status === 0 || status === 404))) { //Incase of HttpErrorResponse - Server errors from backend
                 this.overlayDisplayService.showOverlay(
-                    'There was an error. This was not supposed to happen. We\'re sorry.. Our engineers are hard at work fixing your problem. We will notify you as soon as we have a fix.');
+                    'There was an error. Please try again later.');
             }            
         }
         return super.handleError();

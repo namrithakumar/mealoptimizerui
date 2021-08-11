@@ -1,17 +1,10 @@
 .overlay {
-    background-color: #e9e9e9;
-    opacity: 0.5;
+    background: rgb(245, 245, 245, 0.80);
+    width: 70vw;
 }
-.grey {
-    background-color: #000000;
-    top: 20%;
-    right: 20%;
-    bottom: 20%;
-    left: 20%;
-    opacity: 1; 
-    position: absolute; 
-}
-.white {
-    color: white;
-    font-style: bold;
-  }
+.custom-error-message {
+    text-align: center;    
+    color: #654322;
+    font-size: 20px;
+    font-family: "Roboto Slab","Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
+}  
