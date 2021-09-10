@@ -29,7 +29,6 @@ The short answer:
 - Click and forget request submission
 - Support for different diet types
 - Supports different meal plans
-
   
 ## Tech Stack
 
