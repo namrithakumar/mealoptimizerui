@@ -2,7 +2,7 @@
 
 ## About
 
-Meal planner (http://www.myclaypot.com) is a unique planner that takes in a list of user meals and provides a menu in 2 flavors.
+http://www.myclaypot.com is a unique planner that takes in a list of user meals and provides a menu in 2 flavors.
 
 COST OPTIMIZED PLAN - Tells you the cheapest way to eat your meal of choice
 
