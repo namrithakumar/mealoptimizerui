@@ -42,7 +42,8 @@ The short answer:
 
 **Miscellaneous:** Maven, Git, Circle CI, JUnit
 
-## Tech Stack (requires login)
+## Docker (requires login)
 
 https://hub.docker.com/repository/docker/namrithar88/mealplannerapp
+
 https://hub.docker.com/repository/docker/namrithar88/keycloak-mealplanner
